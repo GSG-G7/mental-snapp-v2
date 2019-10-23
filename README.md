@@ -3,13 +3,13 @@
 ### Project Description :book: 
 People are having issues controlling their feelings and keeping up with their lives. In **Mental Snapp** we've created a routine for those people that involves self-reflection and journalling, we believe that by making our users write down about their feelings or life then they will feel better :100: about themselves, our main goal is helping people in **maintaining positive mental health** outcomes.
 ### Problem Statement :exclamation:
-The user needs a way to connect to her feelings so that she can accept herself and feel confident that she can manage her life.
+The users need a way to connect to their feelings so that they can accept themselves and feel confident that they can manage their lives.
 
 ### Solution :bulb: 
 Creating a framework that supports users in developing an active self awareness so that they can reframe negative moods into positive ones and as a result they can move from victims to someones who are in control.
 
 ### User Journey 
-The user can enter the app and create a private account for herself, then she will be moved to the dashboard page and at this page the user can enter and edit her top goal and by clicking on the plus button she will have two choices to write her story by answering three questions or write her own words and also she can delete the entry if she wants,and this page will have the last three recent entries and by clicking on (see more) the user will be moved to the feed page that has   all entries of the user that can be filtered by month, and when the user clicks on heat-map icon she will be moved to the heat-map page that tracks her progress over time and also the user can edit her account settings by clicking on setting icon.
+The users can enter the app and create a private account for themselves, then they will be moved to the dashboard page and at this page the users can enter and edit their top goal and by clicking on the plus button they will have two choices to write their stories by answering three questions or write theur own words and also they can delete the entry if they want,and this page will have the last three recent entries and by clicking on (see more) the user will be moved to the feed page that has all entries of the user that can be filtered by month, and when the user clicks on heat-map icon he/she will be moved to the heat-map page that tracks her/his progress over time and also the user can edit her/his account settings by clicking on setting icon.
 
 ## User Stories: :pencil: 
 * As a user, I want to achieve goals so that I can make real progress in my life.
