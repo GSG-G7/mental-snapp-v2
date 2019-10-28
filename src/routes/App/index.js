@@ -1,12 +1,13 @@
-import './style.css';
 import React from 'react';
+import 'antd/dist/antd.css';
+import './style.css';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <h1>Hello App</h1>
+      <h1>Hello from App</h1>
     </div>
   );
-}
+};
 
 export default App;
