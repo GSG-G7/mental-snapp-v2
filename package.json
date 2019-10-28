@@ -1,27 +1,51 @@
 {
   "name": "mental-snapp",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "People are having issues controlling their feelings and keeping up with their lives. In **Mental Snapp** we've created a routine for those people that involves self-reflection and journalling, we believe that by making our users write down about their feelings or life then they will feel better :100: about themselves, our main goal is helping people in **maintaining positive mental health** outcomes. ### Problem Statement :exclamation: The users need a way to connect to their feelings so that they can accept themselves and feel confident that they can manage their lives.",
-  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.24.3",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-scripts": "3.2.0"
+  },
   "scripts": {
-    "dev:react": "cd client && npm run start",
-    "client:eslint": "cd client && npm run eslint ",
-    "fix:eslint": "cd client && npm run fix:eslint"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "eslint": "eslint src && eslint src/**/**/*.jsx",
+    "fix:eslint": "eslint src --fix && eslint src/**/**/*.jsx --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GSG-G7/mental-snapp.git"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GSG-G7/mental-snapp/issues"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
-  "homepage": "https://github.com/GSG-G7/mental-snapp#readme",
   "devDependencies": {
-    "pre-commit": "^1.2.2"
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^24.9.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.18.2"
   },
   "pre-commit": [
-    "client:eslint"
+    "eslint"
   ]
 }
