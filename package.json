@@ -4,9 +4,12 @@
   "description": "People are having issues controlling their feelings and keeping up with their lives. In **Mental Snapp** we've created a routine for those people that involves self-reflection and journalling, we believe that by making our users write down about their feelings or life then they will feel better :100: about themselves, our main goal is helping people in **maintaining positive mental health** outcomes. ### Problem Statement :exclamation: The users need a way to connect to their feelings so that they can accept themselves and feel confident that they can manage their lives.",
   "private": true,
   "dependencies": {
+    "apexcharts": "^3.10.0",
+    "axios": "^0.19.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -14,7 +17,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "eslint": "eslint src && eslint src/**/**/*.jsx",
-    "fix:eslint": "eslint src --fix && eslint src/**/**/*.jsx --fix"
+    "fix:eslint": "eslint src --fix && eslint src/**/**/*.jsx --fix",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,6 +37,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@storybook/addon-actions": "^5.2.5",
+    "@storybook/addon-links": "^5.2.5",
+    "@storybook/addons": "^5.2.5",
+    "@storybook/react": "^5.2.5",
+    "babel-loader": "^8.0.6",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.5.0",
