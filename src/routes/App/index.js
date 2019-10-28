@@ -3,11 +3,7 @@ import 'antd/dist/antd.css';
 import './style.css';
 
 const App = () => {
-  return (
-    <div className="App">
-      <h1>Hello from App</h1>
-    </div>
-  );
+  return <div className="App" />;
 };
 
 export default App;

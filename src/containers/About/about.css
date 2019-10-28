@@ -1,0 +1,32 @@
+.about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.about__heading {
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.about__title {
+    width: 285px;
+    font-family: Open Sans;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 0.2rem;
+}
+
+.about__content {
+    width: 285px;
+    font-family: Open Sans;
+    font-size: 14px;
+    text-align: left
+}
