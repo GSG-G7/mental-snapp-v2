@@ -4,9 +4,10 @@
   "description": "People are having issues controlling their feelings and keeping up with their lives. In **Mental Snapp** we've created a routine for those people that involves self-reflection and journalling, we believe that by making our users write down about their feelings or life then they will feel better :100: about themselves, our main goal is helping people in **maintaining positive mental health** outcomes. ### Problem Statement :exclamation: The users need a way to connect to their feelings so that they can accept themselves and feel confident that they can manage their lives.",
   "private": true,
   "dependencies": {
+    "antd": "^3.24.3",
     "apexcharts": "^3.10.0",
     "axios": "^0.19.0",
-    "antd": "^3.24.3",
+    "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
