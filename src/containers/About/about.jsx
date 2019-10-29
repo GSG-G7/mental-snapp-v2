@@ -9,14 +9,12 @@ const About = () => {
     <div className="about">
       <p className="about__heading">About</p>
       <Illustration />
-      {Aboutdata.map(data => {
-        return (
-          <div key={data.id}>
-            <p className="about__title">{data.title}</p>
-            <p className="about__content">{data.descrption}</p>
-          </div>
-        );
-      })}
+      {Aboutdata.map(data => (
+        <div key={data.id}>
+          <p className="about__title">{data.title}</p>
+          <p className="about__content">{data.descrption}</p>
+        </div>
+      ))}
       <Logo />
     </div>
   );
