@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "vagroun";
+  src: url("../../assets/fonts/vagroun.ttf") format("truetype");
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 48px;
+  text-align: left;
+  font-family: "vagroun" !important;
+  font-weight: normal;
+}
