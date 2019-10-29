@@ -1,0 +1,39 @@
+.servererror__img {
+  position: absolute;
+  width: 236px;
+  height: 128px;
+  left: 42px;
+  top: 137px;
+}
+
+.servererror__msg {
+  position: absolute;
+  width: 229px;
+  height: 66px;
+  left: 45px;
+  top: 295px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: rgba(36, 36, 36, 0.8);
+}
+
+.servererror__btn {
+  position: absolute;
+  width: 221px;
+  height: 40px;
+  left: 49px;
+  top: 391px;
+  background-color: #E9663A;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: #FFFFFF;
+}
