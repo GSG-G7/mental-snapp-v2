@@ -3,7 +3,7 @@
   src: url("../../assets/fonts/vagroun.ttf") format("truetype");
 }
 
-h2 {
+.main-head {
   font-weight: 600;
   font-size: 48px;
   text-align: left;
