@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
-import { ReactComponent as Illustration } from './vector.svg';
+import { ReactComponent as Illustration } from '../../assets/images/athentication.svg';
 import './style.css';
 
 const UnAthenticated = () => {
