@@ -1,12 +1,10 @@
 @font-face {
-  font-family: "vagroun";
-  src: url("../../assets/fonts/vagroun.ttf") format("truetype");
+  font-family: "VAGRounded";
+  src: url("../assets/fonts/vagrounded-thin.ttf") format("truetype");
 }
 
 h2 {
-  font-weight: 600;
-  font-size: 48px;
-  text-align: left;
-  font-family: "vagroun" !important;
-  font-weight: normal;
+  font-weight: bold;
+  font-size: 2.5rem;
+  font-family: "VAGRounded" !important;
 }
