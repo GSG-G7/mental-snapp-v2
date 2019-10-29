@@ -1,6 +1,6 @@
 import React from 'react';
-import { ReactComponent as Illustration } from './vector.svg';
-import { ReactComponent as Logo } from './logo.svg';
+import { ReactComponent as Illustration } from '../assets/images/about.svg';
+import { ReactComponent as Logo } from '../assets/images/logo.svg';
 import './about.css';
 
 const About = () => {
