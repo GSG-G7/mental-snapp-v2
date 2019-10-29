@@ -1,7 +1,8 @@
 import React from 'react';
+import UnderConstruction from '../UnderConstruction';
 
 const Landing = () => {
-  return <h1>Hello from Landing</h1>;
+  return <UnderConstruction />;
 };
 
 export default Landing;

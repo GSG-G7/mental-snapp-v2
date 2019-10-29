@@ -1,7 +1,8 @@
 import React from 'react';
+import UnderConstruction from '../UnderConstruction';
 
 const Questions = () => {
-  return <h1>Hello from Questions</h1>;
+  return <UnderConstruction />;
 };
 
 export default Questions;

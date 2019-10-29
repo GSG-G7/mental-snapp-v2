@@ -1,7 +1,8 @@
 import React from 'react';
+import UnderConstruction from '../UnderConstruction';
 
 const ConfirmPassword = () => {
-  return <h1>Hello from ConfirmPassword</h1>;
+  return <UnderConstruction />;
 };
 
 export default ConfirmPassword;

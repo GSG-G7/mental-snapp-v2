@@ -1,7 +1,8 @@
 import React from 'react';
+import UnderConstruction from '../UnderConstruction';
 
 const ForgetPassword = () => {
-  return <h1>Hello from ForgetPassword</h1>;
+  return <UnderConstruction />;
 };
 
 export default ForgetPassword;

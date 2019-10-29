@@ -1,7 +1,8 @@
 import React from 'react';
+import UnderConstruction from '../UnderConstruction';
 
 const HeatMap = () => {
-  return <h1>Hello from HeatMap</h1>;
+  return <UnderConstruction />;
 };
 
 export default HeatMap;

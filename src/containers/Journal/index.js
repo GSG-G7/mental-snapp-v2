@@ -1,7 +1,8 @@
 import React from 'react';
+import UnderConstruction from '../UnderConstruction';
 
 const Journal = () => {
-  return <h1>Hello from Journal</h1>;
+  return <UnderConstruction />;
 };
 
 export default Journal;

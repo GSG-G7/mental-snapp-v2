@@ -1,7 +1,8 @@
 import React from 'react';
+import UnderConstruction from '../UnderConstruction';
 
 const EditAccount = () => {
-  return <h1>Hello from EditAccount</h1>;
+  return <UnderConstruction />;
 };
 
 export default EditAccount;

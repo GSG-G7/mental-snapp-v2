@@ -1,7 +1,8 @@
 import React from 'react';
+import UnderConstruction from '../UnderConstruction';
 
 const Feeds = () => {
-  return <h1>Hello from Feeds</h1>;
+  return <UnderConstruction />;
 };
 
 export default Feeds;

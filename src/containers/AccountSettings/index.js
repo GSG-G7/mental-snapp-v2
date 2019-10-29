@@ -1,7 +1,8 @@
 import React from 'react';
+import UnderConstruction from '../UnderConstruction';
 
 const AccountSetting = () => {
-  return <h1>Hello from AccountSetting</h1>;
+  return <UnderConstruction />;
 };
 
 export default AccountSetting;
