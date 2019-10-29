@@ -5,6 +5,11 @@
     align-items: center
 }
 
+.Illustration {
+    width: 100%;
+    height: 56vh;
+}
+
 .landingPage__title {
     width: 170px;
     font-family: Poppins;
@@ -15,7 +20,6 @@
 
 .landingPage__content {
     width: 197px;
-    height: 45px;
     font-family: Source Sans Pro;
     font-size: 14px;
     line-height: 18px;
@@ -25,7 +29,7 @@
 
 .landingPage__signUpLink {
     width: 125px;
-    height: 35px;
+    height: 33px;
     font-family: Source Sans Pro;
     font-size: 14px;
     line-height: 18px;
