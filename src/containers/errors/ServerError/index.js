@@ -1,7 +1,6 @@
 import React from 'react';
-import Button from 'antd/es/button';
+import { Button } from 'antd';
 import { ReactComponent as Image } from '../../assets/serverError.svg';
-import 'antd/es/button/style';
 import './style.css';
 
 const ServerError = () => {
