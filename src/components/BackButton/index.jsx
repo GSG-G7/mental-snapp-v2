@@ -4,7 +4,7 @@ import './backbutton.css';
 
 const BackButton = () => {
   return (
-    <div className="backButton">
+    <div className="back-button">
       <Icon type="left" />
     </div>
   );
