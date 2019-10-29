@@ -1,7 +1,6 @@
 .sub-heading {
-    color: #242424;
-    opacity: 90%;
-    font-weight: 700;
-    /* TODO: add font family here */
-    /* font-family: ; */
+  color: #242424;
+  opacity: 90%;
+  font-weight: 700;
+  font-family: 'VAGRounded', sans-serif;
 }
