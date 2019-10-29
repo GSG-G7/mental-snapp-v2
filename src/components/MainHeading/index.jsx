@@ -2,13 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './main-heading.css';
 
-const MainHeading = ({ text }) => {
-  return (
-    <div>
-      <h2>{text}</h2>
-    </div>
-  );
-};
+const MainHeading = ({ text }) => <h2 className="main-head">{text}</h2>;
 
 MainHeading.propTypes = {
   text: PropTypes.string.isRequired,
