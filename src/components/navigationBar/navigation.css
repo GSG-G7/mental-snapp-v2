@@ -14,7 +14,7 @@ nav i + i {
   padding-left: 2.5em;
 }
 
-.addnewicon {
+.navbar__add-icon {
   position: absolute;
   bottom: 2.3em;
   left: 9.3em;

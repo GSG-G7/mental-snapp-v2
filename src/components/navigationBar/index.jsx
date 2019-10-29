@@ -17,7 +17,7 @@ const NavBar = () => {
           <Calendar />
         </i>
         <i>
-          <AddNew className="addnewicon" />
+          <AddNew className="navbar__add-icon" />
         </i>
         <i>
           <FeedsFilter />
