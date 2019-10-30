@@ -10,7 +10,9 @@ const UnderConstruction = props => {
   } = props;
   return (
     <div className="constraction">
-      <BackButton handleBack={goBack} />
+      <div style={{ textAlign: 'left' }}>
+        <BackButton handleBack={goBack} />
+      </div>
 
       <div style={{ paddingTop: '20vh' }}>
         <ConstructionImg />
