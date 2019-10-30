@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import './style.css';
 
-const JournalCard = ({ time, date, grateful, challenges, developing }) => {
+const JournalCard = ({ time, date, grateful, challenge, developing }) => {
   return (
     <div className="journal-card">
       <div className="journal-card__top">
@@ -30,7 +30,7 @@ const JournalCard = ({ time, date, grateful, challenges, developing }) => {
         </p>
         <p className="journal-card__challenges">
           <span className="journal-card__body__title">challenge</span>
-          {challenges}
+          {challenge}
         </p>
         <p className="journal-card__developing">
           <span className="journal-card__body__title">developing</span>
@@ -45,7 +45,7 @@ JournalCard.propTypes = {
   time: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   grateful: PropTypes.string.isRequired,
-  challenges: PropTypes.string.isRequired,
+  challenge: PropTypes.string.isRequired,
   developing: PropTypes.string.isRequired,
 };
 
