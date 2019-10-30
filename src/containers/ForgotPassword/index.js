@@ -1,8 +1,8 @@
 import React from 'react';
 import UnderConstruction from '../UnderConstruction';
 
-const Questions = () => {
+const ForgotPassword = () => {
   return <UnderConstruction />;
 };
 
-export default Questions;
+export default ForgotPassword;

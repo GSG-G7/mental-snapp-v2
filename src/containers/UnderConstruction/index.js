@@ -3,12 +3,11 @@ import BackButton from '../../components/BackButton';
 import { ReactComponent as ConstructionImg } from '../assets/images/underConstruction.svg';
 import './style.css';
 
-const UnderConstruction = () => {
+const UnderConstruction = porps => {
   return (
     <div className="constraction">
-      <div style={{ textAlign: 'left' }}>
-        <BackButton />
-      </div>
+      <BackButton back={() => console.log('hi')} />
+
       <div style={{ paddingTop: '20vh' }}>
         <ConstructionImg />
       </div>

@@ -1,16 +1,21 @@
 import React from 'react';
 import { Button } from 'antd';
+import { LANDING } from '../../../constants/routes';
 import { ReactComponent as Illustration } from '../../assets/images/athentication.svg';
 import './style.css';
 
-const UnAthenticated = () => {
+const UnAthenticated = porps => {
   return (
-    <div className="error">
+    <div className="authentication-error">
       <Illustration />
-      <p className="error__message">
+      <p className="authentication-error__message">
         Sorry but you are not authorized to see the content of this page
       </p>
-      <Button className="error__button" type="primary">
+      <Button
+        className="authentication-error__button"
+        type="primary"
+        onClick={() => porps.history.push(LANDING)}
+      >
         Go Home
       </Button>
     </div>
