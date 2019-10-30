@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Link } from 're';
+import { Link } from 'react-router-dom';
 import { ReactComponent as HomeIcon } from '../assets/icons/homeIcon.svg';
 import { ReactComponent as Calendar } from '../assets/icons/calendar.svg';
 import { ReactComponent as AddNew } from '../assets/icons/addNew.svg';
@@ -11,21 +11,30 @@ const NavBar = () => {
   return (
     <div className="navbar">
       <nav>
-        {/* <Link /> */}
         <i>
-          <HomeIcon className="navbar__home-icon" />
+          <Link to="/home">
+            <HomeIcon className="navbar__home-icon" />
+          </Link>
         </i>
         <i>
-          <Calendar className="navbar__calendar" />
+          <Link to="/home">
+            <Calendar className="navbar__calendar" />
+          </Link>
         </i>
         <i>
-          <AddNew className="navbar__add-icon" />
+          <Link to="/home">
+            <AddNew className="navbar__add-icon" />
+          </Link>
         </i>
         <i>
-          <FeedsFilter className="navbar__feeds-filter" />
+          <Link to="/home">
+            <FeedsFilter className="navbar__feeds-filter" />
+          </Link>
         </i>
         <i>
-          <Settings className="navbar__settings" />
+          <Link to="/home">
+            <Settings className="navbar__settings" />
+          </Link>
         </i>
       </nav>
     </div>
