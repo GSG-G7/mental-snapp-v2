@@ -1,8 +1,10 @@
-.landingPAge {
+.landing {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    font-size: 14px;
+    font-family: 'Source Sans Pro';
 }
 
 .Illustration {
@@ -10,57 +12,50 @@
     height: 56vh;
 }
 
-.landingPage__title {
+.landing__title {
     width: 170px;
-    font-family: Poppins;
+    font-family: 'Poppins';
     font-weight: bold;
     font-size: 18px;
     color: #242424;
 }
 
-.landingPage__content {
+.landing__content {
     width: 197px;
-    font-family: Source Sans Pro;
-    font-size: 14px;
     line-height: 18px;
     text-align: center;
     color: rgba(0, 0, 0, 0.6);
 }
 
-.landingPage__signUpLink {
+.landing__link {
     width: 125px;
     height: 33px;
-    font-family: Source Sans Pro;
-    font-size: 14px;
     line-height: 18px;
     color: #E9663A;
     padding-top: 19px;
 }
 
-.landingPage__homeLink {
+.landing__aboutLink {
     width: 226px;
-    font-family: Open Sans;
-    font-size: 14px;
+    font-family: 'Open Sans';
     line-height: 19px;
     align-items: center;
     color: #242424;
 }
 
-.landingPage__logo {
+.landing__logo {
     width: 226px;
     height: 24px;
-    font-family: Open Sans;
+    font-family: 'Open Sans';
     font-weight: bold;
-    font-size: 14px;
     line-height: 19px;
     align-items: center;
     color: #E9663A;
     padding-left: 5px;
 }
 
-.landingPage__button {
-    font-family: Roboto;
-    font-style: normal;
+.landing__button {
+    font-family: 'Roboto';
     font-weight: 500;
     font-size: 16px;
     color: #FFFFFF;
