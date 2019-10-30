@@ -14,9 +14,6 @@
 
 .landing__title {
     width: 170px;
-    font-family: 'Poppins';
-    font-weight: bold;
-    font-size: 18px;
     color: #242424;
 }
 
@@ -24,7 +21,6 @@
     width: 197px;
     line-height: 18px;
     text-align: center;
-    color: rgba(0, 0, 0, 0.6);
 }
 
 .landing__link {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from 'antd';
 import { ReactComponent as Illustration } from '../assets/images/landing.svg';
+import MainHeading from '../../components/MainHeading/index';
+import SubHeading from '../../components/subHeading/index';
 import './landing.css';
 
 const LandingPage = () => {
@@ -8,10 +10,12 @@ const LandingPage = () => {
     <div>
       <Illustration className="Illustration" />
       <div className="landing">
-        <p className="landing__title">Practice the art of good mental health</p>
-        <p className="landing__content">
-          Tell your story and positively guide your thoughts
-        </p>
+        <div className="landing__title">
+          <MainHeading text="Practice the art of good mental health" />
+        </div>
+        <div className="landing__content">
+          <SubHeading text="Tell your story and positively guide your thoughts" />
+        </div>
         <Button type="primary" className="landing__button">
           Sign In
         </Button>
