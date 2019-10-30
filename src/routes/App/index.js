@@ -31,19 +31,16 @@ const App = () => {
           path={ROUTES.CONFIRM_PASSWORD}
           component={Containers.ConfirmPassword}
         />
-        <Route
-          path={ROUTES.CLIENT_ERROR}
-          component={Containers.Errors.ClientError}
-        />
-        <Route
-          path={ROUTES.SERVER_ERROR}
-          component={Containers.Errors.ServerError}
-        />
         <Route path={ROUTES.JOURNAL} component={Containers.Journal} />
         <Route
           path={ROUTES.UNAUTHENTICATED}
           component={Containers.Errors.AuthenticationError}
         />
+        <Route
+          path={ROUTES.SERVER_ERROR}
+          component={Containers.Errors.ServerError}
+        />
+        <Route component={Containers.Errors.ClientError} />
       </Router>
     </div>
   );
