@@ -1,25 +1,22 @@
+.server-error {
+  text-align: center;
+  width: 100%;
+}
+
 .server-error__img {
-  position: absolute;
-  width: 236px;
-  height: 128px;
-  left: 42px;
-  top: 137px;
+  width: 80%;
+  margin-top: 137px;
 }
 
 .server-error__msg {
-  position: absolute;
   width: 229px;
   height: 66px;
-  left: 45px;
-  top: 295px;
+  margin: 30px auto 20px auto;
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 22px;
-  display: flex;
-  align-items: center;
-  text-align: center;
   color: rgba(36, 36, 36, 0.8);
 }
 
@@ -43,15 +40,18 @@
 }
 
 .server-error__btn {
-  position: absolute;
-  width: 221px;
-  height: 40px;
-  left: 49px;
-  top: 391px;
+  width: 50vw;
+  height: 5vh;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 22px;
   color: #FFFFFF;
+}
+
+@media all and (device-width: 768px) and (device-height: 1024px) {
+  .server-error__img {
+    margin-top: 300px;
+  } 
 }
