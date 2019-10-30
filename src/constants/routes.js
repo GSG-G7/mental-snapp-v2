@@ -9,7 +9,6 @@ export const ACCOUNT_SETTINGS = '/account-settings';
 export const EDIT_ACCOUNT = '/edit-account';
 export const QUESTION = '/question';
 export const CONFIRM_PASSWORD = '/confirm-password';
-export const CLIENT_ERROR = '/clien-error';
 export const SERVER_ERROR = '/server-error';
 export const UNAUTHENTICATED = '/unauthenticated';
 export const JOURNAL = '/journal';
