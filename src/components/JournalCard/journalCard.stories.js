@@ -17,7 +17,7 @@ const journal = {
     title: 'not finding time',
     body: 'some dummy and very stupid data',
   },
-  challenges: {
+  challenge: {
     title: 'reading more books',
     body: 'some dummy and very stupid data',
   },
@@ -37,7 +37,7 @@ export const versionOne = () => (
         .split(',')[0]
     }
     grateful={journal.grateful.title}
-    challenges={journal.challenges.title}
+    challenges={journal.challenge.title}
     developing={journal.developing.title}
   />
 );

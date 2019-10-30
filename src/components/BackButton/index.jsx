@@ -8,6 +8,7 @@ const BackButton = props => {
   //   history: { goBack },
   // } = props;
   return (
+    // eslint-disable-next-line no-console
     <button type="submit" className="back-button" onClick={console.log('hi')}>
       <Icon type="left" />
     </button>

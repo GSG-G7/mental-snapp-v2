@@ -29,7 +29,7 @@ const JournalCard = ({ time, date, grateful, challenges, developing }) => {
           {grateful}
         </p>
         <p className="journal-card__challenges">
-          <span className="journal-card__body__title">challenges</span>
+          <span className="journal-card__body__title">challenge</span>
           {challenges}
         </p>
         <p className="journal-card__developing">
