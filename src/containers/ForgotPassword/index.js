@@ -1,8 +1,8 @@
 import React from 'react';
-import UnderConstruction from '../UnderConstruction';
+import ForgotPassword from './forgotPass';
 
-const ForgotPassword = () => {
-  return <UnderConstruction />;
-};
+function index() {
+  return <ForgotPassword />;
+}
 
-export default ForgotPassword;
+export default index;

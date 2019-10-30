@@ -12,7 +12,7 @@ body {
 
 @font-face {
   font-family: 'VAGRounded';
-  src: url('../assets/fonts/vagrounded-thin.ttf') format('truetype');
+  src: url('../../components/assets/fonts/vagroun.ttf') format('truetype');
 }
 
 .App {
