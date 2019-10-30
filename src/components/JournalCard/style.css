@@ -32,7 +32,14 @@
 }
 
 .journal-card__icon {
+  font-size: 15px;
+  color: rgba(36, 36, 36, 0.6);
+  margin-right: 4px;
+}
+
+.journal-card__icon--delete {
   cursor: pointer;
+  color: rgba(245, 34, 45, 0.8);
 }
 
 .journal-card__body {
@@ -58,8 +65,9 @@
 }
 
 @media (min-width: 600px) {
-  .journal-card  {
+  .journal-card {
     width: 60%;
     margin: 0 auto;
   }
 }
+

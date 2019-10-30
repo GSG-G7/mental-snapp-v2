@@ -9,34 +9,17 @@ const JournalCard = ({ time, date, grateful, challenges, developing }) => {
     <div className="journal-card">
       <div className="journal-card__top">
         <div className="journal-card__date">
-          <Icon
-            type="calendar"
-            style={{
-              fontSize: '15px',
-              color: 'rgba(36, 36, 36, 0.6)',
-              marginRight: '4px',
-            }}
-          />
+          <Icon type="calendar" className="journal-card__icon" />
           <span>{date}</span>
         </div>
         <div className="journal-card__time">
-          <Icon
-            type="clock-circle"
-            style={{
-              fontSize: '14px',
-              color: 'rgba(36, 36, 36, 0.6)',
-              marginRight: '4px',
-            }}
-          />
+          <Icon type="clock-circle" className="journal-card__icon" />
           <span>{time}</span>
         </div>
         <div className="journal-card__delete">
           <Icon
-            className="journal-card__icon"
+            className="journal-card__icon journal-card__icon--delete"
             type="delete"
-            style={{
-              color: 'rgba(245, 34, 45, 0.8)',
-            }}
           />
         </div>
       </div>
