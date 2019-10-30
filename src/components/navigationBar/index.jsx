@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <div className="navbar">
       <nav>
-        <Link />
+        {/* <Link /> */}
         <i>
           <HomeIcon className="navbar__home-icon" />
         </i>
