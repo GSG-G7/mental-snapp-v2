@@ -1,4 +1,5 @@
 import React from 'react';
+// import { Link } from 're';
 import { ReactComponent as HomeIcon } from '../assets/icons/homeIcon.svg';
 import { ReactComponent as Calendar } from '../assets/icons/calendar.svg';
 import { ReactComponent as AddNew } from '../assets/icons/addNew.svg';
@@ -10,20 +11,21 @@ const NavBar = () => {
   return (
     <div className="navbar">
       <nav>
+        <Link />
         <i>
-          <HomeIcon />
+          <HomeIcon className="navbar__home-icon" />
         </i>
         <i>
-          <Calendar />
+          <Calendar className="navbar__calendar" />
         </i>
         <i>
           <AddNew className="navbar__add-icon" />
         </i>
         <i>
-          <FeedsFilter />
+          <FeedsFilter className="navbar__feeds-filter" />
         </i>
         <i>
-          <Settings />
+          <Settings className="navbar__settings" />
         </i>
       </nav>
     </div>
