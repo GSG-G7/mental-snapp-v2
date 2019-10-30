@@ -2,12 +2,13 @@ import React from 'react';
 import { ReactComponent as Illustration } from '../assets/images/about.svg';
 import { ReactComponent as Logo } from '../assets/images/logo.svg';
 import Aboutdata from './data';
+import MainHeading from '../../components/MainHeading/index';
 import './about.css';
 
 const About = () => {
   return (
     <div className="about">
-      <p className="about__heading">About</p>
+      <MainHeading text="About" />
       <Illustration />
       {Aboutdata.map(data => (
         <div key={data.id}>
