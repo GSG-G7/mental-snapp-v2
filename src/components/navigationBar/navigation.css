@@ -10,8 +10,12 @@
   justify-content: space-evenly;
 }
 
+ .clicked svg path {
+  fill: #E9663A;
+}
+
 nav i + i {
-  padding-left: 2.5em;
+  padding-left: 3em;
 }
 
 .navbar__add-icon {
@@ -26,15 +30,14 @@ nav i + i {
   -webkit-border-radius:50%;
 }
 
-@media all and (device-width: 768px) and (device-height: 1024px) {
+@media all and (min-width: 768px) and (max-width: 1024px) {
   nav i + i {
-    padding-left: 7em;
-  }
-
-  .navbar__add-icon {
-    position: absolute;
-    bottom: 78%;
+    padding-left: 5em;
   }
 }
 
-
+@media all and (min-width: 1025px) and (max-width: 2560px) {
+  nav i + i {
+    padding-left: 9em;
+  }
+}
