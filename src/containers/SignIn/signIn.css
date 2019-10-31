@@ -2,6 +2,14 @@
   min-height: 100vh;
 }
 
+.sign-in__form {
+  margin-top: 28px;
+}
+
+.sign-in__form .sign-in__input {
+  margin-bottom: 28px;
+}
+
 .sign-in__email-input {
   width: 70vw !important;
   height: 7vh;
@@ -9,14 +17,18 @@
 }
 
 .sign-in__password-input {
-  width: 70vw !important;
-  height: 7vh;
+  width: 224px !important;
+  height: 40px;
   margin: 0 auto;
 }
 
+.ant-btn {
+  border: none !important;
+}
+
 .signIn__btn {
-  width: 50vw;
-  height: 5vh;
+  width: 224px;
+  height: 40px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
