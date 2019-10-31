@@ -6,20 +6,23 @@
   display: flex;
   justify-content: center;
   align-items: baseline;
-  font-family: 'VAGRounded', sans-serif;
 }
 
 .forgot-password__back-btn {
-    flex: 1;
+  flex: 1;
 }
 
 .forgot-password__title {
-    flex: 6;
-    text-transform: capitalize; 
+  flex: 6;
+  text-transform: capitalize;
+  font-family: 'VAGRounded', 'Poppins', sans-serif;
+  font-weight: 500;
+  color: #242424;
+  padding-right: 12%;
 }
 
 .forgot-password__vector {
-    margin: 10px auto;
+  margin: 10px auto;
 }
 
 .forgot-password__text {
@@ -31,14 +34,9 @@
   font-weight: 300;
   text-align: left;
 }
-.forgot-password__icon {
-    border: 1px solid #d9d9d9;
-    border-radius: 4px;
-    width: 15%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #242424;
+
+.forgot-password__input .forgot-password__icon {
+  color: rgba(0, 0, 0, 0.45);
 }
 
 .forgot-password__resend {
@@ -95,7 +93,28 @@
   .forgot-password__text {
     font-size: 20px;
   }
-  .forgot-password__heading  {
+  .forgot-password__heading {
     font-size: 24px;
+  }
+  .forgot-password__vector {
+    width: 80%;
+    height: 30vh;
+  }
+  .forgot-password__link {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 920px) {
+  .forgot-password__button,
+  .forgot-password__input,
+  .forgot-password__text {
+    width: 40%;
+  }
+  .forgot-password__text {
+    font-size: 18px;
+  }
+  .forgot-password__heading {
+    font-size: 20px;
   }
 }
