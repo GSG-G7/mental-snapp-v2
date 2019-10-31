@@ -77,3 +77,32 @@
     background-color: #E9663A;
     border-color: #E9663A;
 }
+
+@media only screen and (min-width: 768px) {
+    .Illustration {
+        height: 66vh;
+    }
+    .landing__title {
+        width: 338px;
+        font-size: 25px;
+        height: 109px;
+    }
+    .landing__content {
+        font-size: 23px;
+        width: 264px;
+        line-height: 28px;
+    }
+    .landing .ant-btn-primary {
+        height: 47px;
+        width: 275px;
+        font-size: 24px;
+    }
+    .landing__link {
+        width: 175px;
+        font-size: 20px;
+    }
+    .landing__aboutLink {
+        font-size: 20px;
+        width: 265px;
+    }
+}
