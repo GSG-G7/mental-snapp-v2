@@ -11,15 +11,15 @@ import './navigation.css';
 const NavBar = () => {
   return (
     <footer aria-label="page footer">
-      <div className="navbar__container">
-        <nav className="navbar">
+      <div className="navbar">
+        <nav className="navbar__container">
           <i className="navbar__icon">
             <NavLink
               to={ROUTES.HOME}
               activeClassName="clicked"
               aria-label="go to home page"
             >
-              <HomeIcon className="icons navbar__home-icon" />
+              <HomeIcon className="icons" />
             </NavLink>
           </i>
           <i className="navbar__icon">
@@ -28,7 +28,7 @@ const NavBar = () => {
               activeClassName="clicked"
               aria-label="go to heat-map page"
             >
-              <Calendar className="icons navbar__calendar" />
+              <Calendar className="icons" />
             </NavLink>
           </i>
           <i className="navbar__icon">
@@ -37,7 +37,7 @@ const NavBar = () => {
               activeClassName="clicked"
               aria-label="go to questions page"
             >
-              <AddNew className="icons navbar__add-icon" />
+              <AddNew className="icons navbar__icon-addnew" />
             </NavLink>
           </i>
           <i className="navbar__icon">
@@ -46,7 +46,7 @@ const NavBar = () => {
               activeClassName="clicked"
               aria-label="go to feed page"
             >
-              <FeedsFilter className="icons navbar__feeds-filter" />
+              <FeedsFilter className="icons" />
             </NavLink>
           </i>
           <i className="navbar__icon">
@@ -55,7 +55,7 @@ const NavBar = () => {
               activeClassName="clicked"
               aria-label="go to your account settings page"
             >
-              <Settings className="icons navbar__settings" />
+              <Settings className="icons" />
             </NavLink>
           </i>
         </nav>

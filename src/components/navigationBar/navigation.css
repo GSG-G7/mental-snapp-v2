@@ -1,4 +1,4 @@
-.navbar__container {
+.navbar {
   position: fixed;
   bottom: 0%;
   width: 100%;
@@ -13,11 +13,11 @@
   fill: #E9663A;
 }
 
-.navbar .navbar__icon + .navbar__icon {
+.navbar__container .navbar__icon + .navbar__icon {
   padding-left: 3em;
 }
 
-.navbar__add-icon {
+.navbar__icon-addnew {
   position: absolute;
   left: 50%;
   bottom: 60%;
@@ -30,7 +30,7 @@
 }
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
-  .navbar .navbar__icon + .navbar__icon {
+  .navbar__container .navbar__icon + .navbar__icon {
     padding-left: 8em;
   }
 
