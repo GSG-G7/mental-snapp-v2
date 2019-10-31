@@ -4,19 +4,15 @@ import './backbutton.css';
 import propTypes from 'prop-types';
 
 const BackButton = props => {
-  // const {
-  //   history: { goBack },
-  // } = props;
+  const { handleBack } = props;
   return (
-    <button type="submit" className="back-button">
+    <button type="submit" className="back-button" onClick={() => handleBack()}>
       <Icon type="left" />
     </button>
   );
 };
 
 BackButton.propTypes = {
-  history: propTypes.shape({
-    goBack: propTypes.func.isRequired,
-  }).isRequired,
+  handleBack: propTypes.func.isRequired,
 };
 export default BackButton;
