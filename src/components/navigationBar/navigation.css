@@ -2,10 +2,9 @@
   position: fixed;
   bottom: 0%;
   width: 100%;
-  height: 10vh;
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
-  padding-top: 0.7em;
+  padding: 0.7em 0;
   display: flex;
   justify-content: space-evenly;
 }
