@@ -1,3 +1,7 @@
+.sign-in {
+  min-height: 100vh;
+}
+
 .sign-in__email-input {
   width: 70vw !important;
   height: 7vh;
@@ -9,26 +13,6 @@
   height: 7vh;
   margin: 0 auto;
 }
-
-
-.ant-btn {
-  border: none;
-}
-
- .ant-btn-primary {
-  color: #fff;
-  background-color: #E9663A;
-  border-color: #E9663A;
-  text-shadow: none;
-  box-shadow: none;
-}
-
- .ant-btn-primary:hover,
- .ant-btn-primary:focus {
-  color: #fff;
-  background-color: #E9663A;
-  border-color: #E9663A;
- }
 
 .signIn__btn {
   width: 50vw;
