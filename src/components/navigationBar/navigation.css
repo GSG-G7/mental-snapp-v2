@@ -1,0 +1,53 @@
+.navbar {
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  padding: 0.7em 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+ .clicked svg path {
+  fill: #E9663A;
+}
+
+.navbar__container .navbar__icon + .navbar__icon {
+  padding-left: 3em;
+}
+
+.navbar__icon-addnew {
+  position: absolute;
+  left: 50%;
+  bottom: 60%;
+  margin-left: -23px;
+  border: 4px solid white;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08), 0px -3px 10px rgba(0, 0, 0, 0.05);
+  border-radius:50%;
+ -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+}
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .navbar__container .navbar__icon + .navbar__icon {
+    padding-left: 8em;
+  }
+
+  .icons {
+    width: 50px;
+    height: 50px;
+  }
+  
+}
+
+@media all and (min-width: 1025px) and (max-width: 2560px) {
+  .navbar .navbar__icon + .navbar__icon {
+    padding-left: 11em;
+  }
+
+  .icons {
+    width: 70px;
+    height: 50px;
+  }
+}
