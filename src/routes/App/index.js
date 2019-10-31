@@ -11,52 +11,71 @@ const App = () => {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path={ROUTES.LANDING} component={Containers.Landing} />
-          <Route exact path={ROUTES.HOME} component={Containers.Home} />
-          <Route exact path={ROUTES.SIGN_IN} component={Containers.SignIn} />
-          <Route exact path={ROUTES.SIGN_UP} component={Containers.SignUp} />
-          <Route exact path={ROUTES.ABOUT} component={Containers.About} />
           <Route
-            exact
+            path={ROUTES.LANDING}
+            render={porps => <Containers.Landing {...porps} />}
+          />
+          <Route
+            path={ROUTES.HOME}
+            render={porps => <Containers.Home {...porps} />}
+          />
+          <Route
+            path={ROUTES.SIGN_IN}
+            render={porps => <Containers.SignIn {...porps} />}
+          />
+          <Route
+            path={ROUTES.SIGN_UP}
+            render={porps => <Containers.SignUp {...porps} />}
+          />
+          <Route
+            path={ROUTES.ABOUT}
+            render={porps => <Containers.About {...porps} />}
+          />
+          <Route
             path={ROUTES.FORGOT_PASSWORD}
-            component={Containers.ForgotPassword}
+            render={porps => <Containers.ForgotPassword {...porps} />}
           />
-          <Route exact path={ROUTES.FEED} component={Containers.Feed} />
-          <Route exact path={ROUTES.HEAT_MAP} component={Containers.HeatMap} />
           <Route
-            exact
+            path={ROUTES.FEED}
+            render={porps => <Containers.Feed {...porps} />}
+          />
+          <Route
+            path={ROUTES.HEAT_MAP}
+            render={porps => <Containers.HeatMap {...porps} />}
+          />
+          <Route
             path={ROUTES.ACCOUNT_SETTINGS}
-            component={Containers.AccountSettings}
+            render={porps => <Containers.AccountSettings {...porps} />}
           />
           <Route
-            exact
             path={ROUTES.EDIT_ACCOUNT}
-            component={Containers.EditAccount}
+            render={porps => <Containers.EditAccount {...porps} />}
           />
           <Route
-            exact
             path={ROUTES.QUESTION}
-            component={Containers.Questions}
+            render={porps => <Containers.Questions {...porps} />}
           />
           <Route
-            exact
             path={ROUTES.CONFIRM_PASSWORD}
-            component={Containers.ConfirmPassword}
+            render={porps => <Containers.ConfirmPassword {...porps} />}
           />
-          <Route exact path={ROUTES.JOURNAL} component={Containers.Journal} />
           <Route
-            exact
+            path={ROUTES.JOURNAL}
+            render={porps => <Containers.Journal {...porps} />}
+          />
+          <Route
             path={ROUTES.UNAUTHENTICATED}
-            render={props => (
-              <Containers.Errors.AuthenticationError {...props} />
+            render={porps => (
+              <Containers.Errors.AuthenticationError {...porps} />
             )}
           />
           <Route
-            exact
             path={ROUTES.SERVER_ERROR}
-            component={Containers.Errors.ServerError}
+            render={porps => <Containers.Errors.ServerError {...porps} />}
           />
-          <Route component={Containers.Errors.ClientError} />
+          <Route
+            render={porps => <Containers.Errors.ClientError {...porps} />}
+          />
         </Switch>
       </Router>
     </div>
