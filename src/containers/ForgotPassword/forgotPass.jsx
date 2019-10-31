@@ -8,6 +8,10 @@ import './forgotPass.css';
 const ForgotPass = props => {
   const {
     history: { goBack },
+    email,
+    error,
+    handleChange,
+    handleClick,
   } = props;
   return (
     <div className="forgot-password">
@@ -27,9 +31,17 @@ const ForgotPass = props => {
           placeholder="Enter your email"
           size="large"
           prefix={<Icon type="mail" className="forgot-password__icon" />}
+          value={email}
+          onChange={handleChange}
         />
       </div>
-      <Button className="forgot-password__button" size="large" type="primary">
+      <div className="forgot-password__error">{error}</div>
+      <Button
+        className="forgot-password__button"
+        size="large"
+        type="primary"
+        onClick={handleClick}
+      >
         Reset My Password
       </Button>
       <p className="forgot-password__link">
@@ -40,10 +52,18 @@ const ForgotPass = props => {
   );
 };
 
+ForgotPass.defaultProps = {
+  error: '',
+};
+
 ForgotPass.propTypes = {
   history: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
   }).isRequired,
+  email: PropTypes.string.isRequired,
+  error: PropTypes.string,
+  handleChange: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default ForgotPass;
