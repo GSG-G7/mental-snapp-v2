@@ -11,34 +11,32 @@
   box-shadow: none;
 }
 
-.ant-btn:hover,
-.ant-btn:focus {
+.ant-btn:hover, .ant-btn:focus {
   color: #fff;
   background-color: #e9663aec;
   border-color: #e9663aec;
 }
 
-.ant-btn-primary:hover,
-.ant-btn-primary:focus {
+.ant-btn-primary:hover, .ant-btn-primary:focus {
   color: #fff;
   background-color: #e9663aec;
   border-color: #e9663aec;
 }
 
 .error {
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .error__message {
-    width: 70%;
-    margin: 30px 10px;
+  width: 70%;
+  margin: 30px 10px;
 }
 
 .error__btn {
-    width: 70%; 
+  width: 70%;
 }
