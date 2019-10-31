@@ -22,3 +22,9 @@
     font-size: 14px;
     text-align: left
 }
+
+.about__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-around
+}
