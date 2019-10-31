@@ -1,26 +1,24 @@
 import React from 'react';
-import { Steps, Button, message, Input } from 'antd';
+import { Button, message, Input, Progress } from 'antd';
 import './questions.css';
-import data from './data';
 
 const { TextArea } = Input;
-const { Step } = Steps;
 
-const steps = [
+const entryData = [
   {
-    title: 'First',
-    content: 'First-content',
+    id: 1,
     heading: 'Today, Iam grateful for',
+    percent: 34,
   },
   {
-    title: 'Second',
-    content: 'Second-content',
+    id: 2,
     heading: 'Challenge I face',
+    percent: 68,
   },
   {
-    title: 'Last',
-    content: 'Last-content',
+    id: 3,
     heading: 'Iam looking to develop',
+    percent: 100,
   },
 ];
 
@@ -29,12 +27,16 @@ class Questions extends React.Component {
     super(props);
     this.state = {
       current: 0,
-      story: data,
+      story: [],
     };
   }
 
   componentDidMount() {
     // fetch data from firbase db by using axios
+    // this.setState({story:data})
+    // **** so the value for input and TextArea will be as follows :
+    // 1- value = {story[current].title} for input
+    // 2- value = {story[current].content} for TextArea
   }
 
   next() {
@@ -53,35 +55,28 @@ class Questions extends React.Component {
     const { current, story } = this.state;
     return (
       <div>
-        {/* <Steps current={current}>
-          {story.map(detail => (
-            <Step key={detail.key} title="go" />
-          ))}
-        </Steps> */}
-
-        <Steps current={current}>
-          <Step />
-          <Step />
-          <Step />
-        </Steps>
-
         <div className="question">
-          <p>{story[current].heading}</p>
-          <Input placeholder="Title" value={story[current].title} />
-          <TextArea
-            rows={4}
-            placeholder="Write your words"
-            value={story[current].content}
+          <p>
+            Question 3·/
+            {current + 1}
+          </p>
+          <Progress
+            percent={entryData[current].percent}
+            size="small"
+            showInfo={false}
           />
+          <p>{entryData[current].heading}</p>
+          <Input placeholder="Title" value="" />
+          <TextArea rows={4} placeholder="Write your words" value="" />
         </div>
 
         <div className="steps-action">
-          {current < steps.length - 1 && (
+          {current < entryData.length - 1 && (
             <Button type="primary" onClick={() => this.next()}>
               Next
             </Button>
           )}
-          {current === steps.length - 1 && (
+          {current === entryData.length - 1 && (
             <Button
               type="primary"
               onClick={() => message.success('Processing complete!')}
@@ -89,8 +84,8 @@ class Questions extends React.Component {
               Done
             </Button>
           )}
-          {current > 0 && (
-            <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+          {current < entryData.length - 1 && (
+            <Button style={{ marginLeft: 8 }} onClick={() => this.next()}>
               Skip
             </Button>
           )}

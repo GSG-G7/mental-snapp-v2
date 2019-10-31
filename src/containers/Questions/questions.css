@@ -1,5 +1,4 @@
 .question {
-    margin-top: 16px;
     border-radius: 6px;
     min-height: 200px;
     text-align: center;
@@ -37,13 +36,33 @@
     margin-top: 24px;
 }
 
-textarea.ant-input {
+.question textarea.ant-input {
     width: 224px;
     height: 179px;
 }
 
-.ant-input {
+.question .ant-input {
     width: 224px;
     height: 40px;
     margin-bottom: 10px;
+}
+
+.question .ant-progress-inner {
+    width: 75%;
+}
+
+.question .ant-progress-show-info .ant-progress-oute {
+    padding-right: 0;
+}
+
+.question .ant-progress-line {
+    padding-bottom: 20px;
+}
+
+.question .ant-progress-status-success .ant-progress-bg {
+    background-color: #EE6B42;
+}
+
+.question .ant-progress-success-bg, .ant-progress-bg {
+    background-color: #EE6B42 !important;
 }
