@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 
 import * as Containers from '../../containers';
@@ -10,37 +10,88 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        <Route path={ROUTES.LANDING} component={Containers.Landing} />
-        <Route path={ROUTES.HOME} component={Containers.Home} />
-        <Route path={ROUTES.SIGN_IN} component={Containers.SignIn} />
-        <Route path={ROUTES.SIGN_UP} component={Containers.SignUp} />
-        <Route path={ROUTES.ABOUT} component={Containers.About} />
-        <Route
-          path={ROUTES.FORGOT_PASSWORD}
-          component={Containers.ForgotPassword}
-        />
-        <Route path={ROUTES.FEED} component={Containers.Feed} />
-        <Route path={ROUTES.HEAT_MAP} component={Containers.HeatMap} />
-        <Route
-          path={ROUTES.ACCOUNT_SETTINGS}
-          component={Containers.AccountSettings}
-        />
-        <Route path={ROUTES.EDIT_ACCOUNT} component={Containers.EditAccount} />
-        <Route path={ROUTES.QUESTION} component={Containers.Questions} />
-        <Route
-          path={ROUTES.CONFIRM_PASSWORD}
-          component={Containers.ConfirmPassword}
-        />
-        <Route path={ROUTES.JOURNAL} component={Containers.Journal} />
-        <Route
-          path={ROUTES.UNAUTHENTICATED}
-          component={Containers.Errors.AuthenticationError}
-        />
-        <Route
-          path={ROUTES.SERVER_ERROR}
-          component={Containers.Errors.ServerError}
-        />
-        <Route component={Containers.Errors.ClientError} />
+        <Switch>
+          <Route
+            exact
+            path={ROUTES.LANDING}
+            render={porps => <Containers.Landing {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.HOME}
+            render={porps => <Containers.Home {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.SIGN_IN}
+            render={porps => <Containers.SignIn {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.SIGN_UP}
+            render={porps => <Containers.SignUp {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.ABOUT}
+            render={porps => <Containers.About {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.FORGOT_PASSWORD}
+            render={porps => <Containers.ForgotPassword {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.FEED}
+            render={porps => <Containers.Feed {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.HEAT_MAP}
+            render={porps => <Containers.HeatMap {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.ACCOUNT_SETTINGS}
+            render={porps => <Containers.AccountSettings {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.EDIT_ACCOUNT}
+            render={porps => <Containers.EditAccount {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.QUESTION}
+            render={porps => <Containers.Questions {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.CONFIRM_PASSWORD}
+            render={porps => <Containers.ConfirmPassword {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.JOURNAL}
+            render={porps => <Containers.Journal {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.UNAUTHENTICATED}
+            render={porps => (
+              <Containers.Errors.AuthenticationError {...porps} />
+            )}
+          />
+          <Route
+            exact
+            path={ROUTES.SERVER_ERROR}
+            render={porps => <Containers.Errors.ServerError {...porps} />}
+          />
+          <Route
+            render={porps => <Containers.Errors.ClientError {...porps} />}
+          />
+        </Switch>
       </Router>
     </div>
   );
