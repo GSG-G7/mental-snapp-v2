@@ -1,5 +1,9 @@
 import React from 'react';
-import { Button, message, Input, Progress } from 'antd';
+import propTypes from 'prop-types';
+import { Button, message, Input, Progress, Icon } from 'antd';
+import { Link } from 'react-router-dom';
+import { HOME } from '../../constants/routes';
+import BackButton from '../../components/BackButton/index';
 import './questions.css';
 
 const { TextArea } = Input;
@@ -53,8 +57,17 @@ class Questions extends React.Component {
 
   render() {
     const { current, story } = this.state;
+    const {
+      history: { goBack },
+    } = this.props;
     return (
       <div>
+        <div className="question__navigation">
+          <BackButton handleBack={goBack} />
+          <Link to={HOME}>
+            <Icon type="close" />
+          </Link>
+        </div>
         <div className="question">
           <p>
             Question 3·/
@@ -79,9 +92,9 @@ class Questions extends React.Component {
           {current === entryData.length - 1 && (
             <Button
               type="primary"
-              onClick={() => message.success('Processing complete!')}
+              onClick={() => message.success('Yes,you have added a journal')}
             >
-              Done
+              <Link to={HOME}>Finish</Link>
             </Button>
           )}
           {current < entryData.length - 1 && (
@@ -94,4 +107,10 @@ class Questions extends React.Component {
     );
   }
 }
+
+Questions.propTypes = {
+  history: propTypes.shape({
+    goBack: propTypes.func.isRequired,
+  }).isRequired,
+};
 export default Questions;

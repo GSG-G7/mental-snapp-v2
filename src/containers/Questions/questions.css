@@ -2,11 +2,19 @@
     border-radius: 6px;
     min-height: 200px;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 13px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center
+}
+
+.question__navigation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 67px;
+    padding: 0 21px;
 }
 
 .question p {
