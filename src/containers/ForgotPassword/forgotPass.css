@@ -52,6 +52,10 @@
   display: flex;
 }
 
+.forgot-password__error {
+  color: #f5222d;
+}
+
 .forgot-password .ant-btn {
   border: none;
 }
@@ -118,3 +122,4 @@
     font-size: 20px;
   }
 }
+
