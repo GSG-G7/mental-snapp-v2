@@ -24,7 +24,7 @@ const ForgotPass = props => {
       </p>
       <div className="forgot-password__input">
         <Input
-          placeholder="Enter your username"
+          placeholder="Enter your email"
           size="large"
           prefix={<Icon type="mail" className="forgot-password__icon" />}
         />
