@@ -10,31 +10,31 @@ import './navigation.css';
 
 const NavBar = () => {
   return (
-    <div className="navbar">
-      <nav>
-        <i>
+    <div className="navbar__container">
+      <nav className="navbar">
+        <i className="navbar__icon">
           <NavLink to={ROUTES.HOME} activeClassName="clicked">
-            <HomeIcon className="navbar__home-icon" />
+            <HomeIcon className="icons navbar__home-icon" />
           </NavLink>
         </i>
-        <i>
+        <i className="navbar__icon">
           <NavLink to={ROUTES.HEAT_MAP} activeClassName="clicked">
-            <Calendar className="navbar__calendar" />
+            <Calendar className="icons navbar__calendar" />
           </NavLink>
         </i>
-        <i>
+        <i className="navbar__icon">
           <NavLink to={ROUTES.QUESTION} activeClassName="clicked">
-            <AddNew className="navbar__add-icon" />
+            <AddNew className="icons navbar__add-icon" />
           </NavLink>
         </i>
-        <i>
+        <i className="navbar__icon">
           <NavLink to={ROUTES.FEED} activeClassName="clicked">
-            <FeedsFilter className="navbar__feeds-filter" />
+            <FeedsFilter className="icons navbar__feeds-filter" />
           </NavLink>
         </i>
-        <i>
+        <i className="navbar__icon">
           <NavLink to={ROUTES.ACCOUNT_SETTINGS} activeClassName="clicked">
-            <Settings className="navbar__settings" />
+            <Settings className="icons navbar__settings" />
           </NavLink>
         </i>
       </nav>

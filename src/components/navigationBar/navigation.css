@@ -1,4 +1,4 @@
-.navbar {
+.navbar__container {
   position: fixed;
   bottom: 0%;
   width: 100%;
@@ -13,7 +13,7 @@
   fill: #E9663A;
 }
 
-nav i + i {
+.navbar .navbar__icon + .navbar__icon {
   padding-left: 3em;
 }
 
@@ -30,13 +30,24 @@ nav i + i {
 }
 
 @media all and (min-width: 768px) and (max-width: 1024px) {
-  nav i + i {
-    padding-left: 5em;
+  .navbar .navbar__icon + .navbar__icon {
+    padding-left: 8em;
   }
+
+  .icons {
+    width: 60px;
+    height: 60px;
+  }
+  
 }
 
 @media all and (min-width: 1025px) and (max-width: 2560px) {
-  nav i + i {
-    padding-left: 9em;
+  .navbar .navbar__icon + .navbar__icon {
+    padding-left: 11em;
+  }
+
+  .icons {
+    width: 100px;
+    height: 100px;
   }
 }
