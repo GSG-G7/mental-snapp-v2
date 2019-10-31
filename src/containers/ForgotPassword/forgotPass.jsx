@@ -1,10 +1,14 @@
 import React from 'react';
 import { Input, Button, Icon } from 'antd';
+import PropTypes from 'prop-types';
 import BackButton from '../../components/BackButton';
 import { ReactComponent as Vector } from './vector.svg';
 import './forgotPass.css';
 
-const forgotPass = () => {
+const ForgotPass = props => {
+  const {
+    history: { goBack },
+  } = props;
   return (
     <div className="forgot-password">
       <header className="forgot-password__heading">
@@ -36,4 +40,10 @@ const forgotPass = () => {
   );
 };
 
-export default forgotPass;
+ForgotPass.propTypes = {
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default ForgotPass;
