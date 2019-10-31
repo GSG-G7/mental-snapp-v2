@@ -1,59 +1,97 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { Input, Icon, Button } from 'antd';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import GoogleButton from '../../components/GoogleButton';
 import FacebookButton from '../../components/FacebookButton';
+import schema from '../../utils/signup-validation';
+
 import './signUp.css';
 
-const SignUp = props => {
-  const {
-    history: { goBack },
-  } = props;
-  return (
-    <div className="signup">
-      <Header text="Sign Up" handleBack={goBack} />
+class SignUp extends Component {
+  state = {
+    name: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+  };
 
-      <form className="signup__form">
-        <Input
-          prefix={<Icon type="user" className="signup__icon" />}
-          className="signup__input"
-          placeholder="Name"
-        />
+  handleSubmit = async () => {
+    await schema.validate(this.state, { abortEarly: false });
+  };
 
-        <Input
-          prefix={<Icon type="mail" className="signup__icon" />}
-          className="signup__input"
-          placeholder="Email"
-        />
+  handleChange = ({ target: { name, value } }) =>
+    this.setState({ [name]: value });
 
-        <Input
-          prefix={<Icon type="lock" className="signup__icon" />}
-          className="signup__input"
-          placeholder="Password"
-        />
+  render() {
+    const {
+      history: { goBack },
+    } = this.props;
+    const { name, password, passwordConfirm, email } = this.state;
+    return (
+      <div className="signup">
+        <Header text="Sign Up" handleBack={goBack} />
 
-        <Input
-          prefix={<Icon type="check-circle" className="signup__icon" />}
-          className="signup__input"
-          placeholder="Confirm Password"
-        />
+        <form className="signup__form" onSubmit={this.handleSubmit}>
+          <Input
+            prefix={<Icon type="user" className="signup__icon" />}
+            className="signup__input"
+            placeholder="Name"
+            name="name"
+            value={name}
+            onChange={this.handleChange}
+          />
 
-        <Button type="primary" size="large" className="signup__submit-btn">
-          Create Account
-        </Button>
+          <Input
+            prefix={<Icon type="mail" className="signup__icon" />}
+            className="signup__input"
+            placeholder="Email"
+            name="email"
+            value={email}
+            onChange={this.handleChange}
+          />
 
-        <p className="signup__or">OR</p>
+          <Input
+            prefix={<Icon type="lock" className="signup__icon" />}
+            className="signup__input"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={this.handleChange}
+            type="password"
+          />
 
-        <div className="signup__buttons">
-          <GoogleButton />
-          <FacebookButton />
-        </div>
-      </form>
-    </div>
-  );
-};
+          <Input
+            prefix={<Icon type="check-circle" className="signup__icon" />}
+            className="signup__input"
+            placeholder="Confirm Password"
+            name="passwordConfirm"
+            value={passwordConfirm}
+            onChange={this.handleChange}
+            type="password"
+          />
+
+          <Button
+            type="primary"
+            onClick={this.handleSubmit}
+            size="large"
+            className="signup__submit-btn"
+          >
+            Create Account
+          </Button>
+
+          <p className="signup__or">OR</p>
+
+          <div className="signup__buttons">
+            <GoogleButton />
+            <FacebookButton />
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
 
 SignUp.propTypes = {
   history: PropTypes.shape({

@@ -1,4 +1,5 @@
 # Mental Snapp
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8694ae19-34b4-48ed-b326-5f073d9a7608/deploy-status)](https://app.netlify.com/sites/mentalsnapp/deploys)
 ###### tags:`Mental-Snapp` `Web App` `Startup`
 ### Project Description :book: 
 People are having issues controlling their feelings and keeping up with their lives. In **Mental Snapp** we've created a routine for those people that involves self-reflection and journalling, we believe that by making our users write down about their feelings or life then they will feel better :100: about themselves, our main goal is helping people in **maintaining positive mental health** outcomes.
