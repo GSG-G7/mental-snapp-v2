@@ -64,7 +64,7 @@ class Questions extends React.Component {
       <div>
         <div className="question__navigation">
           <BackButton handleBack={goBack} />
-          <Link to={HOME}>
+          <Link to={HOME} className="question__close">
             <Icon type="close" />
           </Link>
         </div>

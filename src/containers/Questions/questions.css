@@ -16,6 +16,9 @@
     height: 67px;
     padding: 0 21px;
 }
+.question__close {
+    color: #7c7c7c;
+}
 
 .question p {
     color: #242424;
