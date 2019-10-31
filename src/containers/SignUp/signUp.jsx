@@ -60,4 +60,4 @@ SignUp.propTypes = {
     goBack: PropTypes.func.isRequired,
   }).isRequired,
 };
-export default signUp;
+export default SignUp;
