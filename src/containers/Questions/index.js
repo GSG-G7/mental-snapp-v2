@@ -1,8 +1,3 @@
-import React from 'react';
-import UnderConstruction from '../UnderConstruction';
-
-const Questions = () => {
-  return <UnderConstruction />;
-};
+import Questions from './questions';
 
 export default Questions;
