@@ -13,7 +13,7 @@ const ForgotPass = props => {
     <div className="forgot-password">
       <header className="forgot-password__heading">
         <div className="forgot-password__back-btn">
-          <BackButton />
+          <BackButton handleBack={goBack} />
         </div>
         <h2 className="forgot-password__title">forgot password</h2>
       </header>
