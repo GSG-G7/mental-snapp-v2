@@ -8,7 +8,7 @@ const BackButton = props => {
   //   history: { goBack },
   // } = props;
   return (
-    <button type="submit" className="back-button" onClick={console.log('hi')}>
+    <button type="submit" className="back-button">
       <Icon type="left" />
     </button>
   );
