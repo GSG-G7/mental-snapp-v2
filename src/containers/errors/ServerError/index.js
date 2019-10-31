@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { ReactComponent as Image } from '../../assets/serverError.svg';
+import * as ROUTES from '../../../constants/routes';
 import './style.css';
 
 const ServerError = () => {
@@ -12,9 +14,11 @@ const ServerError = () => {
           Oh sorry about this problem our development team is working to on it
           now.
         </p>
-        <Button className="server-error__btn" type="primary">
-          Go Home
-        </Button>
+        <Link to={ROUTES.HOME}>
+          <Button className="server-error__btn" type="primary">
+            Go Home
+          </Button>
+        </Link>
       </div>
     </main>
   );
