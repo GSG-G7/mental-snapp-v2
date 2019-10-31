@@ -79,8 +79,8 @@ class Questions extends React.Component {
             showInfo={false}
           />
           <p>{entryData[current].heading}</p>
-          <Input placeholder="Title" value="" />
-          <TextArea rows={4} placeholder="Write your words" value="" />
+          <Input placeholder="Title" />
+          <TextArea rows={4} placeholder="Write your words" />
         </div>
 
         <div className="steps-action">
