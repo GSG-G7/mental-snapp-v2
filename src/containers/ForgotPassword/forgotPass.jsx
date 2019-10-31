@@ -19,8 +19,11 @@ const forgotPass = () => {
         check it.
       </p>
       <div className="forgot-password__input">
-        <Icon type="mail" className="forgot-password__icon" />
-        <Input size="large" placeholder="Email" />
+        <Input
+          placeholder="Enter your username"
+          size="large"
+          prefix={<Icon type="mail" className="forgot-password__icon" />}
+        />
       </div>
       <Button className="forgot-password__button" size="large" type="primary">
         Reset My Password
