@@ -1,8 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Button, message, Input, Progress, Icon, Popconfirm } from 'antd';
-import { Link } from 'react-router-dom';
-import { HOME } from '../../constants/routes';
+import schema from './questionValidation';
 import './questions.css';
 
 const { TextArea } = Input;
@@ -30,6 +29,9 @@ class Questions extends React.Component {
     super(props);
     this.state = {
       current: 0,
+      title: '',
+      content: '',
+      errors: {},
     };
   }
 
@@ -39,10 +41,48 @@ class Questions extends React.Component {
     history.push('/home');
   };
 
+  handleChange = ({ target: { value, name } }) => {
+    this.setState({ [name]: value });
+  };
+
   next() {
-    const { current } = this.state;
-    const curr = current + 1;
-    this.setState({ current: curr });
+    const { current, title, content } = this.state;
+    schema
+      .validate({ title, content }, { abortEarly: false })
+      .then(() =>
+        this.setState({
+          current: current + 1,
+          content: '',
+          title: '',
+          errors: {},
+        })
+      )
+      .catch(error => {
+        const objError = {};
+        error.inner.forEach(fielderror => {
+          objError[fielderror.path] = fielderror.message;
+        });
+        return this.setState({ errors: objError });
+      });
+  }
+
+  finish() {
+    const { title, content } = this.state;
+    const { history } = this.props;
+
+    schema
+      .validate({ title, content }, { abortEarly: false })
+      .then(e => {
+        message.success('Yes, you have added a journal ');
+        history.push('/home');
+      })
+      .catch(error => {
+        const objError = {};
+        error.inner.forEach(fielderror => {
+          objError[fielderror.path] = fielderror.message;
+        });
+        return this.setState({ errors: objError });
+      });
   }
 
   prev() {
@@ -51,8 +91,14 @@ class Questions extends React.Component {
     this.setState({ current: curr });
   }
 
-  render() {
+  skip() {
     const { current } = this.state;
+    const curr = current + 1;
+    this.setState({ current: curr });
+  }
+
+  render() {
+    const { errors, current, title, content } = this.state;
     return (
       <div>
         <div className="question__navigation">
@@ -63,9 +109,7 @@ class Questions extends React.Component {
             okText="Yes"
             cancelText="cancel"
           >
-            <Link to="HOME" className="question__close">
-              <Icon type="close" />
-            </Link>
+            <Icon type="close" />
           </Popconfirm>
         </div>
         <div className="question">
@@ -79,8 +123,24 @@ class Questions extends React.Component {
             showInfo={false}
           />
           <p>{entryData[current].heading}</p>
-          <Input placeholder="Title" />
-          <TextArea rows={4} placeholder="Write your words" />
+
+          <Input
+            placeholder="Title"
+            name="title"
+            value={title}
+            onChange={this.handleChange}
+          />
+          {errors.title && <span className="error-field">{errors.title}</span>}
+          <TextArea
+            rows={4}
+            placeholder="Write your words"
+            name="content"
+            value={content}
+            onChange={this.handleChange}
+          />
+          {errors.content && (
+            <span className="error-field">{errors.content}</span>
+          )}
         </div>
 
         <div className="steps-action">
@@ -92,13 +152,15 @@ class Questions extends React.Component {
           {current === entryData.length - 1 && (
             <Button
               type="primary"
-              onClick={() => message.success('Yes,you have added a journal')}
+              onClick={() => {
+                this.finish();
+              }}
             >
-              <Link to={HOME}>Finish</Link>
+              Finish
             </Button>
           )}
           {current < entryData.length - 1 && (
-            <Button style={{ marginLeft: 8 }} onClick={() => this.next()}>
+            <Button style={{ marginLeft: 8 }} onClick={() => this.skip()}>
               Skip
             </Button>
           )}
@@ -110,7 +172,6 @@ class Questions extends React.Component {
 
 Questions.propTypes = {
   history: propTypes.shape({
-    goBack: propTypes.func.isRequired,
     push: propTypes.func.isRequired,
   }).isRequired,
 };

@@ -2,20 +2,26 @@
     border-radius: 6px;
     min-height: 200px;
     text-align: center;
-    padding-top: 13px;
+    padding-top: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center
 }
 
-.question__navigation{
+.error-field {
+    font-size: 10px;
+    color: red;
+}
+
+.question__navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 67px;
     padding: 0 21px;
 }
+
 .question__close {
     color: #7c7c7c;
 }
