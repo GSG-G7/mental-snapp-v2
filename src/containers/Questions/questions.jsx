@@ -3,7 +3,6 @@ import propTypes from 'prop-types';
 import { Button, message, Input, Progress, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { HOME } from '../../constants/routes';
-import BackButton from '../../components/BackButton/index';
 import './questions.css';
 
 const { TextArea } = Input;
@@ -57,13 +56,10 @@ class Questions extends React.Component {
 
   render() {
     const { current, story } = this.state;
-    const {
-      history: { goBack },
-    } = this.props;
     return (
       <div>
         <div className="question__navigation">
-          <BackButton handleBack={goBack} />
+          {current > 0 && <Icon type="left" onClick={() => this.prev()} />}
           <Link to={HOME} className="question__close">
             <Icon type="close" />
           </Link>
