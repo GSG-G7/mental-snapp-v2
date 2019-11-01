@@ -30,16 +30,7 @@ class Questions extends React.Component {
     super(props);
     this.state = {
       current: 0,
-      story: [],
     };
-  }
-
-  componentDidMount() {
-    // fetch data from firbase db by using axios
-    // this.setState({story:data})
-    // **** so the value for input and TextArea will be as follows :
-    // 1- value = {story[current].title} for input
-    // 2- value = {story[current].content} for TextArea
   }
 
   confirm = e => {
@@ -61,7 +52,7 @@ class Questions extends React.Component {
   }
 
   render() {
-    const { current, story } = this.state;
+    const { current } = this.state;
     return (
       <div>
         <div className="question__navigation">
