@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Button, message, Input, Progress, Icon } from 'antd';
+import { Button, message, Input, Progress, Icon, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 import { HOME } from '../../constants/routes';
 import './questions.css';
@@ -42,6 +42,12 @@ class Questions extends React.Component {
     // 2- value = {story[current].content} for TextArea
   }
 
+  confirm = e => {
+    message.success("You don't make an entry today");
+    const { history } = this.props;
+    history.push('/home');
+  };
+
   next() {
     const { current } = this.state;
     const curr = current + 1;
@@ -60,9 +66,16 @@ class Questions extends React.Component {
       <div>
         <div className="question__navigation">
           {current > 0 && <Icon type="left" onClick={() => this.prev()} />}
-          <Link to={HOME} className="question__close">
-            <Icon type="close" />
-          </Link>
+          <Popconfirm
+            title="Do you really want to exit?"
+            onConfirm={this.confirm}
+            okText="Yes"
+            cancelText="cancel"
+          >
+            <Link to="HOME" className="question__close">
+              <Icon type="close" />
+            </Link>
+          </Popconfirm>
         </div>
         <div className="question">
           <p>
@@ -107,6 +120,7 @@ class Questions extends React.Component {
 Questions.propTypes = {
   history: propTypes.shape({
     goBack: propTypes.func.isRequired,
+    push: propTypes.func.isRequired,
   }).isRequired,
 };
 export default Questions;
