@@ -37,7 +37,7 @@ export const versionOne = () => (
         .split(',')[0]
     }
     grateful={journal.grateful.title}
-    challenges={journal.challenge.title}
+    challenge={journal.challenge.title}
     developing={journal.developing.title}
   />
 );
