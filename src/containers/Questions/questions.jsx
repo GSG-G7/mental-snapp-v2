@@ -47,25 +47,23 @@ class Questions extends React.Component {
     this.setState({ [name]: value });
   };
 
-  next = () => {
+  next = async () => {
     const { current, title, content } = this.state;
-    schema
-      .validate({ title, content }, { abortEarly: false })
-      .then(() =>
-        this.setState({
-          current: current + 1,
-          content: '',
-          title: '',
-          errors: {},
-        })
-      )
-      .catch(error => {
-        const objError = {};
-        error.inner.forEach(fielderror => {
-          objError[fielderror.path] = fielderror.message;
-        });
-        return this.setState({ errors: objError });
+    try {
+      await schema.validate({ title, content }, { abortEarly: false });
+      return this.setState({
+        current: current + 1,
+        content: '',
+        title: '',
+        errors: {},
       });
+    } catch (error) {
+      const objError = {};
+      error.inner.forEach(fielderror => {
+        objError[fielderror.path] = fielderror.message;
+      });
+      return this.setState({ errors: objError });
+    }
   };
 
   finish = () => {
