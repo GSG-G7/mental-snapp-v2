@@ -1,5 +1,6 @@
 .forgot-password {
-  min-height: 100vh;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .forgot-password__heading {
@@ -26,7 +27,6 @@
 }
 
 .forgot-password__text {
-  width: 80%;
   margin: 20px auto;
   font-size: 14px;
   color: #242424;
@@ -47,7 +47,6 @@
 }
 
 .forgot-password__input {
-  width: 80%;
   margin: 10px auto;
   display: flex;
 }
@@ -67,13 +66,7 @@
   border: none;
   text-shadow: none;
   box-shadow: none;
-}
-
-.forgot-password .ant-btn:hover,
-.forgot-password .ant-btn:focus {
-  color: #fff;
-  background-color: #e9663aec;
-  border-color: #e9663aec;
+  width: 100%;
 }
 
 .forgot-password .ant-btn-primary:hover,
@@ -84,14 +77,11 @@
 }
 
 .forgot-password__button {
-  width: 80%;
   margin: 20px 0;
 }
 
 @media (min-width: 600px) {
-  .forgot-password__button,
-  .forgot-password__input,
-  .forgot-password__text {
+  .forgot-password {
     width: 60%;
   }
   .forgot-password__text {
@@ -110,10 +100,11 @@
 }
 
 @media (min-width: 920px) {
-  .forgot-password__button,
-  .forgot-password__input,
-  .forgot-password__text {
+  .forgot-password {
     width: 40%;
+  }
+  .forgot-password__vector {
+    height: 20vh;
   }
   .forgot-password__text {
     font-size: 18px;
@@ -122,4 +113,5 @@
     font-size: 20px;
   }
 }
+
 
