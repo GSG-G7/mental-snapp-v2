@@ -1,8 +1,9 @@
 import React from 'react';
-import { Input, Button, Icon } from 'antd';
 import PropTypes from 'prop-types';
+import { Input, Button, Icon } from 'antd';
+
 import BackButton from '../../components/BackButton';
-import { ReactComponent as Vector } from './vector.svg';
+import { ReactComponent as Vector } from '../assets/images/forgotPass.svg';
 import './forgotPass.css';
 
 const ForgotPass = props => {
