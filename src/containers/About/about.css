@@ -28,3 +28,32 @@
     align-items: center;
     justify-content: space-around
 }
+
+.about__img {
+    width: 30vh;
+    height: 10vh;
+}
+
+@media only screen and (min-width: 768px) {
+    .about__heading .main-head {
+        font-size: 35px;
+    }
+    .about__title {
+        font-size: 26px;
+    }
+    .about__content {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .about__heading .main-head {
+        font-size: 45px;
+    }
+    .about__title {
+        font-size: 38px;
+    }
+    .about__content {
+        font-size: 30px;
+    }
+}

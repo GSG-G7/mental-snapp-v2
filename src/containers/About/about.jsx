@@ -25,7 +25,7 @@ const About = props => {
           <p className="about__content">{data.descrption}</p>
         </div>
       ))}
-      <Logo />
+      <Logo className="about__img" />
     </div>
   );
 };

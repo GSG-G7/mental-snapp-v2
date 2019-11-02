@@ -53,6 +53,10 @@
     margin-top: 24px;
 }
 
+.steps-action .ant-btn {
+    border: none;
+}
+
 .question textarea.ant-input {
     width: 224px;
     height: 179px;
