@@ -36,7 +36,7 @@ class Questions extends React.Component {
   }
 
   confirm = e => {
-    message.success("You don't make an entry today");
+    message.success("You didn't make an entry today ): ");
     const { history } = this.props;
     history.push('/home');
   };
