@@ -33,6 +33,7 @@ const ForgotPass = props => {
           prefix={<Icon type="mail" className="forgot-password__icon" />}
           value={email}
           onChange={handleChange}
+          aria-label="Enter email"
         />
       </div>
       <div className="forgot-password__error">{error}</div>
