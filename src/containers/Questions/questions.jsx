@@ -67,23 +67,20 @@ class Questions extends React.Component {
     }
   };
 
-  finish = () => {
+  finish = async () => {
     const { title, content } = this.state;
     const { history } = this.props;
-
-    schema
-      .validate({ title, content }, { abortEarly: false })
-      .then(e => {
-        message.success('Yes, you have added a journal ');
-        history.push('/home');
-      })
-      .catch(error => {
-        const objError = {};
-        error.inner.forEach(fielderror => {
-          objError[fielderror.path] = fielderror.message;
-        });
-        return this.setState({ errors: objError });
+    try {
+      await schema.validate({ title, content }, { abortEarly: false });
+      message.success('Yes, you have added a journal');
+      return history.push('/home');
+    } catch (error) {
+      const objError = {};
+      error.inner.forEach(fielderror => {
+        objError[fielderror.path] = fielderror.message;
       });
+      return this.setState({ errors: objError });
+    }
   };
 
   prev = () => {
