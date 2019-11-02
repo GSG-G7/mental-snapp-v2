@@ -1,6 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
+
 import { Button, message, Input, Progress, Icon, Popconfirm } from 'antd';
+
 import schema from './questionValidation';
 import './questions.css';
 
@@ -45,7 +47,7 @@ class Questions extends React.Component {
     this.setState({ [name]: value });
   };
 
-  next() {
+  next = () => {
     const { current, title, content } = this.state;
     schema
       .validate({ title, content }, { abortEarly: false })
@@ -64,9 +66,9 @@ class Questions extends React.Component {
         });
         return this.setState({ errors: objError });
       });
-  }
+  };
 
-  finish() {
+  finish = () => {
     const { title, content } = this.state;
     const { history } = this.props;
 
@@ -83,19 +85,19 @@ class Questions extends React.Component {
         });
         return this.setState({ errors: objError });
       });
-  }
+  };
 
-  prev() {
+  prev = () => {
     const { current } = this.state;
     const curr = current - 1;
     this.setState({ current: curr });
-  }
+  };
 
-  skip() {
+  skip = () => {
     const { current } = this.state;
     const curr = current + 1;
     this.setState({ current: curr });
-  }
+  };
 
   render() {
     const { errors, current, title, content } = this.state;
