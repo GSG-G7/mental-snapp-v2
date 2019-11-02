@@ -10,18 +10,18 @@ const entryData = [
   {
     id: 1,
     heading: 'Today, Iam grateful for',
-    percent: 34
+    percent: 34,
   },
   {
     id: 2,
     heading: 'Challenge I face',
-    percent: 68
+    percent: 68,
   },
   {
     id: 3,
     heading: 'Iam looking to develop',
-    percent: 100
-  }
+    percent: 100,
+  },
 ];
 
 class Questions extends React.Component {
@@ -31,7 +31,7 @@ class Questions extends React.Component {
       current: 0,
       title: '',
       content: '',
-      errors: {}
+      errors: {},
     };
   }
 
@@ -54,7 +54,7 @@ class Questions extends React.Component {
           current: current + 1,
           content: '',
           title: '',
-          errors: {}
+          errors: {},
         })
       )
       .catch(error => {
@@ -172,7 +172,7 @@ class Questions extends React.Component {
 
 Questions.propTypes = {
   history: propTypes.shape({
-    push: propTypes.func.isRequired
-  }).isRequired
+    push: propTypes.func.isRequired,
+  }).isRequired,
 };
 export default Questions;
