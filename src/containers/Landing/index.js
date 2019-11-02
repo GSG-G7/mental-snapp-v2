@@ -10,7 +10,9 @@ import './landing.css';
 const LandingPage = () => {
   return (
     <div>
-      <Illustration className="Illustration" />
+      <div className="landing__img">
+        <Illustration className="Illustration" />
+      </div>
       <div className="landing">
         <div className="landing__title">
           <MainHeading text="Practice the art of good mental health" />
