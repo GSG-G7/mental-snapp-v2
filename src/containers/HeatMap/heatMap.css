@@ -1,0 +1,24 @@
+.heat-map {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.heat-map__header {
+  padding: 20px;
+  text-align: left;
+}
+
+.heat-map__logo {
+  height: 35px;
+}
+
+.apexcharts-menu-icon {
+    display: none;
+}
+
+.heat-map__text {
+    text-align: center;
+    color: rgba(36, 36, 36, 0.6);
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+}
