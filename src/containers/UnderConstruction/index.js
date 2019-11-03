@@ -1,14 +1,19 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import BackButton from '../../components/BackButton';
 import { ReactComponent as ConstructionImg } from '../assets/images/underConstruction.svg';
 import './style.css';
 
-const UnderConstruction = () => {
+const UnderConstruction = props => {
+  const {
+    history: { goBack },
+  } = props;
   return (
     <div className="constraction">
       <div style={{ textAlign: 'left' }}>
-        <BackButton />
+        <BackButton handleBack={goBack} />
       </div>
+
       <div style={{ paddingTop: '20vh' }}>
         <ConstructionImg />
       </div>
@@ -20,4 +25,9 @@ const UnderConstruction = () => {
   );
 };
 
+UnderConstruction.propTypes = {
+  history: propTypes.shape({
+    goBack: propTypes.func.isRequired,
+  }).isRequired,
+};
 export default UnderConstruction;
