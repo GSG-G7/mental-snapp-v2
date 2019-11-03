@@ -1,0 +1,30 @@
+.about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.about__title {
+    width: 100%;
+    font-family: 'Open Sans';
+    font-style: italic;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 0.2rem;
+}
+
+.about__content {
+    width: 100%;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    text-align: left
+}
+
+.about__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-around
+}
