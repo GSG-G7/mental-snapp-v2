@@ -1,8 +1,3 @@
-import React from 'react';
-import UnderConstruction from '../UnderConstruction';
+import AccountSettings from './accountSettings';
 
-const AccountSetting = props => {
-  return <UnderConstruction {...props} />;
-};
-
-export default AccountSetting;
+export default AccountSettings;
