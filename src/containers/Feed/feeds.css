@@ -1,9 +1,13 @@
 .feeds__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-top: 18px;
 }
 
 .feeds__select {
-  width: 263px;
+  width: 90% !important;
   height: 32px;
 }
 
@@ -13,6 +17,7 @@
 
 .feeds__message {
   font-size: 16px;
+  font-weight: bold;
   color: #e9663a;
   width: 90%;
   margin: 0 auto;
@@ -22,4 +27,22 @@
 .feeds__option {
   display: flex !important;
   justify-content: space-between;
+}
+
+@media only screen and (min-width:768px) {
+  
+  .feeds__content .ant-select-selection--single {
+    height: 60px;
+    border-color: black;
+    font-size: 24px;
+    padding-top: 10px;
+  }
+  .feeds__message {
+    font-size: 36px;
+  }
+  .feeds__option {
+    font-size: 24px;
+  }
+
+
 }

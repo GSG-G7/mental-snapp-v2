@@ -30,7 +30,7 @@ class Feed extends Component {
   }
 
   handleChange = value => {
-    // data.filter(e=>{})
+    //  matched data will be filtered here
   };
 
   render() {
@@ -51,7 +51,7 @@ class Feed extends Component {
                 value={element.value}
               >
                 <span>{element.month}</span>
-                <span>{element.month}</span>
+                <span>{element.count}</span>
               </Option>
             ))}
           </Select>
