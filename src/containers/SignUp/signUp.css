@@ -2,6 +2,10 @@
   overflow: hidden;
 }
 
+.signup .ant-btn.ant-btn-primary {
+  width: 100%;
+}
+
 .signup__form {
   width: 80%;
   margin: auto;
@@ -19,8 +23,7 @@
   margin-bottom: 30px;
 }
 
-.signup__or::before,
-.signup__or::after {
+.signup__or::before, .signup__or::after {
   content: " __________ ";
   position: relative;
   top: -7px;
@@ -28,6 +31,7 @@
 
 .signup__buttons {
   display: flex;
+  margin: 20px;
   justify-content: space-evenly;
 }
 
@@ -44,23 +48,20 @@
 }
 
 /*=================== Medium devices (tablets, 768px and up)  ===================*/
+
 @media (min-width: 768px) and (max-width: 991.98px) {
   .signup__form {
     height: 56vh;
     margin-top: 10vh;
   }
-
   .signup__or {
     font-size: 30px;
     margin-bottom: 60px;
   }
-
-  .signup__or::before,
-  .signup__or::after {
+  .signup__or::before, .signup__or::after {
     content: " _________________ ";
     top: -10px;
   }
-
   .signup .ant-form-item-control {
     zoom: 1.7;
     line-height: 50px;
@@ -72,6 +73,7 @@
 }
 
 /*=================== Large devices (desktops, 992px and up) ===================*/
+
 @media (min-width: 992px) {
   .signup {
     width: 35vw;
@@ -80,12 +82,9 @@
     height: 90vh;
     margin-top: 5vh;
   }
-
-  .signup__or::before,
-  .signup__or::after {
+  .signup__or::before, .signup__or::after {
     content: " _____________ ";
   }
-
   .signup__buttons {
     width: 30vw;
     margin: auto;

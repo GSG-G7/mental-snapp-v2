@@ -1,5 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+
 import { Form, Input, Icon, Button } from 'antd';
 import PropTypes from 'prop-types';
 
@@ -7,8 +7,6 @@ import Header from '../../components/Header';
 import FacebookBottun from '../../components/FacebookButton';
 import GoogleButton from '../../components/GoogleButton';
 import './signUp.css';
-
-const FormItem = Form.Item;
 
 class SignUpForm extends React.Component {
   state = {
@@ -45,8 +43,6 @@ class SignUpForm extends React.Component {
   render() {
     const {
       form: { getFieldDecorator },
-    } = this.props;
-    const {
       history: { goBack },
     } = this.props;
     return (
@@ -95,8 +91,10 @@ class SignUpForm extends React.Component {
               {getFieldDecorator('password', {
                 rules: [
                   {
+                    pattern: new RegExp(/^[a-z0-9].{7,}/),
                     required: true,
-                    message: 'Please input your password!',
+                    message:
+                      'The password must be at least 8 alphanumeric characters',
                   },
                   {
                     validator: this.validateToNextPassword,
@@ -129,12 +127,11 @@ class SignUpForm extends React.Component {
                 />
               )}
             </Form.Item>
-
-            <FormItem>
+            <Form.Item>
               <Button type="primary" htmlType="submit">
                 Sign Up
               </Button>
-            </FormItem>
+            </Form.Item>
           </Form>
         </section>
 
@@ -149,7 +146,7 @@ class SignUpForm extends React.Component {
   }
 }
 
-const HorizontalSignUp = Form.create({ name: 'sign up' })(SignUpForm);
+const SignUp = Form.create({ name: 'sign up' })(SignUpForm);
 
 SignUpForm.propTypes = {
   form: PropTypes.shape({
@@ -162,4 +159,4 @@ SignUpForm.propTypes = {
   }).isRequired,
 };
 
-export default HorizontalSignUp;
+export default SignUp;
