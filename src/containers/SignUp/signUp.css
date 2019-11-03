@@ -1,23 +1,14 @@
+.signup {
+  overflow: hidden;
+}
+
 .signup__form {
   width: 80%;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 75vh;
-  margin-top: 50px;
-}
-.signup__input .ant-input {
-  padding: 10px 30px !important;
-  font-size: 18px !important;
-  height: 40px;
+  height: 59vh;
+  margin-top: 5vh;
 }
 
-.ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled),
-.ant-input-affix-wrapper:focus .ant-input:not(.ant-input-disabled) {
-  border-color: #e9663a !important;
-  box-shadow: none !important;
-}
 .signup__icon {
   color: rgba(0, 0, 0, 0.25) !important;
 }
@@ -25,11 +16,12 @@
 .signup__or {
   font-size: 18px;
   font-weight: bold;
+  margin-bottom: 30px;
 }
 
 .signup__or::before,
 .signup__or::after {
-  content: " _________ ";
+  content: " __________ ";
   position: relative;
   top: -7px;
 }
@@ -39,44 +31,63 @@
   justify-content: space-evenly;
 }
 
+.signup .ant-form-item-control {
+  line-height: 6vh;
+  zoom: 1.2;
+}
+
+.signup form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 /*=================== Medium devices (tablets, 768px and up)  ===================*/
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .signup__input .ant-input {
-    padding: 10px 50px !important;
-    font-size: 25px !important;
-    height: 60px;
-  }
-
-  .signup__icon * {
-    color: rgba(0, 0, 0, 0.25) !important;
-    width: 25px;
-    height: 25px;
-  }
-
-  .signup__submit-btn {
-    width: 80%;
-    margin: 0 auto;
-    height: 50px !important;
-    font-size: 25px !important;
+  .signup__form {
+    height: 56vh;
+    margin-top: 10vh;
   }
 
   .signup__or {
-    font-size: 25px;
-    font-weight: bold;
-    font-style: italic;
+    font-size: 30px;
+    margin-bottom: 60px;
   }
 
   .signup__or::before,
   .signup__or::after {
-    content: " _______________ ";
-    position: relative;
+    content: " _________________ ";
     top: -10px;
   }
 
-  .signup__buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
+  .signup .ant-form-item-control {
+    zoom: 1.7;
+    line-height: 50px;
+  }
+  .signup .ant-form-item-control .ant-btn-primary {
+    width: 30vw;
+    height: 4vh;
+  }
+}
+
+/*=================== Large devices (desktops, 992px and up) ===================*/
+@media (min-width: 992px) {
+  .signup {
+    width: 35vw;
     margin: 0 auto;
+    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
+    height: 90vh;
+    margin-top: 5vh;
+  }
+
+  .signup__or::before,
+  .signup__or::after {
+    content: " _____________ ";
+  }
+
+  .signup__buttons {
+    width: 30vw;
+    margin: auto;
   }
 }
