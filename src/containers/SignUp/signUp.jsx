@@ -9,10 +9,6 @@ import GoogleButton from '../../components/GoogleButton';
 import './signUp.css';
 
 class SignUpForm extends React.Component {
-  state = {
-    confirmDirty: false,
-  };
-
   handleSubmit = e => {
     e.preventDefault();
     const {
@@ -25,16 +21,10 @@ class SignUpForm extends React.Component {
     });
   };
 
-  handleConfirmBlur = e => {
-    const { value } = e.target;
-    const { confirmDirty } = this.state;
-    this.setState({ confirmDirty: confirmDirty || !!value });
-  };
-
   compareToFirstPassword = (rule, value, callback) => {
     const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback("Password doesn't match");
     } else {
       callback();
     }
@@ -52,7 +42,7 @@ class SignUpForm extends React.Component {
         <section className="signup__form">
           <Form onSubmit={this.handleSubmit}>
             <Form.Item hasFeedback>
-              {getFieldDecorator('username', {
+              {getFieldDecorator('name', {
                 rules: [
                   {
                     required: true,
@@ -121,9 +111,8 @@ class SignUpForm extends React.Component {
                 ],
               })(
                 <Input.Password
-                  onBlur={this.handleConfirmBlur}
                   prefix={<Icon type="check-circle" className="signup__icon" />}
-                  placeholder="Password"
+                  placeholder="Confirm password"
                 />
               )}
             </Form.Item>
