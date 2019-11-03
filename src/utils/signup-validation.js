@@ -1,16 +1,19 @@
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
-  name: yup.string().required(),
-  email: yup.string().email(),
+  name: yup.string().required('required field'),
+  email: yup
+    .string()
+    .email('Wrong Email')
+    .required('required field'),
   password: yup
-    .string('password must be string')
-    .matches(/^[a-z0-9]+$/, 'password should contain from letters and numbers')
-    .min(8, 'password should be at least 8 characters')
-    .required('password is required'),
+    .string()
+    .matches(/^[a-z0-9]+$/, 'Enter string and number')
+    .min(8, 'Enter least 8 characters')
+    .required('required field'),
   passwordConfirm: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    .oneOf([yup.ref('password'), null], 'Password must match'),
 });
 
 export default schema;
