@@ -20,13 +20,17 @@ class Feed extends Component {
     };
   }
 
-  handleChange = value => {
-    // fetch matched data from firebase firstore
+  componentDidMount() {
+    // fetch all data from firebase firstore
     // async
-    // const result = await axios.post(`https:-------`, {month: value});
+    // const result = await axios.get(`https:-------`);
     // const cards = result.data.data[0];
     //   this.setState({ data: cards });
     // });
+  }
+
+  handleChange = value => {
+    // data.filter(e=>{})
   };
 
   render() {
@@ -41,8 +45,13 @@ class Feed extends Component {
             onChange={this.handleChange}
           >
             {months.map(element => (
-              <Option key={element.id} value={element.value}>
-                {element.month}
+              <Option
+                className="feeds__option"
+                key={element.id}
+                value={element.value}
+              >
+                <span>{element.month}</span>
+                <span>{element.month}</span>
               </Option>
             ))}
           </Select>

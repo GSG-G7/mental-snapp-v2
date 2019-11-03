@@ -1,18 +1,25 @@
 .feeds__content {
-    margin-top: 18px;
+  margin-top: 18px;
 }
 
 .feeds__select {
-    width: 263px;
-    height: 32px;
+  width: 263px;
+  height: 32px;
 }
 
 .feeds__logo {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .feeds__message {
-    font-size: 14px;
-    padding-top: 20px;
-    color: #e9663a;
+  font-size: 16px;
+  color: #e9663a;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 6rem;
+}
+
+.feeds__option {
+  display: flex !important;
+  justify-content: space-between;
 }
