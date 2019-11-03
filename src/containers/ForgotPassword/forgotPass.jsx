@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Button, Icon } from 'antd';
+import { Form, Input, Button, Icon } from 'antd';
 
 import BackButton from '../../components/BackButton';
 import { ReactComponent as Vector } from '../assets/images/forgotPass.svg';
@@ -9,11 +9,18 @@ import './forgotPass.css';
 const ForgotPass = props => {
   const {
     history: { goBack },
-    email,
-    error,
-    handleChange,
-    handleClick,
+    form: { getFieldDecorator, validateFields },
   } = props;
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    validateFields((err, values) => {
+      if (!err) {
+        // We will call firebase function here
+      }
+    });
+  };
+
   return (
     <div className="forgot-password">
       <header className="forgot-password__heading">
@@ -27,25 +34,38 @@ const ForgotPass = props => {
         We will send you a verification code to your email, enter your email and
         check it.
       </p>
-      <div className="forgot-password__input">
-        <Input
-          placeholder="Enter your email"
-          size="large"
-          prefix={<Icon type="mail" className="forgot-password__icon" />}
-          value={email}
-          onChange={handleChange}
-          aria-label="Enter email"
-        />
+      <div className="forgot-password__from">
+        <Form layout="horizontal" onSubmit={handleSubmit}>
+          <Form.Item>
+            {getFieldDecorator('email', {
+              rules: [
+                {
+                  type: 'email',
+                  message: 'This is not a valid email!',
+                },
+                { required: true, message: 'Please enter your email' },
+              ],
+            })(
+              <Input
+                placeholder="Enter your email"
+                size="large"
+                prefix={<Icon type="mail" className="forgot-password__icon" />}
+                aria-label="Enter email"
+              />
+            )}
+          </Form.Item>
+          <Form.Item>
+            <Button
+              className="forgot-password__button"
+              size="large"
+              type="primary"
+              htmlType="submit"
+            >
+              Reset My Password
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
-      <div className="forgot-password__error">{error}</div>
-      <Button
-        className="forgot-password__button"
-        size="large"
-        type="primary"
-        onClick={handleClick}
-      >
-        Reset My Password
-      </Button>
       <p className="forgot-password__link">
         Didn’t receive any code?
         <span className="forgot-password__resend">Resend</span>
@@ -54,18 +74,18 @@ const ForgotPass = props => {
   );
 };
 
-ForgotPass.defaultProps = {
-  error: '',
-};
-
 ForgotPass.propTypes = {
   history: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
   }).isRequired,
-  email: PropTypes.string.isRequired,
-  error: PropTypes.string,
-  handleChange: PropTypes.func.isRequired,
-  handleClick: PropTypes.func.isRequired,
+  form: PropTypes.shape({
+    getFieldDecorator: PropTypes.func.isRequired,
+    validateFields: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default ForgotPass;
+const forgotPassForm = Form.create({ name: 'forgot_password_from' })(
+  ForgotPass
+);
+
+export default forgotPassForm;
