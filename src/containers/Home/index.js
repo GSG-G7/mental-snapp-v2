@@ -1,8 +1,8 @@
 import React from 'react';
-import UnderConstruction from '../UnderConstruction';
+import NavBar from '../../components/navigationBar';
 
 const Home = () => {
-  return <UnderConstruction />;
+  return <NavBar />;
 };
 
 export default Home;

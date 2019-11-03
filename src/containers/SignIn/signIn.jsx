@@ -1,10 +1,10 @@
 // import React, { Component } from 'react';
-// import * as yup from 'yup';
-// import { Link } from 'react-router-dom';
 // import { Button, Input, Icon } from 'antd';
+// import PropTypes from 'prop-types';
 // import MainHeading from '../../components/MainHeading';
 // import signInSchema from './utils/signInSchema';
 // import * as ROUTES from '../../constants/routes';
+
 // import './signIn.css';
 
 // class SignIn extends Component {
