@@ -4,6 +4,10 @@
     format("truetype");
 }
 
+body {
+  overflow: hidden;
+}
+
 .App {
   text-align: center;
 }
