@@ -1,13 +1,14 @@
-import React, { Component } from "react";
-import { Icon } from "antd";
-import Logo from "../../components/LogoHeader";
-import SubHeading from "../../components/subHeading";
+import React, { Component } from 'react';
+import { Icon } from 'antd';
+import Logo from '../../components/LogoHeader';
+import SubHeading from '../../components/subHeading';
 
-import NavigationBar from "../../components/navigationBar";
+import NavigationBar from '../../components/navigationBar';
 
-import "./accountSettings.css";
+import './accountSettings.css';
 
 export class accountSettings extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {};
 
   render() {
