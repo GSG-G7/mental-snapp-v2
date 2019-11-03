@@ -1,27 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Icon } from 'antd';
+
 import Logo from '../../components/LogoHeader';
 import SubHeading from '../../components/subHeading';
-
 import NavigationBar from '../../components/navigationBar';
 
 import './accountSettings.css';
 
-export class accountSettings extends Component {
-  // eslint-disable-next-line react/state-in-constructor
-  state = {};
+const accountSettings = ({ info }) => {
+  return (
+    <div className="settings">
+      <Logo />
 
-  render() {
-    return (
-      <div className="settings">
-        <Logo />
-
+      <div className="settings__desktop-container">
         <section className="settings__title">
           <SubHeading text="Account Settings" />
-          <span className="settings__edit-btn">
+
+          <Link
+            to="/confirm-password"
+            className={
+              info.createdAccount
+                ? 'settings__edit-btn'
+                : 'settings__edit-btn hidden-edit-btn'
+            }
+          >
             <span className="settings__edit-btn__text">Edit</span>
             <Icon type="edit" className="settings__edit-btn__icon" />
-          </span>
+          </Link>
         </section>
 
         <section className="settings__body">
@@ -30,7 +37,9 @@ export class accountSettings extends Component {
               <Icon type="user" className="settings__body__icon" />
               Name:
             </p>
-            <span className="settings__body__info">fares</span>
+            <span className="settings__body__info">
+              {info.name || 'in Progress'}
+            </span>
           </div>
 
           <div>
@@ -38,7 +47,9 @@ export class accountSettings extends Component {
               <Icon type="mail" className="settings__body__icon" />
               Email:
             </p>
-            <span className="settings__body__info">fares</span>
+            <span className="settings__body__info">
+              {info.email || 'in Progress'}
+            </span>
           </div>
 
           <div>
@@ -54,13 +65,16 @@ export class accountSettings extends Component {
             <span>Log Out</span>
           </div>
         </section>
-
-        <section>
-          <NavigationBar />
-        </section>
       </div>
-    );
-  }
-}
+      <section>
+        <NavigationBar />
+      </section>
+    </div>
+  );
+};
+
+accountSettings.propTypes = {
+  info: PropTypes.shape.isRequired,
+};
 
 export default accountSettings;

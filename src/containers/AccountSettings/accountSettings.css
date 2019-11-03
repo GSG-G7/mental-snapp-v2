@@ -11,8 +11,13 @@
   margin: 0;
 }
 
+.settings__edit-btn {
+  color: #242424;
+  opacity: 0.8;
+}
+
 .settings__edit-btn__text {
-  margin-right: 8px;
+  margin-right: 10px;
 }
 
 .settings__edit-btn__icon {
@@ -52,5 +57,59 @@
 
 .settings__logout {
   width: max-content;
-  font-size: 18px;
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+.settings__logout:hover {
+  opacity: 0.6;
+}
+.hidden-edit-btn {
+  display: none;
+}
+
+/*===================== Medium devices (tablets, 768px and up) =====================*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .settings__title {
+    font-size: 30px;
+    width: calc(100vw - 80px);
+  }
+
+  .settings__body {
+    margin: 80px auto;
+    min-height: 45vh;
+    width: calc(100vw - 80px);
+  }
+
+  .settings__body__title,
+  .settings__body__info,
+  .settings__logout {
+    font-size: 30px;
+  }
+
+  .settings__body__icon {
+    /* margin-right: 8px; */
+  }
+
+  .settings__body__info {
+    margin-left: 40px;
+  }
+}
+
+/*===================== Large devices (desktops, 992px and up) =====================*/
+@media (min-width: 992px) {
+  .settings__desktop-container {
+    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
+    width: 35vw;
+    margin: 0 auto;
+    min-height: max-content;
+    padding: 1px 20px;
+    overflow: hidden;
+  }
+  .settings__title {
+    width: 100%;
+  }
 }
