@@ -1,4 +1,4 @@
-export default [
+export const months = [
   { id: 1, value: 'January', month: 'January' },
   { id: 2, value: 'February', month: 'February' },
   { id: 3, value: 'March', month: 'March' },
@@ -11,4 +11,112 @@ export default [
   { id: 10, value: 'October', month: 'October' },
   { id: 11, value: 'November', month: 'November' },
   { id: 12, value: 'December', month: 'December' },
+];
+
+export const fakeData = [
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'January',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'January',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'February',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'February',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'March',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'March',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'April',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'April',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'May',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'May',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'June',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'June',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'July',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'July',
+  },
+  {
+    grateful: 'family',
+    challenge: 'no time',
+    developing: 'care alot about my social life',
+    time: '07:00',
+    date: 'September',
+  },
 ];
