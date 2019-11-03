@@ -23,7 +23,8 @@
   margin-bottom: 30px;
 }
 
-.signup__or::before, .signup__or::after {
+.signup__or::before,
+.signup__or::after {
   content: " __________ ";
   position: relative;
   top: -7px;
@@ -58,7 +59,8 @@
     font-size: 30px;
     margin-bottom: 60px;
   }
-  .signup__or::before, .signup__or::after {
+  .signup__or::before,
+  .signup__or::after {
     content: " _________________ ";
     top: -10px;
   }
@@ -82,7 +84,8 @@
     height: 90vh;
     margin-top: 5vh;
   }
-  .signup__or::before, .signup__or::after {
+  .signup__or::before,
+  .signup__or::after {
     content: " _____________ ";
   }
   .signup__buttons {
