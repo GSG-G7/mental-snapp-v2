@@ -13,7 +13,7 @@
 }
 
 .heat-map__body {
-  padding: 20px;
+  padding: 0 20px 20px;
 }
 
 .heat-map__text {
@@ -23,12 +23,16 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-.heat {
-  background: red;
-}
-
 /* The colors of the heat map */
-.react-calendar-heatmap .color-github-1 { fill: #FEDDD2; }
-.react-calendar-heatmap .color-github-2 { fill: #FEC3B1; }
-.react-calendar-heatmap .color-github-3 { fill: #F2AC95; }
-.react-calendar-heatmap .color-github-4 { fill: #FC8D6B; }
+.react-calendar-heatmap .color-scale-1 {
+  fill: #feddd2;
+}
+.react-calendar-heatmap .color-scale-2 {
+  fill: #fec3b1;
+}
+.react-calendar-heatmap .color-scale-3 {
+  fill: #f2ac95;
+}
+.react-calendar-heatmap .color-scale-4 {
+  fill: #fc8d6b;
+}
