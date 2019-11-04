@@ -12,8 +12,8 @@
   height: 35px;
 }
 
-.apexcharts-menu-icon {
-  display: none;
+.heat-map__body {
+  padding: 20px;
 }
 
 .heat-map__text {
@@ -23,3 +23,12 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+.heat {
+  background: red;
+}
+
+/* The colors of the heat map */
+.react-calendar-heatmap .color-github-1 { fill: #FEDDD2; }
+.react-calendar-heatmap .color-github-2 { fill: #FEC3B1; }
+.react-calendar-heatmap .color-github-3 { fill: #F2AC95; }
+.react-calendar-heatmap .color-github-4 { fill: #FC8D6B; }
