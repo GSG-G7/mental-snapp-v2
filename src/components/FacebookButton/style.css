@@ -1,7 +1,7 @@
 .facebook-btn {
   border: 1px solid #d9d9d9;
   width: 45%;
-  height: 35px;
+  height: 40px;
   padding: 5px;
   display: flex;
   justify-content: space-evenly;
@@ -9,6 +9,7 @@
   background: transparent;
   border-radius: 4px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .facebook-btn__img {
