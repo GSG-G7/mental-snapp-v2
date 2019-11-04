@@ -6,6 +6,20 @@ import data from './data';
 class index extends Component {
   state = {
     options: {
+      dataLabels: {
+        enabled: false,
+      },
+      chart: {
+        events: {
+          dataPointSelection(event, chartContext, config) {
+            console.log('clicked', event);
+          },
+        },
+      },
+
+      legend: {
+        // position: 'bottom',
+      },
       plotOptions: {
         heatmap: {
           enableShades: false,
