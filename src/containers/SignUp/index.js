@@ -1,8 +1,3 @@
-import React from 'react';
-import UnderConstruction from '../UnderConstruction';
+import SignUpForm from './signUp';
 
-const SignUp = props => {
-  return <UnderConstruction {...props} />;
-};
-
-export default SignUp;
+export default SignUpForm;

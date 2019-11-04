@@ -1,0 +1,54 @@
+.server-error {
+  text-align: center;
+  width: 100%;
+}
+
+.server-error__img {
+  width: 80%;
+  margin-top: 137px;
+}
+
+.server-error__msg {
+  width: 229px;
+  height: 66px;
+  margin: 30px auto 20px auto;
+  font-family: Open Sans;
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(36, 36, 36, 0.8);
+}
+
+.ant-btn {
+  border: none;
+}
+
+.ant-btn-primary {
+  color: #fff;
+  background-color: #E9663A;
+  border-color: #E9663A;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  color: #fff;
+  background-color: #E9663A;
+  border-color: #E9663A;
+}
+
+.server-error__btn {
+  width: 50vw;
+  height: 5vh;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: #FFFFFF;
+}
+
+@media all and (device-width: 768px) and (device-height: 1024px) {
+  .server-error__img {
+    margin-top: 300px;
+  } 
+}
