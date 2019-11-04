@@ -14,6 +14,7 @@ const heatMap = props => {
       <header className="heat-map__header">
         <img src={logo} alt="mental snapp logo" className="heat-map__logo" />
       </header>
+      <h2 className="heat-map__month">April</h2>
       <Chart options={options} series={series} width="100%" type="heatmap" />
       <div className="heat-map__journals">
         <p className="heat-map__text">
