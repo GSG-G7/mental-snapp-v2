@@ -1,14 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Input, Icon, Button, Form } from 'antd';
 import { ReactComponent as ConfirmImg } from '../assets/images/confirmPass.svg';
 import Header from '../../components/Header';
 
 import './confirmPass.css';
 
-const confirmPass = () => {
+const confirmPass = props => {
+  const {
+    history: { goBack },
+  } = props;
   return (
     <div className="confirm-pass">
-      <Header text="Confirm Password" />
+      <Header text="Confirm Password" handleBack={goBack} />
 
       <section className="confirm-pass__body">
         <p className="confirm-Password__text">
@@ -29,6 +33,12 @@ const confirmPass = () => {
       </section>
     </div>
   );
+};
+
+confirmPass.propTypes = {
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default confirmPass;
