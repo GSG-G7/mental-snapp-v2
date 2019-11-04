@@ -6,11 +6,6 @@
   box-sizing: border-box;
 }
 
-body {
-  padding: 20px 10px;
-  overflow: hidden;
-}
-
 .App {
   text-align: center;
 }
