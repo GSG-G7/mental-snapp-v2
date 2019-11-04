@@ -11,9 +11,7 @@
 }
 
 .confirm-pass__form {
-  /* width: calc(100vw - 60px); */
   width: 90%;
-
   margin: auto;
   display: flex;
   flex-direction: column;
