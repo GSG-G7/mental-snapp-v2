@@ -1,6 +1,11 @@
 @font-face {
-  font-family: 'VAGRounded';
-  src: url('../../components/assets/fonts/vagrounded-thin.ttf') format('truetype');
+  font-family: "VAGRounded";
+  src: url("../../components/assets/fonts/vagrounded-thin.ttf")
+    format("truetype");
+}
+
+body {
+  overflow: hidden;
 }
 
 .App-logo {
@@ -20,4 +25,10 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.ant-btn.ant-btn-primary {
+  background-color: #e9663a;
+  border: none;
+  font-weight: bold;
 }
