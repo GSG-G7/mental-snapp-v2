@@ -4,13 +4,12 @@ import { Select } from 'antd';
 
 import NavBar from '../../components/navigationBar';
 
-import { ReactComponent as Logo } from '../assets/images/logo.svg';
-
 import JournalCard from '../../components/JournalCard';
 
 import { months, fakeData } from './data';
 
 import './feeds.css';
+import LogoHeader from '../../components/LogoHeader';
 
 const { Option } = Select;
 class Feed extends Component {
@@ -64,7 +63,7 @@ class Feed extends Component {
     return (
       <div className="feeds">
         <div className="feeds__content">
-          <Logo className="feeds__logo" />
+          <LogoHeader />
           <Select
             defaultValue="select a month"
             className="feeds__select"

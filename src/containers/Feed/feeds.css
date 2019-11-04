@@ -29,9 +29,12 @@
   display: flex !important;
   justify-content: space-between;
   font-size: 16px;
-    margin-top: 18px;
+  margin-top: 18px;
 }
 
+.feeds__content .ant-select-selection-selected-value span:nth-child(2) {
+  visibility: hidden;
+}
 
 @media only screen and (min-width:768px) {
   .feeds__content .ant-select-selection--single {
@@ -48,8 +51,7 @@
     margin-top: 18px;
   }
   .ant-select-dropdown-menu-item {
-    font-size:30px !important;
+    font-size: 30px !important;
     margin-top: 18px;
-
   }
 }
