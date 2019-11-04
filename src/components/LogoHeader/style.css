@@ -1,0 +1,19 @@
+.logo-header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-header__image {
+  height: 35px;
+}
+
+.logo-header__link {
+  font-family: 'Open Sans', sans-serif;
+  text-transform: capitalize;
+  font-size: 13px;
+  color: #242424;
+  font-weight: 600;  
+  align-self: center;
+}   
+

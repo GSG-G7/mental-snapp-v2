@@ -2,15 +2,15 @@
   overflow: hidden;
 }
 
-.signup .ant-btn.ant-btn-primary {
-  width: 100%;
-}
-
 .signup__form {
   width: 80%;
   margin: auto;
   height: 59vh;
   margin-top: 5vh;
+}
+
+.signup .ant-btn.ant-btn-primary {
+  width: 100%;
 }
 
 .signup__icon {
@@ -23,7 +23,8 @@
   margin-bottom: 30px;
 }
 
-.signup__or::before, .signup__or::after {
+.signup__or::before,
+.signup__or::after {
   content: " __________ ";
   position: relative;
   top: -7px;
@@ -54,14 +55,18 @@
     height: 56vh;
     margin-top: 10vh;
   }
+
   .signup__or {
     font-size: 30px;
     margin-bottom: 60px;
   }
-  .signup__or::before, .signup__or::after {
+
+  .signup__or::before,
+  .signup__or::after {
     content: " _________________ ";
     top: -10px;
   }
+
   .signup .ant-form-item-control {
     zoom: 1.7;
     line-height: 50px;
@@ -78,7 +83,9 @@
     height: 92vh;
     margin-top: 5vh;
   }
-  .signup__or::before, .signup__or::after {
+
+  .signup__or::before,
+  .signup__or::after {
     content: " _____________ ";
   }
 }
@@ -94,7 +101,7 @@
   .signup__form {
     height: 42vh;
   }
-  .signup .ant-btn .ant-btn-primary {
+  .signup .signup__form .ant-btn .ant-btn-primary {
     height: 50px !important;
   }
   .signup__or::before, .signup__or::after {
