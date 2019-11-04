@@ -1,189 +1,184 @@
 .landing-page {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .landing {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    font-size: 14px;
-    font-family: 'Source Sans Pro';
-    height: 152px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 14px;
+  font-family: 'Source Sans Pro';
+  height: 152px;
 }
 
 .landing__img {
-    position: relative;
-    width: 410px;
-    height: 410px;
-    background-color: #e9663a;
-    border-radius: 50%;
-    top: -77px;
-    left: calc(50% - 205px);
-    overflow: hidden;
+  position: relative;
+  width: 600px;
+  height: 410px;
+  background-color: #e9663a;
+  border-radius: 50%;
+  top: -77px;
+  left: calc(50% - 300px);
 }
 
 .Illustration {
-    position: absolute;
-    left: 58px;
-    bottom: 21px;
+  position: absolute;
+  transform: translate(-50%, 39%);
 }
 
 .landing__title {
-    width: 170px;
-    color: #242424;
+  width: 170px;
+  color: #242424;
 }
 
 .landing__content {
-    width: 197px;
-    line-height: 18px;
-    text-align: center;
+  width: 197px;
+  line-height: 18px;
+  text-align: center;
 }
 
 .landing__link {
-    width: 125px;
-    height: 33px;
-    line-height: 18px;
-    color: #E9663A;
-    padding-top: 19px;
+  width: 125px;
+  height: 33px;
+  line-height: 18px;
+  color: #E9663A;
+  padding-top: 19px;
 }
 
 .landing__aboutLink {
-    width: 226px;
-    font-family: 'Open Sans';
-    line-height: 19px;
-    align-items: center;
-    color: #242424;
+  width: 226px;
+  font-family: 'Open Sans';
+  line-height: 19px;
+  align-items: center;
+  color: #242424;
 }
 
 .landing__logo {
-    width: 226px;
-    height: 24px;
-    font-family: 'Open Sans';
-    font-weight: bold;
-    line-height: 19px;
-    align-items: center;
-    color: #E9663A;
-    padding-left: 5px;
+  width: 226px;
+  height: 24px;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  line-height: 19px;
+  align-items: center;
+  color: #E9663A;
+  padding-left: 5px;
 }
 
 .landing__button {
-    font-family: 'Roboto';
-    font-weight: 500;
-    font-size: 16px;
-    color: #FFFFFF;
-    width: 221px;
-    height: 40px;
-    border-radius: 4px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 16px;
+  color: #FFFFFF;
+  width: 221px;
+  height: 40px;
+  border-radius: 4px;
 }
 
 .landing .ant-btn {
-    border: none;
+  border: none;
 }
 
 .landing .ant-btn-primary {
-    color: #fff;
-    background-color: #E9663A;
-    border-color: #E9663A;
-    text-shadow: none;
-    box-shadow: none;
+  color: #fff;
+  background-color: #E9663A;
+  border-color: #E9663A;
+  text-shadow: none;
+  box-shadow: none;
 }
 
 .landing .ant-btn-primary:hover, .ant-btn-primary:focus {
-    color: #fff;
-    background-color: #E9663A;
-    border-color: #E9663A;
+  color: #fff;
+  background-color: #E9663A;
+  border-color: #E9663A;
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-    .landing {
-        height: 7vh;
-        line-height: 74px;
-    }
-    .landing__title {
-        width: 360px;
-        font-size: 33px;
-    }
-    .landing__content {
-        font-size: 33px;
-        width: 377px;
-        line-height: 28px;
-    }
-    .landing .ant-btn-primary {
-        height: 47px;
-        width: 275px;
-        font-size: 24px;
-    }
-    .landing__link {
-        width: 243px;
-        font-size: 27px;
-    }
-    .landing__aboutLink {
-        font-size: 26px;
-        width: 352px;
-    }
-    .landing__img {
-        position: relative;
-        width: 120vw;
-        height: 120vw;
-        background-color: #e9663a;
-        border-radius: 50%;
-        top: -369px;
-        left: calc(50% - 60vw);
-        overflow: hidden;
-    }
-    .Illustration {
-        position: absolute;
-        top: 348px;
-        left: calc(50% - 285px);
-        width: 570px;
-        height: 570px;
-    }
+  .landing {
+    height: 7vh;
+    line-height: 74px;
+  }
+  .landing__title {
+    width: 360px;
+    font-size: 33px;
+  }
+  .landing__content {
+    font-size: 33px;
+    width: 377px;
+    line-height: 28px;
+  }
+  .landing .ant-btn-primary {
+    height: 47px;
+    width: 275px;
+    font-size: 24px;
+  }
+  .landing__link {
+    width: 243px;
+    font-size: 27px;
+  }
+  .landing__aboutLink {
+    font-size: 26px;
+    width: 352px;
+  }
+  .landing__img {
+    position: relative;
+    width: 150vw;
+    height: 115vw;
+    background-color: #e9663a;
+    border-radius: 50%;
+    top: -369px;
+    left: calc(50% - 75vW);
+  }
+  .Illustration {
+    position: absolute;
+    transform: translate(-50%, 60%);
+    width: 570px;
+    height: 570px;
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
-    .landing {
-        height: 4vh;
-        line-height: 74px;
-    }
-    .landing__title {
-        width: 360px;
-        font-size: 33px;
-    }
-    .landing__content {
-        font-size: 33px;
-        width: 377px;
-        line-height: 28px;
-    }
-    .landing .ant-btn-primary {
-        height: 47px;
-        width: 275px;
-        font-size: 24px;
-    }
-    .landing__link {
-        width: 243px;
-        font-size: 27px;
-    }
-    .landing__aboutLink {
-        font-size: 26px;
-        width: 352px;
-    }
-    .landing__img {
-        position: relative;
-        width: 120vw;
-        height: 120vw;
-        background-color: #e9663a;
-        border-radius: 50%;
-        top: -432px;
-        left: calc(50% - 60vw);
-        overflow: hidden;
-    }
-    .Illustration {
-        position: absolute;
-        top: 552px;
-        left: calc(50% - 325px);
-        width: 650px;
-        height: 650px;
-    }
+  .landing {
+    height: 4vh;
+    line-height: 74px;
+  }
+  .landing__title {
+    width: 360px;
+    font-size: 33px;
+  }
+  .landing__content {
+    font-size: 33px;
+    width: 377px;
+    line-height: 28px;
+  }
+  .landing .ant-btn-primary {
+    height: 47px;
+    width: 275px;
+    font-size: 24px;
+  }
+  .landing__link {
+    width: 243px;
+    font-size: 27px;
+  }
+  .landing__aboutLink {
+    font-size: 26px;
+    width: 352px;
+  }
+  .landing__img {
+    position: relative;
+    width: 140vw;
+    height: 108vw;
+    background-color: #e9663a;
+    border-radius: 50%;
+    top: -432px;
+    left: calc(50% - 70vw);
+  }
+  .Illustration {
+    position: absolute;
+    transform: translate(-50%, 77%);
+    width: 650px;
+    height: 650px;
+  }
 }
 
+@media (min-width: 1281px) {}

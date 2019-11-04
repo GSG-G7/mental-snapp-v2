@@ -107,6 +107,7 @@ class Questions extends React.Component {
         // here, a request will be post to firebase to save data
         // that will be as follows : [{title:'', content:''}]
       }
+      message.warning("You didn't make an entry today");
       history.push('/home');
     }
   };
