@@ -9,31 +9,35 @@ import './landing.css';
 
 const LandingPage = () => {
   return (
-    <div>
-      <div className="landing__img">
-        <Illustration className="Illustration" />
+    <div className="landing-page">
+      <div>
+        <div className="landing__img">
+          <Illustration className="Illustration" />
+        </div>
       </div>
-      <div className="landing">
-        <div className="landing__title">
-          <MainHeading text="Practice the art of good mental health" />
-        </div>
-        <div className="landing__content">
-          <SubHeading text="Tell your story and positively guide your thoughts" />
-        </div>
-        <Link to={SIGN_IN}>
-          <Button type="primary" className="landing__button">
-            Sign In
-          </Button>
-        </Link>
-        <Link to={SIGN_UP}>
-          <p className="landing__link">Create a new account</p>
-        </Link>
-        <p className="landing__aboutLink">
-          Read more about
-          <Link to={ABOUT}>
-            <span className="landing__logo">Mental Snapp</span>
+      <div>
+        <div className="landing">
+          <div className="landing__title">
+            <MainHeading text="Practice the art of good mental health" />
+          </div>
+          <div className="landing__content">
+            <SubHeading text="Tell your story and positively guide your thoughts" />
+          </div>
+          <Link to={SIGN_IN}>
+            <Button type="primary" className="landing__button">
+              Sign In
+            </Button>
           </Link>
-        </p>
+          <Link to={SIGN_UP}>
+            <p className="landing__link">Create a new account</p>
+          </Link>
+          <p className="landing__aboutLink">
+            Read more about
+            <Link to={ABOUT}>
+              <span className="landing__logo">Mental Snapp</span>
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
