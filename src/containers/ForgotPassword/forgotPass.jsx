@@ -21,6 +21,10 @@ const ForgotPass = props => {
     });
   };
 
+  const handleClick = () => {
+    // here will will call the firebase function again
+  };
+
   return (
     <div className="forgot-password">
       <header className="forgot-password__heading">
@@ -68,7 +72,15 @@ const ForgotPass = props => {
       </div>
       <p className="forgot-password__link">
         Didn’t receive any code?
-        <span className="forgot-password__resend">Resend</span>
+        <span
+          role="button"
+          tabIndex="0"
+          onClick={handleClick}
+          onKeyPress={handleClick}
+          className="forgot-password__resend"
+        >
+          Resend
+        </span>
       </p>
     </div>
   );
