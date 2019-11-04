@@ -6,6 +6,8 @@ import NavBar from '../../components/navigationBar';
 
 import { ReactComponent as Logo } from '../assets/images/logo.svg';
 
+import JournalCard from '../../components/JournalCard';
+
 import { months, fakeData } from './data';
 
 import './feeds.css';
@@ -15,7 +17,7 @@ class Feed extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
+      data: [],
       monthCount: months,
     };
   }
@@ -64,7 +66,7 @@ class Feed extends Component {
         <div className="feeds__content">
           <Logo className="feeds__logo" />
           <Select
-            defaultValue="September"
+            defaultValue="select a month"
             className="feeds__select"
             onChange={this.handleChange}
           >
@@ -81,8 +83,16 @@ class Feed extends Component {
           </Select>
         </div>
 
-        {data ? (
-          <p>You have 3 entries</p> // matched entries will be rendered here
+        {data.length > 0 ? (
+          data.map(journal => (
+            <JournalCard
+              time={journal.time}
+              date={journal.date}
+              grateful={journal.grateful}
+              challenge={journal.challenge}
+              developing={journal.developing}
+            /> // matched entries will be rendered here
+          ))
         ) : (
           <h2 className="feeds__message">
             No entries for this month, choose another one
