@@ -127,7 +127,7 @@
     background-color: #e9663a;
     border-radius: 50%;
     top: -369px;
-    left: calc(50% - 75vW);
+    left: calc(50% - 75%);
   }
   .Illustration {
     position: absolute;
@@ -171,7 +171,7 @@
     background-color: #e9663a;
     border-radius: 50%;
     top: -432px;
-    left: calc(50% - 70vw);
+    left: calc(50% - 70%);
   }
   .Illustration {
     position: absolute;

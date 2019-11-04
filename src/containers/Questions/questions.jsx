@@ -78,7 +78,7 @@ class Questions extends React.Component {
       message.success('Yes, you have added a journal');
       return history.push('/home');
       // here, a request will be post to firebase to save data
-      // that will be as follows : [{title:'', content:''}]
+      // that will be as follows : [{title:'', content:'', time:'', date:'',month:''}]
     } catch (error) {
       const objError = {};
       error.inner.forEach(fielderror => {
@@ -105,7 +105,7 @@ class Questions extends React.Component {
         message.success('Yes, you have added a journal');
         history.push('/home');
         // here, a request will be post to firebase to save data
-        // that will be as follows : [{title:'', content:''}]
+        // that will be as follows : [{title:'', content:'', time:'', date:'',month:''}]
       }
       message.warning("You didn't make an entry today");
       history.push('/home');
