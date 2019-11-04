@@ -3,18 +3,13 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import CalenderHeatMap from 'react-calendar-heatmap';
 
+import LogoHeader from '../../components/LogoHeader';
 import NavigationBar from '../../components/navigationBar';
-import logo from '../assets/images/logo.png';
 import 'react-calendar-heatmap/dist/styles.css';
 import './heatMap.css';
 
 const heatMap = props => {
-  const data = [
-    {
-      date: '2019-11-01T22:00:00.000Z',
-      count: 2,
-    },
-  ];
+  const { data, handleClick } = props;
 
   const toolTipData = value => {
     if (value.date) {
@@ -27,23 +22,13 @@ const heatMap = props => {
     };
   };
 
-  // This function should show data based on day
-  const handleClick = value => {
-    // the date of the clicked day in the same way it's stored in our DB
-    if (value) {
-      const currentDay = new Date(value.date).toISOString();
-    }
-  };
-
   const date = new Date();
   const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
   const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
   return (
     <div className="heat-map">
-      <header className="heat-map__header">
-        <img src={logo} alt="mental snapp logo" className="heat-map__logo" />
-      </header>
+      <LogoHeader />
       <h2 className="heat-map__month">{new Date().toDateString()}</h2>
       <div className="heat-map__body">
         <CalenderHeatMap
@@ -51,10 +36,10 @@ const heatMap = props => {
           endDate={lastDay}
           values={data}
           classForValue={value => {
-            if (!value) {
+            if (!value || !value.count) {
               return 'color-empty';
             }
-            return `color-github-${value.count}`;
+            return `color-scale-${value.count > 4 ? 4 : value.count}`;
           }}
           tooltipDataAttrs={toolTipData}
           showWeekdayLabels={false}
@@ -72,6 +57,12 @@ const heatMap = props => {
   );
 };
 
-heatMap.propTypes = {};
+heatMap.propTypes = {
+  data: PropTypes.arrayOf({
+    date: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+  }).isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 export default heatMap;
