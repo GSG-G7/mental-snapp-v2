@@ -22,8 +22,14 @@ class Feed extends Component {
   }
 
   componentDidMount() {
+    // fetch all data from firebase firstore
+    // async
+    // const result = await axios.get(`https:-------`);
+    // const cards = result.data.data[0];
+    // cards === fackData
+    //
+    //
     const monthArray = fakeData.map(journal => journal.date);
-
     const filteredArray = monthArray.reduce((acc, curr) => {
       if (typeof acc[curr] == 'undefined') {
         acc[curr] = 1;
@@ -33,7 +39,6 @@ class Feed extends Component {
       return acc;
     }, {});
 
-    this.setState({ monthCount: filteredArray });
     const keys = Object.keys(filteredArray);
 
     for (let i = 0; i < months.length; i++) {
@@ -44,13 +49,6 @@ class Feed extends Component {
       }
     }
     return this.setState({ monthCount: months });
-    // fetch all data from firebase firstore
-    // async
-    // const result = await axios.get(`https:-------`);
-    // const cards = result.data.data[0];
-    //   this.setState({ data: cards });
-    // });
-    // getMonth()+1 for month
   }
 
   handleChange = value => {
