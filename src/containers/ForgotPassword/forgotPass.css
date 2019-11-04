@@ -23,7 +23,7 @@
 }
 
 .forgot-password__vector {
-  margin: 10px auto;
+  margin: 1rem auto;
 }
 
 .forgot-password__text {
@@ -32,7 +32,7 @@
   color: #242424;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  text-align: left;
+  text-align: center;
 }
 
 .forgot-password__input .forgot-password__icon {

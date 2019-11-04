@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Button, Icon } from 'antd';
 
-import BackButton from '../../components/BackButton';
+import Header from '../../components/Header';
 import { ReactComponent as Vector } from '../assets/images/forgotPass.svg';
 import './forgotPass.css';
 
@@ -27,12 +27,7 @@ const ForgotPass = props => {
 
   return (
     <div className="forgot-password">
-      <header className="forgot-password__heading">
-        <div className="forgot-password__back-btn">
-          <BackButton handleBack={goBack} />
-        </div>
-        <h2 className="forgot-password__title">forgot password</h2>
-      </header>
+      <Header text="forgot password" handleBack={goBack} />
       <Vector className="forgot-password__vector" />
       <p className="forgot-password__text">
         We will send you a verification code to your email, enter your email and
