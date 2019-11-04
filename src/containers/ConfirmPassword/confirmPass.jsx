@@ -24,6 +24,7 @@ const confirmPass = props => {
             placeholder="Enter your password"
             prefix={<Icon type="lock" className="confirm-pass__form__icon" />}
             size="large"
+            aria-label="Enter your password"
           />
           <Button type="primary" size="large">
             Procceed To Edit
