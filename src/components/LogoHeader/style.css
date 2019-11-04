@@ -17,3 +17,9 @@
   align-self: center;
 }   
 
+@media (min-width: 600px) {
+  .logo-header__link {
+    font-size: 1.4rem;
+  }
+}
+

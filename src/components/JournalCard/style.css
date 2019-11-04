@@ -1,9 +1,9 @@
 .journal-card {
-  padding: 13px;
+  padding: 20px;
+  margin-bottom: 20px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  max-height: 140px;
   font-family: 'VAGRounded', sans-serif;
 }
 
@@ -65,9 +65,42 @@
 }
 
 @media (min-width: 600px) {
+  .cards-container {
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
   .journal-card {
-    width: 60%;
-    margin: 0 auto;
+    width: 48%;
+  }
+  .journal-card__date {
+    font-size: 1rem;
+  }
+  .journal-card__date svg {
+    width: 25px;
+    height: 25px;
+  }
+  .journal-card__time svg {
+    width: 25px;
+    height: 25px;
+  }
+  .journal-card__delete svg {
+    width: 30px;
+    height: 30px;
+  }
+  .journal-card__grateful,
+  .journal-card__challenge,
+  .journal-card__developing {
+    font-size: 1.3rem;
+  }
+
+  .journal-card__body__title {
+    font-size: 1.3rem;
+  }
+  .journal-card--date,
+  .journal-card--time {
+    font-size: 0.8rem;
   }
 }
 

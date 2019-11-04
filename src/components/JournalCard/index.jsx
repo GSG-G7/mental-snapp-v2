@@ -10,11 +10,11 @@ const JournalCard = ({ time, date, grateful, challenge, developing }) => {
       <div className="journal-card__top">
         <div className="journal-card__date">
           <Icon type="calendar" className="journal-card__icon" />
-          <span>{date}</span>
+          <span className="journal-card--date">{date}</span>
         </div>
         <div className="journal-card__time">
           <Icon type="clock-circle" className="journal-card__icon" />
-          <span>{time}</span>
+          <span className="journal-card--time">{time}</span>
         </div>
         <div className="journal-card__delete">
           <Icon
