@@ -1,0 +1,93 @@
+.edit-account {
+  overflow: hidden;
+}
+
+.edit-account__form {
+  width: 80%;
+  margin: auto;
+  min-height: 59vh;
+  margin-top: 10vh;
+}
+
+.edit-account .ant-btn.ant-btn-primary {
+  width: 100%;
+}
+
+.edit-account__icon {
+  color: rgba(0, 0, 0, 0.25) !important;
+}
+
+.edit-account .ant-form-item-control {
+  line-height: 6vh;
+  zoom: 1.2;
+}
+
+.edit-account form {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.edit-account__checkbox {
+  width: max-content;
+  margin-bottom: 20px;
+}
+
+.edit-account__checkbox * {
+  color: #e9663a;
+}
+
+.hidden {
+  height: 0 !important;
+  display: none !important;
+}
+
+/*=================== Medium devices (tablets, 768px and up)  ===================*/
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .edit-account__form {
+    min-height: 56vh;
+    margin-top: 10vh;
+  }
+
+  .edit-account .ant-form-item-control {
+    zoom: 1.7;
+    line-height: 50px;
+  }
+}
+
+/*=================== Large devices (desktops, 992px and up) ===================*/
+
+@media (min-width: 992px) {
+  .edit-account {
+    width: 35vw;
+    margin: 0 auto;
+    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
+    min-height: 92vh;
+    margin-top: 5vh;
+  }
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .edit-account {
+    width: 70%;
+    margin: 0 auto;
+    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
+    min-height: 62vh;
+    margin-top: 15rem;
+  }
+  .edit-account__form {
+    min-height: 42vh;
+  }
+  .edit-account .edit-account__form .ant-btn .ant-btn-primary {
+    min-height: 50px !important;
+  }
+
+  .edit-account .ant-input {
+    min-height: 50px !important;
+  }
+  .edit-account .ant-form-item-control {
+    line-height: 5vh;
+  }
+}

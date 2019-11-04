@@ -1,8 +1,3 @@
-import React from 'react';
-import UnderConstruction from '../UnderConstruction';
-
-const EditAccount = props => {
-  return <UnderConstruction {...props} />;
-};
+import EditAccount from './editAccount';
 
 export default EditAccount;
