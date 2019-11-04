@@ -71,11 +71,6 @@
     zoom: 1.7;
     line-height: 50px;
   }
-
-  .signup .ant-form-item-control .ant-btn-primary {
-    width: 100%;
-    height: 4vh;
-  }
 }
 
 /*=================== Large devices (desktops, 992px and up) ===================*/
@@ -85,7 +80,7 @@
     width: 35vw;
     margin: 0 auto;
     box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
-    height: 90vh;
+    height: 92vh;
     margin-top: 5vh;
   }
 
@@ -93,9 +88,35 @@
   .signup__or::after {
     content: " _____________ ";
   }
+}
 
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .signup {
+    width: 70%;
+    margin: 0 auto;
+    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
+    height: 62vh;
+    margin-top: 15rem;
+  }
+  .signup__form {
+    height: 42vh;
+  }
+  .signup .signup__form .ant-btn .ant-btn-primary {
+    height: 50px !important;
+  }
+  .signup__or::before, .signup__or::after {
+    content: " ___________________________ ";
+  }
   .signup__buttons {
-    width: 30vw;
-    margin: auto;
+    margin: 0 3rem;
+  }
+  .signup .ant-input {
+    height: 50px !important;
+  }
+  .signup .ant-form-item-control {
+    line-height: 5vh;
+  }
+  .signup .google-btn, .signup .facebook-btn {
+    height: 50px;
   }
 }
