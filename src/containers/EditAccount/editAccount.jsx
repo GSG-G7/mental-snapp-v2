@@ -80,7 +80,10 @@ class EditAccount extends Component {
               </Checkbox>
             </section>
 
-            <Form.Item hasFeedback className={!checked && 'hidden'}>
+            <Form.Item
+              hasFeedback
+              className={!checked ? 'transition hidden' : 'transition'}
+            >
               {getFieldDecorator('password', {
                 rules: [
                   {

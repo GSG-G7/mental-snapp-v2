@@ -23,7 +23,7 @@
 }
 
 .edit-account form {
-  min-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -38,9 +38,24 @@
   color: #e9663a;
 }
 
+.ant-checkbox-checked .ant-checkbox-inner {
+  border-color: #e9663a !important;
+  background-color: #e9663a !important;
+}
+
+.ant-checkbox-inner {
+  border-color: #e9663a !important;
+}
 .hidden {
   height: 0 !important;
-  display: none !important;
+  opacity: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+  z-index: -1;
+}
+
+.transition {
+  transition: all 1s ease !important;
 }
 
 /*=================== Medium devices (tablets, 768px and up)  ===================*/
@@ -81,11 +96,11 @@
     min-height: 42vh;
   }
   .edit-account .edit-account__form .ant-btn .ant-btn-primary {
-    min-height: 50px !important;
+    height: 50px !important;
   }
 
   .edit-account .ant-input {
-    min-height: 50px !important;
+    height: 50px !important;
   }
   .edit-account .ant-form-item-control {
     line-height: 5vh;
