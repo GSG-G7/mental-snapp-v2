@@ -1,23 +1,37 @@
+/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import EditAccount from './editAccount';
 
-class Edit extends Component {
+class Index extends Component {
   state = {
-    // eslint-disable-next-line react/no-unused-state
     info: {
       name: 'Fares',
       email: 'fares@gmail.com',
     },
-    // eslint-disable-next-line react/no-unused-state
     checked: false,
   };
 
-  // eslint-disable-next-line react/no-unused-state
   onChange = ({ target: { checked } }) => this.setState({ checked });
 
   render() {
-    return <EditAccount state={this.state} handleChange={this.onChange} />;
+    const {
+      history: { goBack },
+    } = this.props;
+    return (
+      <EditAccount
+        state={this.state}
+        handleChange={this.onChange}
+        handleGoBack={goBack}
+      />
+    );
   }
 }
 
-export default Edit;
+Index.propTypes = {
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default Index;
