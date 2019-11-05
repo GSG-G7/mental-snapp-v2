@@ -32,7 +32,7 @@ class Feed extends Component {
     const monthArray = fakeData.map(journal =>
       moment(journal.timestamp).format('MMMM')
     );
-    const filteredArray = monthArray.reduce((acc, curr) => {
+    const filteredObject = monthArray.reduce((acc, curr) => {
       if (typeof acc[curr] == 'undefined') {
         acc[curr] = 1;
       } else {
@@ -41,12 +41,12 @@ class Feed extends Component {
       return acc;
     }, {});
 
-    const keys = Object.keys(filteredArray);
+    const keys = Object.keys(filteredObject);
 
     for (let i = 0; i < months.length; i++) {
       for (let j = 0; j < keys.length; j++) {
         if (months[i].month === keys[j]) {
-          months[i].count = filteredArray[keys[j]];
+          months[i].count = filteredObject[keys[j]];
         }
       }
     }
