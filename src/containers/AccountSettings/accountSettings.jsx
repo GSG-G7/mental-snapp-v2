@@ -10,6 +10,11 @@ import NavigationBar from '../../components/navigationBar';
 import './accountSettings.css';
 
 const accountSettings = ({ info }) => {
+  const logOut = () => {
+    // clear cockie & redirect to the login page
+  };
+  // const { createdAccount, name, email } = info;
+
   return (
     <div className="settings">
       <Logo />
@@ -21,9 +26,10 @@ const accountSettings = ({ info }) => {
           <Link
             to="/confirm-password"
             className={
-              info.createdAccount
+              info &&
+              (info.createdAccount
                 ? 'settings__edit-btn'
-                : 'settings__edit-btn hidden-edit-btn'
+                : 'settings__edit-btn hidden-edit-btn')
             }
           >
             <span className="settings__edit-btn__text">Edit</span>
@@ -38,7 +44,7 @@ const accountSettings = ({ info }) => {
               Name:
             </p>
             <span className="settings__body__info">
-              {info.name || 'in Progress'}
+              {(info && info.name) || 'in Progress'}
             </span>
           </div>
 
@@ -48,7 +54,7 @@ const accountSettings = ({ info }) => {
               Email:
             </p>
             <span className="settings__body__info">
-              {info.email || 'in Progress'}
+              {(info && info.email) || 'in Progress'}
             </span>
           </div>
 
@@ -60,10 +66,10 @@ const accountSettings = ({ info }) => {
             <span className="settings__body__info">********</span>
           </div>
 
-          <div className="settings__logout">
+          <button type="button" className="settings__logout" onClick={logOut}>
             <Icon type="logout" className="settings__body__icon" />
             <span>Log Out</span>
-          </div>
+          </button>
         </section>
       </div>
       <section>
@@ -74,7 +80,11 @@ const accountSettings = ({ info }) => {
 };
 
 accountSettings.propTypes = {
-  info: PropTypes.shape.isRequired,
+  info: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    createdAccount: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 export default accountSettings;
