@@ -1,6 +1,6 @@
 .heat-map {
-  width: 100%;
   margin: 0 auto;
+  padding: 0 0 5rem 0;
 }
 
 .heat-map__header {
@@ -12,15 +12,68 @@
   height: 35px;
 }
 
-.heat-map__body {
-  padding: 0 20px 20px;
+.heat-map__month {
+  padding: 0 1.5rem;
+  color: rgba(36, 36, 36, 0.9);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.heat-map__icon {
+  margin-right: 0.5rem;
+  color: rgba(36, 36, 36, 0.9);
+}
+
+.heat-map__body,
+.heat-map__journals {
+  padding: 0 1.2rem 1rem;
+}
+
+.heat-map__legend {
+  padding: 0 1rem 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+.heat-map__box {
+  width: .8rem;
+  height: .7rem;
+  margin: 0 .3rem;
+}
+
+.heat-map__box--scale1 {
+  background-color: #feddd2;
+}
+.heat-map__box--scale2 {
+  background-color: #fec3b1;
+}
+.heat-map__box--scale3 {
+  background-color: #f2ac95;
+}
+.heat-map__box--scale4 {
+  background-color: #fc8d6b;
 }
 
 .heat-map__text {
   text-align: center;
   color: rgba(36, 36, 36, 0.6);
-  font-size: 14px;
+  font-size: .8rem;
   font-family: 'Open Sans', sans-serif;
+}
+
+.heat-map__empty {
+  display: flex;
+  padding: .5rem 1.5rem;
+}
+
+.heat-map__journals__message {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  color: rgba(36, 36, 36, 0.8);
+  font-family: Poppins, sans-serif;
 }
 
 /* The colors of the heat map */
@@ -35,4 +88,53 @@
 }
 .react-calendar-heatmap .color-scale-4 {
   fill: #fc8d6b;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 20px;
+  }
+
+  .heat-map__body {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .heat-map__legend,
+  .heat-map__empty 
+  {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 24px;
+  }
+
+  .heat-map__month {
+    text-align: left;
+  }
+
+  .heat-map__body {
+    width: 35%;
+    margin: 0 auto;
+  }
+
+  .heat-map__legend {
+    justify-content: center;
+  }
+
+  .heat-map__container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .heat-map__journals {
+    width: 50%;
+  }
+
+  .heat-map__empty {
+    flex-direction: column;
+  }
 }
