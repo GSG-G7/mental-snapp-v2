@@ -5,27 +5,11 @@ import propTypes from 'prop-types';
 import { Button, Input, Progress, Icon, Popconfirm } from 'antd';
 
 import BackButton from '../../components/BackButton';
+import entryData from './data';
+
 import './questions.css';
 
 const { TextArea } = Input;
-
-const entryData = [
-  {
-    id: 1,
-    heading: 'Today, Iam grateful for',
-    percent: 34,
-  },
-  {
-    id: 2,
-    heading: 'Challenge I face',
-    percent: 68,
-  },
-  {
-    id: 3,
-    heading: 'Iam looking to develop',
-    percent: 100,
-  },
-];
 
 const Question = props => {
   const {

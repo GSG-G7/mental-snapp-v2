@@ -4,24 +4,7 @@ import { message } from 'antd';
 import Question from './questions';
 
 import schema from './questionValidation';
-
-const entryData = [
-  {
-    id: 1,
-    heading: 'Today, Iam grateful for',
-    percent: 34,
-  },
-  {
-    id: 2,
-    heading: 'Challenge I face',
-    percent: 68,
-  },
-  {
-    id: 3,
-    heading: 'Iam looking to develop',
-    percent: 100,
-  },
-];
+import entryData from './data';
 
 class Questions extends React.Component {
   state = {
