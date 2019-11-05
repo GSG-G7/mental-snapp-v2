@@ -26,6 +26,10 @@
     height: 173px;
 }
 
+.question__count {
+    padding-left: 8px;
+}
+
 .question__navigation {
     display: flex;
     justify-content: space-between;

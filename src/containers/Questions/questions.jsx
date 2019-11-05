@@ -9,7 +9,6 @@ import schema from './questionValidation';
 import './questions.css';
 
 const { TextArea } = Input;
-const journals = [];
 
 const entryData = [
   {
@@ -30,18 +29,16 @@ const entryData = [
 ];
 
 class Questions extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      current: 0,
-      title: '',
-      content: '',
-      errors: {},
-    };
-  }
+  state = {
+    current: 0,
+    title: '',
+    content: '',
+    errors: {},
+    journals: [],
+  };
 
   confirm = e => {
-    message.success("You didn't make an entry today");
+    message.warning("You didn't make an entry today");
     const { history } = this.props;
     history.push('/home');
   };
@@ -51,7 +48,7 @@ class Questions extends React.Component {
   };
 
   next = async () => {
-    const { current, title, content } = this.state;
+    const { current, title, content, journals } = this.state;
     try {
       await schema.validate({ title, content }, { abortEarly: false });
       journals.push({ title, content });
@@ -71,14 +68,16 @@ class Questions extends React.Component {
   };
 
   finish = async () => {
-    const { title, content } = this.state;
+    const { title, content, journals } = this.state;
     const { history } = this.props;
     try {
       await schema.validate({ title, content }, { abortEarly: false });
+      journals.push({ title, content });
       message.success('Yes, you have added a journal');
-      return history.push('/home');
+      history.push('/home');
       // here, a request will be post to firebase to save data
       // that will be as follows : [{title:'', content:'', time:'', date:'',month:''}]
+      return this.setState({ journals: [] });
     } catch (error) {
       const objError = {};
       error.inner.forEach(fielderror => {
@@ -95,7 +94,7 @@ class Questions extends React.Component {
   };
 
   skip = () => {
-    const { current } = this.state;
+    const { current, journals } = this.state;
     if (current < entryData.length - 1) {
       const curr = current + 1;
       this.setState({ current: curr, errors: {} });
@@ -106,9 +105,11 @@ class Questions extends React.Component {
         history.push('/home');
         // here, a request will be post to firebase to save data
         // that will be as follows : [{title:'', content:'', time:'', date:'',month:''}]
+        this.setState({ journals: [] });
+      } else {
+        message.warning("You didn't make an entry today");
+        history.push('/home');
       }
-      message.warning("You didn't make an entry today");
-      history.push('/home');
     }
   };
 
@@ -129,7 +130,6 @@ class Questions extends React.Component {
             <Popconfirm
               title="Do you really want to exit?"
               onConfirm={this.confirm}
-              onCancel={this.cancel}
               okText="Yes"
               cancelText="cancel"
             >
@@ -139,8 +139,11 @@ class Questions extends React.Component {
         </div>
         <div className="question__type">
           <p>
-            Question 3·/
-            {current + 1}
+            Question
+            <span className="question__count">
+              {current + 1}
+              /3
+            </span>
           </p>
           <Progress
             percent={entryData[current].percent}
@@ -175,31 +178,19 @@ class Questions extends React.Component {
         </div>
 
         <div className="question__steps-action">
-          {current < entryData.length - 1 && (
+          {current < entryData.length - 1 ? (
             <Button type="primary" onClick={() => this.next()}>
               Next
             </Button>
-          )}
-          {current === entryData.length - 1 && (
-            <Button
-              type="primary"
-              onClick={() => {
-                this.finish();
-              }}
-            >
+          ) : (
+            <Button type="primary" onClick={() => this.finish()}>
               Done
             </Button>
           )}
 
-          {current < entryData.length - 1 ? (
-            <Button style={{ marginLeft: 8 }} onClick={() => this.skip()}>
-              Skip
-            </Button>
-          ) : (
-            <Button style={{ marginLeft: 8 }} onClick={() => this.skip()}>
-              Skip
-            </Button>
-          )}
+          <Button style={{ marginLeft: 8 }} onClick={() => this.skip()}>
+            Skip
+          </Button>
         </div>
       </div>
     );
