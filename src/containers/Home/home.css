@@ -1,3 +1,7 @@
+
+.home{
+  padding-bottom: 3.5rem;
+}
 .home__user-name {
   margin: 10px 0 0 20px;
   color: #E9663A !important;
@@ -19,6 +23,9 @@
   width: 90%;
 }
 
+.cards-container{
+  padding: 0 20px;
+}
 .goal__static {
   position: relative;
   margin-left: 5px;
@@ -28,18 +35,24 @@
   color: #242424;
 }
 
-.goal__editable {
+.goal__editable, .goal__editable-edit {
   margin-left: 5px;
   font-family: Poppins;
   font-weight: bold;
   font-size: 1rem;
   color: rgba(36, 36, 36, 0.6);
 }
-
+.goal__editable-edit{
+  border:1px solid #E9663A;
+}
+.goal__save-icon,
 .goal__edit-icon {
   position: absolute;
   bottom: 5px;
   right: 5px;
+}
+.goal__save-icon {
+  fill: green;
 }
 
 .home__goal svg {

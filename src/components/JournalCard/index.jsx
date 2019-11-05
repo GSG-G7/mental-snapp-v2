@@ -24,18 +24,24 @@ const JournalCard = ({ time, date, grateful, challenge, developing }) => {
         </div>
       </div>
       <div className="journal-card__body">
-        <p className="journal-card__grateful">
-          <span className="journal-card__body__title">grateful</span>
-          {grateful}
-        </p>
-        <p className="journal-card__challenge">
-          <span className="journal-card__body__title">challenge</span>
-          {challenge}
-        </p>
-        <p className="journal-card__developing">
-          <span className="journal-card__body__title">developing</span>
-          {developing}
-        </p>
+        {grateful && (
+          <p className="journal-card__grateful">
+            <span className="journal-card__body__title">grateful</span>
+            {grateful}
+          </p>
+        )}
+        {challenge && (
+          <p className="journal-card__challenge">
+            <span className="journal-card__body__title">challenge</span>
+            {challenge}
+          </p>
+        )}
+        {developing && (
+          <p className="journal-card__developing">
+            <span className="journal-card__body__title">developing</span>
+            {developing}
+          </p>
+        )}
       </div>
     </div>
   );
