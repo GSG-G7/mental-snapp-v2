@@ -67,15 +67,13 @@ class Questions extends React.Component {
 
   handlePrev = () => {
     const { current } = this.state;
-    const curr = current - 1;
-    this.setState({ current: curr, errors: {} });
+    this.setState({ current: current - 1, errors: {} });
   };
 
   handleSkip = () => {
     const { current, answers } = this.state;
     if (current < entryData.length - 1) {
-      const curr = current + 1;
-      this.setState({ current: curr, errors: {} });
+      this.setState({ current: current + 1, errors: {} });
     } else {
       const { history } = this.props;
       if (answers.length !== 0) {
