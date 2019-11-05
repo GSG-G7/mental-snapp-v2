@@ -74,9 +74,8 @@ const heatMap = props => {
         <div className="heat-map__journals">
           {journals.length !== 0 ? (
             journals.map(journal => (
-              <Link to={`journals/${journal.id}`}>
+              <Link to={`journals/${journal.id}`} key={journal.id}>
                 <JournalCard
-                  key={journal.id}
                   time={
                     moment('2019-10-30T09:17:27.037Z')
                       .format('MMMM Do, h:mm a')
