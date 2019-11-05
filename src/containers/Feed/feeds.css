@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 18px;
 }
 
 .feeds__select {
@@ -42,6 +41,9 @@
     border-color: black;
     font-size: 30px;
     padding-top: 10px;
+  }
+  .feeds__content{
+    margin-top: 18px;
   }
   .feeds__message {
     font-size: 36px;

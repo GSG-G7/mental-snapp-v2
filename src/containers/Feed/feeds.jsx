@@ -14,13 +14,10 @@ import LogoHeader from '../../components/LogoHeader';
 
 const { Option } = Select;
 class Feed extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      monthCount: months,
-    };
-  }
+  state = {
+    data: [],
+    monthCount: months,
+  };
 
   componentDidMount() {
     // fetch all data from firebase firstore
