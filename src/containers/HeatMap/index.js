@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 
 import HeatMap from './heatMap';
-import fakeData from './data';
+import { heatMapData, journalsData } from './data';
 
 class index extends Component {
   state = {
-    data: [...fakeData],
+    data: [...heatMapData],
+    journals: [...journalsData],
   };
+
+  componentDidMount() {
+    // We need to get the heatMap data here
+  }
 
   // This function should show data based on day
   handleClick = value => {
@@ -17,8 +22,10 @@ class index extends Component {
   };
 
   render() {
-    const { data } = this.state;
-    return <HeatMap data={data} handleClick={this.handleClick} />;
+    const { data, journals } = this.state;
+    return (
+      <HeatMap data={data} handleClick={this.handleClick} journals={journals} />
+    );
   }
 }
 
