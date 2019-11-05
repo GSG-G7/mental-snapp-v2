@@ -20,7 +20,6 @@ const SignInForm = props => {
     e.preventDefault();
     validateFieldsAndScroll((err, values) => {
       if (!err) {
-        // eslint-disable-next-line no-console
         console.log('Received values of form: ', values);
       }
     });
@@ -41,7 +40,7 @@ const SignInForm = props => {
                 },
                 {
                   required: true,
-                  message: 'Please input your E-mail!',
+                  message: 'This feild is required',
                 },
               ],
             })(
@@ -56,12 +55,8 @@ const SignInForm = props => {
             {getFieldDecorator('password', {
               rules: [
                 {
-                  pattern: new RegExp(
-                    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d].{8,}$/
-                  ),
                   required: true,
-                  message:
-                    'The password must contain at lest 8 numbers and characters',
+                  message: 'This field is required',
                 },
               ],
             })(
