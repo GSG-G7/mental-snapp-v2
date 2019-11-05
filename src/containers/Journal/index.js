@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { Icon, Popconfirm } from 'antd';
 
 import data from './fakeData';
@@ -12,17 +12,16 @@ import './journal.css';
 class Journal extends Component {
   state = {
     journal: { ...data },
-    history: '',
   };
 
   handleConfirm = e => {
     // it will delete the journal from firebase
-    const { history } = this.state;
+    const { history } = this.props;
     history.push('/home');
   };
 
   handleGoBack = e => {
-    const { history } = this.state;
+    const { history } = this.props;
     history.push('/home');
   };
 
@@ -48,7 +47,7 @@ class Journal extends Component {
             <Icon type="calendar" className="journal-card__icon" />
             <span>
               {
-                moment('2019-10-30T09:17:27.037Z')
+                moment(journal.timestamp)
                   .format('MMMM Do, h:mm a')
                   .split(',')[0]
               }
@@ -58,7 +57,7 @@ class Journal extends Component {
             <Icon type="clock-circle" className="journal-card__icon" />
             <span>
               {
-                moment('2019-10-30T09:17:27.037Z')
+                moment(journal.timestamp)
                   .format('MMMM Do, h:mm a')
                   .split(',')[1]
               }
@@ -90,10 +89,10 @@ class Journal extends Component {
   }
 }
 
-Journal.protoTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-    goBack: PropTypes.func.isRequired,
+Journal.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+    goBack: propTypes.func.isRequired,
   }).isRequired,
 };
 
