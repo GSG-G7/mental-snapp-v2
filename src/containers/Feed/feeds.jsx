@@ -1,5 +1,6 @@
 /* eslint-disable no-plusplus */
 import React, { Component } from 'react';
+import moment from 'moment';
 import { Select } from 'antd';
 
 import NavBar from '../../components/navigationBar';
@@ -28,8 +29,9 @@ class Feed extends Component {
     // const cards = result.data.data[0];
     // cards === fackData
     //
-    //
-    const monthArray = fakeData.map(journal => journal.date);
+    const monthArray = fakeData.map(journal =>
+      moment(journal.timestamp).format('MMMM')
+    );
     const filteredArray = monthArray.reduce((acc, curr) => {
       if (typeof acc[curr] == 'undefined') {
         acc[curr] = 1;
@@ -52,7 +54,9 @@ class Feed extends Component {
   }
 
   handleChange = value => {
-    const selectedJournal = fakeData.filter(journal => journal.date === value);
+    const selectedJournal = fakeData.filter(
+      journal => moment(journal.timestamp).format('MMMM') === value
+    );
     this.setState({ data: selectedJournal });
   };
 
@@ -83,11 +87,12 @@ class Feed extends Component {
         {data.length > 0 ? (
           data.map(journal => (
             <JournalCard
-              time={journal.time}
-              date={journal.date}
-              grateful={journal.grateful}
-              challenge={journal.challenge}
-              developing={journal.developing}
+              key={journal.id}
+              time={moment(journal.timestamp).format('MMMM Do')}
+              date={moment(journal.timestamp).format('h:mm a')}
+              grateful={journal.grateful.title}
+              challenge={journal.challenge.title}
+              developing={journal.developing.title}
             /> // matched entries will be rendered here
           ))
         ) : (
