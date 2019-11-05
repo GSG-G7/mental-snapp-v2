@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import EditAccount from './editAccount';
@@ -18,9 +17,11 @@ class Index extends Component {
     const {
       history: { goBack },
     } = this.props;
+    const { info, checked } = this.state;
     return (
       <EditAccount
-        state={this.state}
+        userInfo={info}
+        checked={checked}
         handleChange={this.onChange}
         handleGoBack={goBack}
       />
@@ -31,6 +32,10 @@ class Index extends Component {
 Index.propTypes = {
   history: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
+  }).isRequired,
+
+  form: PropTypes.shape({
+    validateFieldsAndScroll: PropTypes.func.isRequired,
   }).isRequired,
 };
 

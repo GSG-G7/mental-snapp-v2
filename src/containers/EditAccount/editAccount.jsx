@@ -8,15 +8,10 @@ import './editAccount.css';
 
 const EditAccount = props => {
   const {
-    state: {
-      info: { name, email },
-      checked,
-    },
+    userInfo: { name, email },
+    checked,
     handleChange,
     handleGoBack,
-  } = props;
-
-  const {
     form: { getFieldDecorator, validateFieldsAndScroll },
   } = props;
 
@@ -26,6 +21,11 @@ const EditAccount = props => {
       if (!err) {
         // eslint-disable-next-line no-console
         console.log('Received values of form: ', values);
+        if (checked) {
+          // name , email, password
+        } else {
+          // name , email
+        }
       }
     });
   };
@@ -118,15 +118,11 @@ EditAccount.propTypes = {
     getFieldValue: PropTypes.func.isRequired,
     getFieldDecorator: PropTypes.func.isRequired,
   }).isRequired,
-
-  state: PropTypes.shape({
-    info: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-    }).isRequired,
-    checked: PropTypes.bool.isRequired,
+  userInfo: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
   }).isRequired,
-
+  checked: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleGoBack: PropTypes.func.isRequired,
 };
