@@ -64,7 +64,7 @@ class Feed extends Component {
         <div className="feeds__content">
           <LogoHeader />
           <Select
-            defaultValue="select a month"
+            defaultValue={moment(new Date()).format('MMMM')}
             className="feeds__select"
             onChange={this.handleChange}
           >
@@ -72,7 +72,7 @@ class Feed extends Component {
               <Option
                 className="feeds__option"
                 key={element.id}
-                value={element.value}
+                value={element.month}
               >
                 <span>{element.month}</span>
                 <span>{element.count}</span>
@@ -90,7 +90,7 @@ class Feed extends Component {
               grateful={journal.grateful.title}
               challenge={journal.challenge.title}
               developing={journal.developing.title}
-            /> // matched entries will be rendered here
+            />
           ))
         ) : (
           <h2 className="feeds__message">
