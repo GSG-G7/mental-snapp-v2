@@ -33,10 +33,6 @@ Index.propTypes = {
   history: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
   }).isRequired,
-
-  form: PropTypes.shape({
-    validateFieldsAndScroll: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
 export default Index;
