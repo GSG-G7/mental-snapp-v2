@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { ReactComponent as Illustration } from '../assets/images/about.svg';
 import { ReactComponent as Logo } from '../assets/images/logo.svg';
-import Aboutdata from './data';
+import aboutData from './data';
 import Header from '../../components/Header';
 import './about.css';
 
@@ -15,7 +15,7 @@ const About = props => {
       <Header text="About" handleBack={goBack} />
       <div className="about">
         <Illustration />
-        {Aboutdata.map(data => (
+        {aboutData.map(data => (
           <div key={data.id}>
             <p className="about__title">{data.title}</p>
             <p className="about__content">{data.descrption}</p>

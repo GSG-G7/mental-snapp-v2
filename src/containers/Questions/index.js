@@ -12,7 +12,7 @@ class Questions extends React.Component {
     title: '',
     content: '',
     errors: {},
-    journals: [],
+    answers: [],
   };
 
   handleConfirm = e => {
@@ -26,10 +26,10 @@ class Questions extends React.Component {
   };
 
   handleNext = async () => {
-    const { current, title, content, journals } = this.state;
+    const { current, title, content, answers } = this.state;
     try {
       await schema.validate({ title, content }, { abortEarly: false });
-      journals.push({ title, content });
+      answers.push({ title, content });
       return this.setState({
         current: current + 1,
         content: '',
@@ -46,16 +46,16 @@ class Questions extends React.Component {
   };
 
   handleSubmit = async () => {
-    const { title, content, journals } = this.state;
+    const { title, content, answers } = this.state;
     const { history } = this.props;
     try {
       await schema.validate({ title, content }, { abortEarly: false });
-      journals.push({ title, content });
+      answers.push({ title, content });
       message.success('Yes, you have added a journal');
       history.push('/home');
       // here, a request will be post to firebase to save data
       // that will be as follows : [{title:'', content:'', time:'', date:'',month:''}]
-      return this.setState({ journals: [] });
+      return this.setState({ answers: [] });
     } catch (error) {
       const objError = {};
       error.inner.forEach(fielderror => {
@@ -72,18 +72,18 @@ class Questions extends React.Component {
   };
 
   handleSkip = () => {
-    const { current, journals } = this.state;
+    const { current, answers } = this.state;
     if (current < entryData.length - 1) {
       const curr = current + 1;
       this.setState({ current: curr, errors: {} });
     } else {
       const { history } = this.props;
-      if (journals.length !== 0) {
+      if (answers.length !== 0) {
         message.success('Yes, you have added a journal');
         history.push('/home');
         // here, a request will be post to firebase to save data
         // that will be as follows : [{title:'', content:'', time:'', date:'',month:''}]
-        this.setState({ journals: [] });
+        this.setState({ answers: [] });
       } else {
         message.warning("You didn't make an entry today");
         history.push('/home');
