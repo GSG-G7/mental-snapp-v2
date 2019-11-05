@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Icon, Popconfirm } from 'antd';
+
+import data from './fakeData';
 import BackButton from '../../components/BackButton';
 import JournalComponent from '../../components/Journal';
 
@@ -9,28 +11,12 @@ import './journal.css';
 
 class Journal extends Component {
   state = {
-    journal: {
-      grateful: {
-        title: 'Family',
-        body:
-          'some dummy and very stupid data, some dummy and very stupid data, some dummy and very stupid data',
-      },
-      developing: {
-        title: 'not finding time',
-        body:
-          'some dummy and very stupid data, some dummy and very stupid data, some dummy and very stupid data, some dummy and very stupid data, some dummy and very stupid data',
-      },
-      challenge: {
-        title: 'reading more books',
-        body:
-          'some dummy and very stupid data, some dummy and very stupid data',
-      },
-      timestamp: '2019-10-30T09:17:27.037Z', // It will be stored in DB as an ISO string
-    },
+    journal: { ...data },
     history: '',
   };
 
   handleConfirm = e => {
+    // it will delete the journal from firebase
     const { history } = this.state;
     history.push('/home');
   };
