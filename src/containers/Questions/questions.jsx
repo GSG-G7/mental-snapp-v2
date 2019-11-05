@@ -93,7 +93,7 @@ const Question = props => {
           </Button>
         )}
 
-        <Button style={{ marginLeft: 8 }} onClick={handleSkip}>
+        <Button className="question__skip" onClick={handleSkip}>
           Skip
         </Button>
       </div>
@@ -102,10 +102,6 @@ const Question = props => {
 };
 
 Question.propTypes = {
-  history: propTypes.shape({
-    push: propTypes.func.isRequired,
-    goBack: propTypes.func.isRequired,
-  }).isRequired,
   handleNext: propTypes.func.isRequired,
   handlePrev: propTypes.func.isRequired,
   handleSubmit: propTypes.func.isRequired,

@@ -51,6 +51,9 @@
     font-size: 20px;
 }
 
+.question__skip {
+    margin-left: 8px;
+}
 .question__steps-action .ant-btn-primary {
     background-color: #EE6B42;
     width: 140px;
