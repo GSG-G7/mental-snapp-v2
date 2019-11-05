@@ -9,7 +9,19 @@ import './confirmPass.css';
 const confirmPass = props => {
   const {
     history: { goBack },
+    form: { getFieldDecorator, validateFieldsAndScroll },
   } = props;
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        // eslint-disable-next-line no-console
+        console.log('Received values of form: ', values);
+      }
+    });
+  };
+
   return (
     <div className="confirm-pass">
       <Header text="Confirm Password" handleBack={goBack} />
@@ -18,14 +30,25 @@ const confirmPass = props => {
         <p className="confirm-Password__text">
           This is to make sure it&apos;s you!
         </p>
-        <Form className="confirm-pass__form">
-          <Input
-            type="password"
-            placeholder="Enter your password"
-            prefix={<Icon type="lock" className="confirm-pass__form__icon" />}
-            size="large"
-            aria-label="Enter your password"
-          />
+        <Form className="confirm-pass__form" onSubmit={handleSubmit}>
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Enter Your Password',
+                },
+              ],
+            })(
+              <Input.Password
+                prefix={
+                  <Icon type="lock" className="confirm-pass__form__icon" />
+                }
+                placeholder="Enter your password"
+              />
+            )}
+          </Form.Item>
+
           <Button type="primary" size="large">
             Procceed To Edit
           </Button>
@@ -36,10 +59,16 @@ const confirmPass = props => {
   );
 };
 
+const confirmPasswordForm = Form.create({ name: 'confirm pass' })(confirmPass);
+
 confirmPass.propTypes = {
   history: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
   }).isRequired,
+  form: PropTypes.shape({
+    validateFieldsAndScroll: PropTypes.func.isRequired,
+    getFieldDecorator: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default confirmPass;
+export default confirmPasswordForm;
