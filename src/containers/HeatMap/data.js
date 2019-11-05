@@ -1,4 +1,4 @@
-export default [
+export const heatMapData = [
   {
     date: '2019-11-01T22:00:00.000Z',
     count: 2,
@@ -62,5 +62,40 @@ export default [
   {
     date: '2019-11-16T22:00:00.000Z',
     count: 4,
+  },
+];
+
+export const journalsData = [
+  {
+    id: '2312ASDASD46556',
+    grateful: {
+      title: 'Family',
+      body: 'some dummy and very stupid data',
+    },
+    developing: {
+      title: 'not finding time',
+      body: 'some dummy and very stupid data',
+    },
+    challenge: {
+      title: 'reading more books',
+      body: 'some dummy and very stupid data',
+    },
+    timestamp: '2019-10-30T09:17:27.037Z', // It will be stored in DB as an ISO string
+  },
+  {
+    id: '2312ASADSD46556',
+    grateful: {
+      title: 'Family',
+      body: 'some dummy and very stupid data',
+    },
+    developing: {
+      title: 'not finding time',
+      body: 'some dummy and very stupid data',
+    },
+    challenge: {
+      title: 'reading more books',
+      body: 'some dummy and very stupid data',
+    },
+    timestamp: '2019-10-30T09:17:27.037Z', // It will be stored in DB as an ISO string
   },
 ];
