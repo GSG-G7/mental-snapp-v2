@@ -10,9 +10,13 @@ class index extends Component {
     },
   };
 
+  handleLogOut = () => {
+    // clear cockie & redirect to the login page
+  };
+
   render() {
     const { info } = this.state;
-    return <AccountSettings info={info} />;
+    return <AccountSettings info={info} handleLogOut={this.handleLogOut} />;
   }
 }
 

@@ -9,12 +9,7 @@ import NavigationBar from '../../components/navigationBar';
 
 import './accountSettings.css';
 
-const accountSettings = ({ info }) => {
-  const logOut = () => {
-    // clear cockie & redirect to the login page
-  };
-  // const { createdAccount, name, email } = info;
-
+const accountSettings = ({ info, handleLogOut }) => {
   return (
     <div className="settings">
       <Logo />
@@ -43,9 +38,7 @@ const accountSettings = ({ info }) => {
               <Icon type="user" className="settings__body__icon" />
               Name:
             </p>
-            <span className="settings__body__info">
-              {(info && info.name) || 'in Progress'}
-            </span>
+            <span className="settings__body__info">{info && info.name}</span>
           </div>
 
           <div>
@@ -53,9 +46,7 @@ const accountSettings = ({ info }) => {
               <Icon type="mail" className="settings__body__icon" />
               Email:
             </p>
-            <span className="settings__body__info">
-              {(info && info.email) || 'in Progress'}
-            </span>
+            <span className="settings__body__info">{info && info.email}</span>
           </div>
 
           <div>
@@ -66,7 +57,11 @@ const accountSettings = ({ info }) => {
             <span className="settings__body__info">********</span>
           </div>
 
-          <button type="button" className="settings__logout" onClick={logOut}>
+          <button
+            type="button"
+            className="settings__logout"
+            onClick={handleLogOut}
+          >
             <Icon type="logout" className="settings__body__icon" />
             <span>Log Out</span>
           </button>
@@ -85,6 +80,7 @@ accountSettings.propTypes = {
     email: PropTypes.string.isRequired,
     createdAccount: PropTypes.bool.isRequired,
   }).isRequired,
+  handleLogOut: PropTypes.func.isRequired,
 };
 
 export default accountSettings;
