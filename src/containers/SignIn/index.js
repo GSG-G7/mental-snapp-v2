@@ -12,15 +12,15 @@ import * as ROUTES from '../../constants/routes';
 
 const SignInForm = props => {
   const {
-    form: { getFieldDecorator, validateFieldsAndScroll },
+    form: { getFieldDecorator, validateFields },
     history: { goBack },
   } = props;
 
   const handleSubmit = e => {
     e.preventDefault();
-    validateFieldsAndScroll((err, values) => {
+    validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        // firebase
       }
     });
   };
@@ -93,7 +93,7 @@ const SignIn = Form.create({ name: 'sign in' })(SignInForm);
 
 SignInForm.propTypes = {
   form: PropTypes.shape({
-    validateFieldsAndScroll: PropTypes.func.isRequired,
+    validateFields: PropTypes.func.isRequired,
     getFieldValue: PropTypes.func.isRequired,
     getFieldDecorator: PropTypes.func.isRequired,
   }).isRequired,
