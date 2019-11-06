@@ -10,26 +10,13 @@ import LogoHeader from '../../components/LogoHeader';
 import JournalCard from '../../components/JournalCard';
 import NavigationBar from '../../components/navigationBar';
 import { ReactComponent as NoJournals } from '../assets/images/noJournals.svg';
+import toolTipData from '../../utils/toolTipData';
+import { firstDay, lastDay } from '../../utils/dates';
 import 'react-calendar-heatmap/dist/styles.css';
 import './heatMap.css';
 
 const heatMap = props => {
   const { data, journals, handleClick } = props;
-
-  const toolTipData = value => {
-    if (value.date) {
-      return {
-        'data-tip': `${value.date.slice(0, 10)} has ${value.count} journals`,
-      };
-    }
-    return {
-      'data-tip': 'No journals yet',
-    };
-  };
-
-  const date = new Date();
-  const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-  const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
   return (
     <div className="heat-map">
