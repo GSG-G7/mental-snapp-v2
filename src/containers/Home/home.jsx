@@ -66,22 +66,13 @@ const Home = props => {
       </section>
 
       <div className="cards-container">
-        {journals &&
-          journals.length > 0 &&
+        {journals.length > 0 &&
           journals.map(journal => (
             <Link to={`journal/${journal.id}`} key={journal.id}>
               <Card
                 className="home__journal-card"
-                date={
-                  moment(journal.timestamp)
-                    .format('MMMM Do, h:mm a')
-                    .split(',')[0]
-                }
-                time={
-                  moment(journal.timestamp)
-                    .format('MMMM Do, h:mm a')
-                    .split(',')[1]
-                }
+                date={moment(journal.timestamp).format('MMMM Do')}
+                time={moment(journal.timestamp).format('h:mm a')}
                 grateful={journal.grateful && journal.grateful.title}
                 challenge={journal.challenge && journal.challenge.title}
                 developing={journal.developing && journal.developing.title}
