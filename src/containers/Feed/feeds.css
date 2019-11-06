@@ -1,0 +1,59 @@
+.feeds__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.feeds__select {
+  width: 90% !important;
+  height: 32px;
+}
+
+.feeds__logo {
+  margin-bottom: 15px;
+  height: 4vh;
+}
+
+.feeds__message {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e9663a;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 6rem;
+}
+
+.feeds__option {
+  display: flex !important;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-top: 18px;
+}
+
+.feeds__content .ant-select-selection-selected-value span:nth-child(2) {
+  visibility: hidden;
+}
+
+@media only screen and (min-width:768px) {
+  .feeds__content .ant-select-selection--single {
+    height: 60px;
+    border-color: black;
+    font-size: 30px;
+    padding-top: 10px;
+  }
+  .feeds__content {
+    margin-top: 18px;
+  }
+  .feeds__message {
+    font-size: 36px;
+  }
+  .feeds__option {
+    font-size: 20px;
+    margin-top: 18px;
+  }
+  .ant-select-dropdown-menu-item {
+    font-size: 30px !important;
+    margin-top: 18px;
+  }
+}

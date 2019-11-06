@@ -1,11 +1,13 @@
 .logo-header {
-  padding: 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .logo-header__image {
-  height: 35px;
+  height: 28px;
+  width: 46%;
 }
 
 .logo-header__link {
