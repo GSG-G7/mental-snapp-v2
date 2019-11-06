@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import logo from '../assets/images/logo.png';
+import { ReactComponent as Logo } from '../assets/images/logo.svg';
 import './style.css';
 
-const index = () => {
+const LogoHeader = () => {
   return (
     <div className="logo-header">
-      <img src={logo} alt="mental snapp logo" className="logo-header__image" />
+      <Logo alt="mental snapp logo" className="logo-header__image" />
       <Link to="/about">
         <span className="logo-header__link">about</span>
       </Link>
@@ -15,4 +15,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default LogoHeader;
