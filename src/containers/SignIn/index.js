@@ -66,8 +66,6 @@ const SignInForm = props => {
               />
             )}
           </Form.Item>
-
-          <Form.Item hasFeedback></Form.Item>
           <Form.Item>
             <Button className="signin__btn" type="primary" htmlType="submit">
               Sign In
