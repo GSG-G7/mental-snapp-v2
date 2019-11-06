@@ -6,7 +6,7 @@ import { heatMapData, journalsData } from './data';
 class index extends Component {
   state = {
     data: [...heatMapData],
-    journals: [...journalsData],
+    journals: [],
   };
 
   componentDidMount() {
@@ -16,8 +16,14 @@ class index extends Component {
   // This function should show data based on day
   handleClick = value => {
     // the date of the clicked day in the same way it's stored in our DB
-    if (value) {
-      const currentDay = new Date(value.date).toISOString();
+    if (value && value.count) {
+      const currentDay = new Date(value.date).getDay();
+      const journalsOfTheDay = journalsData.filter(
+        journal => new Date(journal.timestamp).getDay() === currentDay
+      );
+      this.setState({ journals: [...journalsOfTheDay] });
+    } else {
+      this.setState({ journals: [] });
     }
   };
 
