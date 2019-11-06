@@ -74,18 +74,10 @@ const heatMap = props => {
         <div className="heat-map__journals">
           {journals.length !== 0 ? (
             journals.map(journal => (
-              <Link to={`journals/${journal.id}`} key={journal.id}>
+              <Link to={`journal/${journal.id}`} key={journal.id}>
                 <JournalCard
-                  time={
-                    moment('2019-10-30T09:17:27.037Z')
-                      .format('MMMM Do, h:mm a')
-                      .split(',')[1]
-                  }
-                  date={
-                    moment(journal.timestamp)
-                      .format('MMMM Do, h:mm a')
-                      .split(',')[0]
-                  }
+                  time={moment(journal.timestamp).format('h:mm a')}
+                  date={moment(journal.timestamp).format('MMMM Do')}
                   grateful={journal.grateful.title}
                   challenge={journal.challenge.title}
                   developing={journal.developing.title}
