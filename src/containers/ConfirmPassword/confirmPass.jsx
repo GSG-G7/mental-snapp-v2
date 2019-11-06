@@ -9,12 +9,12 @@ import './confirmPass.css';
 const confirmPass = props => {
   const {
     history: { goBack },
-    form: { getFieldDecorator, validateFieldsAndScroll },
+    form: { getFieldDecorator, validateFields },
   } = props;
 
   const handleSubmit = e => {
     e.preventDefault();
-    validateFieldsAndScroll((err, values) => {
+    validateFields((err, values) => {
       if (!err) {
         // eslint-disable-next-line no-console
         console.log('Received values of form: ', values);
@@ -27,7 +27,7 @@ const confirmPass = props => {
       <Header text="Confirm Password" handleBack={goBack} />
 
       <section className="confirm-pass__body">
-        <p className="confirm-Password__text">
+        <p className="confirm-pass__text">
           This is to make sure it&apos;s you!
         </p>
         <Form className="confirm-pass__form" onSubmit={handleSubmit}>
@@ -66,7 +66,7 @@ confirmPass.propTypes = {
     goBack: PropTypes.func.isRequired,
   }).isRequired,
   form: PropTypes.shape({
-    validateFieldsAndScroll: PropTypes.func.isRequired,
+    validateFields: PropTypes.func.isRequired,
     getFieldDecorator: PropTypes.func.isRequired,
   }).isRequired,
 };

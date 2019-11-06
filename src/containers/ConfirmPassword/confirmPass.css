@@ -3,11 +3,12 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 85vh;
+  height: 75vh;
 }
 
-.confirm-Password__text {
-  font-size: 20px;
+.confirm-pass__text {
+  font-size: 18px;
+  margin: 10px 0 0 0;
 }
 
 .confirm-pass__form {
@@ -35,7 +36,7 @@
     margin-top: 70px;
   }
 
-  .confirm-Password__text {
+  .confirm-pass__text {
     font-size: 30px;
   }
 
@@ -68,7 +69,7 @@
     height: 70vh;
   }
 
-  .confirm-Password__text {
+  .confirm-pass__text {
     font-size: 35px;
   }
 
@@ -102,7 +103,7 @@
     height: 75vh;
   }
 
-  .confirm-Password__text {
+  .confirm-pass__text {
     font-size: 25px;
   }
 
