@@ -38,24 +38,13 @@
   color: #e9663a;
 }
 
-.ant-checkbox-checked .ant-checkbox-inner {
+.edit-account .ant-checkbox-checked .ant-checkbox-inner {
   border-color: #e9663a !important;
   background-color: #e9663a !important;
 }
 
-.ant-checkbox-inner {
+.edit-account .ant-checkbox-inner {
   border-color: #e9663a !important;
-}
-.hidden {
-  height: 0 !important;
-  opacity: 0;
-  padding: 0 !important;
-  margin: 0 !important;
-  z-index: -1;
-}
-
-.transition {
-  transition: all 0.5s ease !important;
 }
 
 /*=================== Medium devices (tablets, 768px and up)  ===================*/
@@ -78,9 +67,11 @@
   .edit-account {
     width: 35vw;
     margin: 0 auto;
-    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1),
+      -2px -2px 10px rgba(0, 0, 0, 0.1);
     min-height: 92vh;
     margin-top: 5vh;
+    border-radius: 5px;
   }
 }
 

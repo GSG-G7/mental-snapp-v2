@@ -21,11 +21,6 @@ const EditAccount = props => {
       if (!err) {
         // eslint-disable-next-line no-console
         console.log('Received values of form: ', values);
-        if (checked) {
-          // name , email, password
-        } else {
-          // name , email
-        }
       }
     });
   };
@@ -80,24 +75,23 @@ const EditAccount = props => {
             </Checkbox>
           </section>
 
-          <Form.Item
-            hasFeedback
-            className={checked ? 'transition' : 'transition hidden'}
-          >
-            {getFieldDecorator('password', {
-              rules: [
-                {
-                  required: checked,
-                  message: 'Enter your password',
-                },
-              ],
-            })(
-              <Input.Password
-                prefix={<Icon type="lock" className="edit-account__icon" />}
-                placeholder="Password"
-              />
-            )}
-          </Form.Item>
+          {checked && (
+            <Form.Item hasFeedback>
+              {getFieldDecorator('password', {
+                rules: [
+                  {
+                    required: checked,
+                    message: 'Enter your password',
+                  },
+                ],
+              })(
+                <Input.Password
+                  prefix={<Icon type="lock" className="edit-account__icon" />}
+                  placeholder="Password"
+                />
+              )}
+            </Form.Item>
+          )}
 
           <Form.Item>
             <Button type="primary" htmlType="submit">
