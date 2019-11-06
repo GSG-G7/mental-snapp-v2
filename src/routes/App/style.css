@@ -3,12 +3,14 @@
   font-family: "VAGRounded";
   src: url("../../components/assets/fonts/vagrounded-thin.ttf") format("truetype");
 }
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+/* 
 .App {
   text-align: center;
 }
@@ -30,11 +32,10 @@
 
 .App-link {
   color: #09d3ac;
-}
+} */
 
 .ant-btn.ant-btn-primary {
   background-color: #e9663a;
   border: none;
   font-weight: bold;
 }
-
