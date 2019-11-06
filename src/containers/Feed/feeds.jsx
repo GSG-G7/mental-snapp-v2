@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Select } from 'antd';
