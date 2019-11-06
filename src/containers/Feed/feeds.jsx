@@ -2,15 +2,13 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Select } from 'antd';
+import { Link } from 'react-router-dom';
 
 import NavBar from '../../components/navigationBar';
-
 import JournalCard from '../../components/JournalCard';
-
 import { months, fakeData } from './data';
-
-import './feeds.css';
 import LogoHeader from '../../components/LogoHeader';
+import './feeds.css';
 
 const { Option } = Select;
 class Feed extends Component {
@@ -83,14 +81,16 @@ class Feed extends Component {
 
         {data.length > 0 ? (
           data.map(journal => (
-            <JournalCard
-              key={journal.id}
-              time={moment(journal.timestamp).format('MMMM Do')}
-              date={moment(journal.timestamp).format('h:mm a')}
-              grateful={journal.grateful.title}
-              challenge={journal.challenge.title}
-              developing={journal.developing.title}
-            />
+            <Link to={`/journal/${journal.id}`}>
+              <JournalCard
+                key={journal.id}
+                time={moment(journal.timestamp).format('MMMM Do')}
+                date={moment(journal.timestamp).format('h:mm a')}
+                grateful={journal.grateful.title}
+                challenge={journal.challenge.title}
+                developing={journal.developing.title}
+              />
+            </Link>
           ))
         ) : (
           <h2 className="feeds__message">
