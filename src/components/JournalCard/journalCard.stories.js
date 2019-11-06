@@ -27,12 +27,12 @@ const journal = {
 export const versionOne = () => (
   <JournalCard
     time={
-      moment('2019-10-30T09:17:27.037Z')
+      moment(journal.timestamp)
         .format('MMMM Do, h:mm a')
         .split(',')[1]
     }
     date={
-      moment('2019-10-30T09:17:27.037Z')
+      moment(journal.timestamp)
         .format('MMMM Do, h:mm a')
         .split(',')[0]
     }

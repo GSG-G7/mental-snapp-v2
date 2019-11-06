@@ -11,5 +11,5 @@ export const QUESTION = '/question';
 export const CONFIRM_PASSWORD = '/confirm-password';
 export const SERVER_ERROR = '/server-error';
 export const UNAUTHENTICATED = '/unauthenticated';
-export const JOURNAL = '/journal';
+export const JOURNAL = '/journal/:id';
 export const ABOUT = '/about';
