@@ -44,7 +44,7 @@ class Feed extends Component {
         }
       }
     }
-    return this.setState({ monthCount: months });
+    this.setState({ monthCount: months });
   }
 
   handleChange = value => {
