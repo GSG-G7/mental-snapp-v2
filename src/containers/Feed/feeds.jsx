@@ -80,9 +80,8 @@ class Feed extends Component {
 
         {data.length > 0 ? (
           data.map(journal => (
-            <Link to={`/journal/${journal.id}`}>
+            <Link to={`/journal/${journal.id}`} key={journal.id}>
               <JournalCard
-                key={journal.id}
                 time={moment(journal.timestamp).format('MMMM Do')}
                 date={moment(journal.timestamp).format('h:mm a')}
                 grateful={journal.grateful.title}
