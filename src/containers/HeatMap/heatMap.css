@@ -90,6 +90,11 @@
   fill: #fc8d6b;
 }
 
+.__react_component_tooltip.show {
+  opacity: 1;
+  font-weight: 700;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 20px;
