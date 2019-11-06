@@ -79,7 +79,8 @@
   .edit-account {
     width: 70%;
     margin: 0 auto;
-    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1),
+      -2px -2px 10px rgba(0, 0, 0, 0.1);
     min-height: 62vh;
     margin-top: 15rem;
   }
