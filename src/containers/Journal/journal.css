@@ -1,0 +1,90 @@
+.journal-page__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: baseline;
+  width: 100%;
+  height: 40px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.journal-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 500;
+  font-size: 13px;
+  color: #e9663a;
+  font-weight: 600;
+  width: 70%;
+  margin: 20px;
+  padding-top: 10px;
+}
+.journal-card__date .journal-card__icon {
+  margin-right: 4px;;
+}
+
+.header__icon svg,
+.journal-card__date svg,
+.journal-card__time svg {
+  width: 20px;
+  height: 20px;
+  fill: rgba(36, 36, 36, 0.6);
+  }
+
+.journal-card--date,
+.journal-card--time {
+  font-size: 0.8rem;
+}
+
+.ant-popover-inner {
+  height: 197px;
+  width: 280px;
+}
+
+.ant-btn-sm {
+  width: 104px;
+  color: black !important;
+  height: 36px !important;
+  padding: 0 !important;
+}
+
+.ant-popover-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 92px;
+}
+
+.ant-btn-primary {
+  background-color: #EE6B42 !important;
+  border-color: #EE6B42 !important;
+  color: white !important;
+}
+
+.ant-popover-message {
+  color: black !important;
+  font-size: 18px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 29px;
+  padding-bottom: 0 !important;
+}
+
+.ant-popover-inner-content {
+  padding: 24px 16px;
+}
+
+.ant-popover-message>.anticon {
+  display: none!important;
+}
+
+.ant-popover-message-title {
+  padding-left: 3px !important;
+}
+
+.ant-popover {
+  left: 20px !important;
+  top: 201px !important;
+}

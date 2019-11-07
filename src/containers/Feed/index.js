@@ -1,8 +1,3 @@
-import React from 'react';
-import UnderConstruction from '../UnderConstruction';
+import Feed from './feeds';
 
-const Feeds = props => {
-  return <UnderConstruction {...props} />;
-};
-
-export default Feeds;
+export default Feed;
