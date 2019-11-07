@@ -1,0 +1,41 @@
+.journal {
+  width: 90%;
+  margin: 0 auto;
+  background: #FBFBFB;
+  text-align: left;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.journal__header {
+  width: 100%;
+  text-align: left;
+  background: #E9663A;
+  border-radius: 5px 5px 0px 0px;
+  padding: 8px;
+}
+
+.journal__question-title {
+  font-family: Poppins;
+  font-style: normal;
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.journal__title {
+  font-weight: bold;
+}
+
+.journal__body {
+  font-family: open sans;
+  font-size: 0.8rem;
+  line-height: 22px;
+  color: #242424;
+  margin-left: 10px;
+  padding: 8px 8px 8px 0;
+}
