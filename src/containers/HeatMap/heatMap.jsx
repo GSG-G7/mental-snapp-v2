@@ -35,7 +35,7 @@ const heatMap = props => {
               if (!value || !value.count) {
                 return 'color-empty';
               }
-              return `color-scale-${value.count > 4 ? 4 : value.count}`;
+              return `color-scale-${Math.min(value.count, 4)}`;
             }}
             tooltipDataAttrs={toolTipData}
             showWeekdayLabels={false}
