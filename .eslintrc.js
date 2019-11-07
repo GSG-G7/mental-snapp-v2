@@ -30,6 +30,7 @@ module.exports = {
     ],
     "react/jsx-props-no-spreading": 0,
     "react/state-in-constructor": 0,
-    "no-plusplus": [2, { allowForLoopAfterthoughts: true }]
+    "no-plusplus": [2, { allowForLoopAfterthoughts: true }],
+    "no-param-reassign": [2, {"props": false}],
   }
 };

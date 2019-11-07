@@ -1,7 +1,9 @@
+/* eslint-disable no-plusplus */
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Select } from 'antd';
-import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
+import { Select, message } from 'antd';
+// import { Link } from 'react-router-dom';
 
 import NavBar from '../../components/navigationBar';
 import JournalCard from '../../components/JournalCard';
@@ -47,11 +49,40 @@ class Feed extends Component {
     this.setState({ monthCount: months });
   }
 
-  handleChange = value => {
+  handleDelete = e => {
+    e.stopPropagation();
+    e.preventdefault();
+
+    const { data, monthCount } = this.state;
+    message.warning('This Journal is deleted');
+    const deletedCardId = data[0].id;
+    // 1- this card will be deleted from firbase store.
+    // 2- also it will be deleted from state as follows :
+    const deletedCardMonth = moment(data[0].timestamp).format('MMMM');
+    monthCount.map(month => {
+      if (month.month === deletedCardMonth) {
+        month.count--;
+      }
+      return month;
+    });
+
+    this.setState({
+      data: data.filter(card => card.id !== deletedCardId),
+    });
+  };
+
+  handleChange = (value, e) => {
     const selectedJournal = fakeData.filter(
       journal => moment(journal.timestamp).format('MMMM') === value
     );
     this.setState({ data: selectedJournal });
+  };
+
+  handleJournalDetails = id => {
+    const {
+      history: { push },
+    } = this.props;
+    push(`/journal/${id}`);
   };
 
   render() {
@@ -80,15 +111,17 @@ class Feed extends Component {
 
         {data.length > 0 ? (
           data.map(journal => (
-            <Link to={`/journal/${journal.id}`} key={journal.id}>
-              <JournalCard
-                time={moment(journal.timestamp).format('MMMM Do')}
-                date={moment(journal.timestamp).format('h:mm a')}
-                grateful={journal.grateful.title}
-                challenge={journal.challenge.title}
-                developing={journal.developing.title}
-              />
-            </Link>
+            <JournalCard
+              key={journal.id}
+              time={moment(journal.timestamp).format('MMMM Do')}
+              date={moment(journal.timestamp).format('h:mm a')}
+              grateful={journal.grateful && journal.grateful.title}
+              challenge={journal.challenge && journal.challenge.title}
+              developing={journal.developing && journal.developing.title}
+              handleDelete={this.handleDelete}
+              journalID={journal.id}
+              handleJournalDetails={e => this.handleJournalDetails(e)}
+            />
           ))
         ) : (
           <h2 className="feeds__message">
@@ -101,5 +134,11 @@ class Feed extends Component {
     );
   }
 }
+
+Feed.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Feed;
