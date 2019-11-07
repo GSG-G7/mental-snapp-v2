@@ -28,7 +28,7 @@ export const fakeData = [
       content: 'example content text for displaying only',
     },
     timestamp: 'Tue Nov 05 2019 02:06:03 GMT+0200',
-    id: 1,
+    id: '1',
   },
   {
     grateful: {
@@ -44,7 +44,7 @@ export const fakeData = [
       content: 'example content text for displaying only',
     },
     timestamp: 'Tue Nov 05 2019 02:06:03 GMT+0200',
-    id: 2,
+    id: '2',
   },
   {
     grateful: {
@@ -60,7 +60,7 @@ export const fakeData = [
       content: 'example content text for displaying only',
     },
     timestamp: 'Tue Aug 05 2019 02:06:03 GMT+0200',
-    id: 3,
+    id: '3',
   },
   {
     grateful: {
@@ -76,7 +76,7 @@ export const fakeData = [
       content: 'example content text for displaying only',
     },
     timestamp: 'Tue Aug 05 2019 02:06:03 GMT+0200',
-    id: 4,
+    id: '4',
   },
   {
     grateful: {
@@ -92,7 +92,7 @@ export const fakeData = [
       content: 'example content text for displaying only',
     },
     timestamp: 'Tue Sep 05 2019 02:06:03 GMT+0200',
-    id: 5,
+    id: '5',
   },
   {
     grateful: {
@@ -108,7 +108,7 @@ export const fakeData = [
       content: 'example content text for displaying only',
     },
     timestamp: 'Tue Oct 05 2019 02:06:03 GMT+0200',
-    id: 6,
+    id: '6',
   },
   {
     grateful: {
@@ -124,6 +124,6 @@ export const fakeData = [
       content: 'example content text for displaying only',
     },
     timestamp: 'Tue Nov 05 2019 02:06:03 GMT+0200',
-    id: 7,
+    id: '7',
   },
 ];
