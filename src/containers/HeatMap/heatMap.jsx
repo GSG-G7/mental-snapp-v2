@@ -65,9 +65,9 @@ const heatMap = props => {
                 <JournalCard
                   time={moment(journal.timestamp).format('h:mm a')}
                   date={moment(journal.timestamp).format('MMMM Do')}
-                  grateful={journal.grateful.title}
-                  challenge={journal.challenge.title}
-                  developing={journal.developing.title}
+                  grateful={journal.grateful && journal.grateful.title}
+                  challenge={journal.challenge && journal.challenge.title}
+                  developing={journal.developing && journal.developing.title}
                 />
               </Link>
             ))
