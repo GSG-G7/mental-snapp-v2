@@ -11,7 +11,7 @@ const JournalCard = ({
   challenge,
   developing,
   handleDelete,
-  journalID,
+  journalId,
   handleJournalDetails,
 }) => {
   return (
@@ -34,7 +34,7 @@ const JournalCard = ({
             }}
             okText="Yes"
             cancelText="cancel"
-            id={journalID}
+            id={journalId}
           >
             <Icon
               className="journal-card__icon journal-card__icon--delete"
@@ -44,7 +44,7 @@ const JournalCard = ({
         </div>
       </div>
       <div
-        onClick={() => handleJournalDetails(journalID)}
+        onClick={() => handleJournalDetails(journalId)}
         style={{ cursor: 'pointer' }}
         role="presentation"
         className="journal-card__body"
@@ -79,7 +79,7 @@ JournalCard.propTypes = {
   challenge: PropTypes.string.isRequired,
   developing: PropTypes.string.isRequired,
   handleDelete: PropTypes.func.isRequired,
-  journalID: PropTypes.string.isRequired,
+  journalId: PropTypes.string.isRequired,
   handleJournalDetails: PropTypes.func.isRequired,
 };
 

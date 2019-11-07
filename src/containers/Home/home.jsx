@@ -79,7 +79,7 @@ const Home = props => {
               challenge={journal.challenge && journal.challenge.title}
               developing={journal.developing && journal.developing.title}
               handleDelete={() => handleDelete(journal.id)}
-              journalID={journal.id}
+              journalId={journal.id}
               handleJournalDetails={handleJournalDetails}
             />
           ))}

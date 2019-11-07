@@ -114,7 +114,7 @@ class Feed extends Component {
               challenge={journal.challenge && journal.challenge.title}
               developing={journal.developing && journal.developing.title}
               handleDelete={() => this.handleDelete(journal.id)}
-              journalID={journal.id}
+              journalId={journal.id}
               handleJournalDetails={this.handleJournalDetails}
             />
           ))
