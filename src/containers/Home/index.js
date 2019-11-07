@@ -31,12 +31,11 @@ class Home extends Component {
   handleDelete = id => {
     const { journals } = this.state;
     message.warning('This Journal is deleted');
-    const deletedCardId = journals[0].id;
     // 1- this card will be deleted from firbase store.
     // 2- also it will be deleted from state as follows :
 
     this.setState({
-      journals: journals.filter(card => card.id !== deletedCardId),
+      journals: journals.filter(card => card.id !== id),
     });
   };
 

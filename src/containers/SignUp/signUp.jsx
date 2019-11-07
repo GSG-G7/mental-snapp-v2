@@ -79,7 +79,9 @@ const SignUpForm = props => {
             {getFieldDecorator('password', {
               rules: [
                 {
-                  pattern: new RegExp(/^[a-z0-9].{7,}/),
+                  pattern: new RegExp(
+                    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d].{7,}$/
+                  ),
                   required: true,
                   message:
                     'The password must be at least 8 alphanumeric characters',

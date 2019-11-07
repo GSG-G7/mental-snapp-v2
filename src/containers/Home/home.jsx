@@ -30,7 +30,7 @@ const Home = props => {
       <section className="fixed-elements">
         <LogoHeader />
         <div className="home__user">
-          <MainHeading className="home__user-name" text={`${userName} 's `} />
+          <MainHeading className="home__user-name" text={userName} />
           <MainHeading className="home__journal" text="Journal" />
         </div>
 

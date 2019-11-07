@@ -23,6 +23,7 @@ class Feed extends Component {
     // const cards = result.data.data[0];
     // cards === fackData
     //
+    // set state the data to the current month
     const monthArray = fakeData.map(journal =>
       moment(journal.timestamp).format('MMMM')
     );
@@ -50,7 +51,6 @@ class Feed extends Component {
   handleDelete = id => {
     const { data, monthCount } = this.state;
     message.warning('This Journal is deleted');
-    const deletedCardId = data[0].id;
     // 1- this card will be deleted from firbase store.
     // 2- also it will be deleted from state as follows :
     const deletedCardMonth = moment(data[0].timestamp).format('MMMM');
@@ -62,7 +62,7 @@ class Feed extends Component {
     });
 
     this.setState({
-      data: data.filter(card => card.id !== deletedCardId),
+      data: data.filter(card => card.id !== id),
     });
   };
 
