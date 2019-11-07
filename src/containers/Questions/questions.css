@@ -70,6 +70,7 @@
 
 .question__steps-action {
     margin-top: 24px;
+    text-align: center;
 }
 
 .question__steps-action .ant-btn {
