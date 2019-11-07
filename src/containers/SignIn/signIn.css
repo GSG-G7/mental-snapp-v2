@@ -1,0 +1,145 @@
+.signin {
+  overflow: hidden;
+}
+
+.signin__form {
+  width: 80%;
+  margin: auto;
+  height: 40vh;
+  margin-top: 5vh;
+}
+
+.signin .ant-btn.ant-btn-primary {
+  width: 100%;
+}
+
+.signin .forgot-password__link {
+  color: #767373;
+}
+
+.signin__icon {
+  color: rgba(0, 0, 0, 0.25) !important;
+}
+
+.signin__or {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.signin__or::before,
+.signin__or::after {
+  content: " __________ ";
+  position: relative;
+  top: -7px;
+}
+
+.signin__buttons {
+  display: flex;
+  margin: 20px;
+  justify-content: space-evenly;
+}
+
+.signin .ant-form-item-control {
+  line-height: 6vh;
+  zoom: 1.2;
+}
+
+.sign-in .signin__btn {
+  margin-top: -20px !important;
+}
+
+.signin form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .signin__form {
+    height: 56vh;
+    margin-top: 8vh;
+  }
+
+  .signin__or {
+    font-size: 30px;
+    margin-bottom: 60px;
+  }
+
+  .signin__or::before,
+  .signin__or::after {
+    content: " _________________ ";
+    top: -10px;
+  }
+
+  .signin .ant-form-item-control {
+    zoom: 1.8;
+    margin-bottom: 20px;
+  }
+  .signin .forgot-password__link {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .signin {
+    width: 35vw;
+    margin: 0 auto;
+    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
+    height: 92vh;
+    margin-top: 5vh;
+  }
+
+  .signin__or::before,
+  .signin__or::after {
+    content: " _____________ ";
+  }
+  .signin .forgot-password__link {
+    font-size: 1.3rem;
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+  .signin {
+    width: 70%;
+    margin: 0 auto;
+    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
+    height: 70vh;
+    margin-top: 15rem;
+  }
+  .signin__form {
+    height: 25vh;
+  }
+  .signin__or::before, .signin__or::after {
+    content: " ___________________________ ";
+  }
+  .signin__buttons {
+    margin: 0 3rem;
+  }
+  .signin .ant-input {
+    height: 50px !important;
+    font-size: 1.3rem;
+    padding-right: 50px
+  }
+  .signin .ant-form-item-control {
+    line-height: 5vh;
+  }
+  .signin .google-btn, .signin .facebook-btn {
+    height: 50px;
+    font-size: 1.3rem;
+  }
+  .signin .ant-btn {
+    height: 50px !important;
+    font-size: 1.3rem;
+  }
+  .signin svg {
+    width: 25px;
+    height: 25px;
+    margin-right: 20px
+  }
+  .ant-input-affix-wrapper .ant-input:not(:first-child) {
+    padding-left: 50px !important;
+  }
+}
