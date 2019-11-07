@@ -1,9 +1,7 @@
-/* eslint-disable no-plusplus */
 import React, { Component } from 'react';
 import moment from 'moment';
 import propTypes from 'prop-types';
 import { Select, message } from 'antd';
-// import { Link } from 'react-router-dom';
 
 import NavBar from '../../components/navigationBar';
 import JournalCard from '../../components/JournalCard';
@@ -49,10 +47,7 @@ class Feed extends Component {
     this.setState({ monthCount: months });
   }
 
-  handleDelete = e => {
-    e.stopPropagation();
-    e.preventdefault();
-
+  handleDelete = id => {
     const { data, monthCount } = this.state;
     message.warning('This Journal is deleted');
     const deletedCardId = data[0].id;
@@ -71,7 +66,7 @@ class Feed extends Component {
     });
   };
 
-  handleChange = (value, e) => {
+  handleChange = value => {
     const selectedJournal = fakeData.filter(
       journal => moment(journal.timestamp).format('MMMM') === value
     );
@@ -118,9 +113,9 @@ class Feed extends Component {
               grateful={journal.grateful && journal.grateful.title}
               challenge={journal.challenge && journal.challenge.title}
               developing={journal.developing && journal.developing.title}
-              handleDelete={this.handleDelete}
+              handleDelete={() => this.handleDelete(journal.id)}
               journalID={journal.id}
-              handleJournalDetails={e => this.handleJournalDetails(e)}
+              handleJournalDetails={this.handleJournalDetails}
             />
           ))
         ) : (
