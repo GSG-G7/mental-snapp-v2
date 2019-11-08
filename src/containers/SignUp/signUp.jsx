@@ -4,8 +4,11 @@ import { Form, Input, Icon, Button } from 'antd';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
+import { SIGN_IN } from '../../constants/routes';
 import FacebookButton from '../../components/FacebookButton';
 import GoogleButton from '../../components/GoogleButton';
+import { withFirebase } from '../Firebase/index';
+
 import './signUp.css';
 
 const SignUpForm = props => {
@@ -18,8 +21,12 @@ const SignUpForm = props => {
     e.preventDefault();
     validateFieldsAndScroll((err, values) => {
       if (!err) {
-        // eslint-disable-next-line no-console
-        console.log('Received values of form: ', values);
+        props.firebase
+          .doCreateUserWithEmailAndPassword(values.email, values.password)
+          .then(authUser => {
+            props.history.push(SIGN_IN);
+          })
+          .catch(error => {});
       }
     });
   };
@@ -133,6 +140,8 @@ const SignUpForm = props => {
 
 const SignUp = Form.create({ name: 'sign up' })(SignUpForm);
 
+const signForm = withFirebase(SignUp);
+
 SignUpForm.propTypes = {
   form: PropTypes.shape({
     validateFieldsAndScroll: PropTypes.func.isRequired,
@@ -141,7 +150,11 @@ SignUpForm.propTypes = {
   }).isRequired,
   history: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  firebase: PropTypes.shape({
+    doCreateUserWithEmailAndPassword: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default SignUp;
+export default signForm;
