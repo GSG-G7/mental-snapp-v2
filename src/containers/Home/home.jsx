@@ -21,6 +21,8 @@ const Home = props => {
     handleBlur,
     handelSave,
     handleClick,
+    handleDelete,
+    handleJournalDetails,
   } = props;
 
   return (
@@ -28,7 +30,7 @@ const Home = props => {
       <section className="fixed-elements">
         <LogoHeader />
         <div className="home__user">
-          <MainHeading className="home__user-name" text={`${userName} 's `} />
+          <MainHeading className="home__user-name" text={userName} />
           <MainHeading className="home__journal" text="Journal" />
         </div>
 
@@ -68,16 +70,18 @@ const Home = props => {
       <div className="cards-container">
         {journals.length > 0 &&
           journals.map(journal => (
-            <Link to={`journal/${journal.id}`} key={journal.id}>
-              <Card
-                className="home__journal-card"
-                date={moment(journal.timestamp).format('MMMM Do')}
-                time={moment(journal.timestamp).format('h:mm a')}
-                grateful={journal.grateful && journal.grateful.title}
-                challenge={journal.challenge && journal.challenge.title}
-                developing={journal.developing && journal.developing.title}
-              />
-            </Link>
+            <Card
+              key={journal.id}
+              className="home__journal-card"
+              date={moment(journal.timestamp).format('MMMM Do')}
+              time={moment(journal.timestamp).format('h:mm a')}
+              grateful={journal.grateful && journal.grateful.title}
+              challenge={journal.challenge && journal.challenge.title}
+              developing={journal.developing && journal.developing.title}
+              handleDelete={() => handleDelete(journal.id)}
+              journalId={journal.id}
+              handleJournalDetails={handleJournalDetails}
+            />
           ))}
       </div>
       <NavBar />
@@ -95,4 +99,6 @@ Home.propTypes = {
   handleBlur: propTypes.func.isRequired,
   handelSave: propTypes.func.isRequired,
   handleClick: propTypes.func.isRequired,
+  handleDelete: propTypes.func.isRequired,
+  handleJournalDetails: propTypes.func.isRequired,
 };

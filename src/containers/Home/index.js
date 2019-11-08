@@ -1,49 +1,24 @@
 import React, { Component } from 'react';
+import { message } from 'antd';
+import propTypes from 'prop-types';
 import HomePage from './home';
+import { journalsData, username, usergoal } from './staticData';
 
 class Home extends Component {
   state = {
     isEditable: false,
     userName: 'Alaa Taima',
-    journals: [
-      {
-        id: 'dhdhdh',
-        grateful: {
-          title: 'Family',
-          body: 'some dummy and very stupid data',
-        },
-        developing: {
-          title: 'not finding time',
-          body: 'some dummy and very stupid data',
-        },
-        challenge: {
-          title: 'reading more articles',
-          body: 'some dummy and very stupid data',
-        },
-        timestamp: '2019-10-30T09:17:27.037Z',
-      },
-      {
-        id: 'ffff',
-        grateful: {
-          title: 'Family',
-          body: 'some dummy and very stupid data',
-        },
-        developing: {
-          title: 'not finding time',
-          body: 'some dummy and very stupid data',
-        },
-        challenge: {
-          title: 'reading more books',
-          body: 'some dummy and very stupid data',
-        },
-        timestamp: '2019-10-30T09:17:27.037Z',
-      },
-    ],
-    goal: 'Manage my tasks to finish them.',
+    journals: [],
+    goal: '',
   };
 
   componentDidMount() {
     // setState to journals and goal that we got from firebase
+    this.setState({
+      journals: journalsData,
+      userName: username,
+      goal: usergoal,
+    });
   }
 
   handleClick = () => this.setState({ isEditable: true });
@@ -53,7 +28,25 @@ class Home extends Component {
     // update the goal
   };
 
+  handleDelete = id => {
+    const { journals } = this.state;
+    message.warning('This Journal is deleted');
+    // 1- this card will be deleted from firbase store.
+    // 2- also it will be deleted from state as follows :
+
+    this.setState({
+      journals: journals.filter(card => card.id !== id),
+    });
+  };
+
   handleBlur = ({ target }) => this.setState({ goal: target.textContent });
+
+  handleJournalDetails = id => {
+    const {
+      history: { push },
+    } = this.props;
+    push(`/journal/${id}`);
+  };
 
   render() {
     const { isEditable, userName, journals, goal } = this.state;
@@ -66,9 +59,17 @@ class Home extends Component {
         handelSave={this.handelSave}
         handleClick={this.handleClick}
         handleBlur={this.handleBlur}
+        handleDelete={this.handleDelete}
+        handleJournalDetails={this.handleJournalDetails}
       />
     );
   }
 }
 
 export default Home;
+
+Home.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+  }).isRequired,
+};

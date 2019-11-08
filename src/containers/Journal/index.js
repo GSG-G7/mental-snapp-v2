@@ -10,8 +10,14 @@ class Journal extends Component {
     journal: { ...data },
   };
 
-  handleConfirm = e => {
+  handleConfirm = () => {
+    const {
+      match: {
+        params: { id: jornalId },
+      },
+    } = this.props;
     // it will delete the journal from firebase
+
     const { history } = this.props;
     history.push('/home');
   };
@@ -37,6 +43,11 @@ Journal.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
     goBack: propTypes.func.isRequired,
+  }).isRequired,
+  match: propTypes.shape({
+    params: propTypes.shape({
+      id: propTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 
