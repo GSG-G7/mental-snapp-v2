@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 import { Form, Input, Icon, Button } from 'antd';
@@ -24,9 +25,20 @@ const SignUpForm = props => {
         props.firebase
           .doCreateUserWithEmailAndPassword(values.email, values.password)
           .then(authUser => {
+            return props.firebase.user(authUser.user.uid).set(
+              {
+                name: values.name,
+                email: values.email,
+              },
+              { merge: true }
+            );
+          })
+          .then(() => {
             props.history.push(SIGN_IN);
           })
-          .catch(error => {});
+          .catch(error => {
+            // console.log(error);
+          });
       }
     });
   };

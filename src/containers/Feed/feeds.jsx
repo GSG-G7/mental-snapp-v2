@@ -7,6 +7,8 @@ import NavBar from '../../components/navigationBar';
 import JournalCard from '../../components/JournalCard';
 import { months, fakeData } from './data';
 import LogoHeader from '../../components/LogoHeader';
+import { withFirebase } from '../Firebase/index';
+
 import './feeds.css';
 
 const { Option } = Select;
@@ -17,12 +19,29 @@ class Feed extends Component {
   };
 
   componentDidMount() {
-    // fetch all data from firebase firstore
-    // async
-    // const result = await axios.get(`https:-------`);
-    // const cards = result.data.data[0];
-    // cards === fackData
-    //
+    // console.log(this.props.firebase.auth.currentUser.uid);
+    // const myUserId = this.props.firebase.auth.currentUser;
+
+    // this.props.firebase
+    //   .user(myUserId)
+    //   .get()
+    //   .then(snapshot => {
+    //     snapshot.forEach(doc => {
+    //       const todo = doc.data();
+    //       console.log(todo, 11);
+    //     });
+    //   });
+
+    // this.props.firebase.db
+    //   .collection('users')
+    //   .get()
+    //   .then(snapshot => {
+    //     snapshot.forEach(doc => {
+    //       const todo = doc.data();
+    //       console.log(todo, 11);
+    //     });
+    //   });
+
     // set state the data to the current month
     const monthArray = fakeData.map(journal =>
       moment(journal.timestamp).format('MMMM')
@@ -136,4 +155,4 @@ Feed.propTypes = {
   }).isRequired,
 };
 
-export default Feed;
+export default withFirebase(Feed);

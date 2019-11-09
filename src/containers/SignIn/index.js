@@ -29,6 +29,7 @@ class SignInForm extends React.Component {
         this.props.firebase
           .doSignInWithEmailAndPassword(values.email, values.password)
           .then(() => {
+            // const myUserId = this.props.firebase.auth().currentUser.uid;
             // eslint-disable-next-line react/destructuring-assignment
             this.props.history.push(ROUTES.HOME);
           })
