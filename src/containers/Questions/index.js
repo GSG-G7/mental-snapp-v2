@@ -1,9 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import propTypes from 'prop-types';
 import { message } from 'antd';
 import Question from './questions';
-import { withFirebase } from '../Firebase/index';
 
 import schema from './questionValidation';
 import entryData from './data';
@@ -14,7 +12,7 @@ class Questions extends React.Component {
     title: '',
     content: '',
     errors: {},
-    journals: [{}],
+    answers: [],
   };
 
   handleConfirm = e => {
@@ -28,18 +26,12 @@ class Questions extends React.Component {
   };
 
   handleNext = async () => {
-    const { title, content, journals } = this.state;
-    let { current } = this.state;
+    const { current, title, content, answers } = this.state;
     try {
       await schema.validate({ title, content }, { abortEarly: false });
-      current += 1;
-      if (current === 1) {
-        journals[0].grateful = { title, body: content };
-      } else if (current === 2) {
-        journals[0].challenge = { title, body: content };
-      }
+      answers.push({ title, content });
       return this.setState({
-        current,
+        current: current + 1,
         content: '',
         title: '',
         errors: {},
@@ -54,24 +46,16 @@ class Questions extends React.Component {
   };
 
   handleSubmit = async () => {
-    const { title, content, journals } = this.state;
-    const { history, firebase } = this.props;
+    const { title, content, answers } = this.state;
+    const { history } = this.props;
     try {
       await schema.validate({ title, content }, { abortEarly: false });
-      journals[0].developing = { title, body: content };
-      journals[0].timestamp = new Date();
-
-      // firebase
-      const userId = firebase.auth.currentUser.uid;
-
-      // firebase.user(userId).set({ journals }, { merge: true });
-      firebase.user(userId).update({
-        journals: firebase.firestore.FieldValue.arrayUnion(journals),
-      });
-
+      answers.push({ title, content });
       message.success('Yes, you have added a journal');
       history.push('/home');
-      return this.setState({ journals: [{}] });
+      // here, a request will be post to firebase to save data
+      // that will be as follows : [{title:'', content:'', time:'', date:'',month:''}]
+      return this.setState({ answers: [] });
     } catch (error) {
       const objError = {};
       error.inner.forEach(fielderror => {
@@ -87,26 +71,20 @@ class Questions extends React.Component {
   };
 
   handleSkip = () => {
-    const { current, journals } = this.state;
+    const { current, answers } = this.state;
     if (current < entryData.length - 1) {
       this.setState({ current: current + 1, errors: {} });
     } else {
-      const { history, firebase } = this.props;
-      if (
-        journals[0].grateful === undefined &&
-        journals[0].challenge === undefined
-      ) {
-        message.warning("You didn't make an entry today");
-        history.push('/home');
-        this.setState({ journals: [{}] });
-      } else {
-        journals[0].timestamp = new Date();
-        // firebase
-        const userId = firebase.auth.currentUser.uid;
-        firebase.user(userId).set({ journals }, { merge: true });
+      const { history } = this.props;
+      if (answers.length !== 0) {
         message.success('Yes, you have added a journal');
         history.push('/home');
-        this.setState({ journals: [{}] });
+        // here, a request will be post to firebase to save data
+        // that will be as follows : [{title:'', content:'', time:'', date:'',month:''}]
+        this.setState({ answers: [] });
+      } else {
+        message.warning("You didn't make an entry today");
+        history.push('/home');
       }
     }
   };
@@ -139,4 +117,4 @@ Questions.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(Questions);
+export default Questions;
