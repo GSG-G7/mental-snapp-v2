@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { message } from 'antd';
 import propTypes from 'prop-types';
@@ -80,5 +79,11 @@ export default withFirebase(Home);
 Home.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
+  }).isRequired,
+  firebase: propTypes.shape({
+    auth: propTypes.object.isRequired,
+    currentUser: propTypes.object.isRequired,
+    uid: propTypes.string.isRequired,
+    user: propTypes.object.isRequired,
   }).isRequired,
 };
