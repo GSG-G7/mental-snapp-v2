@@ -25,4 +25,4 @@ class Firebase {
   users = () => this.db.collection('users');
 }
 
-export { Firebase as default };
+export default Firebase;
