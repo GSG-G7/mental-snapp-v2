@@ -7,6 +7,8 @@ import { withFirebase } from '../Firebase/index';
 import schema from './questionValidation';
 import entryData from './data';
 
+const userJournals = [];
+
 class Questions extends React.Component {
   state = {
     current: 0,
@@ -59,20 +61,17 @@ class Questions extends React.Component {
       await schema.validate({ title, content }, { abortEarly: false });
       journals[0].developing = { title, body: content };
       journals[0].timestamp = new Date();
+      userJournals.push(journals[0]);
 
       // firebase
       const userId = firebase.auth.currentUser.uid;
-
-      firebase.user(userId).set({ journals }, { merge: true });
-      // I will use it but I haven't finished yet
-
-      // firebase.user(userId).update({
-      //   journals: firebase.firestore.FieldValue.arrayUnion(journals),
-      // });
+      firebase.user(userId).set({ userJournals }, { merge: true });
 
       message.success('Yes, you have added a journal');
       history.push('/home');
-      return this.setState({ journals: [{}] });
+      return this.setState({
+        journals: [{}],
+      });
     } catch (error) {
       const objError = {};
       error.inner.forEach(fielderror => {
@@ -102,9 +101,11 @@ class Questions extends React.Component {
         this.setState({ journals: [{}] });
       } else {
         journals[0].timestamp = new Date();
+        userJournals.push(journals[0]);
+
         // firebase
         const userId = firebase.auth.currentUser.uid;
-        firebase.user(userId).set({ journals }, { merge: true });
+        firebase.user(userId).set({ userJournals }, { merge: true });
         message.success('Yes, you have added a journal');
         history.push('/home');
         this.setState({ journals: [{}] });
