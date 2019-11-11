@@ -10,6 +10,11 @@ class index extends Component {
     },
   };
 
+  componentDidMount() {
+    // get user info from firebase fire store
+    // edit state to update user data
+  }
+
   handleLogOut = () => {
     // clear cockie & redirect to the login page
   };
