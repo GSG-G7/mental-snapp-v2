@@ -1,26 +1,47 @@
 import React from 'react';
-
-import { Form, Input, Icon, Button, Checkbox } from 'antd';
+import { message, Form, Input, Icon, Button, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 
+import { withFirebase } from '../Firebase';
 import Header from '../../components/Header';
 import './editAccount.css';
 
 const EditAccount = props => {
   const {
+    firebase,
     userInfo: { name, email },
     checked,
     handleChange,
+    handlePush,
+    handleErrorMessage,
+    errorMessage,
     handleGoBack,
     form: { getFieldDecorator, validateFieldsAndScroll },
   } = props;
 
   const handleSubmit = e => {
     e.preventDefault();
-    validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        // eslint-disable-next-line no-console
-        console.log('Received values of form: ', values);
+    const user = firebase.auth.currentUser;
+    validateFieldsAndScroll(async (err, values) => {
+      try {
+        if (!err) {
+          if (!values.password) {
+            await user.updateProfile({
+              displayName: values.name,
+            });
+            await user.updateEmail(values.email);
+          } else {
+            await user.updateProfile({
+              displayName: values.name,
+            });
+            await user.updateEmail(values.email);
+            await user.updatePassword(values.password);
+          }
+          message.success('account updated successfully');
+        }
+      } catch (error) {
+        if (error.message) handleErrorMessage(error.message);
+        // should do better handling here
       }
     });
   };
@@ -92,7 +113,7 @@ const EditAccount = props => {
               )}
             </Form.Item>
           )}
-
+          {errorMessage && <p>{errorMessage.message}</p>}
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Save Changes
@@ -119,6 +140,12 @@ EditAccount.propTypes = {
   checked: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleGoBack: PropTypes.func.isRequired,
+  firebase: PropTypes.shape({
+    auth: PropTypes.object.isRequired,
+  }).isRequired,
+  handlePush: PropTypes.func.isRequired,
+  handleErrorMessage: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
 };
 
-export default editAccount;
+export default withFirebase(editAccount);
