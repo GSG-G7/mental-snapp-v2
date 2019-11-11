@@ -78,7 +78,7 @@ const SignInForm = props => {
         </Link>
       </section>
       <p className="landing__aboutLink">
-        Don't have an account ?
+        Don’t have an account ?
         <Link to={ROUTES.SIGN_UP}>
           <span className="landing__logo"> Sign Up</span>
         </Link>
