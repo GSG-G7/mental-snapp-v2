@@ -1,7 +1,8 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import moment from 'moment';
 import propTypes from 'prop-types';
-import { Select, message } from 'antd';
+import { Select, message, Spin } from 'antd';
 
 import NavBar from '../../components/navigationBar';
 import JournalCard from '../../components/JournalCard';
@@ -16,15 +17,17 @@ class Feed extends Component {
   state = {
     data: [],
     monthCount: months,
+    loading: true,
+    allJournals: [],
   };
 
   componentDidMount() {
     const { firebase } = this.props;
-    // const userId = firebase.auth.currentUser.uid;
+    const userId = localStorage.getItem('userId');
 
     firebase.db
       .collection('users')
-      .doc('xIOOq5jUrLfDp2JDHMWpxhWeaCu2')
+      .doc(userId)
       .get()
       .then(snapshot => {
         const data = snapshot.data().userJournals;
@@ -49,13 +52,24 @@ class Feed extends Component {
             }
           }
         }
-        this.setState({ monthCount: months, data });
+        const currentMonthJournal = data.filter(
+          journal =>
+            moment(journal.timestamp).format('MMMM') ===
+            moment(new Date()).format('MMMM')
+        );
+        this.setState({
+          monthCount: months,
+          data: currentMonthJournal,
+          loading: false,
+          allJournals: data,
+        });
       });
   }
 
   handleDelete = id => {
     const { firebase } = this.props;
     const userId = firebase.auth.currentUser.uid;
+
     const { data, monthCount } = this.state;
     message.warning('This Journal is deleted');
 
@@ -83,9 +97,9 @@ class Feed extends Component {
   };
 
   handleChange = value => {
-    const { data } = this.state;
-    const selectedJournal = data.filter(
-      journal => moment(journal.timestamp.toDate()).format('MMMM') === value
+    const { allJournals } = this.state;
+    const selectedJournal = allJournals.filter(
+      journal => moment(journal.timestamp).format('MMMM') === value
     );
     this.setState({ data: selectedJournal });
   };
@@ -98,7 +112,7 @@ class Feed extends Component {
   };
 
   render() {
-    const { data, monthCount } = this.state;
+    const { data, monthCount, loading } = this.state;
     return (
       <div className="feeds">
         <div className="feeds__content">
@@ -120,8 +134,11 @@ class Feed extends Component {
             ))}
           </Select>
         </div>
-
-        {data.length > 0 ? (
+        {loading ? (
+          <div style={{ textAlign: 'center', marginTop: '9vh' }}>
+            <Spin size="large" />
+          </div>
+        ) : data.length > 0 ? (
           data.map(journal => (
             <JournalCard
               key={journal.timestamp}
@@ -153,7 +170,6 @@ Feed.propTypes = {
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    currentUser: propTypes.object.isRequired,
     uid: propTypes.string.isRequired,
     firestore: propTypes.object.isRequired,
     FieldValue: propTypes.object.isRequired,
