@@ -117,6 +117,7 @@ class Feed extends Component {
       <div className="feeds">
         <div className="feeds__content">
           <LogoHeader />
+          <br />
           <Select
             defaultValue={moment(new Date()).format('MMMM')}
             className="feeds__select"
@@ -134,30 +135,31 @@ class Feed extends Component {
             ))}
           </Select>
         </div>
-        {loading ? (
-          <div style={{ textAlign: 'center', marginTop: '9vh' }}>
-            <Spin size="large" />
-          </div>
-        ) : data.length > 0 ? (
-          data.map(journal => (
-            <JournalCard
-              key={journal.timestamp}
-              time={moment(journal.timestamp).format('MMMM Do')}
-              date={moment(journal.timestamp).format('h:mm a')}
-              grateful={journal.grateful && journal.grateful.title}
-              challenge={journal.challenge && journal.challenge.title}
-              developing={journal.developing && journal.developing.title}
-              handleDelete={() => this.handleDelete(journal.timestamp)}
-              journalId={journal.timestamp}
-              handleJournalDetails={this.handleJournalDetails}
-            />
-          ))
-        ) : (
-          <h2 className="feeds__message">
-            No entries for this month, choose another one
-          </h2>
-        )}
-
+        <div className="feed_journals">
+          {loading ? (
+            <div style={{ textAlign: 'center', marginTop: '9vh' }}>
+              <Spin size="large" />
+            </div>
+          ) : data.length > 0 ? (
+            data.map(journal => (
+              <JournalCard
+                key={journal.timestamp}
+                time={moment(journal.timestamp).format('MMMM Do')}
+                date={moment(journal.timestamp).format('h:mm a')}
+                grateful={journal.grateful && journal.grateful.title}
+                challenge={journal.challenge && journal.challenge.title}
+                developing={journal.developing && journal.developing.title}
+                handleDelete={() => this.handleDelete(journal.timestamp)}
+                journalId={journal.timestamp}
+                handleJournalDetails={this.handleJournalDetails}
+              />
+            ))
+          ) : (
+            <h2 className="feeds__message">
+              No entries for this month, choose another one
+            </h2>
+          )}
+        </div>
         <NavBar />
       </div>
     );

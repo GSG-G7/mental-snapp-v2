@@ -69,13 +69,13 @@
 @media (min-width: 600px) {
   .journal-card {
     width: 70%;
-    margin: 1rem auto;
+    margin: 1rem 0px;
   }
 }
 
 @media (min-width: 1024px) {
   .journal-card {
     width: 80%;
-    margin: 1rem auto;
+    margin: 1rem 0px;
   }
 }
