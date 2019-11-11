@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import AccountSettings from './accountSettings';
+import { withFirebase } from '../Firebase/index';
+import { LANDING } from '../../constants/routes';
 
-class index extends Component {
+class Account extends Component {
   state = {
     info: {
       name: 'fares98',
@@ -11,7 +14,9 @@ class index extends Component {
   };
 
   handleLogOut = () => {
-    // clear cockie & redirect to the login page
+    const { firebase, history } = this.props;
+    history.push(LANDING);
+    return firebase.doSignOut;
   };
 
   render() {
@@ -20,4 +25,13 @@ class index extends Component {
   }
 }
 
-export default index;
+Account.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  firebase: PropTypes.shape({
+    doSignOut: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+export default withFirebase(Account);

@@ -20,6 +20,8 @@ class Firebase {
     this.db = app.firestore();
   }
 
+  doSignOut = () => this.auth.signOut();
+
   user = uid => this.db.doc(`users/${uid}`);
 
   users = () => this.db.collection('users');
