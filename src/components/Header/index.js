@@ -8,9 +8,10 @@ import './header.css';
 
 const Header = ({ text, handleBack }) => {
   return (
-    <div className="signup__header">
+    <div className="main__header">
       <BackButton handleBack={handleBack} />
-      <MainHeading text={text} className="signup__heading" />
+      <MainHeading text={text} className="main__heading" />
+      <div />
     </div>
   );
 };

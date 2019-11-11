@@ -1,12 +1,13 @@
 .signup {
-  overflow: hidden;
+  /* overflow: hidden; */
+  text-align: center;
 }
 
 .signup__form {
   width: 80%;
   margin: auto;
   height: 59vh;
-  margin-top: 5vh;
+  margin-top: 2vh;
 }
 
 .signup .ant-btn.ant-btn-primary {
@@ -20,7 +21,7 @@
 .signup__or {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .signup__or::before,
@@ -58,20 +59,17 @@
 @media (min-width: 768px) and (max-width: 991.98px) {
   .signup__form {
     height: 56vh;
-    margin-top: 10vh;
+    margin-top: 5vh;
   }
-
   .signup__or {
     font-size: 30px;
     margin-bottom: 60px;
   }
-
   .signup__or::before,
   .signup__or::after {
     content: " _________________ ";
     top: -10px;
   }
-
   .signup .ant-form-item-control {
     zoom: 1.7;
     line-height: 50px;
@@ -81,40 +79,41 @@
 /*=================== Large devices (desktops, 992px and up) ===================*/
 
 @media (min-width: 992px) {
-  .signup {
-    width: 35vw;
-    margin: 0 auto;
-    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
-    height: 92vh;
-    margin-top: 5vh;
+  .signup__form {
+    width: 42vw;
   }
-
   .signup__or::before,
   .signup__or::after {
-    content: " _____________ ";
+    content: " ________________________ ";
+  }
+  .signup__buttons {
+    margin: 0rem auto;
+    width: 46vw;
+  }
+  .signup .main__header svg {
+    display: none;
   }
 }
 
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  .signup {
-    width: 70%;
-    margin: 0 auto;
-    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
-    height: 62vh;
-    margin-top: 15rem;
-  }
   .signup__form {
-    height: 42vh;
+    height: 40vh;
+    width: 70%;
+  }
+  .signup__buttons {
+    margin: 2rem auto;
+    width: 76%;
   }
   .signup .signup__form .ant-btn .ant-btn-primary {
     height: 50px !important;
   }
   .signup__or::before,
   .signup__or::after {
-    content: " ___________________________ ";
+    content: " __________________________________ ";
   }
   .signup__buttons {
-    margin: 0 3rem;
+    margin: 2rem auto;
+    width: 76%;
   }
   .signup .ant-input {
     height: 50px !important;
@@ -124,6 +123,9 @@
   }
   .signup .google-btn,
   .signup .facebook-btn {
-    height: 50px;
+    height: 50px !important;
+  }
+  .signup .ant-btn.ant-btn-primary {
+    height: 50px !important;
   }
 }

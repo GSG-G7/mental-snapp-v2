@@ -1,32 +1,47 @@
-.signup__header {
+.main__header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   margin-top: 10px;
-  padding-top: 20px;
+  padding: 20px;
 }
 
-.signup__heading {
+.main__heading {
   font-weight: bold;
   font-family: sans-serif !important;
   width: max-content;
   margin: 0;
   text-transform: capitalize;
-  transform: translateX(-58%);
+  transform: translateX(-10%);
+  font-size: 20px;
 }
 
 /*=================== Medium devices (tablets, 768px and up)  ===================*/
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .signup__heading {
-    transform: translateX(-138%);
+  .main__header {
+    margin-top: 0.5rem;
+  }
+  .main__heading {
+    font-size: 28px;
+  }
+  .main__header svg {
+    width: 25px;
+    height: 25px;
   }
 }
 
 /*=================== Large devices (desktops, 992px and up) ===================*/
 
 @media (min-width: 992px) {
-  .signup__heading {
-    transform: translateX(-100%);
+  .main__header {
+    margin-top: 0.5rem;
+  }
+  .main__heading {
+    font-size: 28px;
+  }
+  .main__header svg {
+    width: 25px;
+    height: 25px;
   }
 }

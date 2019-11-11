@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
 import { Form, Input, Icon, Button } from 'antd';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
+import { SIGN_IN, HOME } from '../../constants/routes';
+
 import FacebookButton from '../../components/FacebookButton';
 import GoogleButton from '../../components/GoogleButton';
-import { HOME } from '../../constants/routes';
+
 import { withFirebase } from '../Firebase';
 import './signUp.css';
 
@@ -154,6 +157,12 @@ class SignUpForm extends Component {
             </Form.Item>
           </Form>
         </section>
+        <p className="landing__aboutLink">
+          Already have account ?
+          <Link to={SIGN_IN}>
+            <span className="landing__logo">Sign In</span>
+          </Link>
+        </p>
 
         <section className="signup__or">OR</section>
 
