@@ -47,6 +47,11 @@
   flex-direction: column;
   justify-content: space-around;
 }
+.errorMesaage {
+  color: #f5222d;
+  font-size: 14px;
+  line-height: 1.5;
+}
 
 /*=================== Medium devices (tablets, 768px and up)  ===================*/
 
@@ -104,7 +109,8 @@
   .signup .signup__form .ant-btn .ant-btn-primary {
     height: 50px !important;
   }
-  .signup__or::before, .signup__or::after {
+  .signup__or::before,
+  .signup__or::after {
     content: " ___________________________ ";
   }
   .signup__buttons {
@@ -116,7 +122,8 @@
   .signup .ant-form-item-control {
     line-height: 5vh;
   }
-  .signup .google-btn, .signup .facebook-btn {
+  .signup .google-btn,
+  .signup .facebook-btn {
     height: 50px;
   }
 }
