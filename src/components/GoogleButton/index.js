@@ -1,19 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
+import { withFirebase } from '../../containers/Firebase';
 import { ReactComponent as GoogleImg } from '../../containers/assets/images/google.svg';
 import './style.css';
 
-const handleClick = () => {
-  // handle login or sign up with Google
+class GoogleButton extends Component {
+  state = {};
+
+  async componentDidMount() {
+    const { firebase } = this.props;
+    const signedInUser = await firebase.auth.getRedirectResult();
+    if (signedInUser.credential) {
+      const token = signedInUser.credential.accessToken;
+      const { user } = signedInUser;
+      console.log(token, user);
+    }
+  }
+
+  handleClick = async () => {
+    const { firebase } = this.props;
+    await firebase.auth.signInWithRedirect(firebase.googleProvider);
+  };
+
+  render() {
+    return (
+      <button type="submit" className="google-btn" onClick={this.handleClick}>
+        <GoogleImg className="google-btn__img" />
+        <span className="google-btn__text">Google</span>
+      </button>
+    );
+  }
+}
+
+GoogleButton.propTypes = {
+  firebase: PropTypes.shape({
+    auth: PropTypes.object.isRequired,
+    googleProvider: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
-const GoogleButton = () => {
-  return (
-    <button type="submit" className="google-btn" onClick={handleClick}>
-      <GoogleImg className="google-btn__img" />
-      <span className="google-btn__text">Google</span>
-    </button>
-  );
-};
-
-export default GoogleButton;
+export default withFirebase(GoogleButton);
