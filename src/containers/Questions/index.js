@@ -16,7 +16,7 @@ class Questions extends React.Component {
     title: '',
     content: '',
     errors: {},
-    journals: [{}]
+    journals: [{}],
   };
 
   handleConfirm = e => {
@@ -44,7 +44,7 @@ class Questions extends React.Component {
         current,
         content: '',
         title: '',
-        errors: {}
+        errors: {},
       });
     } catch (error) {
       const objError = {};
@@ -72,7 +72,7 @@ class Questions extends React.Component {
       message.success('Yes, you have added a journal');
       history.push('/home');
       return this.setState({
-        journals: [{}]
+        journals: [{}],
       });
     } catch (error) {
       const objError = {};
@@ -117,7 +117,7 @@ class Questions extends React.Component {
 
   render() {
     const {
-      history: { goBack }
+      history: { goBack },
     } = this.props;
     const { errors } = this.state;
     return (
@@ -139,8 +139,8 @@ class Questions extends React.Component {
 Questions.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
-    goBack: propTypes.func.isRequired
-  }).isRequired
+    goBack: propTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default withFirebase(Questions);
