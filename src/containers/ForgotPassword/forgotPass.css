@@ -1,6 +1,7 @@
 .forgot-password {
   width: 80%;
   margin: 0 auto;
+  text-align: center;
 }
 
 .forgot-password__heading {
@@ -24,15 +25,17 @@
 
 .forgot-password__vector {
   margin: 1rem auto;
+  width: 100%;
 }
 
-.forgot-password__text {
+.forgot-password__text,.forgot-password__link {
   margin: 20px auto;
   font-size: 14px;
-  color: #242424;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300;
+  color: #333;
+  font-family: 'Source Sans Pro';
+  font-weight: 100;
   text-align: center;
+  font-style: italic;
 }
 
 .forgot-password__input .forgot-password__icon {
@@ -69,8 +72,7 @@
   width: 100%;
 }
 
-.forgot-password .ant-btn-primary:hover,
-.forgot-password .ant-btn-primary:focus {
+.forgot-password .ant-btn-primary:hover, .forgot-password .ant-btn-primary:focus {
   color: #fff;
   background-color: #e9663aec;
   border-color: #e9663aec;
@@ -93,6 +95,7 @@
   .forgot-password__vector {
     width: 80%;
     height: 30vh;
+    margin: 0 auto;
   }
   .forgot-password__link {
     font-size: 18px;
@@ -105,6 +108,7 @@
   }
   .forgot-password__vector {
     height: 20vh;
+    margin: 0 auto;
   }
   .forgot-password__text {
     font-size: 18px;
@@ -114,5 +118,11 @@
   }
 }
 
-
-
+@media (min-width: 992px) {
+  .forgot-password .main__header svg {
+    display: none;
+  }
+  .forgot-password__vector svg {
+    margin: 0 auto;
+  }
+}

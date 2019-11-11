@@ -1,11 +1,12 @@
 .signin {
   overflow: hidden;
+  text-align: center;
 }
 
 .signin__form {
   width: 80%;
   margin: auto;
-  height: 40vh;
+  /* height: 40vh; */
   margin-top: 5vh;
 }
 
@@ -14,7 +15,13 @@
 }
 
 .signin .forgot-password__link {
-  color: #767373;
+  color: #E9663A;
+  line-height: 1;
+  font-weight: 500;
+  text-align: right;
+  padding-right: 2px;
+  margin-top: -18px;
+  font-size: 14px;
 }
 
 .signin__icon {
@@ -27,8 +34,7 @@
   margin-top: 10px;
 }
 
-.signin__or::before,
-.signin__or::after {
+.signin__or::before, .signin__or::after {
   content: " __________ ";
   position: relative;
   top: -7px;
@@ -58,65 +64,68 @@
 
 @media (min-width: 768px) and (max-width: 991.98px) {
   .signin__form {
-    height: 56vh;
+    /* height: 56vh; */
     margin-top: 8vh;
   }
-
   .signin__or {
     font-size: 30px;
     margin-bottom: 60px;
   }
-
-  .signin__or::before,
-  .signin__or::after {
+  .signin__or::before, .signin__or::after {
     content: " _________________ ";
     top: -10px;
   }
-
   .signin .ant-form-item-control {
     zoom: 1.8;
     margin-bottom: 20px;
+    line-height: 1vh;
   }
   .signin .forgot-password__link {
-    font-size: 1.5rem;
+    font-size: 19px;
+    margin-top: -2.4rem !important;
   }
 }
 
 @media (min-width: 992px) {
-  .signin {
-    width: 35vw;
-    margin: 0 auto;
-    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
-    height: 92vh;
-    margin-top: 5vh;
+  .signin__form {
+    width: 42vw;
   }
-
-  .signin__or::before,
-  .signin__or::after {
-    content: " _____________ ";
+  .signin__buttons {
+    margin: 1rem auto;
+    width: 45vw;
+  }
+  .signin .ant-form-item-control {
+    line-height: 2vh;
+  }
+  .signin__or::before, .signin__or::after {
+    content: " _______________________ ";
   }
   .signin .forgot-password__link {
-    font-size: 1.3rem;
-    margin-top: 10px;
+    font-size: 19px;
+    margin-top: -17px;
+  }
+  .signin .main__header svg {
+    display: none;
   }
 }
 
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  .signin {
-    width: 70%;
-    margin: 0 auto;
-    box-shadow: 2px 2px 7px #bdc3c7, -2px -2px 7px #bdc3c7;
-    height: 70vh;
-    margin-top: 15rem;
-  }
   .signin__form {
     height: 25vh;
+    width: 70%;
   }
   .signin__or::before, .signin__or::after {
-    content: " ___________________________ ";
+    content: " __________________________________ ";
   }
   .signin__buttons {
-    margin: 0 3rem;
+    width: 75%;
+    margin: 2rem auto;
+  }
+  .signin__buttons button {
+    height: 50px;
+  }
+  .signin .ant-form-item-control {
+    line-height: 2vh;
   }
   .signin .ant-input {
     height: 50px !important;
@@ -124,11 +133,7 @@
     padding-right: 50px
   }
   .signin .ant-form-item-control {
-    line-height: 5vh;
-  }
-  .signin .google-btn, .signin .facebook-btn {
-    height: 50px;
-    font-size: 1.3rem;
+    line-height: 2vh;
   }
   .signin .ant-btn {
     height: 50px !important;
