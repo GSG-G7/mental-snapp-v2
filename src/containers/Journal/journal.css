@@ -11,29 +11,25 @@
 .journal-card__top {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
   font-weight: 500;
   font-size: 13px;
   color: #e9663a;
   font-weight: 600;
-  width: 70%;
-  margin: 20px;
-  padding-top: 10px;
-}
-.journal-card__date .journal-card__icon {
-  margin-right: 4px;;
+  width: 100%;
 }
 
-.header__icon svg,
-.journal-card__date svg,
-.journal-card__time svg {
+.journal-card__date .journal-card__icon {
+  margin-right: 4px;
+  ;
+}
+
+.header__icon svg, .journal-card__date svg, .journal-card__time svg {
   width: 20px;
   height: 20px;
   fill: rgba(36, 36, 36, 0.6);
-  }
+}
 
-.journal-card--date,
-.journal-card--time {
+.journal-card--date, .journal-card--time {
   font-size: 0.8rem;
 }
 
