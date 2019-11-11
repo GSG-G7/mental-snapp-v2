@@ -5,8 +5,10 @@ import { Select, message } from 'antd';
 
 import NavBar from '../../components/navigationBar';
 import JournalCard from '../../components/JournalCard';
-import { months, fakeData } from './data';
+import { months } from './data';
 import LogoHeader from '../../components/LogoHeader';
+import { withFirebase } from '../Firebase/index';
+
 import './feeds.css';
 
 const { Option } = Select;
@@ -17,42 +19,47 @@ class Feed extends Component {
   };
 
   componentDidMount() {
-    // fetch all data from firebase firstore
-    // async
-    // const result = await axios.get(`https:-------`);
-    // const cards = result.data.data[0];
-    // cards === fackData
-    //
-    // set state the data to the current month
-    const monthArray = fakeData.map(journal =>
-      moment(journal.timestamp).format('MMMM')
-    );
-    const filteredObject = monthArray.reduce((acc, curr) => {
-      if (typeof acc[curr] == 'undefined') {
-        acc[curr] = 1;
-      } else {
-        acc[curr] += 1;
-      }
-      return acc;
-    }, {});
+    const { firebase } = this.props;
+    // const userId = firebase.auth.currentUser.uid;
 
-    const keys = Object.keys(filteredObject);
+    firebase.db
+      .collection('users')
+      .doc('xIOOq5jUrLfDp2JDHMWpxhWeaCu2')
+      .get()
+      .then(snapshot => {
+        const data = snapshot.data().userJournals;
+        const monthArray = data.map(journal =>
+          moment(journal.timestamp).format('MMMM')
+        );
+        const filteredObject = monthArray.reduce((acc, curr) => {
+          if (typeof acc[curr] == 'undefined') {
+            acc[curr] = 1;
+          } else {
+            acc[curr] += 1;
+          }
+          return acc;
+        }, {});
 
-    for (let i = 0; i < months.length; i++) {
-      for (let j = 0; j < keys.length; j++) {
-        if (months[i].month === keys[j]) {
-          months[i].count = filteredObject[keys[j]];
+        const keys = Object.keys(filteredObject);
+
+        for (let i = 0; i < months.length; i++) {
+          for (let j = 0; j < keys.length; j++) {
+            if (months[i].month === keys[j]) {
+              months[i].count = filteredObject[keys[j]];
+            }
+          }
         }
-      }
-    }
-    this.setState({ monthCount: months });
+        this.setState({ monthCount: months, data });
+      });
   }
 
   handleDelete = id => {
+    const { firebase } = this.props;
+    const userId = firebase.auth.currentUser.uid;
     const { data, monthCount } = this.state;
     message.warning('This Journal is deleted');
-    // 1- this card will be deleted from firbase store.
-    // 2- also it will be deleted from state as follows :
+
+    // 1- also it will be deleted from state as follows :
     const deletedCardMonth = moment(data[0].timestamp).format('MMMM');
     monthCount.map(month => {
       if (month.month === deletedCardMonth) {
@@ -61,14 +68,24 @@ class Feed extends Component {
       return month;
     });
 
+    // 2- this card will be deleted from firbase firestore.
+
+    firebase.db
+      .collection('users')
+      .doc(userId)
+      .update({
+        userJournals: data.filter(journal => journal.timestamp !== id),
+      });
+
     this.setState({
-      data: data.filter(card => card.id !== id),
+      data: data.filter(journal => journal.timestamp !== id),
     });
   };
 
   handleChange = value => {
-    const selectedJournal = fakeData.filter(
-      journal => moment(journal.timestamp).format('MMMM') === value
+    const { data } = this.state;
+    const selectedJournal = data.filter(
+      journal => moment(journal.timestamp.toDate()).format('MMMM') === value
     );
     this.setState({ data: selectedJournal });
   };
@@ -107,14 +124,14 @@ class Feed extends Component {
         {data.length > 0 ? (
           data.map(journal => (
             <JournalCard
-              key={journal.id}
+              key={journal.timestamp}
               time={moment(journal.timestamp).format('MMMM Do')}
               date={moment(journal.timestamp).format('h:mm a')}
               grateful={journal.grateful && journal.grateful.title}
               challenge={journal.challenge && journal.challenge.title}
               developing={journal.developing && journal.developing.title}
-              handleDelete={() => this.handleDelete(journal.id)}
-              journalId={journal.id}
+              handleDelete={() => this.handleDelete(journal.timestamp)}
+              journalId={journal.timestamp}
               handleJournalDetails={this.handleJournalDetails}
             />
           ))
@@ -134,6 +151,17 @@ Feed.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,
+  firebase: propTypes.shape({
+    auth: propTypes.object.isRequired,
+    currentUser: propTypes.object.isRequired,
+    uid: propTypes.string.isRequired,
+    firestore: propTypes.object.isRequired,
+    FieldValue: propTypes.object.isRequired,
+    arrayUnion: propTypes.func.isRequired,
+    user: propTypes.object.isRequired,
+    db: propTypes.object.isRequired,
+    collection: propTypes.object.isRequired,
+  }).isRequired,
 };
 
-export default Feed;
+export default withFirebase(Feed);
