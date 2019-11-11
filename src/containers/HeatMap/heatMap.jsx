@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import ReactTooltip from 'react-tooltip';
@@ -16,7 +15,13 @@ import 'react-calendar-heatmap/dist/styles.css';
 import './heatMap.css';
 
 const heatMap = props => {
-  const { data, journals, handleClick } = props;
+  const {
+    data,
+    journals,
+    handleClick,
+    handleDelete,
+    handleJournalDetails,
+  } = props;
 
   return (
     <div className="heat-map">
@@ -61,15 +66,19 @@ const heatMap = props => {
         <div className="heat-map__journals">
           {journals.length !== 0 ? (
             journals.map(journal => (
-              <Link to={`journal/${journal.id}`} key={journal.id}>
-                <JournalCard
-                  time={moment(journal.timestamp).format('h:mm a')}
-                  date={moment(journal.timestamp).format('MMMM Do')}
-                  grateful={journal.grateful && journal.grateful.title}
-                  challenge={journal.challenge && journal.challenge.title}
-                  developing={journal.developing && journal.developing.title}
-                />
-              </Link>
+              // <Link to={`journal/${journal.id}`} key={journal.id}>
+              <JournalCard
+                key={journal.id}
+                journalId={journal.id}
+                handleDelete={() => handleDelete(journal.timestamp)}
+                handleJournalDetails={handleJournalDetails}
+                time={moment(journal.timestamp).format('h:mm a')}
+                date={moment(journal.timestamp).format('MMMM Do')}
+                grateful={journal.grateful && journal.grateful.title}
+                challenge={journal.challenge && journal.challenge.title}
+                developing={journal.developing && journal.developing.title}
+              />
+              // </Link>
             ))
           ) : (
             <div className="heat-map__empty">
@@ -100,20 +109,22 @@ heatMap.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       grateful: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        body: PropTypes.string.isRequired,
-      }).isRequired,
+        title: PropTypes.string,
+        body: PropTypes.string,
+      }),
       challenge: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        body: PropTypes.string.isRequired,
-      }).isRequired,
+        title: PropTypes.string,
+        body: PropTypes.string,
+      }),
       developing: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        body: PropTypes.string.isRequired,
-      }).isRequired,
+        title: PropTypes.string,
+        body: PropTypes.string,
+      }),
       timestamp: PropTypes.string.isRequired,
     })
   ).isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  handleJournalDetails: PropTypes.func.isRequired,
 };
 
 export default heatMap;
