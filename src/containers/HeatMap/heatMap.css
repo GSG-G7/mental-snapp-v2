@@ -26,8 +26,7 @@
   color: rgba(36, 36, 36, 0.9);
 }
 
-.heat-map__body,
-.heat-map__journals {
+.heat-map__body, .heat-map__journals {
   padding: 0 1.2rem 1rem;
 }
 
@@ -64,15 +63,19 @@
 }
 
 /* The colors of the heat map */
+
 .react-calendar-heatmap .color-scale-1 {
   fill: #feddd2;
 }
+
 .react-calendar-heatmap .color-scale-2 {
   fill: #fec3b1;
 }
+
 .react-calendar-heatmap .color-scale-3 {
   fill: #f2ac95;
 }
+
 .react-calendar-heatmap .color-scale-4 {
   fill: #fc8d6b;
 }
@@ -80,12 +83,15 @@
 .heat-map__box--scale1 {
   background-color: #feddd2;
 }
+
 .heat-map__box--scale2 {
   background-color: #fec3b1;
 }
+
 .heat-map__box--scale3 {
   background-color: #f2ac95;
 }
+
 .heat-map__box--scale4 {
   background-color: #fc8d6b;
 }
@@ -99,15 +105,20 @@
   html {
     font-size: 20px;
   }
-
   .heat-map__body {
     width: 70%;
     margin: 0 auto;
   }
-
-  .heat-map__legend,
-  .heat-map__empty {
+  .heat-map__legend, .heat-map__empty {
     justify-content: center;
+  }
+  .heat-map__journals {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .heat-map__journals .journal-card {
+    width: 100%;
   }
 }
 
@@ -115,25 +126,20 @@
   html {
     font-size: 24px;
   }
-
   .heat-map__month {
     text-align: left;
   }
-
   .heat-map__body {
     width: 35%;
     margin: 0 auto;
   }
-
   .heat-map__container {
     display: flex;
     justify-content: space-around;
   }
-
   .heat-map__journals {
     width: 50%;
   }
-
   .heat-map__empty {
     flex-direction: column;
   }
