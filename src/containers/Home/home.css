@@ -28,6 +28,13 @@
   word-break: break-all;
 }
 
+.home__emptyJournals {
+  color: #E9663A;
+  font-size: 20px;
+  text-align: center;
+  margin: 40px auto;
+}
+
 .cards-container {
   padding: 0 20px;
 }

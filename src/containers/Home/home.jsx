@@ -16,7 +16,7 @@ const Home = props => {
   const {
     isEditable,
     userName,
-    journals,
+    recentJournals,
     goal,
     handleBlur,
     handelSave,
@@ -68,33 +68,34 @@ const Home = props => {
       </section>
 
       <div className="cards-container">
-        {journals.length > 0 &&
-          journals.map(journal => (
+        {recentJournals.length > 0 ? (
+          recentJournals.map(journal => (
             <Card
-              key={journal.id}
+              key={journal.timestamp}
               className="home__journal-card"
               date={moment(journal.timestamp).format('MMMM Do')}
               time={moment(journal.timestamp).format('h:mm a')}
               grateful={journal.grateful && journal.grateful.title}
               challenge={journal.challenge && journal.challenge.title}
               developing={journal.developing && journal.developing.title}
-              handleDelete={() => handleDelete(journal.id)}
-              journalId={journal.id}
+              handleDelete={() => handleDelete(journal.timestamp)}
+              journalId={journal.timestamp}
               handleJournalDetails={handleJournalDetails}
             />
-          ))}
+          ))
+        ) : (
+          <h5 className="home__emptyJournals">You has not added entries yet</h5>
+        )}
       </div>
       <NavBar />
     </div>
   );
 };
 
-export default Home;
-
 Home.propTypes = {
   isEditable: propTypes.bool.isRequired,
   userName: propTypes.string.isRequired,
-  journals: propTypes.arrayOf(propTypes.object).isRequired,
+  recentJournals: propTypes.arrayOf(propTypes.object).isRequired,
   goal: propTypes.string.isRequired,
   handleBlur: propTypes.func.isRequired,
   handelSave: propTypes.func.isRequired,
@@ -102,3 +103,5 @@ Home.propTypes = {
   handleDelete: propTypes.func.isRequired,
   handleJournalDetails: propTypes.func.isRequired,
 };
+
+export default Home;
