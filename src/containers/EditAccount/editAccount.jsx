@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { withFirebase } from '../Firebase';
 import Header from '../../components/Header';
 import './editAccount.css';
+import * as ROUTES from '../../constants/routes';
 
 const EditAccount = props => {
   const {
@@ -12,16 +13,17 @@ const EditAccount = props => {
     userInfo: { name, email },
     checked,
     handleChange,
-    handlePush,
     handleErrorMessage,
     errorMessage,
     handleGoBack,
+    handlePush,
     form: { getFieldDecorator, validateFieldsAndScroll },
   } = props;
-
   const handleSubmit = e => {
     e.preventDefault();
     const user = firebase.auth.currentUser;
+    const userId =
+      firebase.auth.currentUser.uid || localStorage.getItem('userId');
     validateFieldsAndScroll(async (err, values) => {
       try {
         if (!err) {
@@ -30,13 +32,22 @@ const EditAccount = props => {
               displayName: values.name,
             });
             await user.updateEmail(values.email);
+
+            firebase
+              .user(userId)
+              .set({ name: values.name, email: values.email }, { merge: true });
           } else {
             await user.updateProfile({
               displayName: values.name,
             });
             await user.updateEmail(values.email);
             await user.updatePassword(values.password);
+
+            firebase
+              .user(userId)
+              .set({ name: values.name, email: values.email }, { merge: true });
           }
+          handlePush(ROUTES.ACCOUNT_SETTINGS);
           message.success('account updated successfully');
         }
       } catch (error) {
@@ -101,14 +112,19 @@ const EditAccount = props => {
               {getFieldDecorator('password', {
                 rules: [
                   {
-                    required: checked,
-                    message: 'Enter your password',
+                    pattern: new RegExp(
+                      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d].{7,}$/
+                    ),
+                    required: true,
+                    message:
+                      'The password must be at least 8 alphanumeric characters',
                   },
                 ],
               })(
                 <Input.Password
                   prefix={<Icon type="lock" className="edit-account__icon" />}
                   placeholder="Password"
+                  autoComplete="off"
                 />
               )}
             </Form.Item>
@@ -142,6 +158,7 @@ EditAccount.propTypes = {
   handleGoBack: PropTypes.func.isRequired,
   firebase: PropTypes.shape({
     auth: PropTypes.object.isRequired,
+    user: PropTypes.func.isRequired,
   }).isRequired,
   handlePush: PropTypes.func.isRequired,
   handleErrorMessage: PropTypes.func.isRequired,

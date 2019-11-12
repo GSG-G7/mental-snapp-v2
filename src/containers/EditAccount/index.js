@@ -7,8 +7,8 @@ import { withFirebase } from '../Firebase';
 class Index extends Component {
   state = {
     info: {
-      name: 'Fares',
-      email: 'fares@gmail.com',
+      name: '',
+      email: '',
     },
     checked: false,
     error: '',
@@ -18,7 +18,6 @@ class Index extends Component {
     const { firebase } = this.props;
 
     const userId = localStorage.getItem('userId');
-
     firebase
       .user(userId)
       .get()
