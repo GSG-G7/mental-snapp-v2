@@ -24,6 +24,8 @@ class Firebase {
     this.auth.sendPasswordResetEmail(email);
   };
 
+  doSignOut = () => this.auth.signOut();
+
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
@@ -33,6 +35,8 @@ class Firebase {
   user = uid => this.db.doc(`users/${uid}`);
 
   users = () => this.db.collection('users');
+
+  journals = () => this.db.collection('journals');
 }
 
 export default Firebase;

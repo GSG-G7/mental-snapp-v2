@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Form, Input, Icon, Button } from 'antd';
+import { Form, Input, Icon, Button, Spin } from 'antd';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
@@ -16,6 +16,7 @@ import * as ROUTES from '../../constants/routes';
 class SignInForm extends React.Component {
   state = {
     error: {},
+    loading: false,
   };
 
   handleSubmit = e => {
@@ -26,21 +27,23 @@ class SignInForm extends React.Component {
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
+        this.setState({ loading: true });
         firebase
           .doSignInWithEmailAndPassword(values.email, values.password)
           .then(res => {
             localStorage.setItem('userId', res.user.uid);
+            this.setState({ loading: false });
             history.push(ROUTES.HOME);
           })
           .catch(error => {
-            this.setState({ error });
+            this.setState({ error, loading: false });
           });
       }
     });
   };
 
   render() {
-    const { error } = this.state;
+    const { error, loading } = this.state;
     const {
       form: { getFieldDecorator },
       history: { goBack },
@@ -88,15 +91,22 @@ class SignInForm extends React.Component {
             </Form.Item>
             <Form.Item>
               <Button className="signin__btn" type="primary" htmlType="submit">
-                Sign In
+                {loading ? <Spin /> : 'Sign In'}
               </Button>
             </Form.Item>
-            {error && <p>{error.message}</p>}
+            {error && <p style={{ color: 'red' }}>{error.message}</p>}
           </Form>
         </section>
         <Link to={ROUTES.FORGOT_PASSWORD}>
           <p className="forgot-password__link">Forgot Password?</p>
         </Link>
+
+        <p className="landing__aboutLink">
+          Don’t have an account ?
+          <Link to={ROUTES.SIGN_UP}>
+            <span className="landing__logo"> Sign Up</span>
+          </Link>
+        </p>
 
         <section className="signin__or">OR</section>
 

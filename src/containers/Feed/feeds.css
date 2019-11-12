@@ -1,3 +1,7 @@
+.feeds{
+  padding-bottom: 5rem;
+}
+
 .feeds__content {
   display: flex;
   flex-direction: column;
