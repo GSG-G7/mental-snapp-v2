@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { compose } from 'recompose';
+import { Link, withRouter } from 'react-router-dom';
 
 import { Form, Input, Icon, Button } from 'antd';
 import PropTypes from 'prop-types';
@@ -17,6 +18,28 @@ class SignInForm extends React.Component {
   state = {
     error: {},
   };
+
+  componentDidMount() {
+    const { firebase, history } = this.props;
+    firebase.auth
+      .getRedirectResult()
+      .then(result => {
+        const { user } = result;
+        if (user !== null) {
+          firebase.user(user.uid).set({
+            name: user.displayName,
+            email: user.email,
+            userID: user.uid,
+            goal: '',
+          });
+          localStorage.setItem('userId', user.uid);
+          history.push(ROUTES.HOME);
+        }
+      })
+      .catch(err => {
+        this.setState({ error: err });
+      });
+  }
 
   handleSubmit = e => {
     const { firebase, history } = this.props;
@@ -125,7 +148,13 @@ SignInForm.propTypes = {
   }).isRequired,
   firebase: PropTypes.shape({
     doSignInWithEmailAndPassword: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    facebookProvider: PropTypes.object.isRequired,
+    user: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default signINForm;
+export default compose(
+  withFirebase,
+  withRouter
+)(signINForm);
