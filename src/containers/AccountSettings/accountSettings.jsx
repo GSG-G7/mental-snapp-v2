@@ -23,46 +23,44 @@ const accountSettings = ({ info, handleLogOut, loading }) => {
             <Icon type="edit" className="settings__edit-btn__icon" />
           </Link>
         </section>
-        {loading ? (
-          <div style={{ textAlign: 'center', marginTop: '9vh' }}>
-            <Spin size="large" />
+        <section className="settings__body">
+          <div>
+            <p className="settings__body__title">
+              <Icon type="user" className="settings__body__icon" />
+              Name:
+            </p>
+            <span className="settings__body__info">
+              {loading ? <Spin /> : info && info.name}
+            </span>
           </div>
-        ) : (
-          <section className="settings__body">
-            <div>
-              <p className="settings__body__title">
-                <Icon type="user" className="settings__body__icon" />
-                Name:
-              </p>
-              <span className="settings__body__info">{info && info.name}</span>
-            </div>
 
-            <div>
-              <p className="settings__body__title">
-                <Icon type="mail" className="settings__body__icon" />
-                Email:
-              </p>
-              <span className="settings__body__info">{info && info.email}</span>
-            </div>
+          <div>
+            <p className="settings__body__title">
+              <Icon type="mail" className="settings__body__icon" />
+              Email:
+            </p>
+            <span className="settings__body__info">
+              {loading ? <Spin /> : info && info.email}
+            </span>
+          </div>
 
-            <div>
-              <p className="settings__body__title">
-                <Icon type="lock" className="settings__body__icon" />
-                Password:
-              </p>
-              <span className="settings__body__info">********</span>
-            </div>
+          <div>
+            <p className="settings__body__title">
+              <Icon type="lock" className="settings__body__icon" />
+              Password:
+            </p>
+            <span className="settings__body__info">********</span>
+          </div>
 
-            <button
-              type="button"
-              className="settings__logout"
-              onClick={handleLogOut}
-            >
-              <Icon type="logout" className="settings__body__icon" />
-              <span>Log Out</span>
-            </button>
-          </section>
-        )}
+          <button
+            type="button"
+            className="settings__logout"
+            onClick={handleLogOut}
+          >
+            <Icon type="logout" className="settings__body__icon" />
+            <span>Log Out</span>
+          </button>
+        </section>
       </div>
       <section>
         <NavigationBar />
