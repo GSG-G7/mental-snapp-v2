@@ -84,7 +84,7 @@ class ForgotPass extends Component {
           </Form>
         </div>
         <p className="forgot-password__link">
-          Didn’t receive any code?
+          Didn’t receive any email?
           <span
             role="button"
             tabIndex="0"
