@@ -16,17 +16,21 @@ class Index extends Component {
 
   componentDidMount() {
     const { firebase } = this.props;
-    const user = firebase.auth.currentUser;
 
-    if (user != null) {
-      const userInfo = {
-        name: user.displayName,
-        email: user.email,
-      };
-      this.setState({
-        info: userInfo,
+    const userId = localStorage.getItem('userId');
+
+    firebase
+      .user(userId)
+      .get()
+      .then(snapshot => {
+        const userInfo = {
+          name: snapshot.data().name,
+          email: snapshot.data().email,
+        };
+        this.setState({
+          info: userInfo,
+        });
       });
-    }
   }
 
   handleErrorMessage = message => {
@@ -61,6 +65,7 @@ Index.propTypes = {
   }).isRequired,
   firebase: PropTypes.shape({
     auth: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
   }).isRequired,
 };
 
