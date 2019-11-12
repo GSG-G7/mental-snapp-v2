@@ -37,7 +37,7 @@ const Home = props => {
         </div>
 
         <div className="home__goal">
-          <p className="goal__static">
+          <div className="goal__static">
             I am developing:
             <span
               className={!isEditable ? 'goal__editable' : 'goal__editable-edit'}
@@ -47,7 +47,7 @@ const Home = props => {
             >
               {loading ? <Spin size="small" /> : goal}
             </span>
-          </p>
+          </div>
           {!isEditable ? (
             <EditIcon className="goal__edit-icon" onClick={handleClick} />
           ) : (

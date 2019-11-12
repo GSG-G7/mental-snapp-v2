@@ -27,13 +27,11 @@ class Home extends Component {
         const userName = snapshot.data().name;
         if (snapshot.data().userJournals) {
           const userJournal = snapshot.data().userJournals;
-          if (userJournal.length === 0) {
-            return recentJournals;
-          }
+
           if (userJournal.length > 3) {
             recentJournals = userJournal.slice(-3);
           } else if (userJournal.length <= 3) {
-            recentJournals = userJournal.slice(-1);
+            recentJournals = userJournal;
           }
           return this.setState({
             journals: userJournal,
@@ -68,18 +66,22 @@ class Home extends Component {
   handleDelete = id => {
     const { journals } = this.state;
     const { firebase } = this.props;
-    const userId = firebase.auth.currentUser.uid;
+    const userId =
+      firebase.auth.currentUser.uid || localStorage.getItem('userId');
     message.warning('This Journal is deleted');
     // 1- this card will be deleted from firbase store.
+    const filteredJournals = journals.filter(
+      journal => journal.timestamp !== id
+    );
     firebase.db
       .collection('users')
       .doc(userId)
       .update({
-        userJournals: journals.filter(journal => journal.timestamp !== id),
+        userJournals: filteredJournals,
       });
     // 2- also it will be deleted from state as follows :
     this.setState({
-      journals: journals.filter(journal => journal.timestamp !== id),
+      journals: filteredJournals,
     });
   };
 
@@ -128,7 +130,7 @@ Home.propTypes = {
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
     uid: propTypes.string,
-    user: propTypes.object.isRequired,
+    user: propTypes.func.isRequired,
     db: propTypes.object.isRequired,
     collection: propTypes.object.isRequired,
     currentUser: propTypes.object.isRequired,
