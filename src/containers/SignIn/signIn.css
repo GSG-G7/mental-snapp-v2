@@ -14,12 +14,17 @@
   width: 100%;
 }
 
+.signin  
+.ant-spin-dot-item {
+  background-color: white !important;
+}
+
 .signin .forgot-password__link {
   color: #E9663A;
   line-height: 1;
   font-weight: 500;
   text-align: right;
-  padding-right: 2px;
+  padding: 2px 2rem;
   margin-top: -18px;
   font-size: 14px;
 }
