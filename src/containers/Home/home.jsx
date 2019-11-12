@@ -3,8 +3,8 @@ import React from 'react';
 import moment from 'moment';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
 import { Icon, Spin } from 'antd';
+
 import LogoHeader from '../../components/LogoHeader';
 import MainHeading from '../../components/MainHeading';
 import Card from '../../components/JournalCard';

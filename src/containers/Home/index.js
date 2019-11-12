@@ -69,7 +69,6 @@ class Home extends Component {
     const userId =
       firebase.auth.currentUser.uid || localStorage.getItem('userId');
     message.warning('This Journal is deleted');
-    // 1- this card will be deleted from firbase store.
     const filteredJournals = journals.filter(
       journal => journal.timestamp !== id
     );
@@ -79,7 +78,6 @@ class Home extends Component {
       .update({
         userJournals: filteredJournals,
       });
-    // 2- also it will be deleted from state as follows :
     this.setState({
       journals: filteredJournals,
     });
