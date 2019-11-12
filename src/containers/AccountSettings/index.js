@@ -55,7 +55,7 @@ Account.propTypes = {
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    user: propTypes.object.isRequired,
+    user: propTypes.func.isRequired,
     db: propTypes.object.isRequired,
     collection: propTypes.object.isRequired,
     doSignOut: propTypes.func.isRequired,

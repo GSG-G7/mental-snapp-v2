@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -71,9 +72,9 @@ const accountSettings = ({ info, handleLogOut, loading }) => {
 
 accountSettings.propTypes = {
   info: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-  }).isRequired,
+    name: PropTypes.string,
+    email: PropTypes.string,
+  }),
   loading: PropTypes.bool.isRequired,
   handleLogOut: PropTypes.func.isRequired,
 };
