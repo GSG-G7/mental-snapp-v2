@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { message } from 'antd';
 import propTypes from 'prop-types';
 import HomePage from './home';
+import { withFirebase } from '../Firebase/index';
+
 import { journalsData, username, usergoal } from './staticData';
 
 class Home extends Component {
@@ -24,8 +26,14 @@ class Home extends Component {
   handleClick = () => this.setState({ isEditable: true });
 
   handelSave = () => {
+    const { goal } = this.state;
+    const { firebase } = this.props;
     this.setState({ isEditable: false });
     // update the goal
+    // firebase
+    const userId = firebase.auth.currentUser.uid;
+
+    firebase.user(userId).set({ goal }, { merge: true });
   };
 
   handleDelete = id => {
@@ -66,10 +74,16 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default withFirebase(Home);
 
 Home.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
+  }).isRequired,
+  firebase: propTypes.shape({
+    auth: propTypes.object.isRequired,
+    currentUser: propTypes.object.isRequired,
+    uid: propTypes.string.isRequired,
+    user: propTypes.object.isRequired,
   }).isRequired,
 };
