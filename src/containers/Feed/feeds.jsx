@@ -144,8 +144,8 @@ class Feed extends Component {
             data.map(journal => (
               <JournalCard
                 key={journal.timestamp}
-                time={moment(journal.timestamp).format('MMMM Do')}
-                date={moment(journal.timestamp).format('h:mm a')}
+                time={moment(journal.timestamp).format('h:mm a')}
+                date={moment(journal.timestamp).format('MMMM Do')}
                 grateful={journal.grateful && journal.grateful.title}
                 challenge={journal.challenge && journal.challenge.title}
                 developing={journal.developing && journal.developing.title}
