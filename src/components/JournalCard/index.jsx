@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 
 import './style.css';
 
-// convert function componet to class component
-
-// ComponenDidMount () {} to get stored data and render a page for clicked card
-
 const JournalCard = ({
   time,
   date,
