@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Input, Icon, Button, Form } from 'antd';
+
 import { ReactComponent as ConfirmImg } from '../assets/images/confirmPass.svg';
 import Header from '../../components/Header';
-
 import { EDIT_ACCOUNT } from '../../constants/routes';
 import { withFirebase } from '../Firebase';
 
@@ -15,20 +15,24 @@ class confirmPass extends Component {
   };
 
   handleSubmit = e => {
+    e.preventDefault();
+
     const {
       history: { push },
       form: { validateFields },
       firebase,
     } = this.props;
-
-    e.preventDefault();
     validateFields(async (err, values) => {
       if (!err) {
         try {
-          await firebase.confirmPassword(values.password);
+          const user = await firebase.auth.currentUser;
+          await firebase.doSignInWithEmailAndPassword(
+            user.email,
+            values.password
+          );
           await push(EDIT_ACCOUNT);
         } catch (error) {
-          this.setState({ errorMesage: error.message });
+          this.setState({ errorMesage: 'Invalid password' });
         }
       }
     });
@@ -65,13 +69,14 @@ class confirmPass extends Component {
                     <Icon type="lock" className="confirm-pass__form__icon" />
                   }
                   placeholder="Enter your password"
+                  onChange={() => this.setState({ errorMesage: '' })}
                 />
               )}
             </Form.Item>
 
-            {errorMesage && <p>{errorMesage}</p>}
+            {errorMesage && <p style={{ color: 'red' }}>{errorMesage}</p>}
 
-            <Button type="primary" size="large">
+            <Button type="primary" size="large" onClick={this.handleSubmit}>
               Procceed To Edit
             </Button>
           </Form>
@@ -95,7 +100,8 @@ confirmPass.propTypes = {
   }).isRequired,
 
   firebase: PropTypes.shape({
-    confirmPassword: PropTypes.func.isRequired,
+    doSignInWithEmailAndPassword: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
   }).isRequired,
 };
 
