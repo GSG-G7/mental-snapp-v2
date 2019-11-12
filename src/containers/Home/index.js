@@ -11,6 +11,7 @@ class Home extends Component {
     journals: [],
     goal: '',
     recentJournals: [],
+    loading: true,
   };
 
   componentDidMount() {
@@ -26,24 +27,23 @@ class Home extends Component {
         const userName = snapshot.data().name;
         if (snapshot.data().userJournals) {
           const userJournal = snapshot.data().userJournals;
-          if (userJournal.length === 0) {
-            return recentJournals;
-          }
           if (userJournal.length > 3) {
             recentJournals = userJournal.slice(-3);
           } else if (userJournal.length <= 3) {
-            recentJournals = userJournal.slice(-1);
+            recentJournals = userJournal;
           }
           return this.setState({
             journals: userJournal,
             name: userName,
             goal: userGoal,
             recentJournals,
+            loading: false,
           });
         }
         return this.setState({
           name: userName,
           goal: userGoal,
+          loading: false,
         });
       });
   }
@@ -55,25 +55,30 @@ class Home extends Component {
     const { firebase } = this.props;
     this.setState({ isEditable: false });
 
-    const userId = firebase.auth.currentUser.uid;
+    const userId =
+      firebase.auth.currentUser.uid || localStorage.getItem('userId');
     firebase.user(userId).set({ goal }, { merge: true });
   };
 
   handleDelete = id => {
     const { journals } = this.state;
     const { firebase } = this.props;
-    const userId = firebase.auth.currentUser.uid;
+    const userId =
+      firebase.auth.currentUser.uid || localStorage.getItem('userId');
     message.warning('This Journal is deleted');
+    const filteredJournals = journals.filter(
+      journal => journal.timestamp !== id
+    );
     // 1- this card will be deleted from firbase store.
     firebase.db
       .collection('users')
       .doc(userId)
       .update({
-        userJournals: journals.filter(journal => journal.timestamp !== id),
+        userJournals: filteredJournals,
       });
     // 2- also it will be deleted from state as follows :
     this.setState({
-      journals: journals.filter(journal => journal.timestamp !== id),
+      journals: filteredJournals,
     });
   };
 
@@ -89,12 +94,20 @@ class Home extends Component {
   };
 
   render() {
-    const { isEditable, name, journals, goal, recentJournals } = this.state;
+    const {
+      isEditable,
+      name,
+      journals,
+      goal,
+      recentJournals,
+      loading,
+    } = this.state;
     return (
       <HomePage
         isEditable={isEditable}
         userName={name}
         journals={journals}
+        loading={loading}
         recentJournals={recentJournals}
         goal={goal}
         handelSave={this.handelSave}
