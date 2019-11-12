@@ -16,6 +16,7 @@ class Account extends Component {
   handleLogOut = () => {
     const { firebase, history } = this.props;
     history.push(LANDING);
+    localStorage.removeItem('userId');
     return firebase.doSignOut;
   };
 
