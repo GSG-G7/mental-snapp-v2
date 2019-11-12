@@ -25,29 +25,29 @@ class SignUpForm extends Component {
       history: { push },
     } = this.props;
     e.preventDefault();
-    validateFieldsAndScroll((err, values) => {
+    validateFieldsAndScroll(async (err, values) => {
       if (!err) {
-        firebase
-          .doCreateUserWithEmailAndPassword(values.email, values.password)
-          .then(result =>
-            firebase
-              .user(result.user.uid)
-              .set(
-                {
-                  name: values.name,
-                  email: values.email,
-                  userID: result.user.uid,
-                },
-                { merge: true }
-              )
-              .then(localStorage.setItem('userId', result.user.uid))
-          )
-          .then(() => {
-            push(HOME);
-          })
-          .catch(error => {
-            this.setState({ errorMessage: error.message });
-          });
+        try {
+          const result = await firebase.doCreateUserWithEmailAndPassword(
+            values.email,
+            values.password
+          );
+
+          await firebase.user(result.user.uid).set(
+            {
+              name: values.name,
+              email: values.email,
+              userID: result.user.uid,
+              goal: '',
+            },
+            { merge: true }
+          );
+
+          await localStorage.setItem('userId', result.user.uid);
+          await push(HOME);
+        } catch (error) {
+          this.setState({ errorMessage: error.message });
+        }
       }
     });
   };
