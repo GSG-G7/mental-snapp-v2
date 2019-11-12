@@ -66,7 +66,6 @@ const heatMap = props => {
         <div className="heat-map__journals">
           {journals.length !== 0 ? (
             journals.map(journal => (
-              // <Link to={`journal/${journal.id}`} key={journal.id}>
               <JournalCard
                 key={journal.id}
                 journalId={journal.id}
@@ -78,7 +77,6 @@ const heatMap = props => {
                 challenge={journal.challenge && journal.challenge.title}
                 developing={journal.developing && journal.developing.title}
               />
-              // </Link>
             ))
           ) : (
             <div className="heat-map__empty">

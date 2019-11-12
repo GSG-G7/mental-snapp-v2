@@ -15,14 +15,21 @@ class index extends Component {
 
   async componentDidMount() {
     const { firebase, history } = this.props;
-    const firebaseData = [];
+    const userId = localStorage.getItem('userId');
     try {
-      const snapshot = await firebase.journals().get();
-      snapshot.forEach(doc => {
-        firebaseData.push({ id: doc.id, ...doc.data() });
+      const snapshot = await firebase.db
+        .collection('users')
+        .doc(userId)
+        .get();
+
+      const data = snapshot.data().userJournals;
+
+      const heatMapData = filter(data);
+
+      this.setState({
+        data: heatMapData,
+        journals: data,
       });
-      const heatMapData = filter(firebaseData);
-      this.setState({ data: heatMapData, journals: firebaseData });
     } catch (error) {
       history.push('/server-error');
     }
@@ -46,20 +53,25 @@ class index extends Component {
   handleDelete = id => {
     const { firebase } = this.props;
     const { journals } = this.state;
-    // firebase
-    //   .journals()
-    //   .doc(id)
-    //   .delete()
-    //   .then(() => {
-    //     message.warning('This Journal is deleted');
-    //     this.setState({
-    //       journals: journals.filter(card => card.id !== id),
-    //       data: journals.filter(day => day.date !== id),
-    //     });
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+    const userId = firebase.auth.currentUser.uid;
+
+    // 1- also it will be deleted from state as follows :
+    const filteredData = journals.filter(journal => journal.timestamp !== id);
+
+    firebase.db
+      .collection('users')
+      .doc(userId)
+      .update({
+        userJournals: filteredData,
+      });
+    message.warning('This Journal is deleted');
+    const heatMapData = filter(filteredData);
+
+    this.setState({
+      journals: filteredData,
+      data: heatMapData,
+      journalsOfTheDay: filteredData,
+    });
   };
 
   handleJournalDetails = id => {
@@ -84,11 +96,19 @@ class index extends Component {
 }
 
 index.propTypes = {
-  firebase: PropTypes.shape({
-    journals: PropTypes.func.isRequired,
-  }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
+  }).isRequired,
+  firebase: PropTypes.shape({
+    auth: PropTypes.object.isRequired,
+    uid: PropTypes.string.isRequired,
+    firestore: PropTypes.object.isRequired,
+    FieldValue: PropTypes.object.isRequired,
+    arrayUnion: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    db: PropTypes.object.isRequired,
+    collection: PropTypes.object.isRequired,
+    journals: PropTypes.func.isRequired,
   }).isRequired,
 };
 
