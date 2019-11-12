@@ -1,22 +1,32 @@
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Button, Icon } from 'antd';
 
 import Header from '../../components/Header';
 import { ReactComponent as Vector } from '../assets/images/forgotPass.svg';
+
+import { withFirebase } from '../Firebase';
+
 import './forgotPass.css';
 
 const ForgotPass = props => {
   const {
     history: { goBack },
     form: { getFieldDecorator, validateFields },
+    firebase,
   } = props;
 
   const handleSubmit = e => {
     e.preventDefault();
-    validateFields((err, values) => {
+    validateFields(async (err, values) => {
       if (!err) {
-        // We will call firebase function here
+        try {
+          await firebase.forgotPassword(values.email);
+        } catch (error) {
+          console.log(error);
+        }
       }
     });
   };
@@ -95,4 +105,4 @@ const forgotPassForm = Form.create({ name: 'forgot_password_from' })(
   ForgotPass
 );
 
-export default forgotPassForm;
+export default withFirebase(forgotPassForm);

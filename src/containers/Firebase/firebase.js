@@ -20,6 +20,10 @@ class Firebase {
     this.db = app.firestore();
   }
 
+  forgotPassword = email => {
+    this.auth.sendPasswordResetEmail(email);
+  };
+
   user = uid => this.db.doc(`users/${uid}`);
 
   users = () => this.db.collection('users');
