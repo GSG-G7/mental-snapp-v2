@@ -17,6 +17,7 @@ class Home extends Component {
     let { recentJournals } = this.state;
     const { firebase } = this.props;
     const userId = localStorage.getItem('userId');
+    // setState to journals and goal that we got from firebase
     firebase.db
       .collection('users')
       .doc(userId)
