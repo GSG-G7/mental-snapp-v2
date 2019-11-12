@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import AccountSettings from './accountSettings';
 import { withFirebase } from '../Firebase/index';
-import { SIGN_IN } from '../../constants/routes';
+import { LANDING } from '../../constants/routes';
 
 class Account extends Component {
   state = {
@@ -32,7 +32,7 @@ class Account extends Component {
 
   handleLogOut = () => {
     const { firebase, history } = this.props;
-    history.push(SIGN_IN);
+    history.push(LANDING);
     localStorage.removeItem('userId');
     return firebase.doSignOut;
   };

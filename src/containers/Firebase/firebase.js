@@ -20,6 +20,8 @@ class Firebase {
     this.db = app.firestore();
   }
 
+  doSignOut = () => this.auth.signOut();
+
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
