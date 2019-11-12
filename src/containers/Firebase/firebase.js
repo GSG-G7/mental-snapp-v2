@@ -26,6 +26,16 @@ class Firebase {
   doCreateUserWithEmailAndPassword = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
 
+  confirmPassword = pass => {
+    const user = app.auth().currentUser;
+    const credential = app.auth.EmailAuthProvider.credential(
+      user.email,
+      `${pass}`
+    );
+
+    user.reauthenticateWithCredential(credential);
+  };
+
   user = uid => this.db.doc(`users/${uid}`);
 
   users = () => this.db.collection('users');
