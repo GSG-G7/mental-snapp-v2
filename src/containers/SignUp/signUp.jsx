@@ -15,8 +15,30 @@ import './signUp.css';
 
 class SignUpForm extends Component {
   state = {
-    errorMessage: '',
+    error: '',
   };
+
+  componentDidMount() {
+    const { firebase, history } = this.props;
+    firebase.auth
+      .getRedirectResult()
+      .then(result => {
+        const { user } = result;
+        if (user !== null) {
+          firebase.user(user.uid).set({
+            name: user.displayName,
+            email: user.email,
+            userID: user.uid,
+            goal: '',
+          });
+          localStorage.setItem('userId', user.uid);
+          history.push(HOME);
+        }
+      })
+      .catch(err => {
+        this.setState({ error: err });
+      });
+  }
 
   handleSubmit = e => {
     const {
@@ -46,7 +68,7 @@ class SignUpForm extends Component {
           await localStorage.setItem('userId', result.user.uid);
           await push(HOME);
         } catch (error) {
-          this.setState({ errorMessage: error.message });
+          this.setState({ error });
         }
       }
     });
@@ -62,7 +84,7 @@ class SignUpForm extends Component {
   };
 
   render() {
-    const { errorMessage } = this.state;
+    const { error } = this.state;
 
     const {
       form: { getFieldDecorator },
@@ -149,7 +171,7 @@ class SignUpForm extends Component {
                 />
               )}
             </Form.Item>
-            {errorMessage && <p className="errorMesaage">{errorMessage}</p>}
+            {error && <p className="errorMesaage">{error.message}</p>}
             <Form.Item>
               <Button type="primary" htmlType="submit">
                 Sign Up
@@ -189,6 +211,7 @@ SignUpForm.propTypes = {
   }).isRequired,
   firebase: PropTypes.shape({
     user: PropTypes.shape.isRequired,
+    auth: PropTypes.object.isRequired,
     doCreateUserWithEmailAndPassword: PropTypes.func.isRequired,
   }).isRequired,
 };
