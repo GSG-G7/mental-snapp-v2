@@ -72,12 +72,18 @@ const JournalCard = ({
   );
 };
 
+JournalCard.defaultProps = {
+  grateful: '',
+  challenge: '',
+  developing: '',
+};
+
 JournalCard.propTypes = {
   time: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  grateful: PropTypes.string.isRequired,
-  challenge: PropTypes.string.isRequired,
-  developing: PropTypes.string.isRequired,
+  grateful: PropTypes.string,
+  challenge: PropTypes.string,
+  developing: PropTypes.string,
   handleDelete: PropTypes.func.isRequired,
   journalId: PropTypes.string.isRequired,
   handleJournalDetails: PropTypes.func.isRequired,

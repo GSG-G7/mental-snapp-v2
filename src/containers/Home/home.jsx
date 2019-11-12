@@ -1,9 +1,10 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import moment from 'moment';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { Icon } from 'antd';
+import { Icon, Spin } from 'antd';
 import LogoHeader from '../../components/LogoHeader';
 import MainHeading from '../../components/MainHeading';
 import Card from '../../components/JournalCard';
@@ -23,6 +24,7 @@ const Home = props => {
     handleClick,
     handleDelete,
     handleJournalDetails,
+    loading,
   } = props;
 
   return (
@@ -43,7 +45,7 @@ const Home = props => {
               suppressContentEditableWarning
               onBlur={handleBlur}
             >
-              {goal}
+              {loading ? <Spin size="small" /> : goal}
             </span>
           </p>
           {!isEditable ? (
@@ -68,7 +70,11 @@ const Home = props => {
       </section>
 
       <div className="cards-container">
-        {recentJournals.length > 0 ? (
+        {loading ? (
+          <div style={{ textAlign: 'center', margin: '9vh auto' }}>
+            <Spin size="large" />
+          </div>
+        ) : recentJournals.length > 0 ? (
           recentJournals.map(journal => (
             <Card
               key={journal.timestamp}
@@ -102,6 +108,7 @@ Home.propTypes = {
   handleClick: propTypes.func.isRequired,
   handleDelete: propTypes.func.isRequired,
   handleJournalDetails: propTypes.func.isRequired,
+  loading: propTypes.bool.isRequired,
 };
 
 export default Home;

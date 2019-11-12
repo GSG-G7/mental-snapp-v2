@@ -11,6 +11,7 @@ class Home extends Component {
     journals: [],
     goal: '',
     recentJournals: [],
+    loading: true,
   };
 
   componentDidMount() {
@@ -39,11 +40,13 @@ class Home extends Component {
             name: userName,
             goal: userGoal,
             recentJournals,
+            loading: false,
           });
         }
         return this.setState({
           name: userName,
           goal: userGoal,
+          loading: false,
         });
       });
   }
@@ -54,8 +57,11 @@ class Home extends Component {
     const { goal } = this.state;
     const { firebase } = this.props;
     this.setState({ isEditable: false });
+    // update the goal
+    // firebase
+    const userId =
+      firebase.auth.currentUser.uid || localStorage.getItem('userId');
 
-    const userId = firebase.auth.currentUser.uid;
     firebase.user(userId).set({ goal }, { merge: true });
   };
 
@@ -87,12 +93,20 @@ class Home extends Component {
   };
 
   render() {
-    const { isEditable, name, journals, goal, recentJournals } = this.state;
+    const {
+      isEditable,
+      name,
+      journals,
+      goal,
+      recentJournals,
+      loading,
+    } = this.state;
     return (
       <HomePage
         isEditable={isEditable}
         userName={name}
         journals={journals}
+        loading={loading}
         recentJournals={recentJournals}
         goal={goal}
         handelSave={this.handelSave}
@@ -113,9 +127,10 @@ Home.propTypes = {
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    uid: propTypes.string.isRequired,
+    uid: propTypes.string,
     user: propTypes.object.isRequired,
     db: propTypes.object.isRequired,
     collection: propTypes.object.isRequired,
+    currentUser: propTypes.object.isRequired,
   }).isRequired,
 };
