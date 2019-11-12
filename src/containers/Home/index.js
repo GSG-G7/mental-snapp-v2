@@ -4,23 +4,49 @@ import propTypes from 'prop-types';
 import HomePage from './home';
 import { withFirebase } from '../Firebase/index';
 
-import { journalsData, username, usergoal } from './staticData';
-
 class Home extends Component {
   state = {
     isEditable: false,
-    userName: 'Alaa Taima',
+    name: '',
     journals: [],
     goal: '',
+    recentJournals: [],
+    loading: true,
   };
 
   componentDidMount() {
+    let { recentJournals } = this.state;
+    const { firebase } = this.props;
+    const userId = localStorage.getItem('userId');
     // setState to journals and goal that we got from firebase
-    this.setState({
-      journals: journalsData,
-      userName: username,
-      goal: usergoal,
-    });
+    firebase.db
+      .collection('users')
+      .doc(userId)
+      .onSnapshot(snapshot => {
+        const userGoal = snapshot.data().goal;
+        const userName = snapshot.data().name;
+        if (snapshot.data().userJournals) {
+          const userJournal = snapshot.data().userJournals;
+
+          if (userJournal.length > 3) {
+            recentJournals = userJournal.slice(-3);
+          } else if (userJournal.length <= 3) {
+            recentJournals = userJournal;
+          }
+          return this.setState({
+            journals: userJournal,
+            name: userName,
+            goal: userGoal,
+            recentJournals,
+            loading: false,
+          });
+        }
+        return this.setState({
+          name: userName,
+          goal: userGoal,
+          loading: false,
+        });
+      });
   }
 
   handleClick = () => this.setState({ isEditable: true });
@@ -31,19 +57,29 @@ class Home extends Component {
     this.setState({ isEditable: false });
     // update the goal
     // firebase
-    const userId = firebase.auth.currentUser.uid;
+    const userId =
+      firebase.auth.currentUser.uid || localStorage.getItem('userId');
 
     firebase.user(userId).set({ goal }, { merge: true });
   };
 
   handleDelete = id => {
     const { journals } = this.state;
+    const { firebase } = this.props;
+    const userId =
+      firebase.auth.currentUser.uid || localStorage.getItem('userId');
     message.warning('This Journal is deleted');
-    // 1- this card will be deleted from firbase store.
-    // 2- also it will be deleted from state as follows :
-
+    const filteredJournals = journals.filter(
+      journal => journal.timestamp !== id
+    );
+    firebase.db
+      .collection('users')
+      .doc(userId)
+      .update({
+        userJournals: filteredJournals,
+      });
     this.setState({
-      journals: journals.filter(card => card.id !== id),
+      journals: filteredJournals,
     });
   };
 
@@ -57,12 +93,21 @@ class Home extends Component {
   };
 
   render() {
-    const { isEditable, userName, journals, goal } = this.state;
+    const {
+      isEditable,
+      name,
+      journals,
+      goal,
+      recentJournals,
+      loading,
+    } = this.state;
     return (
       <HomePage
         isEditable={isEditable}
-        userName={userName}
+        userName={name}
         journals={journals}
+        loading={loading}
+        recentJournals={recentJournals}
         goal={goal}
         handelSave={this.handelSave}
         handleClick={this.handleClick}
@@ -82,8 +127,10 @@ Home.propTypes = {
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
+    uid: propTypes.string,
+    user: propTypes.func.isRequired,
+    db: propTypes.object.isRequired,
+    collection: propTypes.object.isRequired,
     currentUser: propTypes.object.isRequired,
-    uid: propTypes.string.isRequired,
-    user: propTypes.object.isRequired,
   }).isRequired,
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Form, Input, Icon, Button } from 'antd';
+import { Form, Input, Icon, Button, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -16,6 +16,7 @@ import './signUp.css';
 class SignUpForm extends Component {
   state = {
     errorMessage: '',
+    loading: false,
   };
 
   handleSubmit = e => {
@@ -27,6 +28,8 @@ class SignUpForm extends Component {
     e.preventDefault();
     validateFieldsAndScroll(async (err, values) => {
       if (!err) {
+        this.setState({ loading: true });
+
         try {
           const result = await firebase.doCreateUserWithEmailAndPassword(
             values.email,
@@ -42,11 +45,11 @@ class SignUpForm extends Component {
             },
             { merge: true }
           );
-
           await localStorage.setItem('userId', result.user.uid);
+          this.setState({ loading: false });
           await push(HOME);
         } catch (error) {
-          this.setState({ errorMessage: error.message });
+          this.setState({ errorMessage: error.message, loading: false });
         }
       }
     });
@@ -62,7 +65,7 @@ class SignUpForm extends Component {
   };
 
   render() {
-    const { errorMessage } = this.state;
+    const { errorMessage, loading } = this.state;
 
     const {
       form: { getFieldDecorator },
@@ -152,7 +155,7 @@ class SignUpForm extends Component {
             {errorMessage && <p className="errorMesaage">{errorMessage}</p>}
             <Form.Item>
               <Button type="primary" htmlType="submit">
-                Sign Up
+                {loading ? <Spin /> : 'Sign Up'}
               </Button>
             </Form.Item>
           </Form>
