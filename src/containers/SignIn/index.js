@@ -101,6 +101,13 @@ class SignInForm extends React.Component {
           <p className="forgot-password__link">Forgot Password?</p>
         </Link>
 
+        <p className="landing__aboutLink">
+          Don’t have an account ?
+          <Link to={ROUTES.SIGN_UP}>
+            <span className="landing__logo"> Sign Up</span>
+          </Link>
+        </p>
+
         <section className="signin__or">OR</section>
 
         <section className="signin__buttons">

@@ -4,7 +4,7 @@
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  font-family: 'VAGRounded', sans-serif;
+  font-family:  sans-serif;
 }
 
 .journal-card__top {
@@ -19,7 +19,7 @@
 }
 
 .journal-card__date {
-  width: 45%;
+  width: 50%;
 }
 
 .journal-card__time {
@@ -27,7 +27,7 @@
 }
 
 .journal-card__delete {
-  width: 10%;
+  width: 7%;
   display: flex;
   justify-content: flex-end;
 }

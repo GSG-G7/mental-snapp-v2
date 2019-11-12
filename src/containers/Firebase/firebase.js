@@ -20,6 +20,12 @@ class Firebase {
     this.db = app.firestore();
   }
 
+  forgotPassword = email => {
+    this.auth.sendPasswordResetEmail(email);
+  };
+
+  doSignOut = () => this.auth.signOut();
+
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
