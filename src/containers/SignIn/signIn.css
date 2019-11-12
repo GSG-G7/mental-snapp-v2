@@ -6,7 +6,6 @@
 .signin__form {
   width: 80%;
   margin: auto;
-  /* height: 40vh; */
   margin-top: 5vh;
 }
 
@@ -14,14 +13,18 @@
   width: 100%;
 }
 
+.signin .ant-spin-dot-item {
+  background-color: white !important;
+}
+
 .signin .forgot-password__link {
   color: #E9663A;
   line-height: 1;
   font-weight: 500;
   text-align: right;
-  padding-right: 2px;
-  margin-top: -18px;
+  margin: -18px auto 0;
   font-size: 14px;
+  width: 80%;
 }
 
 .signin__icon {
@@ -82,7 +85,8 @@
   }
   .signin .forgot-password__link {
     font-size: 19px;
-    margin-top: -2.4rem !important;
+    margin: -2.4rem auto 0 !important;
+    width: 80%;
   }
 }
 
@@ -102,7 +106,8 @@
   }
   .signin .forgot-password__link {
     font-size: 19px;
-    margin-top: -17px;
+    margin: -17px auto 0;
+    width: 42vw;
   }
   .signin .main__header svg {
     display: none;

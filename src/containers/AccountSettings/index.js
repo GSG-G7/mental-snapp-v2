@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import AccountSettings from './accountSettings';
 import { withFirebase } from '../Firebase/index';
 import { LANDING } from '../../constants/routes';
@@ -7,11 +7,28 @@ import { LANDING } from '../../constants/routes';
 class Account extends Component {
   state = {
     info: {
-      name: 'fares98',
-      email: 'fares98@gmai.com',
-      createdAccount: true,
+      name: '',
+      email: '',
     },
+    loading: true,
   };
+
+  componentDidMount() {
+    const { firebase } = this.props;
+    const userId = localStorage.getItem('userId');
+    firebase.db
+      .collection('users')
+      .doc(userId)
+      .get()
+      .then(snapshot => {
+        const userEmail = snapshot.data().email;
+        const userName = snapshot.data().name;
+        this.setState({
+          info: { name: userName, email: userEmail },
+          loading: false,
+        });
+      });
+  }
 
   handleLogOut = () => {
     const { firebase, history } = this.props;
@@ -21,17 +38,27 @@ class Account extends Component {
   };
 
   render() {
-    const { info } = this.state;
-    return <AccountSettings info={info} handleLogOut={this.handleLogOut} />;
+    const { info, loading } = this.state;
+    return (
+      <AccountSettings
+        loading={loading}
+        info={info}
+        handleLogOut={this.handleLogOut}
+      />
+    );
   }
 }
 
 Account.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
   }).isRequired,
-  firebase: PropTypes.shape({
-    doSignOut: PropTypes.func.isRequired,
+  firebase: propTypes.shape({
+    auth: propTypes.object.isRequired,
+    user: propTypes.func.isRequired,
+    db: propTypes.object.isRequired,
+    collection: propTypes.object.isRequired,
+    doSignOut: propTypes.func.isRequired,
   }).isRequired,
 };
 
