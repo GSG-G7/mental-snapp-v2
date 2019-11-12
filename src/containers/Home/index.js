@@ -21,8 +21,7 @@ class Home extends Component {
     firebase.db
       .collection('users')
       .doc(userId)
-      .get()
-      .then(snapshot => {
+      .onSnapshot(snapshot => {
         const userGoal = snapshot.data().goal;
         const userName = snapshot.data().name;
         if (snapshot.data().userJournals) {
@@ -114,7 +113,6 @@ Home.propTypes = {
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    currentUser: propTypes.object.isRequired,
     uid: propTypes.string.isRequired,
     user: propTypes.object.isRequired,
     db: propTypes.object.isRequired,
