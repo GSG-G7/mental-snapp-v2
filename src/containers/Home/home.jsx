@@ -3,8 +3,8 @@ import React from 'react';
 import moment from 'moment';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Icon, Spin } from 'antd';
 
+import { Icon, Spin } from 'antd';
 import LogoHeader from '../../components/LogoHeader';
 import MainHeading from '../../components/MainHeading';
 import Card from '../../components/JournalCard';
@@ -86,7 +86,9 @@ const Home = props => {
               developing={journal.developing && journal.developing.title}
               handleDelete={() => handleDelete(journal.timestamp)}
               journalId={journal.timestamp}
-              handleJournalDetails={handleJournalDetails}
+              handleJournalDetails={() => {
+                return handleJournalDetails(journal.timestamp);
+              }}
             />
           ))
         ) : (
@@ -100,6 +102,7 @@ const Home = props => {
 
 Home.propTypes = {
   isEditable: propTypes.bool.isRequired,
+  loading: propTypes.bool.isRequired,
   userName: propTypes.string.isRequired,
   recentJournals: propTypes.arrayOf(propTypes.object).isRequired,
   goal: propTypes.string.isRequired,
@@ -108,7 +111,6 @@ Home.propTypes = {
   handleClick: propTypes.func.isRequired,
   handleDelete: propTypes.func.isRequired,
   handleJournalDetails: propTypes.func.isRequired,
-  loading: propTypes.bool.isRequired,
 };
 
 export default Home;

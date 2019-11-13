@@ -27,7 +27,6 @@ class Home extends Component {
         const userName = snapshot.data().name;
         if (snapshot.data().userJournals) {
           const userJournal = snapshot.data().userJournals;
-
           if (userJournal.length > 3) {
             recentJournals = userJournal.slice(-3);
           } else if (userJournal.length <= 3) {
@@ -55,11 +54,9 @@ class Home extends Component {
     const { goal } = this.state;
     const { firebase } = this.props;
     this.setState({ isEditable: false });
-    // update the goal
-    // firebase
+
     const userId =
       firebase.auth.currentUser.uid || localStorage.getItem('userId');
-
     firebase.user(userId).set({ goal }, { merge: true });
   };
 
@@ -72,12 +69,14 @@ class Home extends Component {
     const filteredJournals = journals.filter(
       journal => journal.timestamp !== id
     );
+    // 1- this card will be deleted from firbase store.
     firebase.db
       .collection('users')
       .doc(userId)
       .update({
         userJournals: filteredJournals,
       });
+    // 2- also it will be deleted from state as follows :
     this.setState({
       journals: filteredJournals,
     });
@@ -88,7 +87,9 @@ class Home extends Component {
   handleJournalDetails = id => {
     const {
       history: { push },
+      match: { params },
     } = this.props;
+    params.id = id;
     push(`/journal/${id}`);
   };
 
@@ -125,12 +126,14 @@ Home.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,
+  match: propTypes.shape({
+    params: propTypes.object.isRequired,
+  }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    uid: propTypes.string,
-    user: propTypes.func.isRequired,
+    uid: propTypes.string.isRequired,
+    user: propTypes.object.isRequired,
     db: propTypes.object.isRequired,
     collection: propTypes.object.isRequired,
-    currentUser: propTypes.object.isRequired,
   }).isRequired,
 };
