@@ -18,13 +18,12 @@ class Home extends Component {
     let { recentJournals } = this.state;
     const { firebase } = this.props;
     const userId = localStorage.getItem('userId');
-    // setState to journals and goal that we got from firebase
     firebase.db
       .collection('users')
       .doc(userId)
       .onSnapshot(snapshot => {
         const userGoal = snapshot.data().goal;
-        const userName = snapshot.data().name;
+        const userName = `${snapshot.data().name}'s`;
         if (snapshot.data().userJournals) {
           const userJournal = snapshot.data().userJournals;
           if (userJournal.length > 3) {
@@ -69,14 +68,12 @@ class Home extends Component {
     const filteredJournals = journals.filter(
       journal => journal.timestamp !== id
     );
-    // 1- this card will be deleted from firbase store.
     firebase.db
       .collection('users')
       .doc(userId)
       .update({
         userJournals: filteredJournals,
       });
-    // 2- also it will be deleted from state as follows :
     this.setState({
       journals: filteredJournals,
     });
