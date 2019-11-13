@@ -1,74 +1,108 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Input, Icon, Button, Form } from 'antd';
+
 import { ReactComponent as ConfirmImg } from '../assets/images/confirmPass.svg';
 import Header from '../../components/Header';
+import { EDIT_ACCOUNT } from '../../constants/routes';
+import { withFirebase } from '../Firebase';
 
 import './confirmPass.css';
 
-const confirmPass = props => {
-  const {
-    history: { goBack },
-    form: { getFieldDecorator, validateFields },
-  } = props;
+class confirmPass extends Component {
+  state = {
+    errorMesage: '',
+  };
 
-  const handleSubmit = e => {
+  handleSubmit = e => {
     e.preventDefault();
-    validateFields((err, values) => {
+
+    const {
+      history: { push },
+      form: { validateFields },
+      firebase,
+    } = this.props;
+    validateFields(async (err, values) => {
       if (!err) {
-        // eslint-disable-next-line no-console
-        console.log('Received values of form: ', values);
+        try {
+          const user = await firebase.auth.currentUser;
+          await firebase.doSignInWithEmailAndPassword(
+            user.email,
+            values.password
+          );
+          await push(EDIT_ACCOUNT);
+        } catch (error) {
+          this.setState({ errorMesage: 'Invalid password' });
+        }
       }
     });
   };
 
-  return (
-    <div className="confirm-pass">
-      <Header text="Confirm Password" handleBack={goBack} />
+  render() {
+    const { errorMesage } = this.state;
 
-      <section className="confirm-pass__body">
-        <p className="confirm-pass__text">
-          This is to make sure it&apos;s you!
-        </p>
-        <Form className="confirm-pass__form" onSubmit={handleSubmit}>
-          <Form.Item>
-            {getFieldDecorator('password', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Enter Your Password',
-                },
-              ],
-            })(
-              <Input.Password
-                prefix={
-                  <Icon type="lock" className="confirm-pass__form__icon" />
-                }
-                placeholder="Enter your password"
-              />
-            )}
-          </Form.Item>
+    const {
+      history: { goBack },
+      form: { getFieldDecorator },
+    } = this.props;
 
-          <Button type="primary" size="large">
-            Procceed To Edit
-          </Button>
-        </Form>
-        <ConfirmImg className="confirm-pass__img" />
-      </section>
-    </div>
-  );
-};
+    return (
+      <div className="confirm-pass">
+        <Header text="Confirm Password" handleBack={goBack} />
+
+        <section className="confirm-pass__body">
+          <p className="confirm-pass__text">
+            This is to make sure it&apos;s you!
+          </p>
+          <Form className="confirm-pass__form" onSubmit={this.handleSubmit}>
+            <Form.Item>
+              {getFieldDecorator('password', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Enter Your Password',
+                  },
+                ],
+              })(
+                <Input.Password
+                  prefix={
+                    <Icon type="lock" className="confirm-pass__form__icon" />
+                  }
+                  placeholder="Enter your password"
+                  onChange={() => this.setState({ errorMesage: '' })}
+                />
+              )}
+            </Form.Item>
+
+            {errorMesage && <p style={{ color: 'red' }}>{errorMesage}</p>}
+
+            <Button type="primary" size="large" onClick={this.handleSubmit}>
+              Procceed To Edit
+            </Button>
+          </Form>
+          <ConfirmImg className="confirm-pass__img" />
+        </section>
+      </div>
+    );
+  }
+}
 
 const confirmPasswordForm = Form.create({ name: 'confirm pass' })(confirmPass);
 
 confirmPass.propTypes = {
   history: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
   }).isRequired,
   form: PropTypes.shape({
     validateFields: PropTypes.func.isRequired,
     getFieldDecorator: PropTypes.func.isRequired,
   }).isRequired,
+
+  firebase: PropTypes.shape({
+    doSignInWithEmailAndPassword: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
-export default confirmPasswordForm;
+export default withFirebase(confirmPasswordForm);

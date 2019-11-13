@@ -47,6 +47,8 @@ class SignUpForm extends Component {
     e.preventDefault();
     validateFieldsAndScroll(async (err, values) => {
       if (!err) {
+        this.setState({ loading: true });
+
         try {
           const result = await firebase.doCreateUserWithEmailAndPassword(
             values.email,
@@ -62,11 +64,11 @@ class SignUpForm extends Component {
             },
             { merge: true }
           );
-
           await localStorage.setItem('userId', result.user.uid);
+          this.setState({ loading: false });
           await push(HOME);
         } catch (error) {
-          this.setState({ error });
+          this.setState({ error, loading: false });
         }
       }
     });
@@ -176,7 +178,7 @@ class SignUpForm extends Component {
             {error && <p className="errorMesaage">{error.message}</p>}
             <Form.Item>
               <Button type="primary" htmlType="submit">
-                Sign Up
+                {loading ? <Spin /> : 'Sign Up'}
               </Button>
             </Form.Item>
           </Form>

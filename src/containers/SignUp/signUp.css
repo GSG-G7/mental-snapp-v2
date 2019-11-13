@@ -1,6 +1,9 @@
 .signup {
-  /* overflow: hidden; */
   text-align: center;
+}
+.signup  
+.ant-spin-dot-item {
+  background-color: white !important;
 }
 
 .signup__form {

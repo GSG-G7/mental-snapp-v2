@@ -1,10 +1,14 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import propTypes from 'prop-types';
 import { message } from 'antd';
 import Question from './questions';
+import { withFirebase } from '../Firebase/index';
 
 import schema from './questionValidation';
 import entryData from './data';
+
+const userJournals = [];
 
 class Questions extends React.Component {
   state = {
@@ -12,8 +16,12 @@ class Questions extends React.Component {
     title: '',
     content: '',
     errors: {},
-    answers: [],
+    journals: [{}],
   };
+
+  componentDidMount() {
+    this.setState({ journals: [{}] });
+  }
 
   handleConfirm = e => {
     message.warning("You didn't make an entry today");
@@ -26,12 +34,18 @@ class Questions extends React.Component {
   };
 
   handleNext = async () => {
-    const { current, title, content, answers } = this.state;
+    const { title, content, journals } = this.state;
+    let { current } = this.state;
     try {
       await schema.validate({ title, content }, { abortEarly: false });
-      answers.push({ title, content });
+      current += 1;
+      if (current === 1) {
+        journals[0].grateful = { title, body: content };
+      } else if (current === 2) {
+        journals[0].challenge = { title, body: content };
+      }
       return this.setState({
-        current: current + 1,
+        current,
         content: '',
         title: '',
         errors: {},
@@ -46,16 +60,24 @@ class Questions extends React.Component {
   };
 
   handleSubmit = async () => {
-    const { title, content, answers } = this.state;
-    const { history } = this.props;
+    const { title, content, journals } = this.state;
+    const { history, firebase } = this.props;
     try {
       await schema.validate({ title, content }, { abortEarly: false });
-      answers.push({ title, content });
+      journals[0].developing = { title, body: content };
+      journals[0].timestamp = new Date().toString();
+      userJournals.push(journals[0]);
+
+      // firebase
+      const userId = firebase.auth.currentUser.uid;
+      firebase.user(userId).set({ userJournals }, { merge: true });
+
+      // console.log(userJournals);
       message.success('Yes, you have added a journal');
       history.push('/home');
-      // here, a request will be post to firebase to save data
-      // that will be as follows : [{title:'', content:'', time:'', date:'',month:''}]
-      return this.setState({ answers: [] });
+      return this.setState({
+        journals: [{}],
+      });
     } catch (error) {
       const objError = {};
       error.inner.forEach(fielderror => {
@@ -71,20 +93,28 @@ class Questions extends React.Component {
   };
 
   handleSkip = () => {
-    const { current, answers } = this.state;
+    const { current, journals } = this.state;
     if (current < entryData.length - 1) {
       this.setState({ current: current + 1, errors: {} });
     } else {
-      const { history } = this.props;
-      if (answers.length !== 0) {
-        message.success('Yes, you have added a journal');
-        history.push('/home');
-        // here, a request will be post to firebase to save data
-        // that will be as follows : [{title:'', content:'', time:'', date:'',month:''}]
-        this.setState({ answers: [] });
-      } else {
+      const { history, firebase } = this.props;
+      if (
+        journals[0].grateful === undefined &&
+        journals[0].challenge === undefined
+      ) {
         message.warning("You didn't make an entry today");
         history.push('/home');
+        this.setState({ journals: [{}] });
+      } else {
+        journals[0].timestamp = new Date().toString();
+        userJournals.push(journals[0]);
+
+        // firebase
+        const userId = firebase.auth.currentUser.uid;
+        firebase.user(userId).set({ userJournals }, { merge: true });
+        message.success('Yes, you have added a journal');
+        history.push('/home');
+        this.setState({ journals: [{}] });
       }
     }
   };
@@ -117,4 +147,4 @@ Questions.propTypes = {
   }).isRequired,
 };
 
-export default Questions;
+export default withFirebase(Questions);
