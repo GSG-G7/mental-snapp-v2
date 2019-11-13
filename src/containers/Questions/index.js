@@ -19,6 +19,10 @@ class Questions extends React.Component {
     journals: [{}],
   };
 
+ componentDidMount() {
+    this.setState({ journals: [{}] });
+  }
+
   handleConfirm = e => {
     message.warning("You didn't make an entry today");
     const { history } = this.props;
