@@ -19,7 +19,7 @@ class Questions extends React.Component {
     journals: [{}],
   };
 
- componentDidMount() {
+  componentDidMount() {
     this.setState({ journals: [{}] });
   }
 
