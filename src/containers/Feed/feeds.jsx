@@ -31,37 +31,42 @@ class Feed extends Component {
       .get()
       .then(snapshot => {
         const data = snapshot.data().userJournals;
-        const monthArray = data.map(journal =>
-          moment(journal.timestamp).format('MMMM')
-        );
-        const filteredObject = monthArray.reduce((acc, curr) => {
-          if (typeof acc[curr] == 'undefined') {
-            acc[curr] = 1;
-          } else {
-            acc[curr] += 1;
-          }
-          return acc;
-        }, {});
+        if (data) {
+          const monthArray = data.map(journal =>
+            moment(journal.timestamp).format('MMMM')
+          );
+          const filteredObject = monthArray.reduce((acc, curr) => {
+            if (typeof acc[curr] == 'undefined') {
+              acc[curr] = 1;
+            } else {
+              acc[curr] += 1;
+            }
+            return acc;
+          }, {});
 
-        const keys = Object.keys(filteredObject);
+          const keys = Object.keys(filteredObject);
 
-        for (let i = 0; i < months.length; i++) {
-          for (let j = 0; j < keys.length; j++) {
-            if (months[i].month === keys[j]) {
-              months[i].count = filteredObject[keys[j]];
+          for (let i = 0; i < months.length; i++) {
+            for (let j = 0; j < keys.length; j++) {
+              if (months[i].month === keys[j]) {
+                months[i].count = filteredObject[keys[j]];
+              }
             }
           }
+          const currentMonthJournal = data.filter(
+            journal =>
+              moment(journal.timestamp).format('MMMM') ===
+              moment(new Date()).format('MMMM')
+          );
+          this.setState({
+            monthCount: months,
+            data: currentMonthJournal,
+            loading: false,
+            allJournals: data,
+          });
         }
-        const currentMonthJournal = data.filter(
-          journal =>
-            moment(journal.timestamp).format('MMMM') ===
-            moment(new Date()).format('MMMM')
-        );
         this.setState({
-          monthCount: months,
-          data: currentMonthJournal,
           loading: false,
-          allJournals: data,
         });
       });
   }
@@ -144,8 +149,8 @@ class Feed extends Component {
             data.map(journal => (
               <JournalCard
                 key={journal.timestamp}
-                time={moment(journal.timestamp).format('MMMM Do')}
-                date={moment(journal.timestamp).format('h:mm a')}
+                time={moment(journal.timestamp).format('h:mm a')}
+                date={moment(journal.timestamp).format('MMMM Do')}
                 grateful={journal.grateful && journal.grateful.title}
                 challenge={journal.challenge && journal.challenge.title}
                 developing={journal.developing && journal.developing.title}

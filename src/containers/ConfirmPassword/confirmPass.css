@@ -12,12 +12,13 @@
 }
 
 .confirm-pass__form {
+  text-align: center;
   width: 90%;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 17vh;
+  height: 22vh;
 }
 
 .confirm-pass__form__icon {

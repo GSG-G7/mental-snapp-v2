@@ -1,26 +1,58 @@
 import React from 'react';
-
-import { Form, Input, Icon, Button, Checkbox } from 'antd';
+import { message, Form, Input, Icon, Button, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 
+import { withFirebase } from '../Firebase';
 import Header from '../../components/Header';
 import './editAccount.css';
+import * as ROUTES from '../../constants/routes';
 
 const EditAccount = props => {
   const {
+    firebase,
     userInfo: { name, email },
     checked,
     handleChange,
+    handleErrorMessage,
+    errorMessage,
     handleGoBack,
+    handlePush,
     form: { getFieldDecorator, validateFieldsAndScroll },
   } = props;
-
   const handleSubmit = e => {
     e.preventDefault();
-    validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        // eslint-disable-next-line no-console
-        console.log('Received values of form: ', values);
+    const user = firebase.auth.currentUser;
+    const userId =
+      firebase.auth.currentUser.uid || localStorage.getItem('userId');
+    validateFieldsAndScroll(async (err, values) => {
+      try {
+        if (!err) {
+          if (!values.password) {
+            await user.updateProfile({
+              displayName: values.name,
+            });
+            await user.updateEmail(values.email);
+
+            firebase
+              .user(userId)
+              .set({ name: values.name, email: values.email }, { merge: true });
+          } else {
+            await user.updateProfile({
+              displayName: values.name,
+            });
+            await user.updateEmail(values.email);
+            await user.updatePassword(values.password);
+
+            firebase
+              .user(userId)
+              .set({ name: values.name, email: values.email }, { merge: true });
+          }
+          handlePush(ROUTES.ACCOUNT_SETTINGS);
+          message.success('account updated successfully');
+        }
+      } catch (error) {
+        if (error.message) handleErrorMessage(error.message);
+        // should do better handling here
       }
     });
   };
@@ -80,19 +112,24 @@ const EditAccount = props => {
               {getFieldDecorator('password', {
                 rules: [
                   {
-                    required: checked,
-                    message: 'Enter your password',
+                    pattern: new RegExp(
+                      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d].{7,}$/
+                    ),
+                    required: true,
+                    message:
+                      'The password must be at least 8 alphanumeric characters',
                   },
                 ],
               })(
                 <Input.Password
                   prefix={<Icon type="lock" className="edit-account__icon" />}
                   placeholder="Password"
+                  autoComplete="off"
                 />
               )}
             </Form.Item>
           )}
-
+          {errorMessage && <p>{errorMessage.message}</p>}
           <Form.Item>
             <Button type="primary" htmlType="submit">
               Save Changes
@@ -119,6 +156,13 @@ EditAccount.propTypes = {
   checked: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleGoBack: PropTypes.func.isRequired,
+  firebase: PropTypes.shape({
+    auth: PropTypes.object.isRequired,
+    user: PropTypes.func.isRequired,
+  }).isRequired,
+  handlePush: PropTypes.func.isRequired,
+  handleErrorMessage: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired,
 };
 
-export default editAccount;
+export default withFirebase(editAccount);
