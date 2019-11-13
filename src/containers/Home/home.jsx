@@ -86,9 +86,9 @@ const Home = props => {
               developing={journal.developing && journal.developing.title}
               handleDelete={() => handleDelete(journal.timestamp)}
               journalId={journal.timestamp}
-              handleJournalDetails={() =>
-                // eslint-disable-next-line prettier/prettier
-                handleJournalDetails(journal.timestamp)}
+              handleJournalDetails={() => {
+                return handleJournalDetails(journal.timestamp);
+              }}
             />
           ))
         ) : (
