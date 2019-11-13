@@ -1,3 +1,11 @@
+.spin {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .signin {
   overflow: hidden;
   text-align: center;
@@ -15,7 +23,7 @@
 }
 
 .signin .forgot-password__link {
-  color: #E9663A;
+  color: #e9663a;
   line-height: 1;
   font-weight: 500;
   text-align: right;
@@ -34,7 +42,8 @@
   margin-top: 10px;
 }
 
-.signin__or::before, .signin__or::after {
+.signin__or::before,
+.signin__or::after {
   content: " __________ ";
   position: relative;
   top: -7px;
@@ -71,7 +80,8 @@
     font-size: 30px;
     margin-bottom: 60px;
   }
-  .signin__or::before, .signin__or::after {
+  .signin__or::before,
+  .signin__or::after {
     content: " _________________ ";
     top: -10px;
   }
@@ -97,7 +107,8 @@
   .signin .ant-form-item-control {
     line-height: 2vh;
   }
-  .signin__or::before, .signin__or::after {
+  .signin__or::before,
+  .signin__or::after {
     content: " _______________________ ";
   }
   .signin .forgot-password__link {
@@ -114,7 +125,8 @@
     height: 25vh;
     width: 70%;
   }
-  .signin__or::before, .signin__or::after {
+  .signin__or::before,
+  .signin__or::after {
     content: " __________________________________ ";
   }
   .signin__buttons {
@@ -130,7 +142,7 @@
   .signin .ant-input {
     height: 50px !important;
     font-size: 1.3rem;
-    padding-right: 50px
+    padding-right: 50px;
   }
   .signin .ant-form-item-control {
     line-height: 2vh;
@@ -142,7 +154,7 @@
   .signin svg {
     width: 25px;
     height: 25px;
-    margin-right: 20px
+    margin-right: 20px;
   }
   .ant-input-affix-wrapper .ant-input:not(:first-child) {
     padding-left: 50px !important;

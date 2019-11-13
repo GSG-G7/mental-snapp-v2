@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Form, Input, Icon, Button } from 'antd';
+import { Form, Input, Icon, Button, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -16,23 +16,21 @@ import './signUp.css';
 class SignUpForm extends Component {
   state = {
     error: '',
+    loading: false,
   };
 
   componentDidMount() {
     const { firebase, history } = this.props;
+    this.setState({ loading: true });
     firebase.auth
       .getRedirectResult()
       .then(result => {
         const { user } = result;
         if (user !== null) {
-          firebase.user(user.uid).set({
-            name: user.displayName,
-            email: user.email,
-            userID: user.uid,
-            goal: '',
-          });
-          localStorage.setItem('userId', user.uid);
+          // we need to add the user data to the db here
           history.push(HOME);
+        } else {
+          this.setState({ loading: false });
         }
       })
       .catch(err => {
@@ -84,14 +82,18 @@ class SignUpForm extends Component {
   };
 
   render() {
-    const { error } = this.state;
+    const { error, loading } = this.state;
 
     const {
       form: { getFieldDecorator },
       history: { goBack },
     } = this.props;
 
-    return (
+    return loading ? (
+      <div className="spin">
+        <Spin size="large" />
+      </div>
+    ) : (
       <div className="signup">
         <Header text="Sign Up" handleBack={goBack} />
 
