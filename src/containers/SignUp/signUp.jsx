@@ -41,7 +41,7 @@ class SignUpForm extends Component {
               name: values.name,
               email: values.email,
               userID: result.user.uid,
-              goal: '',
+              goal: 'Enter your goal here',
             },
             { merge: true }
           );

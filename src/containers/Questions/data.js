@@ -1,17 +1,17 @@
 export default [
   {
     id: 1,
-    heading: 'Today, Iam grateful for',
+    heading: 'Today, I am grateful for',
     percent: 34,
   },
   {
     id: 2,
-    heading: 'Challenge I face',
+    heading: 'Challenges I face',
     percent: 68,
   },
   {
     id: 3,
-    heading: 'Iam looking to develop',
+    heading: 'I am looking to develop',
     percent: 100,
   },
 ];

@@ -30,9 +30,9 @@ class Feed extends Component {
       .doc(userId)
       .get()
       .then(snapshot => {
-        const data = snapshot.data().userJournals;
-        if (data) {
-          const monthArray = data.map(journal =>
+        if (snapshot.data().userJournals) {
+          const allUserJournal = snapshot.data().userJournals;
+          const monthArray = allUserJournal.map(journal =>
             moment(journal.timestamp).format('MMMM')
           );
           const filteredObject = monthArray.reduce((acc, curr) => {
@@ -53,7 +53,7 @@ class Feed extends Component {
               }
             }
           }
-          const currentMonthJournal = data.filter(
+          const currentMonthJournal = allUserJournal.filter(
             journal =>
               moment(journal.timestamp).format('MMMM') ===
               moment(new Date()).format('MMMM')
@@ -62,7 +62,7 @@ class Feed extends Component {
             monthCount: months,
             data: currentMonthJournal,
             loading: false,
-            allJournals: data,
+            allJournals: allUserJournal,
           });
         }
         this.setState({
@@ -71,14 +71,21 @@ class Feed extends Component {
       });
   }
 
+  handleChange = value => {
+    const { allJournals } = this.state;
+    const selectedJournal = allJournals.filter(
+      journal => moment(journal.timestamp).format('MMMM') === value
+    );
+    this.setState({ data: selectedJournal });
+  };
+
   handleDelete = id => {
     const { firebase } = this.props;
     const userId = firebase.auth.currentUser.uid;
 
-    const { data, monthCount } = this.state;
+    const { data, monthCount, allJournals } = this.state;
     message.warning('This Journal is deleted');
 
-    // 1- also it will be deleted from state as follows :
     const deletedCardMonth = moment(data[0].timestamp).format('MMMM');
     monthCount.map(month => {
       if (month.month === deletedCardMonth) {
@@ -87,26 +94,17 @@ class Feed extends Component {
       return month;
     });
 
-    // 2- this card will be deleted from firbase firestore.
-
     firebase.db
       .collection('users')
       .doc(userId)
       .update({
-        userJournals: data.filter(journal => journal.timestamp !== id),
+        userJournals: allJournals.filter(journal => journal.timestamp !== id),
       });
 
     this.setState({
       data: data.filter(journal => journal.timestamp !== id),
+      allJournals: allJournals.filter(journal => journal.timestamp !== id),
     });
-  };
-
-  handleChange = value => {
-    const { allJournals } = this.state;
-    const selectedJournal = allJournals.filter(
-      journal => moment(journal.timestamp).format('MMMM') === value
-    );
-    this.setState({ data: selectedJournal });
   };
 
   handleJournalDetails = id => {
