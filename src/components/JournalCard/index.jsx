@@ -27,7 +27,7 @@ const JournalCard = ({
         </div>
         <div className="journal-card__delete">
           <Popconfirm
-            title="Do you really want to delete this card ?"
+            title="Do you really want to delete this entry?"
             onConfirm={e => {
               e.stopPropagation();
               handleDelete();
