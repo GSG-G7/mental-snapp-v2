@@ -50,13 +50,15 @@ class index extends Component {
     }
   };
 
-  handleDelete = id => {
+  handleDelete = timestamp => {
     const { firebase } = this.props;
     const { journals } = this.state;
     const userId = firebase.auth.currentUser.uid;
 
     // 1- also it will be deleted from state as follows :
-    const filteredData = journals.filter(journal => journal.timestamp !== id);
+    const filteredData = journals.filter(
+      journal => journal.timestamp !== timestamp
+    );
 
     firebase.db
       .collection('users')
@@ -101,13 +103,7 @@ index.propTypes = {
   }).isRequired,
   firebase: PropTypes.shape({
     auth: PropTypes.object.isRequired,
-    uid: PropTypes.string.isRequired,
-    firestore: PropTypes.object.isRequired,
-    FieldValue: PropTypes.object.isRequired,
-    arrayUnion: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired,
     db: PropTypes.object.isRequired,
-    collection: PropTypes.object.isRequired,
     journals: PropTypes.func.isRequired,
   }).isRequired,
 };
