@@ -86,6 +86,7 @@ class Questions extends React.Component {
         .doc(userId)
         .update({
           userJournals: allUserJournals,
+          goal: title,
         });
 
       message.success('Yes, you have added a journal');
