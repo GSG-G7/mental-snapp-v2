@@ -36,7 +36,6 @@ class Account extends Component {
     const { firebase, history } = this.props;
     history.push(LANDING);
     localStorage.removeItem('userId');
-    window.location = '/';
     return firebase.doSignOut;
   };
 

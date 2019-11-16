@@ -12,12 +12,9 @@ export const withAuth = Component => props => {
     <AuthUserContext.Consumer>
       {authProps => {
         if (!authProps.loading) {
-          if (authProps.authUser) {
+          if (authProps.authUser)
             return <Component {...props} authUser={authProps.authUser} />;
-          }
-          if (!authProps.authUser) {
-            return <Redirect to={ROUTES.UNAUTHENTICATED} />;
-          }
+          return <Redirect to={ROUTES.UNAUTHENTICATED} />;
         }
         return (
           <div style={{ textAlign: 'center', paddingTop: '40vh' }}>

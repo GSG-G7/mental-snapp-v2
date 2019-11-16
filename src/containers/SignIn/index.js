@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { Form, Input, Icon, Button, Spin } from 'antd';
 import PropTypes from 'prop-types';
@@ -49,7 +49,7 @@ class SignInForm extends React.Component {
       history: { goBack },
     } = this.props;
     if (localStorage.getItem('userId')) {
-      return goBack();
+      return <Redirect to={ROUTES.HOME} />;
     }
     return (
       <div className="signin">

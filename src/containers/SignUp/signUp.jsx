@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Form, Input, Icon, Button, Spin } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
@@ -73,7 +73,7 @@ class SignUpForm extends Component {
     } = this.props;
 
     if (localStorage.getItem('userId')) {
-      return goBack();
+      return <Redirect to={HOME} />;
     }
     return (
       <div className="signup">

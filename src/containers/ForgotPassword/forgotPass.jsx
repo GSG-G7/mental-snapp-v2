@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Input, Button, Icon, message } from 'antd';
 
 import Header from '../../components/Header';
 import { ReactComponent as Vector } from '../assets/images/forgotPass.svg';
-
+import { HOME } from '../../constants/routes';
 import { withFirebase } from '../Firebase';
 
 import './forgotPass.css';
@@ -40,7 +41,7 @@ class ForgotPass extends Component {
       form: { getFieldDecorator },
     } = this.props;
     if (localStorage.getItem('userId')) {
-      return goBack();
+      return <Redirect to={HOME} />;
     }
     return (
       <div className="forgot-password">
