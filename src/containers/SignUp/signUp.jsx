@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Form, Input, Icon, Button, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 
 import Header from '../../components/Header';
 import { SIGN_IN, HOME } from '../../constants/routes';
@@ -12,6 +13,7 @@ import GoogleButton from '../../components/GoogleButton';
 
 import { withFirebase } from '../Firebase';
 import './signUp.css';
+import { withAuth } from '../Session';
 
 class SignUpForm extends Component {
   state = {
@@ -196,4 +198,7 @@ SignUpForm.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(SignUp);
+export default compose(
+  withFirebase,
+  withAuth
+)(SignUp);

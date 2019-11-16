@@ -9,6 +9,7 @@ const withAuthentication = Component => {
       super(props);
       this.state = {
         authUser: null,
+        loading: true,
       };
     }
 
@@ -16,19 +17,25 @@ const withAuthentication = Component => {
       const { firebase } = this.props;
       this.listener = firebase.auth.onAuthStateChanged(authUser => {
         authUser.uid === localStorage.getItem('userId')
-          ? this.setState({ authUser: authUser.uid })
-          : this.setState({ authUser: null });
+          ? this.setState({ authUser: authUser.uid, loading: false })
+          : this.setState({ authUser: null, loading: false });
       });
     }
 
     componentWillUnmount() {
+      const { firebase } = this.props;
+      firebase.auth.onAuthStateChanged(authUser => {
+        authUser.uid === localStorage.getItem('userId')
+          ? this.setState({ authUser: authUser.uid })
+          : this.setState({ authUser: null });
+      });
       this.listener();
     }
 
     render() {
-      const { authUser } = this.state;
+      const { authUser, loading } = this.state;
       return (
-        <AuthUserContext.Provider value={authUser}>
+        <AuthUserContext.Provider value={{ authUser, loading }}>
           <Component {...this.props} />
         </AuthUserContext.Provider>
       );

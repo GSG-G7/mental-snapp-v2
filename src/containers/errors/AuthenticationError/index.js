@@ -5,6 +5,7 @@ import { ReactComponent as Illustration } from '../../assets/images/athenticatio
 import './style.css';
 
 const UnAthenticated = porps => {
+  localStorage.removeItem('userId');
   return (
     <div className="authentication-error">
       <Illustration />
