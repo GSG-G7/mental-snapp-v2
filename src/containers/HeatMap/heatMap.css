@@ -26,14 +26,18 @@
   color: rgba(36, 36, 36, 0.9);
 }
 
-.heat-map__body, .heat-map__journals {
-  padding: 0 1.2rem 1rem;
+.heat-map__journals {
+  padding: 0 0.5rem;
+}
+
+.react-calendar-heatmap {
+  margin: 0 0 0 2.5rem;
 }
 
 .heat-map__legend {
   padding: 0 1rem 1.5rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: baseline;
 }
 
