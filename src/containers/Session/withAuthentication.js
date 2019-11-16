@@ -5,9 +5,12 @@ import { withFirebase } from '../Firebase';
 
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
-    state = {
-      authUser: null,
-    };
+    constructor(props) {
+      super(props);
+      this.state = {
+        authUser: null,
+      };
+    }
 
     componentDidMount() {
       const { firebase } = this.props;
