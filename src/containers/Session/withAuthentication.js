@@ -16,14 +16,10 @@ const withAuthentication = Component => {
     componentDidMount() {
       const { firebase } = this.props;
       this.listener = firebase.auth.onAuthStateChanged(authUser => {
-        if (authUser) {
-          if (authUser.uid === localStorage.getItem('userId'))
-            this.setState({ authUser: authUser.uid, loading: false });
-          else {
-            localStorage.removeItem('userId');
-            this.setState({ authUser: null, loading: false });
-          }
-        } else {
+        if (authUser.uid === localStorage.getItem('userId'))
+          this.setState({ authUser: authUser.uid, loading: false });
+        else {
+          localStorage.removeItem('userId');
           this.setState({ authUser: null, loading: false });
         }
       });
