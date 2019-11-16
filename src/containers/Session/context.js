@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 /* eslint-disable no-nested-ternary */
 import React from 'react';
 import { Spin } from 'antd';
@@ -7,28 +8,21 @@ import * as ROUTES from '../../constants/routes';
 const AuthUserContext = React.createContext(null);
 
 export const withAuth = Component => props => {
-  const {
-    location: { pathname },
-    history: { goBack },
-  } = props;
-
   return (
     <AuthUserContext.Consumer>
       {authProps => {
-        return authProps.loading ? (
+        if (!authProps.loading) {
+          if (authProps.authUser) {
+            return <Component {...props} authUser={authProps.authUser} />;
+          }
+          if (!authProps.authUser) {
+            return <Redirect to={ROUTES.UNAUTHENTICATED} />;
+          }
+        }
+        return (
           <div style={{ textAlign: 'center', paddingTop: '40vh' }}>
             <Spin size="large" />
           </div>
-        ) : authProps.authUser ? (
-          pathname === '/sign-in' ||
-          pathname === '/sign-up' ||
-          pathname === '/forgot-password' ? (
-            goBack()
-          ) : (
-            <Component {...props} authUser={authProps.authUser} />
-          )
-        ) : (
-          <Redirect to={ROUTES.UNAUTHENTICATED} />
         );
       }}
     </AuthUserContext.Consumer>

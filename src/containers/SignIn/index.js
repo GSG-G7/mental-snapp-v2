@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { Form, Input, Icon, Button, Spin } from 'antd';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 
 import Header from '../../components/Header';
 import FacebookButton from '../../components/FacebookButton';
@@ -13,7 +12,6 @@ import { withFirebase } from '../Firebase/index';
 
 import './signIn.css';
 import * as ROUTES from '../../constants/routes';
-import { withAuth } from '../Session';
 
 class SignInForm extends React.Component {
   state = {
@@ -50,6 +48,9 @@ class SignInForm extends React.Component {
       form: { getFieldDecorator },
       history: { goBack },
     } = this.props;
+    if (localStorage.getItem('userId')) {
+      return goBack();
+    }
     return (
       <div className="signin">
         <Header text="Sign In" handleBack={goBack} />
@@ -123,10 +124,7 @@ class SignInForm extends React.Component {
 
 const SignIn = Form.create({ name: 'sign in' })(SignInForm);
 
-const signINForm = compose(
-  withAuth,
-  withFirebase
-)(SignIn);
+const signINForm = withFirebase(SignIn);
 
 SignInForm.propTypes = {
   form: PropTypes.shape({

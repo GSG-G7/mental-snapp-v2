@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Form, Input, Icon, Button, Spin } from 'antd';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 
 import Header from '../../components/Header';
 import { SIGN_IN, HOME } from '../../constants/routes';
@@ -13,7 +12,6 @@ import GoogleButton from '../../components/GoogleButton';
 
 import { withFirebase } from '../Firebase';
 import './signUp.css';
-import { withAuth } from '../Session';
 
 class SignUpForm extends Component {
   state = {
@@ -74,6 +72,9 @@ class SignUpForm extends Component {
       history: { goBack },
     } = this.props;
 
+    if (localStorage.getItem('userId')) {
+      return goBack();
+    }
     return (
       <div className="signup">
         <Header text="Sign Up" handleBack={goBack} />
@@ -198,7 +199,4 @@ SignUpForm.propTypes = {
   }).isRequired,
 };
 
-export default compose(
-  withFirebase,
-  withAuth
-)(SignUp);
+export default withFirebase(SignUp);

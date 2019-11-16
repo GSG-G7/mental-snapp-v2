@@ -16,19 +16,20 @@ const withAuthentication = Component => {
     componentDidMount() {
       const { firebase } = this.props;
       this.listener = firebase.auth.onAuthStateChanged(authUser => {
-        authUser.uid === localStorage.getItem('userId')
-          ? this.setState({ authUser: authUser.uid, loading: false })
-          : this.setState({ authUser: null, loading: false });
+        if (authUser) {
+          if (authUser.uid === localStorage.getItem('userId'))
+            this.setState({ authUser: authUser.uid, loading: false });
+          else {
+            localStorage.removeItem('userId');
+            this.setState({ authUser: null, loading: false });
+          }
+        } else {
+          this.setState({ authUser: null, loading: false });
+        }
       });
     }
 
     componentWillUnmount() {
-      const { firebase } = this.props;
-      firebase.auth.onAuthStateChanged(authUser => {
-        authUser.uid === localStorage.getItem('userId')
-          ? this.setState({ authUser: authUser.uid })
-          : this.setState({ authUser: null });
-      });
       this.listener();
     }
 
@@ -36,7 +37,7 @@ const withAuthentication = Component => {
       const { authUser, loading } = this.state;
       return (
         <AuthUserContext.Provider value={{ authUser, loading }}>
-          <Component {...this.props} />
+          <Component {...this.props} authUser={authUser} />
         </AuthUserContext.Provider>
       );
     }

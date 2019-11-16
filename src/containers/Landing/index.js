@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Button } from 'antd';
 import { ReactComponent as Illustration } from '../assets/images/landing.svg';
 import MainHeading from '../../components/MainHeading/index';
@@ -21,7 +21,11 @@ const LandingPage = () => {
           <SubHeading text="Tell your story and positively guide your thoughts" />
         </div>
         <Link to={SIGN_IN}>
-          <Button type="primary" className="landing__button">
+          <Button
+            type="primary"
+            className="landing__button"
+            onClick={() => <Redirect to={SIGN_IN} />}
+          >
             Sign In
           </Button>
         </Link>
