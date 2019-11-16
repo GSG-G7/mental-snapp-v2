@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 import { Form, Input, Button, Icon, message } from 'antd';
+import { withAuth } from '../Session/index';
 
 import Header from '../../components/Header';
 import { ReactComponent as Vector } from '../assets/images/forgotPass.svg';
@@ -114,4 +116,9 @@ const forgotPassForm = Form.create({ name: 'forgot_password_from' })(
   ForgotPass
 );
 
-export default withFirebase(forgotPassForm);
+const AuthForgotPassword = compose(
+  withAuth,
+  withFirebase
+)(forgotPassForm);
+
+export default AuthForgotPassword;

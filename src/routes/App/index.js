@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
+import withAuthentication from '../../containers/Session';
 
 import * as Containers from '../../containers';
 import 'antd/dist/antd.css';
@@ -97,4 +98,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withAuthentication(App);

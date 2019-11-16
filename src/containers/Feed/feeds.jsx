@@ -1,8 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import moment from 'moment';
+import { compose } from 'recompose';
 import propTypes from 'prop-types';
 import { Select, message, Spin } from 'antd';
+import { withAuth } from '../Session/index';
 
 import NavBar from '../../components/navigationBar';
 import JournalCard from '../../components/JournalCard';
@@ -185,4 +187,9 @@ Feed.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(Feed);
+const AuthFedd = compose(
+  withAuth,
+  withFirebase
+)(Feed);
+
+export default AuthFedd;

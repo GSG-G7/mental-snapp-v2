@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import { compose } from 'recompose';
 import AccountSettings from './accountSettings';
 import { withFirebase } from '../Firebase/index';
+import { withAuth } from '../Session/index';
 import { LANDING } from '../../constants/routes';
 
 class Account extends Component {
@@ -62,4 +64,9 @@ Account.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(Account);
+const AuthAccount = compose(
+  withAuth,
+  withFirebase
+)(Account);
+
+export default AuthAccount;
