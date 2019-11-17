@@ -4,6 +4,7 @@ import { ReactComponent as Illustration } from '../assets/images/about.svg';
 import { ReactComponent as Logo } from '../assets/images/logo.svg';
 import aboutData from './data';
 import Header from '../../components/Header';
+
 import './about.css';
 
 const About = props => {

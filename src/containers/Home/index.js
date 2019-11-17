@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { message } from 'antd';
 import propTypes from 'prop-types';
+import { compose } from 'recompose';
 import HomePage from './home';
 import { withFirebase } from '../Firebase/index';
+import { withAuth } from '../Session/index';
 
 class Home extends Component {
   state = {
@@ -117,7 +119,12 @@ class Home extends Component {
   }
 }
 
-export default withFirebase(Home);
+const AuthHome = compose(
+  withAuth,
+  withFirebase
+)(Home);
+
+export default AuthHome;
 
 Home.propTypes = {
   history: propTypes.shape({

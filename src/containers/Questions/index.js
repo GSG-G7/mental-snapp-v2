@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import propTypes from 'prop-types';
+import { compose } from 'recompose';
 import { message } from 'antd';
+import { withAuth } from '../Session/index';
 import Question from './questions';
 import { withFirebase } from '../Firebase/index';
 
@@ -170,4 +172,9 @@ Questions.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(Questions);
+const AuthQuestion = compose(
+  withAuth,
+  withFirebase
+)(Questions);
+
+export default AuthQuestion;

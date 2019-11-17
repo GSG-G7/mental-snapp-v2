@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import { compose } from 'recompose';
+import { withAuth } from '../Session/index';
 import { withFirebase } from '../Firebase/index';
 
 import JournalPage from './journal';
@@ -92,4 +94,9 @@ Journal.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(Journal);
+const AuthJournal = compose(
+  withAuth,
+  withFirebase
+)(Journal);
+
+export default AuthJournal;
