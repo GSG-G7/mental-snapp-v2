@@ -11,15 +11,14 @@ export const withAuth = Component => props => {
   return (
     <AuthUserContext.Consumer>
       {authProps => {
-        if (!authProps.loading) {
-          if (authProps.authUser)
-            return <Component {...props} authUser={authProps.authUser} />;
-          return <Redirect to={ROUTES.UNAUTHENTICATED} />;
-        }
-        return (
+        return authProps.loading ? (
           <div style={{ textAlign: 'center', paddingTop: '40vh' }}>
             <Spin size="large" />
           </div>
+        ) : authProps.authUser ? (
+          <Component {...props} authUser={authProps.authUser} />
+        ) : (
+          <Redirect to={ROUTES.UNAUTHENTICATED} />
         );
       }}
     </AuthUserContext.Consumer>
