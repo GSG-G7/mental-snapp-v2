@@ -18,13 +18,9 @@ class Firebase {
     app.initializeApp(firebaseConfig);
     this.auth = app.auth();
     this.db = app.firestore();
+    this.googleProvider = new app.auth.GoogleAuthProvider();
+    this.facebookProvider = new app.auth.FacebookAuthProvider();
   }
-
-  forgotPassword = email => {
-    this.auth.sendPasswordResetEmail(email);
-  };
-
-  doSignOut = () => this.auth.signOut();
 
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
@@ -32,11 +28,19 @@ class Firebase {
   doCreateUserWithEmailAndPassword = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
 
+  doSignInWithGoogle = () => this.auth.signInWithPopup(this.googleProvider);
+
+  doSignInWithFacebook = () => this.auth.signInWithPopup(this.facebookProvider);
+
+  forgotPassword = email => {
+    this.auth.sendPasswordResetEmail(email);
+  };
+
+  doSignOut = () => this.auth.signOut();
+
   user = uid => this.db.doc(`users/${uid}`);
 
   users = () => this.db.collection('users');
-
-  journals = () => this.db.collection('journals');
 }
 
 export default Firebase;

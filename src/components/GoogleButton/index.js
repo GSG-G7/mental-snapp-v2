@@ -1,19 +1,72 @@
-import React from 'react';
-
+import React, { Component } from 'react';
+import propTypes from 'prop-types';
+import { compose } from 'recompose';
+import { withRouter, Redirect } from 'react-router-dom';
+import { withFirebase } from '../../containers/Firebase';
 import { ReactComponent as GoogleImg } from '../../containers/assets/images/google.svg';
+import * as ROUTES from '../../constants/routes';
 import './style.css';
 
-const handleClick = () => {
-  // handle login or sign up with Google
+class SignInGoogle extends Component {
+  state = { error: null };
+
+  handleClick = () => {
+    const {
+      firebase,
+      history: { push },
+    } = this.props;
+    firebase
+      .doSignInWithGoogle()
+      .then(socialAuthUser => {
+        firebase.user(socialAuthUser.user.uid).set(
+          {
+            email: socialAuthUser.user.email,
+            name: socialAuthUser.user.displayName,
+            goal: '',
+            userID: socialAuthUser.user.uid,
+            createdBygoogle: true,
+          },
+          { merge: true }
+        );
+        localStorage.setItem('userId', socialAuthUser.user.uid);
+        this.setState({ error: null });
+        push(ROUTES.HOME);
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+  };
+
+  render() {
+    const { error } = this.state;
+    if (localStorage.getItem('userId')) {
+      return <Redirect to={ROUTES.HOME} />;
+    }
+    return (
+      <button type="submit" className="google-btn" onClick={this.handleClick}>
+        <GoogleImg className="google-btn__img" />
+        <span className="google-btn__text">Google</span>
+        {error && <p>{error.message}</p>}
+      </button>
+    );
+  }
+}
+
+SignInGoogle.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+  }).isRequired,
+  firebase: propTypes.shape({
+    auth: propTypes.object.isRequired,
+    uid: propTypes.string.isRequired,
+    user: propTypes.object.isRequired,
+    doSignInWithGoogle: propTypes.func.isRequired,
+  }).isRequired,
 };
 
-const GoogleButton = () => {
-  return (
-    <button type="submit" className="google-btn" onClick={handleClick}>
-      <GoogleImg className="google-btn__img" />
-      <span className="google-btn__text">Google</span>
-    </button>
-  );
-};
+const AuthSignInGoogle = compose(
+  withRouter,
+  withFirebase
+)(SignInGoogle);
 
-export default GoogleButton;
+export default AuthSignInGoogle;
