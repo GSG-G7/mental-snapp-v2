@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { message } from 'antd';
 import propTypes from 'prop-types';
+import { compose } from 'recompose';
 import HomePage from './home';
 import { withFirebase } from '../Firebase/index';
+import { withAuth } from '../Session/index';
 
 class Home extends Component {
   state = {
@@ -18,13 +20,12 @@ class Home extends Component {
     let { recentJournals } = this.state;
     const { firebase } = this.props;
     const userId = localStorage.getItem('userId');
-    // setState to journals and goal that we got from firebase
     firebase.db
       .collection('users')
       .doc(userId)
       .onSnapshot(snapshot => {
         const userGoal = snapshot.data().goal;
-        const userName = snapshot.data().name;
+        const userName = `${snapshot.data().name}'s`;
         if (snapshot.data().userJournals) {
           const userJournal = snapshot.data().userJournals;
           if (userJournal.length > 3) {
@@ -69,14 +70,12 @@ class Home extends Component {
     const filteredJournals = journals.filter(
       journal => journal.timestamp !== id
     );
-    // 1- this card will be deleted from firbase store.
     firebase.db
       .collection('users')
       .doc(userId)
       .update({
         userJournals: filteredJournals,
       });
-    // 2- also it will be deleted from state as follows :
     this.setState({
       journals: filteredJournals,
     });
@@ -120,7 +119,12 @@ class Home extends Component {
   }
 }
 
-export default withFirebase(Home);
+const AuthHome = compose(
+  withAuth,
+  withFirebase
+)(Home);
+
+export default AuthHome;
 
 Home.propTypes = {
   history: propTypes.shape({

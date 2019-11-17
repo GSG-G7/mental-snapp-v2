@@ -1,6 +1,5 @@
 import React from 'react';
-import { compose } from 'recompose';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { Form, Input, Icon, Button, Spin } from 'antd';
 import PropTypes from 'prop-types';
@@ -19,24 +18,6 @@ class SignInForm extends React.Component {
     error: {},
     loading: false,
   };
-
-  componentDidMount() {
-    const { firebase, history } = this.props;
-    this.setState({ loading: true });
-    firebase.auth
-      .getRedirectResult()
-      .then(result => {
-        if (result.user !== null) {
-          // we need to add the user data to the db here
-          history.push(ROUTES.HOME);
-        } else {
-          this.setState({ loading: false });
-        }
-      })
-      .catch(err => {
-        this.setState({ error: err });
-      });
-  }
 
   handleSubmit = e => {
     const { firebase, history } = this.props;
@@ -67,11 +48,10 @@ class SignInForm extends React.Component {
       form: { getFieldDecorator },
       history: { goBack },
     } = this.props;
-    return loading ? (
-      <div className="spin">
-        <Spin size="large" />
-      </div>
-    ) : (
+    if (localStorage.getItem('userId')) {
+      return <Redirect to={ROUTES.HOME} />;
+    }
+    return (
       <div className="signin">
         <Header text="Sign In" handleBack={goBack} />
 
@@ -158,13 +138,7 @@ SignInForm.propTypes = {
   }).isRequired,
   firebase: PropTypes.shape({
     doSignInWithEmailAndPassword: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    facebookProvider: PropTypes.object.isRequired,
-    user: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default compose(
-  withFirebase,
-  withRouter
-)(signINForm);
+export default signINForm;

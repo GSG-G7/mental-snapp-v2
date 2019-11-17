@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Form, Input, Icon, Button, Spin } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
@@ -15,28 +15,9 @@ import './signUp.css';
 
 class SignUpForm extends Component {
   state = {
-    error: '',
+    errorMessage: '',
     loading: false,
   };
-
-  componentDidMount() {
-    const { firebase, history } = this.props;
-    this.setState({ loading: true });
-    firebase.auth
-      .getRedirectResult()
-      .then(result => {
-        const { user } = result;
-        if (user !== null) {
-          // we need to add the user data to the db here
-          history.push(HOME);
-        } else {
-          this.setState({ loading: false });
-        }
-      })
-      .catch(err => {
-        this.setState({ error: err });
-      });
-  }
 
   handleSubmit = e => {
     const {
@@ -68,7 +49,7 @@ class SignUpForm extends Component {
           this.setState({ loading: false });
           await push(HOME);
         } catch (error) {
-          this.setState({ error, loading: false });
+          this.setState({ errorMessage: error.message, loading: false });
         }
       }
     });
@@ -84,18 +65,17 @@ class SignUpForm extends Component {
   };
 
   render() {
-    const { error, loading } = this.state;
+    const { errorMessage, loading } = this.state;
 
     const {
       form: { getFieldDecorator },
       history: { goBack },
     } = this.props;
 
-    return loading ? (
-      <div className="spin">
-        <Spin size="large" />
-      </div>
-    ) : (
+    if (localStorage.getItem('userId')) {
+      return <Redirect to={HOME} />;
+    }
+    return (
       <div className="signup">
         <Header text="Sign Up" handleBack={goBack} />
 
@@ -175,7 +155,7 @@ class SignUpForm extends Component {
                 />
               )}
             </Form.Item>
-            {error && <p className="errorMesaage">{error.message}</p>}
+            {errorMessage && <p className="errorMesaage">{errorMessage}</p>}
             <Form.Item>
               <Button type="primary" htmlType="submit">
                 {loading ? <Spin /> : 'Sign Up'}
@@ -215,7 +195,6 @@ SignUpForm.propTypes = {
   }).isRequired,
   firebase: PropTypes.shape({
     user: PropTypes.shape.isRequired,
-    auth: PropTypes.object.isRequired,
     doCreateUserWithEmailAndPassword: PropTypes.func.isRequired,
   }).isRequired,
 };

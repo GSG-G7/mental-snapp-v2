@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 import { Input, Icon, Button, Form } from 'antd';
+import { withAuth } from '../Session/index';
 
 import { ReactComponent as ConfirmImg } from '../assets/images/confirmPass.svg';
 import Header from '../../components/Header';
@@ -9,7 +11,7 @@ import { withFirebase } from '../Firebase';
 
 import './confirmPass.css';
 
-class confirmPass extends Component {
+class ConfirmPass extends Component {
   state = {
     errorMesage: '',
   };
@@ -87,9 +89,9 @@ class confirmPass extends Component {
   }
 }
 
-const confirmPasswordForm = Form.create({ name: 'confirm pass' })(confirmPass);
+const confirmPasswordForm = Form.create({ name: 'confirm pass' })(ConfirmPass);
 
-confirmPass.propTypes = {
+ConfirmPass.propTypes = {
   history: PropTypes.shape({
     goBack: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
@@ -105,4 +107,9 @@ confirmPass.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(confirmPasswordForm);
+const AuthConfirmaPassword = compose(
+  withAuth,
+  withFirebase
+)(confirmPasswordForm);
+
+export default AuthConfirmaPassword;

@@ -1,14 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import propTypes from 'prop-types';
+import { compose } from 'recompose';
 import { message } from 'antd';
+import { withAuth } from '../Session/index';
 import Question from './questions';
 import { withFirebase } from '../Firebase/index';
 
 import schema from './questionValidation';
 import entryData from './data';
-
-const userJournals = [];
 
 class Questions extends React.Component {
   state = {
@@ -17,10 +17,22 @@ class Questions extends React.Component {
     content: '',
     errors: {},
     journals: [{}],
+    allUserJournals: [],
   };
 
   componentDidMount() {
-    this.setState({ journals: [{}] });
+    const { firebase } = this.props;
+    const userId = localStorage.getItem('userId');
+    firebase.db
+      .collection('users')
+      .doc(userId)
+      .get()
+      .then(snapshot => {
+        if (snapshot.data().userJournals) {
+          const data = snapshot.data().userJournals;
+          this.setState({ allUserJournals: data });
+        }
+      });
   }
 
   handleConfirm = e => {
@@ -60,19 +72,25 @@ class Questions extends React.Component {
   };
 
   handleSubmit = async () => {
-    const { title, content, journals } = this.state;
+    const { title, content, journals, allUserJournals } = this.state;
     const { history, firebase } = this.props;
     try {
       await schema.validate({ title, content }, { abortEarly: false });
       journals[0].developing = { title, body: content };
       journals[0].timestamp = new Date().toString();
-      userJournals.push(journals[0]);
+      allUserJournals.push(journals[0]);
 
-      // firebase
+      this.setState({ allUserJournals });
+
       const userId = firebase.auth.currentUser.uid;
-      firebase.user(userId).set({ userJournals }, { merge: true });
+      firebase.db
+        .collection('users')
+        .doc(userId)
+        .update({
+          userJournals: allUserJournals,
+          goal: title,
+        });
 
-      // console.log(userJournals);
       message.success('Yes, you have added a journal');
       history.push('/home');
       return this.setState({
@@ -93,7 +111,7 @@ class Questions extends React.Component {
   };
 
   handleSkip = () => {
-    const { current, journals } = this.state;
+    const { current, journals, allUserJournals } = this.state;
     if (current < entryData.length - 1) {
       this.setState({ current: current + 1, errors: {} });
     } else {
@@ -107,11 +125,18 @@ class Questions extends React.Component {
         this.setState({ journals: [{}] });
       } else {
         journals[0].timestamp = new Date().toString();
-        userJournals.push(journals[0]);
+        allUserJournals.push(journals[0]);
 
-        // firebase
         const userId = firebase.auth.currentUser.uid;
-        firebase.user(userId).set({ userJournals }, { merge: true });
+
+        this.setState({ allUserJournals });
+
+        firebase.db
+          .collection('users')
+          .doc(userId)
+          .update({
+            userJournals: allUserJournals,
+          });
         message.success('Yes, you have added a journal');
         history.push('/home');
         this.setState({ journals: [{}] });
@@ -147,4 +172,9 @@ Questions.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(Questions);
+const AuthQuestion = compose(
+  withAuth,
+  withFirebase
+)(Questions);
+
+export default AuthQuestion;

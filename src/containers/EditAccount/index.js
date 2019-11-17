@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import { withAuth } from '../Session/index';
 import EditAccount from './editAccount';
 
 import { withFirebase } from '../Firebase';
@@ -68,4 +70,9 @@ Index.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(Index);
+const AuthEditAccount = compose(
+  withAuth,
+  withFirebase
+)(Index);
+
+export default AuthEditAccount;
