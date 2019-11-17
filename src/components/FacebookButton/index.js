@@ -20,8 +20,11 @@ class SignInFacebook extends Component {
       .then(socialAuthUser => {
         firebase.user(socialAuthUser.user.uid).set(
           {
-            name: socialAuthUser.user.displayName,
             email: socialAuthUser.user.email,
+            name: socialAuthUser.user.displayName,
+            goal: '',
+            userID: socialAuthUser.user.uid,
+            createdByFacebook: true,
           },
           { merge: true }
         );
@@ -39,11 +42,9 @@ class SignInFacebook extends Component {
   render() {
     const { error } = this.state;
 
-    if (localStorage.getItem('userId')) {
-      return <Redirect to={ROUTES.HOME} />;
-    }
-
-    return (
+    return localStorage.getItem('userId') ? (
+      <Redirect to={ROUTES.HOME} />
+    ) : (
       <button type="submit" className="facebook-btn" onClick={this.handleClick}>
         <FacebookImg className="facebook-btn__img" />
         <span className="facebook-btn__text">Facebook</span>

@@ -24,7 +24,7 @@ class SignInGoogle extends Component {
             name: socialAuthUser.user.displayName,
             goal: '',
             userID: socialAuthUser.user.uid,
-            createdBygoogle: true,
+            createdByGoogle: true,
           },
           { merge: true }
         );
@@ -39,10 +39,9 @@ class SignInGoogle extends Component {
 
   render() {
     const { error } = this.state;
-    if (localStorage.getItem('userId')) {
-      return <Redirect to={ROUTES.HOME} />;
-    }
-    return (
+    return localStorage.getItem('userId') ? (
+      <Redirect to={ROUTES.HOME} />
+    ) : (
       <button type="submit" className="google-btn" onClick={this.handleClick}>
         <GoogleImg className="google-btn__img" />
         <span className="google-btn__text">Google</span>
