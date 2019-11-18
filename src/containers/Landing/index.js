@@ -11,6 +11,7 @@ const LandingPage = () => {
   /* if (localStorage.getItem('userId')) {
     return <Redirect to={HOME} />;
   } */
+  const userId = localStorage.getItem('userId');
   return (
     <div className="landing-page">
       <div className="landing__img">
@@ -29,13 +30,15 @@ const LandingPage = () => {
             className="landing__button"
             onClick={() => <Redirect to={SIGN_IN} />}
           >
-            Sign In
+            {userId ? 'Go to recent journals' : 'Sign In'}
           </Button>
         </Link>
-        <Link to={SIGN_UP}>
-          <p className="landing__link">Create a new account</p>
-        </Link>
-        <p className="landing__aboutLink">
+        {!userId && (
+          <Link to={SIGN_UP}>
+            <p className="landing__link">Create a new account</p>
+          </Link>
+        )}
+        <p className="landing__aboutLink" style={{ paddingTop: '1rem' }}>
           Read more about
           <Link to={ABOUT}>
             <span className="landing__logo">Mental Snapp</span>
