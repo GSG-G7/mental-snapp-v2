@@ -7,7 +7,7 @@ import { ReactComponent as FacebookImg } from '../../containers/assets/images/fa
 import * as ROUTES from '../../constants/routes';
 import './style.css';
 
-class SignInFacebook extends Component {
+class SignInTwitter extends Component {
   state = { error: null };
 
   handleClick = () => {
@@ -16,7 +16,7 @@ class SignInFacebook extends Component {
       history: { push },
     } = this.props;
     firebase
-      .doSignInWithFacebook()
+      .doSignInWithTwitter()
       .then(socialAuthUser => {
         firebase.user(socialAuthUser.user.uid).set(
           {
@@ -54,7 +54,7 @@ class SignInFacebook extends Component {
   }
 }
 
-SignInFacebook.propTypes = {
+SignInTwitter.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,
@@ -62,13 +62,13 @@ SignInFacebook.propTypes = {
     auth: propTypes.object.isRequired,
     uid: propTypes.string.isRequired,
     user: propTypes.object.isRequired,
-    doSignInWithFacebook: propTypes.func.isRequired,
+    doSignInWithTwitter: propTypes.func.isRequired,
   }).isRequired,
 };
 
 const AuthFacebook = compose(
   withRouter,
   withFirebase
-)(SignInFacebook);
+)(SignInTwitter);
 
 export default AuthFacebook;
