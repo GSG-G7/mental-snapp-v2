@@ -4,10 +4,13 @@ import { Button } from 'antd';
 import { ReactComponent as Illustration } from '../assets/images/landing.svg';
 import MainHeading from '../../components/MainHeading/index';
 import SubHeading from '../../components/subHeading/index';
-import { SIGN_UP, ABOUT, SIGN_IN } from '../../constants/routes';
+import { SIGN_UP, ABOUT, SIGN_IN, HOME } from '../../constants/routes';
 import './landing.css';
 
 const LandingPage = () => {
+  if (localStorage.getItem('userId')) {
+    return <Redirect to={HOME} />;
+  }
   return (
     <div className="landing-page">
       <div className="landing__img">
