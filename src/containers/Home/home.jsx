@@ -97,7 +97,7 @@ const Home = props => {
           ))
         ) : (
           <h5 className="home__emptyJournals">
-            You have not added any journals yet
+            You haven&apos;t added any journals yet.
           </h5>
         )}
       </div>
