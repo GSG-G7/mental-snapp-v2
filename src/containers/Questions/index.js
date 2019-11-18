@@ -60,8 +60,8 @@ class Questions extends React.Component {
 
       return this.setState({
         current,
-        // content: '',
-        // title: '',
+        content: '',
+        title: '',
         errors: {},
       });
     } catch (error) {

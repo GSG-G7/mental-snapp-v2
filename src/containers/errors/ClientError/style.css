@@ -38,5 +38,11 @@
 }
 
 .error__btn {
-  width: 70%;
+  width: 50vw;
+  height: 5vh;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: #FFFFFF;
 }

@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from 'antd/es/button';
 import { ReactComponent as Logo } from './vector.svg';
 import 'antd/es/button/style';
 import './style.css';
+import * as ROUTES from '../../../constants/routes';
 
 const ClientError = () => {
   return (
@@ -11,9 +13,11 @@ const ClientError = () => {
       <p className="error__message">
         Oh sorry about this but this page does not exist
       </p>
-      <Button className="error__btn" type="primary">
-        Go Home
-      </Button>
+      <Link to={ROUTES.LANDING}>
+        <Button className="error__btn" type="primary">
+          Go Home
+        </Button>
+      </Link>
     </div>
   );
 };
