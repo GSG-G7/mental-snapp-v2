@@ -96,7 +96,9 @@ const Home = props => {
             />
           ))
         ) : (
-          <h5 className="home__emptyJournals">You has not added entries yet</h5>
+          <h5 className="home__emptyJournals">
+            You have not added any journals yet
+          </h5>
         )}
       </div>
       <NavBar />
