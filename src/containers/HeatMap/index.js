@@ -16,6 +16,7 @@ class index extends Component {
   };
 
   async componentDidMount() {
+    const { journals } = this.state;
     const { firebase, history } = this.props;
     const userId = localStorage.getItem('userId');
     try {
@@ -27,15 +28,26 @@ class index extends Component {
       const data = snapshot.data().userJournals;
 
       const heatMapData = filter(data);
-
       this.setState({
         data: heatMapData,
         journals: data,
       });
+      this.handleCurrentDay();
     } catch (error) {
       history.push('/server-error');
     }
   }
+
+  handleCurrentDay = () => {
+    const { journals } = this.state;
+    const currentDay = new Date().getDay();
+    const filteredJournals = journals.filter(
+      journal => new Date(journal.timestamp).getDay() === currentDay
+    );
+    this.setState({
+      journalsOfTheDay: filteredJournals,
+    });
+  };
 
   // This function should show data based on day
   handleClick = value => {
@@ -106,7 +118,6 @@ index.propTypes = {
   firebase: PropTypes.shape({
     auth: PropTypes.object.isRequired,
     db: PropTypes.object.isRequired,
-    journals: PropTypes.func.isRequired,
   }).isRequired,
 };
 
