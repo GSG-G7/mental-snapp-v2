@@ -15,7 +15,7 @@ export const withAuth = Component => props => {
           <div style={{ textAlign: 'center', paddingTop: '40vh' }}>
             <Spin size="large" />
           </div>
-        ) : authProps.authUser ? (
+        ) : authProps.authUser || localStorage.getItem('userId') ? (
           <Component {...props} authUser={authProps.authUser} />
         ) : (
           <Redirect to={ROUTES.UNAUTHENTICATED} />
