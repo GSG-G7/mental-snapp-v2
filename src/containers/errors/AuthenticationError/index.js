@@ -1,13 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ReactComponent as Illustration } from '../../assets/images/athentication.svg';
 import './style.css';
 
 const UnAthenticated = porps => {
-  if (localStorage.getItem('userId')) {
-    return <Redirect to="/home" />;
-  }
   return (
     <div className="authentication-error">
       <Illustration />

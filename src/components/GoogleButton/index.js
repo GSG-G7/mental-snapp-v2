@@ -57,8 +57,7 @@ SignInGoogle.propTypes = {
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    uid: propTypes.string.isRequired,
-    user: propTypes.object.isRequired,
+    user: propTypes.func.isRequired,
     doSignInWithGoogle: propTypes.func.isRequired,
   }).isRequired,
 };

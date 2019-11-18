@@ -66,7 +66,7 @@ Index.propTypes = {
   }).isRequired,
   firebase: PropTypes.shape({
     auth: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
+    user: PropTypes.func.isRequired,
   }).isRequired,
 };
 

@@ -4,13 +4,14 @@ import { Button } from 'antd';
 import { ReactComponent as Illustration } from '../assets/images/landing.svg';
 import MainHeading from '../../components/MainHeading/index';
 import SubHeading from '../../components/subHeading/index';
-import { SIGN_UP, ABOUT, SIGN_IN, HOME } from '../../constants/routes';
+import { SIGN_UP, ABOUT, SIGN_IN } from '../../constants/routes';
 import './landing.css';
 
 const LandingPage = () => {
-  if (localStorage.getItem('userId')) {
+  /* if (localStorage.getItem('userId')) {
     return <Redirect to={HOME} />;
-  }
+  } */
+  const userId = localStorage.getItem('userId');
   return (
     <div className="landing-page">
       <div className="landing__img">
@@ -29,13 +30,15 @@ const LandingPage = () => {
             className="landing__button"
             onClick={() => <Redirect to={SIGN_IN} />}
           >
-            Sign In
+            {userId ? 'Go to recent journals' : 'Sign In'}
           </Button>
         </Link>
-        <Link to={SIGN_UP}>
-          <p className="landing__link">Create a new account</p>
-        </Link>
-        <p className="landing__aboutLink">
+        {!userId && (
+          <Link to={SIGN_UP}>
+            <p className="landing__link">Create a new account</p>
+          </Link>
+        )}
+        <p className="landing__aboutLink" style={{ paddingTop: '1rem' }}>
           Read more about
           <Link to={ABOUT}>
             <span className="landing__logo">Mental Snapp</span>

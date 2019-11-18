@@ -142,7 +142,9 @@ const EditAccount = props => {
 };
 
 const editAccount = Form.create({ name: 'Edit Account' })(EditAccount);
-
+EditAccount.defaultProps = {
+  errorMessage: '',
+};
 EditAccount.propTypes = {
   form: PropTypes.shape({
     validateFieldsAndScroll: PropTypes.func.isRequired,
@@ -162,7 +164,7 @@ EditAccount.propTypes = {
   }).isRequired,
   handlePush: PropTypes.func.isRequired,
   handleErrorMessage: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
 };
 
 export default withFirebase(editAccount);
