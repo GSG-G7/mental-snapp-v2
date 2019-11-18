@@ -177,13 +177,8 @@ Feed.propTypes = {
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    uid: propTypes.string.isRequired,
-    firestore: propTypes.object.isRequired,
-    FieldValue: propTypes.object.isRequired,
-    arrayUnion: propTypes.func.isRequired,
-    user: propTypes.object.isRequired,
+    user: propTypes.func.isRequired,
     db: propTypes.object.isRequired,
-    collection: propTypes.object.isRequired,
   }).isRequired,
 };
 

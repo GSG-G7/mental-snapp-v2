@@ -26,7 +26,6 @@ const Home = props => {
     handleJournalDetails,
     loading,
   } = props;
-
   return (
     <div className="home">
       <section className="fixed-elements">
