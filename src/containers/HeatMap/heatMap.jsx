@@ -71,8 +71,8 @@ const heatMap = props => {
           {journals.length !== 0 ? (
             journals.map(journal => (
               <JournalCard
-                key={journal.id}
-                journalId={journal.id}
+                key={journal.timestamp}
+                journalId={journal.timestamp}
                 handleDelete={() => handleDelete(journal.timestamp)}
                 handleJournalDetails={handleJournalDetails}
                 time={moment(journal.timestamp).format('h:mm a')}
@@ -109,7 +109,6 @@ heatMap.propTypes = {
   handleClick: PropTypes.func.isRequired,
   journals: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
       grateful: PropTypes.shape({
         title: PropTypes.string,
         body: PropTypes.string,
