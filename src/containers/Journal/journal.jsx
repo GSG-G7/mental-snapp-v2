@@ -24,12 +24,12 @@ const Journal = props => {
           </Popconfirm>
         </div>
       </div>
-      <div className="journal-card__top">
-        <div className="journal-card__date">
+      <div className="journal-details__top">
+        <div>
           <Icon type="calendar" className="journal-card__icon" />
           <span>{moment(journal.timestamp).format('MMMM Do')}</span>
         </div>
-        <div className="journal-card__time">
+        <div>
           <Icon type="clock-circle" className="journal-card__icon" />
           <span>{moment(journal.timestamp).format('h:mm a')}</span>
         </div>
@@ -44,7 +44,7 @@ const Journal = props => {
 
       {journal && journal.challenge && (
         <JournalComponent
-          questionTitle="Challenge:"
+          questionTitle="Challenges:"
           question={journal.challenge}
         />
       )}
