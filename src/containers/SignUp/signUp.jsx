@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import { SIGN_IN, HOME } from '../../constants/routes';
 
-import FacebookButton from '../../components/TwitterButton';
+// import FacebookButton from '../../components/TwitterButton';
 import GoogleButton from '../../components/GoogleButton';
 
 import { withFirebase } from '../Firebase';
@@ -173,7 +173,7 @@ class SignUpForm extends Component {
         <section className="signup__or">OR</section>
 
         <section className="signup__buttons">
-          <FacebookButton />
+          {/* <FacebookButton /> */}
           <GoogleButton />
         </section>
       </div>
