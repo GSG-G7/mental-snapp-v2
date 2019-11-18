@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import { compose } from 'recompose';
+import { withAuth } from '../Session/index';
 import { withFirebase } from '../Firebase/index';
 
 import JournalPage from './journal';
+import { HOME } from '../../constants/routes';
 
 class Journal extends Component {
   state = {
@@ -50,12 +53,12 @@ class Journal extends Component {
         ),
       });
     const { history } = this.props;
-    history.push('/home');
+    history.push(HOME);
   };
 
   handleGoBack = e => {
     const { history } = this.props;
-    history.push('/home');
+    history.push(HOME);
   };
 
   render() {
@@ -85,11 +88,14 @@ Journal.propTypes = {
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    uid: propTypes.string.isRequired,
-    user: propTypes.object.isRequired,
+    user: propTypes.func.isRequired,
     db: propTypes.object.isRequired,
-    collection: propTypes.object.isRequired,
   }).isRequired,
 };
 
-export default withFirebase(Journal);
+const AuthJournal = compose(
+  withAuth,
+  withFirebase
+)(Journal);
+
+export default AuthJournal;

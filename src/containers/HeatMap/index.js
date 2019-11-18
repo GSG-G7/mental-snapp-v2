@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 import { message } from 'antd';
+import { withAuth } from '../Session/index';
 
 import HeatMap from './heatMap';
 import { withFirebase } from '../Firebase';
@@ -108,4 +110,9 @@ index.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(index);
+const AuthHeatMap = compose(
+  withAuth,
+  withFirebase
+)(index);
+
+export default AuthHeatMap;

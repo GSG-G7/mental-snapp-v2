@@ -1,12 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import propTypes from 'prop-types';
+import { compose } from 'recompose';
 import { message } from 'antd';
+import { withAuth } from '../Session/index';
 import Question from './questions';
 import { withFirebase } from '../Firebase/index';
 
 import schema from './questionValidation';
 import entryData from './data';
+import { HOME } from '../../constants/routes';
 
 class Questions extends React.Component {
   state = {
@@ -36,7 +39,7 @@ class Questions extends React.Component {
   handleConfirm = e => {
     message.warning("You didn't make an entry today");
     const { history } = this.props;
-    history.push('/home');
+    history.push(HOME);
   };
 
   handleChange = ({ target: { value, name } }) => {
@@ -86,10 +89,11 @@ class Questions extends React.Component {
         .doc(userId)
         .update({
           userJournals: allUserJournals,
+          goal: title,
         });
 
       message.success('Yes, you have added a journal');
-      history.push('/home');
+      history.push(HOME);
       return this.setState({
         journals: [{}],
       });
@@ -118,7 +122,7 @@ class Questions extends React.Component {
         journals[0].challenge === undefined
       ) {
         message.warning("You didn't make an entry today");
-        history.push('/home');
+        history.push(HOME);
         this.setState({ journals: [{}] });
       } else {
         journals[0].timestamp = new Date().toString();
@@ -135,7 +139,7 @@ class Questions extends React.Component {
             userJournals: allUserJournals,
           });
         message.success('Yes, you have added a journal');
-        history.push('/home');
+        history.push(HOME);
         this.setState({ journals: [{}] });
       }
     }
@@ -169,4 +173,9 @@ Questions.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(Questions);
+const AuthQuestion = compose(
+  withAuth,
+  withFirebase
+)(Questions);
+
+export default AuthQuestion;

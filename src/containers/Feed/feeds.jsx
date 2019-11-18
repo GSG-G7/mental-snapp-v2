@@ -1,8 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import moment from 'moment';
+import { compose } from 'recompose';
 import propTypes from 'prop-types';
 import { Select, message, Spin } from 'antd';
+import { withAuth } from '../Session/index';
 
 import NavBar from '../../components/navigationBar';
 import JournalCard from '../../components/JournalCard';
@@ -175,14 +177,14 @@ Feed.propTypes = {
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    uid: propTypes.string.isRequired,
-    firestore: propTypes.object.isRequired,
-    FieldValue: propTypes.object.isRequired,
-    arrayUnion: propTypes.func.isRequired,
-    user: propTypes.object.isRequired,
+    user: propTypes.func.isRequired,
     db: propTypes.object.isRequired,
-    collection: propTypes.object.isRequired,
   }).isRequired,
 };
 
-export default withFirebase(Feed);
+const AuthFedd = compose(
+  withAuth,
+  withFirebase
+)(Feed);
+
+export default AuthFedd;

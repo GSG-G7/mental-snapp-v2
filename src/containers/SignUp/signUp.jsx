@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import { Form, Input, Icon, Button, Spin } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
 import { SIGN_IN, HOME } from '../../constants/routes';
 
-import FacebookButton from '../../components/FacebookButton';
+// import FacebookButton from '../../components/TwitterButton';
 import GoogleButton from '../../components/GoogleButton';
 
 import { withFirebase } from '../Firebase';
@@ -41,7 +41,7 @@ class SignUpForm extends Component {
               name: values.name,
               email: values.email,
               userID: result.user.uid,
-              goal: 'Enter your goal here',
+              goal: '',
             },
             { merge: true }
           );
@@ -72,6 +72,9 @@ class SignUpForm extends Component {
       history: { goBack },
     } = this.props;
 
+    if (localStorage.getItem('userId')) {
+      return <Redirect to={HOME} />;
+    }
     return (
       <div className="signup">
         <Header text="Sign Up" handleBack={goBack} />
@@ -170,7 +173,7 @@ class SignUpForm extends Component {
         <section className="signup__or">OR</section>
 
         <section className="signup__buttons">
-          <FacebookButton />
+          {/* <FacebookButton /> */}
           <GoogleButton />
         </section>
       </div>

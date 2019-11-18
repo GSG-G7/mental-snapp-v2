@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { Form, Input, Icon, Button, Spin } from 'antd';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
-import FacebookButton from '../../components/FacebookButton';
+// import FacebookButton from '../../components/TwitterButton';
 import GoogleButton from '../../components/GoogleButton';
 
 import { withFirebase } from '../Firebase/index';
@@ -48,6 +48,9 @@ class SignInForm extends React.Component {
       form: { getFieldDecorator },
       history: { goBack },
     } = this.props;
+    if (localStorage.getItem('userId')) {
+      return <Redirect to={ROUTES.HOME} />;
+    }
     return (
       <div className="signin">
         <Header text="Sign In" handleBack={goBack} />
@@ -111,7 +114,7 @@ class SignInForm extends React.Component {
         <section className="signin__or">OR</section>
 
         <section className="signin__buttons">
-          <FacebookButton />
+          {/* <FacebookButton /> */}
           <GoogleButton />
         </section>
       </div>
