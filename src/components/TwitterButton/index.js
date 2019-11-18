@@ -24,7 +24,7 @@ class SignInTwitter extends Component {
             name: socialAuthUser.user.displayName,
             goal: '',
             userID: socialAuthUser.user.uid,
-            createdByFacebook: true,
+            createdByTwitter: true,
           },
           { merge: true }
         );
