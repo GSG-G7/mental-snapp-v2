@@ -26,42 +26,47 @@ const Home = props => {
     handleJournalDetails,
     loading,
   } = props;
+
   return (
     <div className="home">
       <section className="fixed-elements">
         <LogoHeader />
         <div className="home__user">
           <MainHeading className="home__user-name" text={userName} />
-          <MainHeading className="home__journal" text="Journal" />
+          <span className="home__journal">Journal</span>
         </div>
 
-        <div className="home__goal">
-          <div className="goal__static">
-            I am developing:
-            <span
-              className={!isEditable ? 'goal__editable' : 'goal__editable-edit'}
-              contentEditable={isEditable}
-              suppressContentEditableWarning
-              onBlur={handleBlur}
-            >
-              {loading ? <Spin size="small" /> : goal}
-            </span>
+        {goal.trim() && (
+          <div className="home__goal">
+            <div className="goal__static">
+              I am developing:
+              <span
+                className={
+                  !isEditable ? 'goal__editable' : 'goal__editable-edit'
+                }
+                contentEditable={isEditable}
+                suppressContentEditableWarning
+                onBlur={handleBlur}
+              >
+                {loading ? <Spin size="small" /> : goal}
+              </span>
+            </div>
+            {!isEditable ? (
+              <EditIcon className="goal__edit-icon" onClick={handleClick} />
+            ) : (
+              <Icon
+                className="goal__save-icon"
+                theme="twoTone"
+                twoToneColor="#52c41a"
+                onClick={handelSave}
+                type="check-circle"
+              />
+            )}
           </div>
-          {!isEditable ? (
-            <EditIcon className="goal__edit-icon" onClick={handleClick} />
-          ) : (
-            <Icon
-              className="goal__save-icon"
-              theme="twoTone"
-              twoToneColor="#52c41a"
-              onClick={handelSave}
-              type="check-circle"
-            />
-          )}
-        </div>
+        )}
 
         <div className="home__entries">
-          <MainHeading className="entries__recent" text="Recent Entries" />
+          <MainHeading className="entries__recent" text="Recent Journals" />
           <Link to={ROUTES.FEED}>
             <p className="entries__more">See more</p>
           </Link>

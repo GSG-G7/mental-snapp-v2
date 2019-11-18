@@ -2,15 +2,20 @@
   padding-bottom: 5rem;
 }
 
+.home__user {
+  margin-bottom: 1rem;
+}
+
 .home__user-name {
-  margin: 10px 0 0 20px;
+  margin: 10px 0 0 22px;
   color: #E9663A !important;
   font-weight: 600;
   font-family: 'Poppins';
+  display: inline;
 }
 
 .home__journal {
-  margin: 5px 0 0 20px;
+  margin: 1px 0 0 5px;
   color: #333;
   font-weight: 600;
   font-family: 'Poppins';
