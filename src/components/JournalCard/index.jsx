@@ -25,7 +25,7 @@ const JournalCard = ({
           <Icon type="clock-circle" className="journal-card__icon" />
           <span>{time}</span>
         </div>
-        <div className="journal-card__delete">
+        <div className="journal-card__delete" title="Delete">
           <Popconfirm
             title="Do you really want to delete this entry?"
             onConfirm={e => {

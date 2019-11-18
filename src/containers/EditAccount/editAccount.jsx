@@ -131,9 +131,13 @@ const EditAccount = props => {
           )}
           {errorMessage && <p>{errorMessage.message}</p>}
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Save Changes
-            </Button>
+            <div className="edit-account__buttons">
+              <Button type="default">Cancel</Button>
+
+              <Button type="primary" htmlType="submit">
+                Save
+              </Button>
+            </div>
           </Form.Item>
         </Form>
       </section>

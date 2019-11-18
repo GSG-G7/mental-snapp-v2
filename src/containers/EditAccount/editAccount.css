@@ -1,17 +1,29 @@
 .edit-account {
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  width: 80vw;
+  min-height: 50vh;
+  margin: 0 auto;
+  margin-top: 17.5vh;
 }
 
 .edit-account__form {
-  width: 80%;
-  margin: auto;
-  min-height: 59vh;
-  margin-top: 10vh;
+  width: 100%;
 }
 
-.edit-account .ant-btn.ant-btn-primary {
-  width: 100%;
+.edit-account__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-account .ant-btn.ant-btn-primary,
+.edit-account .ant-btn.ant-btn-default {
+  width: 45%;
+}
+
+.edit-account .ant-btn.ant-btn-default {
+  border-color: #e9663a;
 }
 
 .edit-account__icon {
@@ -35,6 +47,10 @@
   margin-bottom: 20px;
 }
 
+.edit-account__checkbox span {
+  font-size: 1.1rem;
+}
+
 .edit-account__checkbox * {
   color: #e9663a;
 }
@@ -48,12 +64,18 @@
   border-color: #e9663a !important;
 }
 
+.edit-account .sub-heading {
+  margin: 20px auto;
+  font-size: 22px;
+  width: 100%;
+}
+
 /*=================== Medium devices (tablets, 768px and up)  ===================*/
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-  .edit-account__form {
-    min-height: 56vh;
-    margin-top: 10vh;
+  .edit-account {
+    width: 80vw;
+    margin-top: 17.5vh;
   }
 
   .edit-account .ant-form-item-control {
@@ -63,31 +85,23 @@
 }
 
 /*=================== Large devices (desktops, 992px and up) ===================*/
-
 @media (min-width: 992px) {
   .edit-account {
-    width: 35vw;
-    margin: 0 auto;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1),
-      -2px -2px 10px rgba(0, 0, 0, 0.1);
-    min-height: 92vh;
-    margin-top: 5vh;
-    border-radius: 5px;
+    width: 55vw;
+  }
+
+  .edit-account .ant-form-item-control {
+    zoom: 1.4;
   }
 }
 
+/*=================== Ipad Pro ===================*/
 @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .edit-account {
-    width: 70%;
-    margin: 0 auto;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1),
-      -2px -2px 10px rgba(0, 0, 0, 0.1);
-    min-height: 62vh;
-    margin-top: 15rem;
+    width: 80vw;
+    margin-top: 17.5vh;
   }
-  .edit-account__form {
-    min-height: 42vh;
-  }
+
   .edit-account .edit-account__form .ant-btn .ant-btn-primary {
     height: 50px !important;
   }

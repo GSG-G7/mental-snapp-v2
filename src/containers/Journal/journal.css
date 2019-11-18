@@ -8,7 +8,7 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-.journal-card__top {
+/* .journal-card__top {
   display: flex;
   justify-content: space-between;
   font-weight: 500;
@@ -17,20 +17,22 @@
   font-weight: 600;
   width: 100%;
   padding: 1rem 1.3rem;
-}
+} */
 
 .journal-card__date .journal-card__icon {
   margin-right: 4px;
-  ;
 }
 
-.header__icon svg, .journal-card__date svg, .journal-card__time svg {
+.header__icon svg,
+.journal-card__date svg,
+.journal-card__time svg {
   width: 20px;
   height: 20px;
   fill: rgba(36, 36, 36, 0.6);
 }
 
-.journal-card--date, .journal-card--time {
+.journal-card--date,
+.journal-card--time {
   font-size: 0.8rem;
 }
 
@@ -54,8 +56,8 @@
 }
 
 .ant-btn-primary {
-  background-color: #EE6B42 !important;
-  border-color: #EE6B42 !important;
+  background-color: #ee6b42 !important;
+  border-color: #ee6b42 !important;
   color: white !important;
 }
 
@@ -73,8 +75,8 @@
   padding: 24px 16px;
 }
 
-.ant-popover-message>.anticon {
-  display: none!important;
+.ant-popover-message > .anticon {
+  display: none !important;
 }
 
 .ant-popover-message-title {
