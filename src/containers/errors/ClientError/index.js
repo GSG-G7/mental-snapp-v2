@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'antd/es/button';
-import { ReactComponent as Logo } from './vector.svg';
+import { ReactComponent as Logo } from '../../assets/images/vector.svg';
 import 'antd/es/button/style';
 import './style.css';
 import * as ROUTES from '../../../constants/routes';
