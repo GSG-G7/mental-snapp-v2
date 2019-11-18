@@ -57,10 +57,11 @@ class Questions extends React.Component {
       } else if (current === 2) {
         journals[0].challenge = { title, body: content };
       }
+
       return this.setState({
         current,
-        content: '',
-        title: '',
+        // content: '',
+        // title: '',
         errors: {},
       });
     } catch (error) {
@@ -107,8 +108,17 @@ class Questions extends React.Component {
   };
 
   handlePrev = () => {
-    const { current } = this.state;
-    this.setState({ current: current - 1, errors: {} });
+    let title;
+    let content;
+    const { current, journals } = this.state;
+    if (current === 1) {
+      title = journals[0].grateful.title;
+      content = journals[0].grateful.body;
+    } else if (current === 2) {
+      title = journals[0].challenge.title;
+      content = journals[0].challenge.body;
+    }
+    this.setState({ current: current - 1, errors: {}, title, content });
   };
 
   handleSkip = () => {
