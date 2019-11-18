@@ -5,7 +5,7 @@ import { Form, Input, Icon, Button, Spin } from 'antd';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
-import FacebookButton from '../../components/FacebookButton';
+import FacebookButton from '../../components/TwitterButton';
 import GoogleButton from '../../components/GoogleButton';
 
 import { withFirebase } from '../Firebase/index';
