@@ -66,7 +66,7 @@ class SignInForm extends React.Component {
                   },
                   {
                     required: true,
-                    message: 'This feild is required',
+                    message: 'This field is required',
                   },
                 ],
               })(
