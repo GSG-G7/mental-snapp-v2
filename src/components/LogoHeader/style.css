@@ -1,8 +1,7 @@
 .logo-header {
-  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  margin-top: 20px;
 }
 
 .logo-header__image {
@@ -11,13 +10,13 @@
 }
 
 .logo-header__link {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-transform: capitalize;
   font-size: 13px;
   color: #242424;
-  font-weight: 600;  
+  font-weight: 600;
   align-self: center;
-}   
+}
 
 @media (min-width: 600px) {
   .logo-header__link {
@@ -25,3 +24,10 @@
   }
 }
 
+/*=================== Large devices (desktops, 992px and up) ===================*/
+@media (min-width: 992px) {
+  .logo-header__image {
+    height: 2.5rem;
+    width: 30%;
+  }
+}

@@ -32,7 +32,6 @@
 }
 
 /*=================== Large devices (desktops, 992px and up) ===================*/
-
 @media (min-width: 992px) {
   .main__header {
     margin-top: 0.5rem;
@@ -46,15 +45,5 @@
     font-size: 28px;
     transform: translateX(0);
     position: relative;
-  }
-  .main__heading::before {
-    content: "";
-    width: 70%;
-    height: 3px;
-    background-color: #e9663a;
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
   }
 }

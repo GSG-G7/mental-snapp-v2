@@ -11,13 +11,17 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-weight: 500;
-  font-size: 0.7rem;
   font-weight: 600;
   padding-bottom: 10px;
   background-color: #e9663a;
   color: #fff;
   padding: 7px 13px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.journal-card__top svg {
+  fill: aliceblue !important;
 }
 
 .journal-card__date {
@@ -52,7 +56,7 @@
   text-transform: capitalize;
   color: rgba(36, 36, 36, 0.9);
   font-weight: 600;
-  padding: 13px;
+  padding: 0.5rem;
 }
 
 .journal-card__body__title {

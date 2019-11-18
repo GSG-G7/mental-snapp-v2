@@ -51,13 +51,13 @@ const JournalCard = ({
       >
         {grateful && (
           <p className="journal-card__grateful">
-            <span className="journal-card__body__title">grateful</span>
+            <span className="journal-card__body__title">grateful for</span>
             {grateful}
           </p>
         )}
         {challenge && (
           <p className="journal-card__challenge">
-            <span className="journal-card__body__title">challenge</span>
+            <span className="journal-card__body__title">challenges</span>
             {challenge}
           </p>
         )}

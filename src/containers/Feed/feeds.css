@@ -1,17 +1,14 @@
-.feeds{
+.feeds {
   padding-bottom: 5rem;
 }
 
-.feeds__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.feeds .ant-select-selection--single {
+  padding: 0.3rem !important;
+  height: 40px !important;
 }
 
 .feeds__select {
-  width: 90% !important;
-  height: 32px;
+  width: 100% !important;
 }
 
 .feeds__logo {
@@ -23,13 +20,9 @@
   font-size: 16px;
   font-weight: bold;
   color: #e9663a;
-  width: 90%;
+  width: 98%;
   margin: 0 auto;
-  padding-top: 6rem;
-}
-
-.feed_journals {
-  padding: 20px;
+  padding-top: 1rem;
 }
 
 .feeds__option {
@@ -43,36 +36,37 @@
   visibility: hidden;
 }
 
-@media only screen and (min-width:768px) {
+@media only screen and (min-width: 768px) {
   .feeds__content .ant-select-selection--single {
     height: 60px;
     border-color: black;
     font-size: 30px;
     padding-top: 10px;
   }
-  .feeds__content {
-    margin-top: 18px;
-  }
+
   .feeds__message {
     font-size: 36px;
   }
+
   .feeds__option {
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 18px;
   }
+
   .ant-select-dropdown-menu-item {
     font-size: 30px !important;
     margin-top: 18px;
   }
+
   .feed_journals {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 40px;
     text-align: left !important;
   }
+
   .feed_journals .journal-card {
-    width: 47%;
+    width: 48%;
     margin-top: 1rem;
   }
 }

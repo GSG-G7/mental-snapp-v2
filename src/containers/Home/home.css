@@ -2,41 +2,44 @@
   padding-bottom: 5rem;
 }
 
+.home__user {
+  margin: 0.7rem 0;
+}
+
+.home__user h3 {
+  margin-left: 0;
+}
 .home__user-name {
-  margin: 10px 0 0 20px;
-  color: #E9663A !important;
+  color: #e9663a !important;
   font-weight: 600;
-  font-family: 'Poppins';
+  font-family: "Poppins";
+  display: inline;
 }
 
 .home__journal {
-  margin: 5px 0 0 20px;
   color: #333;
+  margin-left: 5px;
   font-weight: 600;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 .home__goal {
   position: relative;
-  background: #FAFAFA;
+  background: #fafafa;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
-  margin: 20px auto;
   display: flex;
-  width: 90%;
   height: auto;
   word-break: break-all;
+  margin: 20px 0;
+  width: 100%;
 }
 
 .home__emptyJournals {
-  color: #E9663A;
+  color: #e9663a;
   font-size: 20px;
   text-align: center;
   margin: 40px auto;
-}
-
-.cards-container {
-  padding: 0 20px;
 }
 
 .goal__static {
@@ -49,23 +52,25 @@
   padding: 12px;
 }
 
-.goal__editable, .goal__editable-edit {
+.goal__editable,
+.goal__editable-edit {
   margin-left: 5px;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-weight: bold;
   font-size: 1rem;
   color: rgba(36, 36, 36, 0.6);
 }
 
 .goal__editable-edit {
-  border: 1px solid #E9663A;
+  border: 1px solid #e9663a;
   padding: 1px 5px;
 }
 
-.goal__save-icon, .goal__edit-icon {
+.goal__save-icon,
+.goal__edit-icon {
   position: absolute;
   bottom: 12px;
-  right: 12px
+  right: 12px;
 }
 
 .goal__save-icon {
@@ -78,16 +83,17 @@
 }
 
 .entries__more {
-  color: #E9663A;
+  color: #e9663a;
 }
 
 .home__entries {
   display: flex;
   justify-content: space-between;
-  padding: 0 24px;
   align-items: center;
-  background: #FFF;
-  font-family: 'Poppins';
+  background: #fff;
+  font-family: "Poppins";
+  /* padding: 0 24px; */
+  width: 100%;
 }
 
 .home__entries * {
@@ -96,20 +102,16 @@
 }
 
 @media (min-width: 600px) {
-  .home {
-    padding: 20px;
-  }
-  .home__user-name, .home__journal, .goal__static, .entries__more, .home__entries, .goal__editable, .goal__editable-edit {
+  .home__user-name,
+  .home__journal,
+  .goal__static,
+  .entries__more,
+  .home__entries,
+  .goal__editable,
+  .goal__editable-edit {
     font-size: 1rem;
   }
-  .home__goal {
-    margin: 10px 0 0 20px;
-    width: 94%;
-  }
-  .home__entries {
-    padding: 0 30px;
-    padding-top: 30px;
-  }
+
   .home__goal svg {
     width: 30px;
     height: 30px;
@@ -120,6 +122,6 @@
     justify-content: space-between;
   }
   .cards-container .journal-card {
-    width: 46%;
+    width: 48%;
   }
 }

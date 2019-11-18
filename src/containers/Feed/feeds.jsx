@@ -1,8 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import moment from 'moment';
+import { compose } from 'recompose';
 import propTypes from 'prop-types';
 import { Select, message, Spin } from 'antd';
+import { withAuth } from '../Session/index';
 
 import NavBar from '../../components/navigationBar';
 import JournalCard from '../../components/JournalCard';
@@ -118,7 +120,7 @@ class Feed extends Component {
     const { data, monthCount, loading } = this.state;
     return (
       <div className="feeds">
-        <div className="feeds__content">
+        <div className="feeds__content container">
           <LogoHeader />
           <br />
           <Select
@@ -138,7 +140,7 @@ class Feed extends Component {
             ))}
           </Select>
         </div>
-        <div className="feed_journals">
+        <div className="feed_journals container">
           {loading ? (
             <div style={{ textAlign: 'center', marginTop: '9vh' }}>
               <Spin size="large" />
@@ -175,14 +177,14 @@ Feed.propTypes = {
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    uid: propTypes.string.isRequired,
-    firestore: propTypes.object.isRequired,
-    FieldValue: propTypes.object.isRequired,
-    arrayUnion: propTypes.func.isRequired,
-    user: propTypes.object.isRequired,
+    user: propTypes.func.isRequired,
     db: propTypes.object.isRequired,
-    collection: propTypes.object.isRequired,
   }).isRequired,
 };
 
-export default withFirebase(Feed);
+const AuthFedd = compose(
+  withAuth,
+  withFirebase
+)(Feed);
+
+export default AuthFedd;

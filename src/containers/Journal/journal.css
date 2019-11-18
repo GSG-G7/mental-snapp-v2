@@ -11,8 +11,9 @@
 /* .journal-card__top {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 14px;
   color: #e9663a;
   font-weight: 600;
   width: 100%;

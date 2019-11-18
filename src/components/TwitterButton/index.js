@@ -3,11 +3,11 @@ import propTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withRouter, Redirect } from 'react-router-dom';
 import { withFirebase } from '../../containers/Firebase';
-import { ReactComponent as GoogleImg } from '../../containers/assets/images/google.svg';
+import { ReactComponent as FacebookImg } from '../../containers/assets/images/facebook.svg';
 import * as ROUTES from '../../constants/routes';
 import './style.css';
 
-class SignInGoogle extends Component {
+class SignInTwitter extends Component {
   state = { error: null };
 
   handleClick = () => {
@@ -16,7 +16,7 @@ class SignInGoogle extends Component {
       history: { push },
     } = this.props;
     firebase
-      .doSignInWithGoogle()
+      .doSignInWithTwitter()
       .then(socialAuthUser => {
         firebase.user(socialAuthUser.user.uid).set(
           {
@@ -24,13 +24,15 @@ class SignInGoogle extends Component {
             name: socialAuthUser.user.displayName,
             goal: '',
             userID: socialAuthUser.user.uid,
-            createdByGoogle: true,
+            createdByTwitter: true,
           },
           { merge: true }
         );
-        localStorage.setItem('userId', socialAuthUser.user.uid);
-        this.setState({ error: null });
+        return localStorage.setItem('userId', socialAuthUser.user.uid);
+      })
+      .then(() => {
         push(ROUTES.HOME);
+        this.setState({ error: null });
       })
       .catch(error => {
         this.setState({ error });
@@ -39,32 +41,34 @@ class SignInGoogle extends Component {
 
   render() {
     const { error } = this.state;
+
     return localStorage.getItem('userId') ? (
       <Redirect to={ROUTES.HOME} />
     ) : (
-      <button type="submit" className="google-btn" onClick={this.handleClick}>
-        <GoogleImg className="google-btn__img" />
-        <span className="google-btn__text">Google</span>
+      <button type="submit" className="facebook-btn" onClick={this.handleClick}>
+        <FacebookImg className="facebook-btn__img" />
+        <span className="facebook-btn__text">Facebook</span>
         {error && <p>{error.message}</p>}
       </button>
     );
   }
 }
 
-SignInGoogle.propTypes = {
+SignInTwitter.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
   }).isRequired,
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
-    user: propTypes.func.isRequired,
-    doSignInWithGoogle: propTypes.func.isRequired,
+    uid: propTypes.string.isRequired,
+    user: propTypes.object.isRequired,
+    doSignInWithTwitter: propTypes.func.isRequired,
   }).isRequired,
 };
 
-const AuthSignInGoogle = compose(
+const AuthFacebook = compose(
   withRouter,
   withFirebase
-)(SignInGoogle);
+)(SignInTwitter);
 
-export default AuthSignInGoogle;
+export default AuthFacebook;

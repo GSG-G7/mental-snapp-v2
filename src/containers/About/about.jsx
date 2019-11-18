@@ -1,9 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { ReactComponent as Illustration } from '../assets/images/about.svg';
-import { ReactComponent as Logo } from '../assets/images/logo.svg';
+import Logo from '../assets/images/logo.png';
 import aboutData from './data';
 import Header from '../../components/Header';
+
 import './about.css';
 
 const About = props => {
@@ -21,7 +22,7 @@ const About = props => {
             <p className="about__content">{data.descrption}</p>
           </div>
         ))}
-        <Logo className="about__img" />
+        <img src={Logo} alt="app-logo" className="about__img" />
       </div>
     </>
   );

@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100vw - 40px);
   margin: 20px auto;
   font-size: 22px;
 }
@@ -26,8 +25,6 @@
 }
 
 .settings__body {
-  width: calc(100vw - 40px);
-  margin: 20px auto;
   min-height: 55vh;
   display: flex;
   flex-direction: column;
@@ -87,7 +84,9 @@
     min-height: 45vh;
     width: calc(100vw - 80px);
   }
-  .settings__body__title, .settings__body__info, .settings__logout {
+  .settings__body__title,
+  .settings__body__info,
+  .settings__logout {
     font-size: 30px;
   }
   .settings__body__info {
