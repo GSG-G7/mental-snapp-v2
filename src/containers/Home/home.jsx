@@ -79,8 +79,9 @@ const Home = props => {
             <Spin size="large" />
           </div>
         ) : recentJournals.length > 0 ? (
-          recentJournals.map(journal => (
+          recentJournals.map((journal, index) => (
             <Card
+              index={index}
               key={journal.timestamp}
               className="home__journal-card"
               date={moment(journal.timestamp).format('MMMM Do')}
