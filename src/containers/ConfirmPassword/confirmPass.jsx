@@ -32,6 +32,7 @@ class ConfirmPass extends Component {
             user.email,
             values.password
           );
+          localStorage.setItem('confirm', true);
           await push(EDIT_ACCOUNT);
         } catch (error) {
           this.setState({ errorMesage: 'Invalid password' });
