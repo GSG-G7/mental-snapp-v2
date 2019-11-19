@@ -5,16 +5,18 @@ import './style.css';
 
 const Journal = ({ question, questionTitle }) => {
   return (
-    <div className="journal">
-      <section className="journal__header">
-        <h5 className="journal__question-title">
-          {`${questionTitle} `}
-          <span className="journal__title">{question.title}</span>
-        </h5>
-      </section>
-      <section className="journal__body">
-        <p>{question.body}</p>
-      </section>
+    <div className="container">
+      <div className="journal">
+        <section className="journal__header">
+          <h5 className="journal__question-title">
+            {`${questionTitle} `}
+            <span className="journal__title">{question.title}</span>
+          </h5>
+        </section>
+        <section className="journal__body">
+          <p>{question.body}</p>
+        </section>
+      </div>
     </div>
   );
 };
