@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }
 
 .question__error-field {
@@ -56,17 +56,18 @@
 }
 
 .question__steps-action .ant-btn-primary {
-  background-color: #EE6B42;
+  background-color: #ee6b42;
   width: 140px;
   height: 41px;
   border: none;
   color: white;
 }
 
-.question__steps-action .ant-btn-primary:hover, .ant-btn-primary:focus {
+.question__steps-action .ant-btn-primary:hover,
+.ant-btn-primary:focus {
   color: #fff;
-  background-color: #EE6B42;
-  border-color: #EE6B42;
+  background-color: #ee6b42;
+  border-color: #ee6b42;
 }
 
 .question__steps-action {
@@ -101,11 +102,12 @@
 }
 
 .question__type .ant-progress-status-success .ant-progress-bg {
-  background-color: #EE6B42;
+  background-color: #ee6b42;
 }
 
-.question__type .ant-progress-success-bg, .ant-progress-bg {
-  background-color: #EE6B42 !important;
+.question__type .ant-progress-success-bg,
+.ant-progress-bg {
+  background-color: #ee6b42 !important;
 }
 
 .ant-popover-inner {
@@ -128,8 +130,8 @@
 }
 
 .ant-btn-primary {
-  background-color: #EE6B42 !important;
-  border-color: #EE6B42 !important;
+  background-color: #ee6b42 !important;
+  border-color: #ee6b42 !important;
   color: white !important;
 }
 
@@ -147,20 +149,15 @@
   padding: 24px 16px;
 }
 
-.ant-popover-message>.anticon {
-  display: none!important;
+.ant-popover-message > .anticon {
+  display: none !important;
 }
 
 .ant-popover-message-title {
   padding-left: 3px !important;
 }
 
-.ant-popover {
-  left: 20px !important;
-  top: 201px !important;
-}
-
-@media only screen and (min-width:768px) {
+@media only screen and (min-width: 768px) {
   .question__type .ant-progress-inner {
     width: 30%;
   }
