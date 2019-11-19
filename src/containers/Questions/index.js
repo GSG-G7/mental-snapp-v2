@@ -21,6 +21,8 @@ class Questions extends React.Component {
     allUserJournals: [],
   };
 
+  nextAnswers = {};
+
   componentDidMount() {
     const { firebase } = this.props;
     const userId = localStorage.getItem('userId');
@@ -49,6 +51,7 @@ class Questions extends React.Component {
   handleNext = async () => {
     const { title, content, journals } = this.state;
     let { current } = this.state;
+
     try {
       await schema.validate({ title, content }, { abortEarly: false });
       current += 1;
@@ -57,11 +60,11 @@ class Questions extends React.Component {
       } else if (current === 2) {
         journals[0].challenge = { title, body: content };
       }
-
+      console.log(this.nextAnswers);
       return this.setState({
         current,
-        content: '',
-        title: '',
+        content: this.nextAnswers[`content${current}`] || '',
+        title: this.nextAnswers[`title${current}`] || '',
         errors: {},
       });
     } catch (error) {
@@ -110,7 +113,17 @@ class Questions extends React.Component {
   handlePrev = () => {
     let title;
     let content;
-    const { current, journals } = this.state;
+    const {
+      current,
+      journals,
+      title: currentTitle,
+      content: currentContent,
+    } = this.state;
+    if (currentTitle || currentContent) {
+      this.nextAnswers[`title${current}`] = currentTitle;
+      this.nextAnswers[`content${current}`] = currentContent;
+    }
+    console.log(this.nextAnswers);
     if (current === 1) {
       title = journals[0].grateful.title;
       content = journals[0].grateful.body;
