@@ -72,7 +72,7 @@ const heatMap = props => {
                 handleDelete={() => handleDelete(journal.timestamp)}
                 handleJournalDetails={handleJournalDetails}
                 time={moment(journal.timestamp).format('h:mm a')}
-                date={moment(journal.timestamp).format('MMMM Do')}
+                date={moment(journal.timestamp).format('MMMM Do YYYY')}
                 grateful={journal.grateful && journal.grateful.title}
                 challenge={journal.challenge && journal.challenge.title}
                 developing={journal.developing && journal.developing.title}

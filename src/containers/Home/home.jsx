@@ -83,7 +83,7 @@ const Home = props => {
             <Card
               key={journal.timestamp}
               className="home__journal-card"
-              date={moment(journal.timestamp).format('MMMM Do')}
+              date={moment(journal.timestamp).format('MMMM Do YYYY')}
               time={moment(journal.timestamp).format('h:mm a')}
               grateful={journal.grateful && journal.grateful.title}
               challenge={journal.challenge && journal.challenge.title}

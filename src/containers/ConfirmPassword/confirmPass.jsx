@@ -79,7 +79,7 @@ class ConfirmPass extends Component {
             {errorMesage && <p style={{ color: 'red' }}>{errorMesage}</p>}
 
             <Button type="primary" size="large" onClick={this.handleSubmit}>
-              Procceed To Edit
+              Proceed To Edit
             </Button>
           </Form>
           <ConfirmImg className="confirm-pass__img" />
