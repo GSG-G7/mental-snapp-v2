@@ -13,6 +13,10 @@
   margin: 10px 0 0 0;
 }
 
+.confirm-pass__input {
+  height: 40px !important;
+}
+
 .confirm-pass__form {
   text-align: center;
   width: 100%;
@@ -49,9 +53,7 @@
   .confirm-pass__form .ant-input {
     padding-left: 45px !important;
   }
-  .confirm-pass__form .ant-input,
-  .confirm-pass__form .ant-btn,
-  .confirm-pass__form .ant-input-prefix {
+  .confirm-pass__form .ant-input, .confirm-pass__form .ant-btn, .confirm-pass__form .ant-input-prefix {
     height: 50px;
     font-size: 25px;
   }
@@ -76,9 +78,7 @@
   .confirm-pass__form .ant-input {
     padding-left: 35px !important;
   }
-  .confirm-pass__form .ant-input,
-  .confirm-pass__form .ant-btn,
-  .confirm-pass__form .ant-input-prefix {
+  .confirm-pass__form .ant-input, .confirm-pass__form .ant-btn, .confirm-pass__form .ant-input-prefix {
     height: 60px;
     font-size: 25px;
   }
@@ -95,7 +95,6 @@
     width: 55vw;
     margin: auto;
   }
-
   .confirm-pass__text {
     font-size: 25px;
   }
@@ -105,9 +104,7 @@
   .confirm-pass__form .ant-input {
     padding-left: 35px !important;
   }
-  .confirm-pass__form .ant-input,
-  .confirm-pass__form .ant-btn,
-  .confirm-pass__form .ant-input-prefix {
+  .confirm-pass__form .ant-input, .confirm-pass__form .ant-btn, .confirm-pass__form .ant-input-prefix {
     height: 40px;
     font-size: 20px;
   }
