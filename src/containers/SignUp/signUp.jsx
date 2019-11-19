@@ -88,6 +88,10 @@ class SignUpForm extends Component {
                     required: true,
                     message: 'Please input your Name!',
                   },
+                  {
+                    pattern: new RegExp(/^(?=.*[A-Za-z])/),
+                    message: 'Please input a real Name!',
+                  },
                 ],
               })(
                 <Input
