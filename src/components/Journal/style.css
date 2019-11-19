@@ -1,7 +1,5 @@
 .journal {
-  width: 90%;
-  margin: 0 auto;
-  background: #FBFBFB;
+  background: #fbfbfb;
   text-align: left;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -11,7 +9,7 @@
 .journal__header {
   width: 100%;
   text-align: left;
-  background: #E9663A;
+  background: #e9663a;
   border-radius: 5px 5px 0px 0px;
   padding: 8px;
 }

@@ -1,6 +1,6 @@
 .heat-map {
   margin: 0 auto;
-  padding: 0 0 5rem 0;
+  padding-top: 80px;
 }
 
 .heat-map__header {
@@ -15,7 +15,7 @@
 .heat-map__month {
   padding: 0 1.5rem;
   color: rgba(36, 36, 36, 0.9);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 500;
   text-align: center;
@@ -24,14 +24,6 @@
 .heat-map__icon {
   margin-right: 0.5rem;
   color: rgba(36, 36, 36, 0.9);
-}
-
-.heat-map__journals {
-  padding: 0 2rem;
-}
-
-.react-calendar-heatmap {
-  margin: 0 0 0 2.5rem;
 }
 
 .heat-map__legend {
@@ -51,7 +43,7 @@
   text-align: center;
   color: rgba(36, 36, 36, 0.6);
   font-size: 0.8rem;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .heat-map__empty {
@@ -105,7 +97,7 @@
   font-weight: 700;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   html {
     font-size: 20px;
   }
@@ -113,16 +105,17 @@
     width: 70%;
     margin: 0 auto;
   }
-  .heat-map__legend, .heat-map__empty {
+  .heat-map__legend,
+  .heat-map__empty {
     justify-content: center;
   }
   .heat-map__journals {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .heat-map__journals .journal-card {
-    width: 100%;
+    width: 48%;
   }
 }
 
@@ -134,16 +127,49 @@
     text-align: left;
   }
   .heat-map__body {
-    width: 35%;
-    margin: 0 auto;
+    padding: 0;
+    width: 48%;
+    margin: 1rem 0;
+    text-emphasis: center;
   }
+
+  .heat-map__body svg {
+    width: 80%;
+    display: block;
+    margin: auto;
+  }
+
+  .heat-map__legend {
+    padding: 0 1rem 0.5rem;
+  }
+
+  .heat-map__description {
+    display: block;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
   .heat-map__container {
     display: flex;
     justify-content: space-around;
   }
   .heat-map__journals {
-    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0;
+    width: 100%;
   }
+
+  .heat-map__journals .journal-card {
+    width: 48%;
+  }
+
   .heat-map__empty {
     flex-direction: column;
   }

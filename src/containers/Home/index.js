@@ -28,9 +28,9 @@ class Home extends Component {
         const userName = `${snapshot.data().name}'s`;
         if (snapshot.data().userJournals) {
           const userJournal = snapshot.data().userJournals;
-          if (userJournal.length > 3) {
-            recentJournals = userJournal.slice(-3);
-          } else if (userJournal.length <= 3) {
+          if (userJournal.length > 4) {
+            recentJournals = userJournal.slice(-4);
+          } else if (userJournal.length <= 4) {
             recentJournals = userJournal;
           }
           return this.setState({

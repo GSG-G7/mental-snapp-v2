@@ -72,6 +72,7 @@ class ConfirmPass extends Component {
                   }
                   placeholder="Enter your password"
                   onChange={() => this.setState({ errorMesage: '' })}
+                  className="confirm-pass__input"
                 />
               )}
             </Form.Item>
