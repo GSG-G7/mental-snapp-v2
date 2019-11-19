@@ -166,7 +166,7 @@ class SignUpForm extends Component {
         <p className="landing__aboutLink">
           Already have account ?
           <Link to={SIGN_IN}>
-            <span className="landing__logo">Sign In</span>
+            <span className="landing__logo link">Sign In</span>
           </Link>
         </p>
 
@@ -181,7 +181,7 @@ class SignUpForm extends Component {
   }
 }
 
-const SignUp = Form.create({ name: 'sign up' })(SignUpForm);
+const SignUp = Form.create({ name: '' })(SignUpForm);
 
 SignUpForm.propTypes = {
   form: PropTypes.shape({
