@@ -60,7 +60,6 @@ class Questions extends React.Component {
       } else if (current === 2) {
         journals[0].challenge = { title, body: content };
       }
-      console.log(this.nextAnswers);
       return this.setState({
         current,
         content: this.nextAnswers[`content${current}`] || '',
@@ -123,7 +122,6 @@ class Questions extends React.Component {
       this.nextAnswers[`title${current}`] = currentTitle;
       this.nextAnswers[`content${current}`] = currentContent;
     }
-    console.log(this.nextAnswers);
     if (current === 1) {
       title = journals[0].grateful.title;
       content = journals[0].grateful.body;
