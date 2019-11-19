@@ -1,5 +1,6 @@
 .heat-map {
   margin: 0 auto;
+  padding-top: 80px;
 }
 
 .heat-map__header {
@@ -126,24 +127,31 @@
     text-align: left;
   }
   .heat-map__body {
-    width: 100%;
     padding: 0;
-    display: flex;
-    justify-content: space-evenly;
+    width: 48%;
+    margin: 1rem 0;
+    text-emphasis: center;
   }
 
   .heat-map__body svg {
-    width: 35%;
+    width: 80%;
+    display: block;
+    margin: auto;
+  }
+
+  .heat-map__legend {
+    padding: 0 1rem 0.5rem;
   }
 
   .heat-map__description {
     display: block;
-    width: 35%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
+    margin-top: 10px;
   }
 
   .heat-map__container {
