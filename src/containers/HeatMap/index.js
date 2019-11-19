@@ -33,7 +33,6 @@ class index extends Component {
       });
       this.handleCurrentDay();
     } catch (error) {
-      console.log(error);
       history.push('/server-error');
     }
   }
