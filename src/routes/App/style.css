@@ -40,12 +40,16 @@
 .container {
   width: 100%;
   padding: 0 15px;
-  /* border: 1px solid blue; */
+}
+
+body {
+  padding-top: 75px;
 }
 
 .link {
   text-decoration: underline;
   font-style: normal;
+  color: #e9663a;
 }
 
 /*=== Large devices (desktops, 992px and up) ===*/
@@ -53,6 +57,5 @@
   .container {
     width: 100%;
     padding: 0 30px;
-    /* border: 1px solid red; */
   }
 }
