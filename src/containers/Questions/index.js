@@ -135,7 +135,14 @@ class Questions extends React.Component {
   handleSkip = () => {
     const { current, journals, allUserJournals } = this.state;
     if (current < entryData.length - 1) {
-      this.setState({ current: current + 1, errors: {} });
+      journals[0].grateful = { title: '', content: '' };
+      journals[0].challenge = { title: '', content: '' };
+      this.setState({
+        current: current + 1,
+        errors: {},
+        content: this.nextAnswers[`content${current}`] || '',
+        title: this.nextAnswers[`title${current}`] || '',
+      });
     } else {
       const { history, firebase } = this.props;
       if (
@@ -144,7 +151,6 @@ class Questions extends React.Component {
       ) {
         message.warning("You didn't make an entry today");
         history.push(HOME);
-        this.setState({ journals: [{}] });
       } else {
         journals[0].timestamp = new Date().toString();
         allUserJournals.push(journals[0]);
