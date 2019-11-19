@@ -120,7 +120,7 @@ class Feed extends Component {
     const { data, monthCount, loading } = this.state;
     return (
       <div className="feeds">
-        <div className="feeds__content">
+        <div className="feeds__content container">
           <LogoHeader />
           <br />
           <Select
@@ -140,7 +140,7 @@ class Feed extends Component {
             ))}
           </Select>
         </div>
-        <div className="feed_journals">
+        <div className="feed_journals container">
           {loading ? (
             <div style={{ textAlign: 'center', marginTop: '9vh' }}>
               <Spin size="large" />
@@ -150,7 +150,7 @@ class Feed extends Component {
               <JournalCard
                 key={journal.timestamp}
                 time={moment(journal.timestamp).format('h:mm a')}
-                date={moment(journal.timestamp).format('MMMM Do')}
+                date={moment(journal.timestamp).format('MMMM Do YYYY')}
                 grateful={journal.grateful && journal.grateful.title}
                 challenge={journal.challenge && journal.challenge.title}
                 developing={journal.developing && journal.developing.title}

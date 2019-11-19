@@ -29,7 +29,7 @@ const Home = props => {
 
   return (
     <div className="home">
-      <section className="fixed-elements">
+      <section className="fixed-elements container">
         <LogoHeader />
         <div className="home__user">
           <MainHeading className="home__user-name" text={userName} />
@@ -68,22 +68,23 @@ const Home = props => {
         <div className="home__entries">
           <MainHeading className="entries__recent" text="Recent Journals" />
           <Link to={ROUTES.FEED}>
-            <p className="entries__more">See more</p>
+            <p className="entries__more link">See more</p>
           </Link>
         </div>
       </section>
 
-      <div className="cards-container">
+      <div className="cards-container container">
         {loading ? (
           <div style={{ textAlign: 'center', margin: '9vh auto' }}>
             <Spin size="large" />
           </div>
         ) : recentJournals.length > 0 ? (
-          recentJournals.map(journal => (
+          recentJournals.map((journal, index) => (
             <Card
+              index={index}
               key={journal.timestamp}
               className="home__journal-card"
-              date={moment(journal.timestamp).format('MMMM Do')}
+              date={moment(journal.timestamp).format('MMMM Do YYYY')}
               time={moment(journal.timestamp).format('h:mm a')}
               grateful={journal.grateful && journal.grateful.title}
               challenge={journal.challenge && journal.challenge.title}
