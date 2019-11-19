@@ -1,10 +1,12 @@
 import React from 'react';
 import { Icon, Popconfirm } from 'antd';
 import PropTypes from 'prop-types';
+import WOW from 'wow.js';
 
 import './style.css';
 
 const JournalCard = ({
+  index,
   time,
   date,
   grateful,
@@ -14,8 +16,12 @@ const JournalCard = ({
   journalId,
   handleJournalDetails,
 }) => {
+  new WOW().init();
   return (
-    <div className="journal-card">
+    <div
+      className="journal-card wow slideInUp"
+      data-wow-delay={`${index * 0.2}s`}
+    >
       <div className="journal-card__top">
         <div className="journal-card__date">
           <Icon type="calendar" className="journal-card__icon" />
@@ -79,6 +85,7 @@ JournalCard.defaultProps = {
 };
 
 JournalCard.propTypes = {
+  index: PropTypes.number.isRequired,
   time: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   grateful: PropTypes.string,
