@@ -16,7 +16,6 @@ class index extends Component {
   };
 
   async componentDidMount() {
-    const { journals } = this.state;
     const { firebase, history } = this.props;
     const userId = localStorage.getItem('userId');
     try {
@@ -34,6 +33,7 @@ class index extends Component {
       });
       this.handleCurrentDay();
     } catch (error) {
+      console.log(error);
       history.push('/server-error');
     }
   }
@@ -41,12 +41,14 @@ class index extends Component {
   handleCurrentDay = () => {
     const { journals } = this.state;
     const currentDay = new Date().getDay();
-    const filteredJournals = journals.filter(
-      journal => new Date(journal.timestamp).getDay() === currentDay
-    );
-    this.setState({
-      journalsOfTheDay: filteredJournals,
-    });
+    if (journals) {
+      const filteredJournals = journals.filter(
+        journal => new Date(journal.timestamp).getDay() === currentDay
+      );
+      this.setState({
+        journalsOfTheDay: filteredJournals,
+      });
+    }
   };
 
   // This function should show data based on day
