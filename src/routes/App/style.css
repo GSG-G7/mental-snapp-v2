@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Poppins:300,400,500,700&display=swap');
-
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Poppins:300,400,500,700&display=swap");
 
 * {
   padding: 0;
@@ -30,9 +29,29 @@
   background-color: #e9663a;
   border: none;
   font-weight: bold;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
-.ant-spin-dot-item{
+.ant-spin-dot-item {
   background-color: #e9663a;
+}
+
+/*=================== Container class (General responsive class ) ===================*/
+.container {
+  width: 100%;
+  padding: 0 15px;
+}
+
+.link {
+  text-decoration: underline;
+  font-style: normal;
+  color: #e9663a;
+}
+
+/*=== Large devices (desktops, 992px and up) ===*/
+@media (min-width: 992px) {
+  .container {
+    width: 100%;
+    padding: 0 30px;
+  }
 }

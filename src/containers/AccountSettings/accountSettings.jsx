@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Icon, Spin } from 'antd';
 
-import Logo from '../../components/LogoHeader';
+import LogoHeader from '../../components/LogoHeader';
 import SubHeading from '../../components/subHeading';
 import NavigationBar from '../../components/navigationBar';
 
@@ -13,16 +13,20 @@ import './accountSettings.css';
 const accountSettings = ({ info, handleLogOut, loading }) => {
   return (
     <div className="settings">
-      <Logo />
+      <div className="container">
+        <LogoHeader />
+      </div>
 
-      <div className="settings__desktop-container">
+      <div className="settings__desktop-container container">
         <section className="settings__title">
           <SubHeading text="Account Settings" />
 
-          <Link to="/confirm-password" className={info}>
-            <span className="settings__edit-btn__text">Edit</span>
-            <Icon type="edit" className="settings__edit-btn__icon" />
-          </Link>
+          {!info.createdByGoogle && (
+            <Link to="/confirm-password" className={info}>
+              <span className="settings__edit-btn__text">Edit</span>
+              <Icon type="edit" className="settings__edit-btn__icon" />
+            </Link>
+          )}
         </section>
         <section className="settings__body">
           <div>
@@ -74,6 +78,7 @@ accountSettings.propTypes = {
   info: PropTypes.shape({
     name: PropTypes.string,
     email: PropTypes.string,
+    createdByGoogle: PropTypes.bool,
   }),
   loading: PropTypes.bool.isRequired,
   handleLogOut: PropTypes.func.isRequired,

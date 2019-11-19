@@ -41,7 +41,7 @@ const LandingPage = () => {
         <p className="landing__aboutLink" style={{ paddingTop: '1rem' }}>
           Read more about
           <Link to={ABOUT}>
-            <span className="landing__logo">Mental Snapp</span>
+            <span className="landing__logo link">Mental Snapp</span>
           </Link>
         </p>
       </div>

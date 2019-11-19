@@ -17,7 +17,7 @@
 .forgot-password__title {
   flex: 6;
   text-transform: capitalize;
-  font-family:  'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   color: #242424;
   padding-right: 12%;
@@ -28,11 +28,12 @@
   width: 100%;
 }
 
-.forgot-password__text,.forgot-password__link {
+.forgot-password__text,
+.forgot-password__link {
   margin: 20px auto;
   font-size: 14px;
   color: #333;
-  font-family: 'Source Sans Pro';
+  font-family: "Source Sans Pro";
   font-weight: 100;
   text-align: center;
   font-style: italic;
@@ -72,7 +73,8 @@
   width: 100%;
 }
 
-.forgot-password .ant-btn-primary:hover, .forgot-password .ant-btn-primary:focus {
+.forgot-password .ant-btn-primary:hover,
+.forgot-password .ant-btn-primary:focus {
   color: #fff;
   background-color: #e9663aec;
   border-color: #e9663aec;
