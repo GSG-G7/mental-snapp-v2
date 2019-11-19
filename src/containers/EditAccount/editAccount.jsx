@@ -52,7 +52,6 @@ const EditAccount = props => {
         }
       } catch (error) {
         if (error.message) handleErrorMessage(error.message);
-        // should do better handling here
       }
     });
   };
@@ -131,9 +130,15 @@ const EditAccount = props => {
           )}
           {errorMessage && <p>{errorMessage.message}</p>}
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Save Changes
-            </Button>
+            <div className="edit-account__buttons">
+              <Button type="default" onClick={handleGoBack}>
+                Cancel
+              </Button>
+
+              <Button type="primary" htmlType="submit">
+                Save
+              </Button>
+            </div>
           </Form.Item>
         </Form>
       </section>

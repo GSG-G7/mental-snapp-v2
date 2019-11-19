@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Icon, Spin } from 'antd';
 
-import Logo from '../../components/LogoHeader';
+import LogoHeader from '../../components/LogoHeader';
 import SubHeading from '../../components/subHeading';
 import NavigationBar from '../../components/navigationBar';
 
@@ -13,9 +13,11 @@ import './accountSettings.css';
 const accountSettings = ({ info, handleLogOut, loading }) => {
   return (
     <div className="settings">
-      <Logo />
+      <div className="container">
+        <LogoHeader />
+      </div>
 
-      <div className="settings__desktop-container">
+      <div className="settings__desktop-container container">
         <section className="settings__title">
           <SubHeading text="Account Settings" />
 

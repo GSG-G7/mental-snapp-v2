@@ -101,13 +101,13 @@ class SignInForm extends React.Component {
           </Form>
         </section>
         <Link to={ROUTES.FORGOT_PASSWORD}>
-          <p className="forgot-password__link">Forgot Password?</p>
+          <p className="forgot-password__link link">Forgot Password?</p>
         </Link>
 
         <p className="landing__aboutLink">
           Don’t have an account ?
           <Link to={ROUTES.SIGN_UP}>
-            <span className="landing__logo"> Sign Up</span>
+            <span className="landing__logo link"> Sign Up</span>
           </Link>
         </p>
 

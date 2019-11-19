@@ -11,7 +11,7 @@ const Journal = props => {
   const { journal, handleConfirm, handleGoBack } = props;
   return (
     <div className="journal-page">
-      <div className="journal-page__header">
+      <div className="journal-page__header container">
         <BackButton handleBack={handleGoBack} />
         <div>
           <Popconfirm
