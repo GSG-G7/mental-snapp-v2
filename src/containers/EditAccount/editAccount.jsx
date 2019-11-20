@@ -1,6 +1,7 @@
 import React from 'react';
 import { message, Form, Input, Icon, Button, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import { withFirebase } from '../Firebase';
 import Header from '../../components/Header';
@@ -47,15 +48,16 @@ const EditAccount = props => {
               .user(userId)
               .set({ name: values.name, email: values.email }, { merge: true });
           }
+          localStorage.removeItem('confirm')
           handlePush(ROUTES.ACCOUNT_SETTINGS);
           message.success('account updated successfully');
         }
       } catch (error) {
         if (error.message) handleErrorMessage(error.message);
-        // should do better handling here
       }
     });
   };
+  if(!localStorage.getItem('confirm')) return <Redirect to={ROUTES.CONFIRM_PASSWORD}/>
   return (
     <div className="edit-account">
       <Header text="Edit Account" handleBack={handleGoBack} />
@@ -132,7 +134,9 @@ const EditAccount = props => {
           {errorMessage && <p>{errorMessage.message}</p>}
           <Form.Item>
             <div className="edit-account__buttons">
-              <Button type="default">Cancel</Button>
+              <Button type="default" onClick={handleGoBack}>
+                Cancel
+              </Button>
 
               <Button type="primary" htmlType="submit">
                 Save

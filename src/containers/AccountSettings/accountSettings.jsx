@@ -21,10 +21,12 @@ const accountSettings = ({ info, handleLogOut, loading }) => {
         <section className="settings__title">
           <SubHeading text="Account Settings" />
 
-          <Link to="/confirm-password" className={info}>
-            <span className="settings__edit-btn__text">Edit</span>
-            <Icon type="edit" className="settings__edit-btn__icon" />
-          </Link>
+          {!info.createdByGoogle && (
+            <Link to="/confirm-password" className={info}>
+              <span className="settings__edit-btn__text">Edit</span>
+              <Icon type="edit" className="settings__edit-btn__icon" />
+            </Link>
+          )}
         </section>
         <section className="settings__body">
           <div>
@@ -76,6 +78,7 @@ accountSettings.propTypes = {
   info: PropTypes.shape({
     name: PropTypes.string,
     email: PropTypes.string,
+    createdByGoogle: PropTypes.bool,
   }),
   loading: PropTypes.bool.isRequired,
   handleLogOut: PropTypes.func.isRequired,

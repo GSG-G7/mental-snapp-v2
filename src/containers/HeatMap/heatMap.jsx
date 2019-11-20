@@ -69,21 +69,22 @@ const heatMap = props => {
           </div>
 
           {journals.length !== 0 ? (
-            journals.map(journal => (
+            journals.map((journal, index) => (
               <JournalCard
                 key={journal.timestamp}
+                index={index}
                 journalId={journal.timestamp}
                 handleDelete={() => handleDelete(journal.timestamp)}
                 handleJournalDetails={handleJournalDetails}
                 time={moment(journal.timestamp).format('h:mm a')}
-                date={moment(journal.timestamp).format('MMMM Do')}
+                date={moment(journal.timestamp).format('MMMM Do YYYY')}
                 grateful={journal.grateful && journal.grateful.title}
                 challenge={journal.challenge && journal.challenge.title}
                 developing={journal.developing && journal.developing.title}
               />
             ))
           ) : (
-            <div className="heat-map__empty">
+            <div className="heat-map__empty wow slideInUp">
               <p className="heat-map__journals__message">
                 no journals for this day
               </p>

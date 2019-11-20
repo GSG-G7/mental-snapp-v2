@@ -18,8 +18,8 @@
 }
 
 .home__journal {
-  color: #333;
-  margin-left: 5px;
+  margin: 1px 0 0 5px;
+  color: #717171;
   font-weight: 600;
   font-family: "Poppins";
 }
