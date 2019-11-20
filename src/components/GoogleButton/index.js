@@ -18,10 +18,11 @@ class SignInGoogle extends Component {
     firebase
       .doSignInWithGoogle()
       .then(socialAuthUser => {
+        const userInfo = socialAuthUser.additionalUserInfo.profile;
         firebase.user(socialAuthUser.user.uid).set(
           {
-            email: socialAuthUser.user.email,
-            name: socialAuthUser.user.displayName,
+            email: userInfo.email,
+            name: userInfo.name,
             goal: '',
             userID: socialAuthUser.user.uid,
             createdByGoogle: true,
