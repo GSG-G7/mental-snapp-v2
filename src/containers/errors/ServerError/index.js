@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 
-import { ReactComponent as Image } from '../../assets/serverError.svg';
+import { ReactComponent as Image } from '../../assets/images/serverError.svg';
 import * as ROUTES from '../../../constants/routes';
 import './style.css';
 
