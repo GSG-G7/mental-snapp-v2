@@ -140,8 +140,8 @@ class Questions extends React.Component {
       this.setState({
         current: current + 1,
         errors: {},
-        content: this.nextAnswers[`content${current}`] || '',
-        title: this.nextAnswers[`title${current}`] || '',
+        content: this.nextAnswers[`content${current + 1}`] || '',
+        title: this.nextAnswers[`title${current + 1}`] || '',
       });
     } else {
       const { history, firebase } = this.props;
