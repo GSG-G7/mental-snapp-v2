@@ -61,7 +61,13 @@ const EditAccount = props => {
     return <Redirect to={ROUTES.CONFIRM_PASSWORD} />;
   return (
     <div className="edit-account">
-      <Header text="Edit Account" handleBack={handleGoBack} />
+      <Header
+        text="Edit Account"
+        handleBack={() => {
+          localStorage.removeItem('confirm');
+          handleGoBack();
+        }}
+      />
 
       <section className="edit-account__form">
         <Form onSubmit={handleSubmit}>
@@ -135,7 +141,13 @@ const EditAccount = props => {
           {errorMessage && <p>{errorMessage.message}</p>}
           <Form.Item>
             <div className="edit-account__buttons">
-              <Button type="default" onClick={handleGoBack}>
+              <Button
+                type="default"
+                onClick={() => {
+                  localStorage.removeItem('confirm');
+                  handleGoBack();
+                }}
+              >
                 Cancel
               </Button>
 

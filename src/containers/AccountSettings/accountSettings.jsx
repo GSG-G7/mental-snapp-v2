@@ -21,12 +21,17 @@ const accountSettings = ({ info, handleLogOut, loading }) => {
         <section className="settings__title">
           <SubHeading text="Account Settings" />
 
-          {!info.createdByGoogle && (
-            <Link to="/confirm-password" className={info}>
-              <span className="settings__edit-btn__text">Edit</span>
-              <Icon type="edit" className="settings__edit-btn__icon" />
-            </Link>
-          )}
+          <a
+            href={
+              !info.createdByGoogle
+                ? '/confirm-password'
+                : 'https://myaccount.google.com/personal-info'
+            }
+            className={info}
+          >
+            <span className="settings__edit-btn__text">Edit</span>
+            <Icon type="edit" className="settings__edit-btn__icon" />
+          </a>
         </section>
         <section className="settings__body">
           <div>
