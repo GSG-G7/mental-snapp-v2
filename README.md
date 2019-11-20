@@ -73,6 +73,9 @@ Create a .env file and add the following variables:
   REACT_APP_APP_ID
   REACT_APP_MEASURMENT_ID
   ```
+
+  #### Look [here](https://github.com/GSG-G7/mental-snapp/issues/134) to get more info about how we store the database using firebase, and to get the project configuration which you can put in the . env file.
+  
   #### Run the App
 You can now start the app! In your terminal write:
 ```
