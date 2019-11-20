@@ -11,6 +11,7 @@ class Account extends Component {
     info: {
       name: '',
       email: '',
+      createdByGoogle: false,
     },
     loading: true,
   };
@@ -25,8 +26,9 @@ class Account extends Component {
       .then(snapshot => {
         const userEmail = snapshot.data().email;
         const userName = snapshot.data().name;
+        const { createdByGoogle } = snapshot.data();
         this.setState({
-          info: { name: userName, email: userEmail },
+          info: { name: userName, email: userEmail, createdByGoogle },
           loading: false,
         });
       });
