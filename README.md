@@ -2,7 +2,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8694ae19-34b4-48ed-b326-5f073d9a7608/deploy-status)](https://app.netlify.com/sites/mental-snapp/deploys)
 
 ###### tags:`Mental-Snapp` `Web App` `Startup`
-### Made By  [Yousuf Al-Najjar](https://github.com/yosefalnajjarofficial), [Alaa Taima](https://github.com/AlaaTaima), [Fares Al-Helow](https://github.com/fares98), [Alaa Yasin](https://github.com/alaa-yasin)
+
 ### Summary :pencil:
 Mental Snapp is a mobile-first web application which allows people in general and women in particular to write down about their feelings or life through answering a set of questions.
 
@@ -99,5 +99,11 @@ CSS | nodemon|
 antd| axios|
 React| |
 Firebase ||
+
+### Team Members
+- [Yousuf Al-Najjar](https://github.com/yosefalnajjarofficial)
+- [Alaa Taima](https://github.com/AlaaTaima)
+- [Fares Al-Hello](https://github.com/fares98)
+- [Alaa Yasin](https://github.com/alaa-yasin)
 
 
