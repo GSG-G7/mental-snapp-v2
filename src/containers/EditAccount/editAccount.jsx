@@ -48,7 +48,7 @@ const EditAccount = props => {
               .user(userId)
               .set({ name: values.name, email: values.email }, { merge: true });
           }
-          localStorage.removeItem('confirm')
+          localStorage.removeItem('confirm');
           handlePush(ROUTES.ACCOUNT_SETTINGS);
           message.success('account updated successfully');
         }
@@ -57,10 +57,17 @@ const EditAccount = props => {
       }
     });
   };
-  if(!localStorage.getItem('confirm')) return <Redirect to={ROUTES.CONFIRM_PASSWORD}/>
+  if (!localStorage.getItem('confirm'))
+    return <Redirect to={ROUTES.CONFIRM_PASSWORD} />;
   return (
     <div className="edit-account">
-      <Header text="Edit Account" handleBack={handleGoBack} />
+      <Header
+        text="Edit Account"
+        handleBack={() => {
+          localStorage.removeItem('confirm');
+          handleGoBack();
+        }}
+      />
 
       <section className="edit-account__form">
         <Form onSubmit={handleSubmit}>
@@ -134,7 +141,13 @@ const EditAccount = props => {
           {errorMessage && <p>{errorMessage.message}</p>}
           <Form.Item>
             <div className="edit-account__buttons">
-              <Button type="default" onClick={handleGoBack}>
+              <Button
+                type="default"
+                onClick={() => {
+                  localStorage.removeItem('confirm');
+                  handleGoBack();
+                }}
+              >
                 Cancel
               </Button>
 
