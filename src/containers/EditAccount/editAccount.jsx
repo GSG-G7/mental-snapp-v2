@@ -48,7 +48,7 @@ const EditAccount = props => {
               .user(userId)
               .set({ name: values.name, email: values.email }, { merge: true });
           }
-          localStorage.removeItem('confirm')
+          localStorage.removeItem('confirm');
           handlePush(ROUTES.ACCOUNT_SETTINGS);
           message.success('account updated successfully');
         }
@@ -57,7 +57,8 @@ const EditAccount = props => {
       }
     });
   };
-  if(!localStorage.getItem('confirm')) return <Redirect to={ROUTES.CONFIRM_PASSWORD}/>
+  if (!localStorage.getItem('confirm'))
+    return <Redirect to={ROUTES.CONFIRM_PASSWORD} />;
   return (
     <div className="edit-account">
       <Header text="Edit Account" handleBack={handleGoBack} />

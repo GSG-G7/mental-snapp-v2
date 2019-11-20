@@ -21,6 +21,8 @@ class Questions extends React.Component {
     allUserJournals: [],
   };
 
+  nextAnswers = {};
+
   componentDidMount() {
     const { firebase } = this.props;
     const userId = localStorage.getItem('userId');
@@ -49,6 +51,7 @@ class Questions extends React.Component {
   handleNext = async () => {
     const { title, content, journals } = this.state;
     let { current } = this.state;
+
     try {
       await schema.validate({ title, content }, { abortEarly: false });
       current += 1;
@@ -59,8 +62,8 @@ class Questions extends React.Component {
       }
       return this.setState({
         current,
-        content: '',
-        title: '',
+        content: this.nextAnswers[`content${current}`] || '',
+        title: this.nextAnswers[`title${current}`] || '',
         errors: {},
       });
     } catch (error) {
@@ -107,14 +110,39 @@ class Questions extends React.Component {
   };
 
   handlePrev = () => {
-    const { current } = this.state;
-    this.setState({ current: current - 1, errors: {} });
+    let title;
+    let content;
+    const {
+      current,
+      journals,
+      title: currentTitle,
+      content: currentContent,
+    } = this.state;
+    if (currentTitle || currentContent) {
+      this.nextAnswers[`title${current}`] = currentTitle;
+      this.nextAnswers[`content${current}`] = currentContent;
+    }
+    if (current === 1) {
+      title = journals[0].grateful.title;
+      content = journals[0].grateful.body;
+    } else if (current === 2) {
+      title = journals[0].challenge.title;
+      content = journals[0].challenge.body;
+    }
+    this.setState({ current: current - 1, errors: {}, title, content });
   };
 
   handleSkip = () => {
     const { current, journals, allUserJournals } = this.state;
     if (current < entryData.length - 1) {
-      this.setState({ current: current + 1, errors: {} });
+      journals[0].grateful = { title: '', content: '' };
+      journals[0].challenge = { title: '', content: '' };
+      this.setState({
+        current: current + 1,
+        errors: {},
+        content: this.nextAnswers[`content${current + 1}`] || '',
+        title: this.nextAnswers[`title${current + 1}`] || '',
+      });
     } else {
       const { history, firebase } = this.props;
       if (
@@ -123,7 +151,6 @@ class Questions extends React.Component {
       ) {
         message.warning("You didn't make an entry today");
         history.push(HOME);
-        this.setState({ journals: [{}] });
       } else {
         journals[0].timestamp = new Date().toString();
         allUserJournals.push(journals[0]);
