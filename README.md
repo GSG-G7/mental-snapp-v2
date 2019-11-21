@@ -1,6 +1,8 @@
 # Mental Snapp
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8694ae19-34b4-48ed-b326-5f073d9a7608/deploy-status)](https://app.netlify.com/sites/mentalsnapp/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8694ae19-34b4-48ed-b326-5f073d9a7608/deploy-status)](https://app.netlify.com/sites/mental-snapp/deploys)
+
 ###### tags:`Mental-Snapp` `Web App` `Startup`
+
 ### Summary :pencil:
 Mental Snapp is a mobile-first web application which allows people in general and women in particular to write down about their feelings or life through answering a set of questions.
 
@@ -12,7 +14,6 @@ Mental Snapp supports users in developing an active self awareness so that they 
 
 ### Our App Figma Design: 
 <img src="./src/containers/assets/images/figma-design.png" alt="figma design photo" />
-![](image.png)
 
 ### User Stories :books:
 <em>"As a user I want to be able to ...:"</em>
@@ -46,3 +47,63 @@ Mental Snapp supports users in developing an active self awareness so that they 
 - [x] See my account information from the setting page by clicking on the settings icon
 
 - [x] Edit my account information by clicking on the edit button from the setting page.
+
+### The MVP! :sparkles:
+####  Look at this short video that shows the functionality of the app:
+
+![Demo](https://i.imgur.com/f944Q7C.gif)
+
+### The App Setup :question:
+#### Set up the app locally
+First clone this repo: git clone https://github.com/GSG-G7/mental-snapp.git
+
+then run npm i to install the dependencies for the app.
+
+#### Environment Variables
+Environment variables are where we store our firebase configuration.
+
+Create a .env file and add the following variables:
+```
+  REACT_APP_API_KEY
+  REACT_APP_AUTH_DOMAIN
+  REACT_APP_DATABASE_URL
+  REACT_APP_PROJECT_ID
+  REACT_APP_STORAGE_BUCKET
+  REACT_APP_MESSAGING_SENDER_ID
+  REACT_APP_APP_ID
+  REACT_APP_MEASURMENT_ID
+  ```
+
+  #### Look [here](https://github.com/GSG-G7/mental-snapp/issues/134) to get more info about how we store the database using firebase, and to get the project configuration which you can put in the . env file.
+  
+  #### Run the App
+You can now start the app! In your terminal write:
+```
+npm start
+```
+
+
+### To Be Continued ... :star2:
+#### The Stretch Goals:
+ - [ ]   Track and display number of days in row on heatmap page
+-  [ ] Let the user identify different emotions in themselves so that they are better able to write/talk about them
+- [ ] Ability to edit past entries
+#### The Second Phase:
+- [ ] Connect the users with therapists in order to help them
+
+### Technologies :computer:
+Core | other |
+-------| --------|
+HTML | eslint|
+CSS | nodemon|
+antd| axios|
+React| |
+Firebase ||
+
+### Team Members
+- [Yousuf Al-Najjar](https://github.com/yosefalnajjarofficial)
+- [Alaa Taima](https://github.com/AlaaTaima)
+- [Fares Al-Hello](https://github.com/fares98)
+- [Alaa Yasin](https://github.com/alaa-yasin)
+
+
