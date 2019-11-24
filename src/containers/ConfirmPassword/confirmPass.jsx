@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 import { Input, Icon, Button, Form } from 'antd';
-import { withAuth } from '../Session/index';
 
 import { ReactComponent as ConfirmImg } from '../assets/images/confirmPass.svg';
 import Header from '../../components/Header';
@@ -11,21 +9,22 @@ import { withFirebase } from '../Firebase';
 
 import './confirmPass.css';
 
-// Refactor
+const ConfirmPass = props => {
+  const {
+    form: { getFieldDecorator },
+    handelGoBack,
+    handleChange,
+    handleErrorMessage,
+    handlePush,
+    errorMessage,
+  } = props;
 
-class ConfirmPass extends Component {
-  state = {
-    errorMesage: '',
-  };
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-
     const {
-      history: { push },
       form: { validateFields },
       firebase,
-    } = this.props;
+    } = props;
     validateFields(async (err, values) => {
       if (!err) {
         try {
@@ -35,85 +34,71 @@ class ConfirmPass extends Component {
             values.password
           );
           localStorage.setItem('confirm', true);
-          await push(EDIT_ACCOUNT);
+          await handlePush(EDIT_ACCOUNT);
         } catch (error) {
-          this.setState({ errorMesage: 'Invalid password' });
+          if (error.message) handleErrorMessage(error.message);
         }
       }
     });
   };
 
-  render() {
-    const { errorMesage } = this.state;
+  return (
+    <div className="confirm-pass">
+      <Header text="Confirm Password" handleBack={handelGoBack} />
 
-    const {
-      history: { goBack },
-      form: { getFieldDecorator },
-    } = this.props;
+      <section className="confirm-pass__body">
+        <p className="confirm-pass__text">
+          This is to make sure it&apos;s you!
+        </p>
+        <Form className="confirm-pass__form" onSubmit={handleSubmit}>
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Enter Your Password',
+                },
+              ],
+            })(
+              <Input.Password
+                prefix={
+                  <Icon type="lock" className="confirm-pass__form__icon" />
+                }
+                placeholder="Enter your password"
+                onChange={handleChange}
+                className="confirm-pass__input"
+              />
+            )}
+          </Form.Item>
 
-    return (
-      <div className="confirm-pass">
-        <Header text="Confirm Password" handleBack={goBack} />
+          {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
-        <section className="confirm-pass__body">
-          <p className="confirm-pass__text">
-            This is to make sure it&apos;s you!
-          </p>
-          <Form className="confirm-pass__form" onSubmit={this.handleSubmit}>
-            <Form.Item>
-              {getFieldDecorator('password', {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Enter Your Password',
-                  },
-                ],
-              })(
-                <Input.Password
-                  prefix={
-                    <Icon type="lock" className="confirm-pass__form__icon" />
-                  }
-                  placeholder="Enter your password"
-                  onChange={() => this.setState({ errorMesage: '' })}
-                  className="confirm-pass__input"
-                />
-              )}
-            </Form.Item>
-
-            {errorMesage && <p style={{ color: 'red' }}>{errorMesage}</p>}
-
-            <Button type="primary" size="large" onClick={this.handleSubmit}>
-              Proceed To Edit
-            </Button>
-          </Form>
-          <ConfirmImg className="confirm-pass__img" />
-        </section>
-      </div>
-    );
-  }
-}
+          <Button type="primary" size="large" onClick={handleSubmit}>
+            Proceed To Edit
+          </Button>
+        </Form>
+        <ConfirmImg className="confirm-pass__img" />
+      </section>
+    </div>
+  );
+};
 
 const confirmPasswordForm = Form.create({ name: 'confirm pass' })(ConfirmPass);
 
 ConfirmPass.propTypes = {
-  history: PropTypes.shape({
-    goBack: PropTypes.func.isRequired,
-    push: PropTypes.func.isRequired,
-  }).isRequired,
+  handelGoBack: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleErrorMessage: PropTypes.func.isRequired,
+  handlePush: PropTypes.func.isRequired,
   form: PropTypes.shape({
     validateFields: PropTypes.func.isRequired,
     getFieldDecorator: PropTypes.func.isRequired,
   }).isRequired,
-
+  errorMessage: PropTypes.string.isRequired,
   firebase: PropTypes.shape({
     doSignInWithEmailAndPassword: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
   }).isRequired,
 };
 
-const AuthConfirmaPassword = compose(
-  withAuth,
-  withFirebase
-)(confirmPasswordForm);
-
-export default AuthConfirmaPassword;
+export default withFirebase(confirmPasswordForm);
