@@ -1,11 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
-import withAuthentication from '../../containers/Session';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import * as ROUTES from "../../constants/routes";
+import withAuthentication from "../../containers/Session";
 
-import * as Containers from '../../containers';
-import 'antd/dist/antd.css';
-import './style.css';
+import * as Containers from "../../containers";
+import "antd/dist/antd.css";
+import "./style.css";
 
 const App = () => {
   return (
@@ -41,6 +41,11 @@ const App = () => {
             exact
             path={ROUTES.FORGOT_PASSWORD}
             render={porps => <Containers.ForgotPassword {...porps} />}
+          />
+          <Route
+            exact
+            path={ROUTES.EMAIL_SENT}
+            render={props => <Containers.EmailSent {...props} />}
           />
           <Route
             exact
