@@ -9,6 +9,8 @@ import { ReactComponent as Vector } from '../assets/images/forgotPass.svg';
 import { HOME } from '../../constants/routes';
 import { withFirebase } from '../Firebase';
 
+import * as ROUTES from '../../constants/routes';
+
 import './forgotPass.css';
 
 class ForgotPass extends Component {
@@ -19,12 +21,15 @@ class ForgotPass extends Component {
     const {
       form: { validateFields },
       firebase,
+      history: { push },
     } = this.props;
 
     validateFields(async (err, values) => {
       if (!err) {
         try {
+          await localStorage.setItem('userEmail', values.email);
           await firebase.forgotPassword(values.email);
+          await push(ROUTES.EMAIL_SENT);
           message.success('Check your email ');
         } catch (error) {
           this.setState({ errorMessage: error.message });
