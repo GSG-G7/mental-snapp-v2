@@ -11,6 +11,8 @@ import { withFirebase } from '../Firebase';
 
 import './confirmPass.css';
 
+// Refactor
+
 class ConfirmPass extends Component {
   state = {
     errorMesage: '',
