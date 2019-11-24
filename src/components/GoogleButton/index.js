@@ -7,6 +7,8 @@ import { ReactComponent as GoogleImg } from '../../containers/assets/images/goog
 import * as ROUTES from '../../constants/routes';
 import './style.css';
 
+// Refactor
+
 class SignInGoogle extends Component {
   state = { error: null };
 
