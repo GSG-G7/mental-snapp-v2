@@ -7,6 +7,7 @@ import { ReactComponent as FacebookImg } from '../../containers/assets/images/fa
 import * as ROUTES from '../../constants/routes';
 import './style.css';
 
+// Refactor
 class SignInTwitter extends Component {
   state = { error: null };
 
