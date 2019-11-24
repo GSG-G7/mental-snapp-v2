@@ -10,32 +10,29 @@ import './style.css';
 class SignInGoogle extends Component {
   state = { error: null };
 
-  handleClick = () => {
+  handleClick = async () => {
     const {
       firebase,
       history: { push },
     } = this.props;
-    firebase
-      .doSignInWithGoogle()
-      .then(socialAuthUser => {
-        const userInfo = socialAuthUser.additionalUserInfo.profile;
-        firebase.user(socialAuthUser.user.uid).set(
-          {
-            email: userInfo.email,
-            name: userInfo.name,
-            goal: '',
-            userID: socialAuthUser.user.uid,
-            createdByGoogle: true,
-          },
-          { merge: true }
-        );
-        localStorage.setItem('userId', socialAuthUser.user.uid);
-        this.setState({ error: null });
-        push(ROUTES.HOME);
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
+    try {
+      const socialAuthUser = await firebase.doSignInWithGoogle();
+      const userInfo = socialAuthUser.additionalUserInfo.profile;
+      await firebase.user(socialAuthUser.user.uid).set(
+        {
+          email: userInfo.email,
+          name: userInfo.name,
+          userID: socialAuthUser.user.uid,
+          createdByGoogle: true,
+        },
+        { merge: true }
+      );
+      await localStorage.setItem('userId', socialAuthUser.user.uid);
+      this.setState({ error: null });
+      await push(ROUTES.HOME);
+    } catch (error) {
+      this.setState({ error });
+    }
   };
 
   render() {
