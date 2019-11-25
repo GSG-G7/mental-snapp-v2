@@ -12,6 +12,7 @@ class Account extends Component {
       name: '',
       email: '',
       createdByGoogle: false,
+      createdByTwitter: false,
     },
     loading: true,
   };
@@ -27,8 +28,14 @@ class Account extends Component {
         const userEmail = snapshot.data().email;
         const userName = snapshot.data().name;
         const { createdByGoogle } = snapshot.data();
+        const { createdByTwitter } = snapshot.data();
         this.setState({
-          info: { name: userName, email: userEmail, createdByGoogle },
+          info: {
+            name: userName,
+            email: userEmail,
+            createdByTwitter,
+            createdByGoogle,
+          },
           loading: false,
         });
       });

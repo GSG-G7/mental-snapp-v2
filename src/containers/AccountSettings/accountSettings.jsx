@@ -1,6 +1,5 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Icon, Spin } from 'antd';
 
@@ -23,8 +22,11 @@ const accountSettings = ({ info, handleLogOut, loading }) => {
 
           <a
             href={
-              !info.createdByGoogle
+              // eslint-disable-next-line no-nested-ternary
+              !info.createdByTwitter && !info.createdByGoogle
                 ? '/confirm-password'
+                : info.createdByTwitter
+                ? 'https://twitter.com/settings/profile'
                 : 'https://myaccount.google.com/personal-info'
             }
             className={info}
@@ -84,6 +86,7 @@ accountSettings.propTypes = {
     name: PropTypes.string,
     email: PropTypes.string,
     createdByGoogle: PropTypes.bool,
+    createdByTwitter: PropTypes.bool,
   }),
   loading: PropTypes.bool.isRequired,
   handleLogOut: PropTypes.func.isRequired,
