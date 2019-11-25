@@ -1,16 +1,15 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import moment from 'moment';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
 import { Icon, Spin } from 'antd';
+
 import LogoHeader from '../../components/LogoHeader';
 import MainHeading from '../../components/MainHeading';
 import Card from '../../components/JournalCard';
 import NavBar from '../../components/navigationBar';
+import { FEED } from '../../constants/routes';
 import { ReactComponent as EditIcon } from '../assets/icons/editIcon.svg';
-import * as ROUTES from '../../constants/routes';
 import './home.css';
 
 const Home = props => {
@@ -26,6 +25,40 @@ const Home = props => {
     handleJournalDetails,
     loading,
   } = props;
+
+  const handleRecentJournals = () => {
+    if (loading) {
+      return (
+        <div style={{ textAlign: 'center', margin: '9vh auto' }}>
+          <Spin size="large" />
+        </div>
+      );
+    }
+    if (recentJournals.length > 0) {
+      return recentJournals.map((journal, index) => (
+        <Card
+          index={index}
+          key={journal.id}
+          className="home__journal-card"
+          date={moment(journal.timestamp).format('MMMM Do YYYY')}
+          time={moment(journal.timestamp).format('h:mm a')}
+          grateful={journal.grateful && journal.grateful.title}
+          challenge={journal.challenge && journal.challenge.title}
+          developing={journal.developing && journal.developing.title}
+          handleDelete={() => handleDelete(journal.id)}
+          journalId={journal.id}
+          handleJournalDetails={() => {
+            return handleJournalDetails(journal.id);
+          }}
+        />
+      ));
+    }
+    return (
+      <h5 className="home__emptyJournals">
+        You haven&apos;t added any journals yet.
+      </h5>
+    );
+  };
 
   return (
     <div className="home">
@@ -67,42 +100,13 @@ const Home = props => {
 
         <div className="home__entries">
           <MainHeading className="entries__recent" text="Recent Journals" />
-          <Link to={ROUTES.FEED}>
+          <Link to={FEED}>
             <p className="entries__more link">See more</p>
           </Link>
         </div>
       </section>
-
-      <div className="cards-container container">
-        {/* we can do a better conditional job here */}
-        {loading ? (
-          <div style={{ textAlign: 'center', margin: '9vh auto' }}>
-            <Spin size="large" />
-          </div>
-        ) : recentJournals.length > 0 ? (
-          recentJournals.map((journal, index) => (
-            <Card
-              index={index}
-              key={journal.timestamp} // we will use id instead
-              className="home__journal-card"
-              date={moment(journal.timestamp).format('MMMM Do YYYY')}
-              time={moment(journal.timestamp).format('h:mm a')}
-              grateful={journal.grateful && journal.grateful.title}
-              challenge={journal.challenge && journal.challenge.title}
-              developing={journal.developing && journal.developing.title}
-              handleDelete={() => handleDelete(journal.timestamp)} // we will use id instead
-              journalId={journal.timestamp} // we will use id instead
-              handleJournalDetails={() => {
-                return handleJournalDetails(journal.timestamp); // we will use id instead
-              }}
-            />
-          ))
-        ) : (
-          <h5 className="home__emptyJournals">
-            You haven&apos;t added any journals yet.
-          </h5>
-        )}
-      </div>
+      {/* handling the journals using the upper function */}
+      <div className="cards-container container">{handleRecentJournals()}</div>
       <NavBar />
     </div>
   );
