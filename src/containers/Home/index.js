@@ -1,53 +1,54 @@
 import React, { Component } from 'react';
-import { message } from 'antd';
 import propTypes from 'prop-types';
+import { message } from 'antd';
 import { compose } from 'recompose';
+
 import HomePage from './home';
-import { withFirebase } from '../Firebase/index';
 import { withAuth } from '../Session/index';
+import { withFirebase } from '../Firebase/index';
 
 class Home extends Component {
   state = {
     isEditable: false,
     name: '',
-    journals: [],
     goal: '',
     recentJournals: [],
     loading: true,
   };
 
-  componentDidMount() {
-    let { recentJournals } = this.state;
-    const { firebase } = this.props;
+  async componentDidMount() {
+    const {
+      firebase,
+      history: { push },
+    } = this.props;
     const userId = localStorage.getItem('userId');
-    firebase.db
-      .collection('users')
-      .doc(userId)
-      .onSnapshot(snapshot => {
-        const userGoal = snapshot.data().goal;
-        const userName = `${snapshot.data().name}'s`;
-        if (snapshot.data().userJournals) {
-          const userJournal = snapshot.data().userJournals;
-          if (userJournal.length > 4) {
-            recentJournals = userJournal.slice(-4);
-            // we don't really need this line
-          } else if (userJournal.length <= 4) {
-            recentJournals = userJournal;
-          }
+    try {
+      await firebase.db
+        .collection('users')
+        .doc(userId)
+        // Listening for changes in the user's document
+        .onSnapshot(snapshot => {
+          const userGoal = snapshot.data().goal;
+          const userName = `${snapshot.data().name}'s`;
           return this.setState({
-            journals: userJournal,
             name: userName,
             goal: userGoal,
-            recentJournals,
             loading: false,
           });
-        }
-        return this.setState({
-          name: userName,
-          goal: userGoal,
-          loading: false,
         });
+      // Getting the user's recent journals
+      const userJournals = await firebase.db
+        .collection('journals')
+        .where('userID', '==', userId)
+        .orderBy('timestamp', 'des')
+        .limit(3)
+        .get();
+      this.setState({
+        recentJournals: userJournals,
       });
+    } catch (error) {
+      push('/server-error');
+    }
   }
 
   handleClick = () => this.setState({ isEditable: true });
@@ -57,29 +58,29 @@ class Home extends Component {
     const { firebase } = this.props;
     this.setState({ isEditable: false });
 
-    const userId =
-      firebase.auth.currentUser.uid || localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     firebase.user(userId).set({ goal }, { merge: true });
   };
 
-  handleDelete = id => {
-    const { journals } = this.state;
+  handleDelete = async id => {
     const { firebase } = this.props;
-    const userId =
-      firebase.auth.currentUser.uid || localStorage.getItem('userId');
+    const userId = localStorage.getItem('userId');
     message.warning('This Journal is deleted');
-    const filteredJournals = journals.filter(
-      journal => journal.timestamp !== id
-    );
-    firebase.db
+
+    await firebase.db
       .collection('users')
-      .doc(userId)
-      // here we will need to apply the .delete() firebase function instead of update
-      .update({
-        userJournals: filteredJournals,
-      });
+      .doc(id)
+      .delete();
+
+    // Getting the user's recent journals
+    const userJournals = await firebase.db
+      .collection('journals')
+      .where('userID', '==', userId)
+      .orderBy('timestamp', 'des')
+      .limit(3)
+      .get();
     this.setState({
-      journals: filteredJournals,
+      recentJournals: userJournals,
     });
   };
 
@@ -88,26 +89,16 @@ class Home extends Component {
   handleJournalDetails = id => {
     const {
       history: { push },
-      match: { params },
     } = this.props;
-    params.id = id; // we can do this in the upper line
     push(`/journal/${id}`);
   };
 
   render() {
-    const {
-      isEditable,
-      name,
-      journals,
-      goal,
-      recentJournals,
-      loading,
-    } = this.state;
+    const { isEditable, name, goal, recentJournals, loading } = this.state;
     return (
       <HomePage
         isEditable={isEditable}
         userName={name}
-        journals={journals}
         loading={loading}
         recentJournals={recentJournals}
         goal={goal}
