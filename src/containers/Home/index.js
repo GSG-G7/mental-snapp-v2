@@ -30,6 +30,7 @@ class Home extends Component {
           const userJournal = snapshot.data().userJournals;
           if (userJournal.length > 4) {
             recentJournals = userJournal.slice(-4);
+            // we don't really need this line
           } else if (userJournal.length <= 4) {
             recentJournals = userJournal;
           }
@@ -73,6 +74,7 @@ class Home extends Component {
     firebase.db
       .collection('users')
       .doc(userId)
+      // here we will need to apply the .delete() firebase function instead of update
       .update({
         userJournals: filteredJournals,
       });
@@ -88,7 +90,7 @@ class Home extends Component {
       history: { push },
       match: { params },
     } = this.props;
-    params.id = id;
+    params.id = id; // we can do this in the upper line
     push(`/journal/${id}`);
   };
 

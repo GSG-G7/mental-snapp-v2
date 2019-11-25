@@ -74,6 +74,7 @@ const Home = props => {
       </section>
 
       <div className="cards-container container">
+        {/* we can do a better conditional job here */}
         {loading ? (
           <div style={{ textAlign: 'center', margin: '9vh auto' }}>
             <Spin size="large" />
@@ -82,17 +83,17 @@ const Home = props => {
           recentJournals.map((journal, index) => (
             <Card
               index={index}
-              key={journal.timestamp}
+              key={journal.timestamp} // we will use id instead
               className="home__journal-card"
               date={moment(journal.timestamp).format('MMMM Do YYYY')}
               time={moment(journal.timestamp).format('h:mm a')}
               grateful={journal.grateful && journal.grateful.title}
               challenge={journal.challenge && journal.challenge.title}
               developing={journal.developing && journal.developing.title}
-              handleDelete={() => handleDelete(journal.timestamp)}
-              journalId={journal.timestamp}
+              handleDelete={() => handleDelete(journal.timestamp)} // we will use id instead
+              journalId={journal.timestamp} // we will use id instead
               handleJournalDetails={() => {
-                return handleJournalDetails(journal.timestamp);
+                return handleJournalDetails(journal.timestamp); // we will use id instead
               }}
             />
           ))
