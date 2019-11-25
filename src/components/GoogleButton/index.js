@@ -22,14 +22,9 @@ class SignInGoogle extends Component {
         {
           email: userInfo.email,
           name: userInfo.name,
+          goal: '',
           userID: socialAuthUser.user.uid,
           createdByGoogle: true,
-        },
-        { merge: true }
-      );
-      await firebase.journal(socialAuthUser.user.uid).set(
-        {
-          goal: '',
         },
         { merge: true }
       );
@@ -62,7 +57,6 @@ SignInGoogle.propTypes = {
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
     user: propTypes.func.isRequired,
-    journal: propTypes.func.isRequired,
     doSignInWithGoogle: propTypes.func.isRequired,
   }).isRequired,
 };
