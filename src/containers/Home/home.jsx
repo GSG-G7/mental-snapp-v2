@@ -6,7 +6,7 @@ import { Icon, Spin } from 'antd';
 
 import LogoHeader from '../../components/LogoHeader';
 import MainHeading from '../../components/MainHeading';
-import Card from '../../components/JournalCard';
+import JournalCard from '../../components/JournalCard';
 import NavBar from '../../components/navigationBar';
 import { FEED } from '../../constants/routes';
 import { ReactComponent as EditIcon } from '../assets/icons/editIcon.svg';
@@ -36,7 +36,7 @@ const Home = props => {
     }
     if (recentJournals.length > 0) {
       return recentJournals.map((journal, index) => (
-        <Card
+        <JournalCard
           index={index}
           key={journal.id}
           className="home__journal-card"
