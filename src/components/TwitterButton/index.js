@@ -3,46 +3,44 @@ import propTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withRouter, Redirect } from 'react-router-dom';
 import { withFirebase } from '../../containers/Firebase';
-import { ReactComponent as FacebookImg } from '../../containers/assets/images/facebook.svg';
+import { ReactComponent as TwitterImage } from '../../containers/assets/images/twitter.svg';
 import * as ROUTES from '../../constants/routes';
 import './style.css';
 
 class SignInTwitter extends Component {
   state = { error: null };
 
-  handleClick = () => {
+  handleClick = async () => {
     const {
       firebase,
       history: { push },
     } = this.props;
-    firebase
-      .doSignInWithTwitter()
-      .then(socialAuthUser => {
-        firebase.user(socialAuthUser.user.uid).set(
-          {
-            email: socialAuthUser.user.email,
-            name: socialAuthUser.user.displayName,
-            userID: socialAuthUser.user.uid,
-            goal: '',
-            createdByTwitter: true,
-          },
-          { merge: true }
-        );
-        firebase.journal(socialAuthUser.user.uid).set(
-          {
-            goal: '',
-          },
-          { merge: true }
-        );
-        return localStorage.setItem('userId', socialAuthUser.user.uid);
-      })
-      .then(() => {
-        push(ROUTES.HOME);
-        this.setState({ error: null });
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
+
+    try {
+      const socialAuthUser = await firebase.doSignInWithTwitter();
+      await firebase.user(socialAuthUser.user.uid).set(
+        {
+          email: socialAuthUser.user.email,
+          name: socialAuthUser.user.displayName,
+          userID: socialAuthUser.user.uid,
+          goal: '',
+          createdByTwitter: true,
+        },
+        { merge: true }
+      );
+      await firebase.journal(socialAuthUser.user.uid).set(
+        {
+          goal: '',
+        },
+        { merge: true }
+      );
+      await localStorage.setItem('userId', socialAuthUser.user.uid);
+
+      await push(ROUTES.HOME);
+      this.setState({ error: null });
+    } catch (error) {
+      this.setState({ error });
+    }
   };
 
   render() {
@@ -52,7 +50,7 @@ class SignInTwitter extends Component {
       <Redirect to={ROUTES.HOME} />
     ) : (
       <button type="submit" className="facebook-btn" onClick={this.handleClick}>
-        <FacebookImg className="facebook-btn__img" />
+        <TwitterImage className="facebook-btn__img" />
         <span className="facebook-btn__text">Twitter</span>
         {error && <p>{error.message}</p>}
       </button>
