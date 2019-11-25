@@ -23,6 +23,7 @@ class SignInTwitter extends Component {
             email: socialAuthUser.user.email,
             name: socialAuthUser.user.displayName,
             userID: socialAuthUser.user.uid,
+            goal: '',
             createdByTwitter: true,
           },
           { merge: true }
@@ -33,7 +34,7 @@ class SignInTwitter extends Component {
           },
           { merge: true }
         );
-        localStorage.setItem('userId', socialAuthUser.user.uid);
+        return localStorage.setItem('userId', socialAuthUser.user.uid);
       })
       .then(() => {
         push(ROUTES.HOME);
