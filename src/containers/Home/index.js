@@ -43,6 +43,7 @@ class Home extends Component {
         .orderBy('timestamp', 'des')
         .limit(3)
         .get();
+
       this.setState({
         recentJournals: userJournals,
       });
@@ -68,7 +69,7 @@ class Home extends Component {
     message.warning('This Journal is deleted');
 
     await firebase.db
-      .collection('users')
+      .collection('journals')
       .doc(id)
       .delete();
 
@@ -79,6 +80,7 @@ class Home extends Component {
       .orderBy('timestamp', 'des')
       .limit(3)
       .get();
+
     this.setState({
       recentJournals: userJournals,
     });
