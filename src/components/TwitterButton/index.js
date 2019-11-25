@@ -27,7 +27,13 @@ class SignInTwitter extends Component {
           },
           { merge: true }
         );
-        return localStorage.setItem('userId', socialAuthUser.user.uid);
+        firebase.journal(socialAuthUser.user.uid).set(
+          {
+            goal: '',
+          },
+          { merge: true }
+        );
+        localStorage.setItem('userId', socialAuthUser.user.uid);
       })
       .then(() => {
         push(ROUTES.HOME);
@@ -61,6 +67,7 @@ SignInTwitter.propTypes = {
     auth: propTypes.object.isRequired,
     uid: propTypes.string.isRequired,
     user: propTypes.object.isRequired,
+    journal: propTypes.object.isRequired,
     doSignInWithTwitter: propTypes.func.isRequired,
   }).isRequired,
 };
