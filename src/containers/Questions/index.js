@@ -23,21 +23,6 @@ class Questions extends React.Component {
 
   nextAnswers = {};
 
-  componentDidMount() {
-    const { firebase } = this.props;
-    const userId = localStorage.getItem('userId');
-    firebase.db
-      .collection('users')
-      .doc(userId)
-      .get()
-      .then(snapshot => {
-        if (snapshot.data().userJournals) {
-          const data = snapshot.data().userJournals;
-          this.setState({ allUserJournals: data });
-        }
-      });
-  }
-
   handleConfirm = e => {
     message.warning("You didn't make an entry today");
     const { history } = this.props;
@@ -82,18 +67,12 @@ class Questions extends React.Component {
       await schema.validate({ title, content }, { abortEarly: false });
       journals[0].developing = { title, body: content };
       journals[0].timestamp = new Date().toString();
-      allUserJournals.push(journals[0]);
-
-      this.setState({ allUserJournals });
 
       const userId = firebase.auth.currentUser.uid;
       firebase.db
-        .collection('users')
-        .doc(userId)
-        .update({
-          userJournals: allUserJournals,
-          goal: title,
-        });
+        .collection('journals')
+        .doc()
+        .set({ ...journals[0], userId });
 
       message.success('Yes, you have added a journal');
       history.push(HOME);
