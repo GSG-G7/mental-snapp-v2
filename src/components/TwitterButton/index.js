@@ -22,7 +22,6 @@ class SignInTwitter extends Component {
           {
             email: socialAuthUser.user.email,
             name: socialAuthUser.user.displayName,
-            goal: '',
             userID: socialAuthUser.user.uid,
             createdByTwitter: true,
           },
@@ -47,7 +46,7 @@ class SignInTwitter extends Component {
     ) : (
       <button type="submit" className="facebook-btn" onClick={this.handleClick}>
         <FacebookImg className="facebook-btn__img" />
-        <span className="facebook-btn__text">Facebook</span>
+        <span className="facebook-btn__text">Twitter</span>
         {error && <p>{error.message}</p>}
       </button>
     );
@@ -66,9 +65,9 @@ SignInTwitter.propTypes = {
   }).isRequired,
 };
 
-const AuthFacebook = compose(
+const AuthTwitter = compose(
   withRouter,
   withFirebase
 )(SignInTwitter);
 
-export default AuthFacebook;
+export default AuthTwitter;
