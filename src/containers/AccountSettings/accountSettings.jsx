@@ -18,7 +18,7 @@ const accountSettings = ({ info, handleLogOut, loading }) => {
       return 'https://myaccount.google.com/personal-info';
     }
     if (info.createdByTwitter) {
-      return 'http://twitter.com';
+      return 'https://twitter.com/settings/account';
     }
     return '/home';
   };
@@ -33,7 +33,7 @@ const accountSettings = ({ info, handleLogOut, loading }) => {
         <section className="settings__title">
           <SubHeading text="Account Settings" />
 
-          <a href={redirect} className={info}>
+          <a href={redirect()} className={info}>
             <span className="settings__edit-btn__text">Edit</span>
             <Icon type="edit" className="settings__edit-btn__icon" />
           </a>
