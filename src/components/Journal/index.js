@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Feelings from '../JournalCard/EmojiData';
 
 import './style.css';
 
@@ -12,6 +13,11 @@ const Journal = ({ question, questionTitle }) => {
             {`${questionTitle} `}
             <span className="journal__title">{question.title}</span>
           </h5>
+          <img
+            className="emoji-icon"
+            src={Feelings[0].photo}
+            alt={Feelings[0].alt}
+          />
         </section>
         <section className="journal__body">
           <p>{question.body}</p>
