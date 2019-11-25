@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 
 import TimerMachine from 'react-timer-machine';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
+import PropTypes from 'prop-types';
+import { withFirebase } from '../Firebase';
 
 import Header from '../../components/Header';
 import { ReactComponent as Img } from '../assets/images/email-sent.svg';
@@ -17,11 +19,12 @@ class EmailSent extends Component {
   };
 
   resend = async () => {
+    const { firebase } = this.props;
     try {
-      const { firebase } = this.props;
-
       const userEmail = await localStorage.getItem('userEmail');
       await firebase.forgotPassword(userEmail);
+      message.success('Check your email ');
+      this.setState({ completed: false });
     } catch (err) {
       console.log(err);
     }
@@ -45,18 +48,19 @@ class EmailSent extends Component {
             className="email-sent__btn"
             disabled={!completed}
             onClick={this.resend}
+            onSubmit={this.handleSubmit}
           >
             {!completed ? (
               <TimerMachine
                 className="btn__content"
                 started
                 countdown
-                timeStart={5 * 1000}
+                timeStart={1 * 1000}
+                formatTimer={ms =>
+                  moment.duration(ms, 'milliseconds').format('h:mm:ss')}
                 onComplete={() => {
                   this.setState({ completed: true });
                 }}
-                formatTimer={(time, ms) =>
-                  moment.duration(ms, 'milliseconds').format('h:mm:ss')}
               />
             ) : (
               <p className="btn__content">Resend</p>
@@ -68,4 +72,9 @@ class EmailSent extends Component {
   }
 }
 
-export default EmailSent;
+EmailSent.propTypes = {
+  firebase: PropTypes.shape().isRequired,
+  history: PropTypes.shape({ goBack: PropTypes.func.isRequired }).isRequired,
+};
+
+export default withFirebase(EmailSent);
