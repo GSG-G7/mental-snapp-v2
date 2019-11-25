@@ -28,12 +28,6 @@ class SignInTwitter extends Component {
         },
         { merge: true }
       );
-      await firebase.journal(socialAuthUser.user.uid).set(
-        {
-          goal: '',
-        },
-        { merge: true }
-      );
       await localStorage.setItem('userId', socialAuthUser.user.uid);
 
       await push(ROUTES.HOME);
