@@ -1,6 +1,5 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Icon, Spin } from 'antd';
 
@@ -11,6 +10,19 @@ import NavigationBar from '../../components/navigationBar';
 import './accountSettings.css';
 
 const accountSettings = ({ info, handleLogOut, loading }) => {
+  const redirect = () => {
+    if (!info.createdByGoogle && !info.createdByTwitter) {
+      return '/confirm-password';
+    }
+    if (info.createdByGoogle) {
+      return 'https://myaccount.google.com/personal-info';
+    }
+    if (info.createdByTwitter) {
+      return 'http://twitter.com';
+    }
+    return '/home';
+  };
+
   return (
     <div className="settings">
       <div className="container">
@@ -21,14 +33,7 @@ const accountSettings = ({ info, handleLogOut, loading }) => {
         <section className="settings__title">
           <SubHeading text="Account Settings" />
 
-          <a
-            href={
-              !info.createdByGoogle
-                ? '/confirm-password'
-                : 'https://myaccount.google.com/personal-info'
-            }
-            className={info}
-          >
+          <a href={redirect} className={info}>
             <span className="settings__edit-btn__text">Edit</span>
             <Icon type="edit" className="settings__edit-btn__icon" />
           </a>
@@ -84,6 +89,7 @@ accountSettings.propTypes = {
     name: PropTypes.string,
     email: PropTypes.string,
     createdByGoogle: PropTypes.bool,
+    createdByTwitter: PropTypes.bool,
   }),
   loading: PropTypes.bool.isRequired,
   handleLogOut: PropTypes.func.isRequired,

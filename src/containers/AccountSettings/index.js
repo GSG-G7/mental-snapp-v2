@@ -12,27 +12,32 @@ class Account extends Component {
       name: '',
       email: '',
       createdByGoogle: false,
+      createdByTwitter: false,
     },
     loading: true,
   };
 
-  componentDidMount() {
+  componentDidMount = async () => {
     const { firebase } = this.props;
     const userId = localStorage.getItem('userId');
-    firebase.db
+    const snapshot = await firebase.db
       .collection('users')
       .doc(userId)
-      .get()
-      .then(snapshot => {
-        const userEmail = snapshot.data().email;
-        const userName = snapshot.data().name;
-        const { createdByGoogle } = snapshot.data();
-        this.setState({
-          info: { name: userName, email: userEmail, createdByGoogle },
-          loading: false,
-        });
-      });
-  }
+      .get();
+    const userEmail = snapshot.data().email;
+    const userName = snapshot.data().name;
+    const { createdByGoogle } = snapshot.data();
+    const { createdByTwitter } = snapshot.data();
+    this.setState({
+      info: {
+        name: userName,
+        email: userEmail,
+        createdByGoogle,
+        createdByTwitter,
+      },
+      loading: false,
+    });
+  };
 
   handleLogOut = () => {
     const { firebase, history } = this.props;
