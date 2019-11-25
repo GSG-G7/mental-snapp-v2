@@ -50,6 +50,14 @@
   color: rgba(245, 34, 45, 0.8);
 }
 
+.feeling-container {
+  margin-bottom: 7px;
+}
+.journal-card__icon--feeling {
+  width: 25px;
+  height: 25px;
+}
+
 .journal-card__body {
   margin: 0.6rem 0;
   font-size: 0.8rem;
