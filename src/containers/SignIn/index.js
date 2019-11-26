@@ -20,7 +20,10 @@ class SignInForm extends React.Component {
   };
 
   handleSubmit = e => {
-    const { firebase, history } = this.props;
+    const {
+      firebase: { doSignInWithEmailAndPassword },
+      history,
+    } = this.props;
     const {
       form: { validateFields },
     } = this.props;
@@ -29,13 +32,13 @@ class SignInForm extends React.Component {
       if (!err) {
         this.setState({ loading: true });
         try {
-          const result = await firebase.doSignInWithEmailAndPassword(
+          const result = await doSignInWithEmailAndPassword(
             values.email,
             values.password
           );
-          await localStorage.setItem('userId', result.user.uid);
+          localStorage.setItem('userId', result.user.uid);
           this.setState({ loading: false });
-          await history.push(ROUTES.HOME);
+          history.push(ROUTES.HOME);
         } catch (error) {
           this.setState({ error, loading: false });
         }
