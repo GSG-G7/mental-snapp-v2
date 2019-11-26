@@ -6,6 +6,7 @@ import { Button, Input, Progress, Icon, Popconfirm } from 'antd';
 
 import BackButton from '../../components/BackButton';
 import entryData from './data';
+import Emojis from './imojis';
 
 import './questions.css';
 
@@ -20,7 +21,8 @@ const Question = props => {
     handleSkip,
     handleGoBack,
     handleConfirm,
-    state: { current, title, content, errors },
+    state: { current, title, content, errors, emojiId },
+    emojiClick,
   } = props;
 
   return (
@@ -57,30 +59,37 @@ const Question = props => {
           showInfo={false}
         />
         <p>{entryData[current].heading}</p>
-        <div className="question__title">
-          <Input
-            placeholder="Title"
-            name="title"
-            value={title}
-            autoComplete="off"
-            onChange={handleChange}
-          />
-          {errors.title && (
-            <span className="question__error-field">{errors.title}</span>
-          )}
-        </div>
-        <div className="question__content">
-          <TextArea
-            rows={4}
-            placeholder="Write your words"
-            name="content"
-            value={content}
-            onChange={handleChange}
-          />
-          {errors.content && (
-            <span className="question__error-field">{errors.content}</span>
-          )}
-        </div>
+
+        {current !== 3 ? (
+          <span>
+            <div className="question__title">
+              <Input
+                placeholder="Title"
+                name="title"
+                value={title}
+                autoComplete="off"
+                onChange={handleChange}
+              />
+              {errors.title && (
+                <span className="question__error-field">{errors.title}</span>
+              )}
+            </div>
+            <div className="question__content">
+              <TextArea
+                rows={4}
+                placeholder="Write your words"
+                name="content"
+                value={content}
+                onChange={handleChange}
+              />
+              {errors.content && (
+                <span className="question__error-field">{errors.content}</span>
+              )}
+            </div>
+          </span>
+        ) : (
+          <Emojis emojiClick={emojiClick} emojiId={emojiId} />
+        )}
       </div>
 
       <div className="question__steps-action">
@@ -94,9 +103,11 @@ const Question = props => {
           </Button>
         )}
 
-        <Button className="question__skip" onClick={handleSkip}>
-          Skip
-        </Button>
+        {current !== 3 && (
+          <Button className="question__skip" onClick={handleSkip}>
+            Skip
+          </Button>
+        )}
       </div>
     </div>
   );
@@ -115,6 +126,8 @@ Question.propTypes = {
     title: propTypes.string.isRequired,
     content: propTypes.string.isRequired,
     errors: propTypes.object.isRequired,
+    emojiId: propTypes.string.isRequired,
   }).isRequired,
+  emojiClick: propTypes.func.isRequired,
 };
 export default Question;

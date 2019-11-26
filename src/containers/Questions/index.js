@@ -1,4 +1,5 @@
-// /* eslint-disable react/prop-types */
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import propTypes from 'prop-types';
 import { compose } from 'recompose';
@@ -18,15 +19,19 @@ class Questions extends React.Component {
     content: '',
     errors: {},
     journals: [{}],
-    allUserJournals: [],
+    emojiId: 0,
   };
 
   nextAnswers = {};
 
+  getEmojiId = ({ target: { id } }) => {
+    this.setState({ emojiId: id });
+  };
+
   handleConfirm = e => {
     message.warning("You didn't make an entry today");
-    const { history } = this.props;
-    history.push(HOME);
+    const { history: push } = this.props;
+    push(HOME);
   };
 
   handleChange = ({ target: { value, name } }) => {
@@ -44,7 +49,10 @@ class Questions extends React.Component {
         journals[0].grateful = { title, body: content };
       } else if (current === 2) {
         journals[0].challenge = { title, body: content };
+      } else if (current === 3) {
+        journals[0].developing = { title, body: content };
       }
+
       return this.setState({
         current,
         content: this.nextAnswers[`content${current}`] || '',
@@ -60,25 +68,32 @@ class Questions extends React.Component {
     }
   };
 
-  handleSubmit = async () => {
-    const { title, content, journals, allUserJournals } = this.state;
+  handleSubmitEithEmoji = () => {
+    const { journals, emojiId } = this.state;
     const { history, firebase } = this.props;
+
+    journals[0].timestamp = new Date().toString();
+    journals[0].userId = firebase.auth.currentUser.uid;
+    journals[0].emojiId = emojiId;
+
+    firebase.db
+      .collection('journals')
+      .doc()
+      .set({ ...journals[0] });
+
+    message.success('Yes, you have added a journal');
+    history.push(HOME);
+    return this.setState({
+      journals: [{}],
+    });
+  };
+
+  handleSubmit = async () => {
+    const { emojiId, current } = this.state;
     try {
-      await schema.validate({ title, content }, { abortEarly: false });
-      journals[0].developing = { title, body: content };
-      journals[0].timestamp = new Date().toString();
-
-      const userId = firebase.auth.currentUser.uid;
-      firebase.db
-        .collection('journals')
-        .doc()
-        .set({ ...journals[0], userId });
-
-      message.success('Yes, you have added a journal');
-      history.push(HOME);
-      return this.setState({
-        journals: [{}],
-      });
+      return current === 3 && emojiId === 0
+        ? message.warning('You choose an emoji')
+        : this.handleSubmitEithEmoji();
     } catch (error) {
       const objError = {};
       error.inner.forEach(fielderror => {
@@ -112,42 +127,19 @@ class Questions extends React.Component {
   };
 
   handleSkip = () => {
-    const { current, journals, allUserJournals } = this.state;
+    const { current, journals, emojiId } = this.state;
     if (current < entryData.length - 1) {
       journals[0].grateful = { title: '', content: '' };
       journals[0].challenge = { title: '', content: '' };
+      journals[0].developing = { title: '', content: '' };
       this.setState({
         current: current + 1,
         errors: {},
         content: this.nextAnswers[`content${current + 1}`] || '',
         title: this.nextAnswers[`title${current + 1}`] || '',
       });
-    } else {
-      const { history, firebase } = this.props;
-      if (
-        journals[0].grateful === undefined &&
-        journals[0].challenge === undefined
-      ) {
-        message.warning("You didn't make an entry today");
-        history.push(HOME);
-      } else {
-        journals[0].timestamp = new Date().toString();
-        allUserJournals.push(journals[0]);
-
-        const userId = firebase.auth.currentUser.uid;
-
-        this.setState({ allUserJournals });
-
-        firebase.db
-          .collection('users')
-          .doc(userId)
-          .update({
-            userJournals: allUserJournals,
-          });
-        message.success('Yes, you have added a journal');
-        history.push(HOME);
-        this.setState({ journals: [{}] });
-      }
+    } else if (emojiId === 0) {
+      message.warning('You choose an emoji');
     }
   };
 
@@ -155,7 +147,7 @@ class Questions extends React.Component {
     const {
       history: { goBack },
     } = this.props;
-    const { errors } = this.state;
+    const { errors, emojiId, current } = this.state;
     return (
       <Question
         state={this.state}
@@ -167,6 +159,9 @@ class Questions extends React.Component {
         handleGoBack={goBack}
         handleConfirm={this.handleConfirm}
         errors={errors}
+        emojiClick={this.getEmojiId}
+        emojiId={emojiId}
+        current={current}
       />
     );
   }
@@ -176,6 +171,11 @@ Questions.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
     goBack: propTypes.func.isRequired,
+  }).isRequired,
+
+  firebase: propTypes.shape({
+    auth: propTypes.shape().isRequired,
+    db: propTypes.shape().isRequired,
   }).isRequired,
 };
 

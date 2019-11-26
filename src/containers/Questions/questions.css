@@ -56,7 +56,6 @@
 }
 
 .question__steps-action .ant-btn-primary {
-  background-color: #ee6b42;
   width: 140px;
   height: 41px;
   border: none;
@@ -157,36 +156,52 @@
   padding-left: 3px !important;
 }
 
-@media only screen and (min-width: 768px) {
-  .question__type .ant-progress-inner {
-    width: 30%;
-  }
-}
-
-/* ================================================== */
-
 .emojis {
-  /* border: 1px solid red; */
-  width: 60%;
-  min-height: 90vh;
-  margin: 2vh auto;
-  text-align: center;
-}
-
-.emojis__container {
-  border: 1px solid rebeccapurple;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
 .emoji {
-  /* border: 1px solid; */
-  width: 30%;
+  width: 27%;
   height: 100%;
   margin: 10px 0;
 }
 
 .active * {
   fill: #ee6b42;
+}
+
+/*=================== Medium devices (tablets, 768px and up)  ===================*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .question__type .ant-progress-inner {
+    width: 30%;
+  }
+}
+
+/*=================== Large devices (desktops, 992px and up) ===================*/
+@media (min-width: 992px) {
+  .question__type .ant-progress-inner {
+    width: 30%;
+  }
+
+  .emojis {
+    width: 50% !important;
+    margin: auto;
+  }
+
+  .emoji {
+    width: 27%;
+    height: 100%;
+    margin: 10px 0;
+  }
+
+  .active * {
+    fill: #ee6b42;
+  }
+
+  .question__steps-action .ant-btn-primary {
+    margin: 30px 0;
+    font-size: 1rem;
+  }
 }
