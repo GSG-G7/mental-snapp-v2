@@ -28,9 +28,9 @@ class SignInGoogle extends Component {
         },
         { merge: true }
       );
-      await localStorage.setItem('userId', socialAuthUser.user.uid);
+      localStorage.setItem('userId', socialAuthUser.user.uid);
       this.setState({ error: null });
-      await push(ROUTES.HOME);
+      push(ROUTES.HOME);
     } catch (error) {
       this.setState({ error });
     }
