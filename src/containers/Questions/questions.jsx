@@ -44,10 +44,11 @@ const Question = props => {
       </div>
       <div className="question__type">
         <p>
-          Question
+          {current === 3 ? 'Imojis' : 'Question'}
+
           <span className="question__count">
             {current + 1}
-            /3
+            /4
           </span>
         </p>
         <Progress

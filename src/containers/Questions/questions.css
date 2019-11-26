@@ -162,3 +162,31 @@
     width: 30%;
   }
 }
+
+/* ================================================== */
+
+.emojis {
+  /* border: 1px solid red; */
+  width: 60%;
+  min-height: 90vh;
+  margin: 2vh auto;
+  text-align: center;
+}
+
+.emojis__container {
+  border: 1px solid rebeccapurple;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.emoji {
+  /* border: 1px solid; */
+  width: 30%;
+  height: 100%;
+  margin: 10px 0;
+}
+
+.active * {
+  fill: #ee6b42;
+}

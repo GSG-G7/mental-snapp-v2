@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+// /* eslint-disable react/prop-types */
 import React from 'react';
 import propTypes from 'prop-types';
 import { compose } from 'recompose';
@@ -206,3 +206,7 @@ const AuthQuestion = compose(
 )(Questions);
 
 export default AuthQuestion;
+
+// import Imojies from './imojis';
+
+// export default Imojies;
