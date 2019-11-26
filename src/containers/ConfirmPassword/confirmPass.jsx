@@ -34,7 +34,7 @@ const ConfirmPass = props => {
             values.password
           );
           localStorage.setItem('confirm', true);
-          await handlePush(EDIT_ACCOUNT);
+          handlePush(EDIT_ACCOUNT);
         } catch (error) {
           if (error.message) handleErrorMessage(error.message);
         }
