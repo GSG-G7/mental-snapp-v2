@@ -4,8 +4,6 @@ import { Input, Icon, Button, Form } from 'antd';
 
 import { ReactComponent as ConfirmImg } from '../assets/images/confirmPass.svg';
 import Header from '../../components/Header';
-import { EDIT_ACCOUNT } from '../../constants/routes';
-import { withFirebase } from '../Firebase';
 
 import './confirmPass.css';
 
@@ -14,33 +12,9 @@ const ConfirmPass = props => {
     form: { getFieldDecorator },
     handelGoBack,
     handleChange,
-    handleErrorMessage,
-    handlePush,
+    handleSubmit,
     errorMessage,
   } = props;
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    const {
-      form: { validateFields },
-      firebase,
-    } = props;
-    validateFields(async (err, values) => {
-      if (!err) {
-        try {
-          const user = await firebase.auth.currentUser;
-          await firebase.doSignInWithEmailAndPassword(
-            user.email,
-            values.password
-          );
-          localStorage.setItem('confirm', true);
-          handlePush(EDIT_ACCOUNT);
-        } catch (error) {
-          if (error.message) handleErrorMessage(error.message);
-        }
-      }
-    });
-  };
 
   return (
     <div className="confirm-pass">
@@ -73,7 +47,7 @@ const ConfirmPass = props => {
 
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
-          <Button type="primary" size="large" onClick={handleSubmit}>
+          <Button type="primary" size="large" htmlType="submit">
             Proceed To Edit
           </Button>
         </Form>
@@ -88,8 +62,7 @@ const confirmPasswordForm = Form.create({ name: 'confirm pass' })(ConfirmPass);
 ConfirmPass.propTypes = {
   handelGoBack: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
-  handleErrorMessage: PropTypes.func.isRequired,
-  handlePush: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   form: PropTypes.shape({
     validateFields: PropTypes.func.isRequired,
     getFieldDecorator: PropTypes.func.isRequired,
@@ -101,4 +74,4 @@ ConfirmPass.propTypes = {
   }).isRequired,
 };
 
-export default withFirebase(confirmPasswordForm);
+export default confirmPasswordForm;
