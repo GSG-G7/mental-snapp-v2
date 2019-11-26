@@ -28,9 +28,9 @@ class SignInTwitter extends Component {
         },
         { merge: true }
       );
-      await localStorage.setItem('userId', socialAuthUser.user.uid);
+      localStorage.setItem('userId', socialAuthUser.user.uid);
 
-      await push(ROUTES.HOME);
+      push(ROUTES.HOME);
       this.setState({ error: null });
     } catch (error) {
       this.setState({ error });
@@ -43,9 +43,9 @@ class SignInTwitter extends Component {
     return localStorage.getItem('userId') ? (
       <Redirect to={ROUTES.HOME} />
     ) : (
-      <button type="submit" className="facebook-btn" onClick={this.handleClick}>
-        <TwitterImage className="facebook-btn__img" />
-        <span className="facebook-btn__text">Twitter</span>
+      <button type="submit" className="twitter-btn" onClick={this.handleClick}>
+        <TwitterImage className="twitter-btn__img" />
+        <span className="twitter-btn__text">Twitter</span>
         {error && <p>{error.message}</p>}
       </button>
     );
