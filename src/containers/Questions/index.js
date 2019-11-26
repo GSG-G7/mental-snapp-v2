@@ -26,7 +26,6 @@ class Questions extends React.Component {
 
   getEmojiId = ({ target: { id } }) => {
     const { emojiId } = this.state;
-
     if (emojiId === id) {
       this.setState({ emojiId: 0 });
     } else this.setState({ emojiId: id });
@@ -56,7 +55,6 @@ class Questions extends React.Component {
       } else if (current === 3) {
         journals[0].developing = { title, body: content };
       }
-
       return this.setState({
         current,
         content: this.nextAnswers[`content${current}`] || '',
@@ -126,24 +124,20 @@ class Questions extends React.Component {
     } else if (current === 2) {
       title = journals[0].challenge.title;
       content = journals[0].challenge.body;
+    } else if (current === 3) {
+      title = journals[0].developing.title;
+      content = journals[0].developing.body;
     }
     this.setState({ current: current - 1, errors: {}, title, content });
   };
 
   handleSkip = () => {
-    const { current, journals, emojiId } = this.state;
+    const { current } = this.state;
     if (current < entryData.length - 1) {
-      journals[0].grateful = { title: '', content: '' };
-      journals[0].challenge = { title: '', content: '' };
-      journals[0].developing = { title: '', content: '' };
       this.setState({
         current: current + 1,
         errors: {},
-        content: this.nextAnswers[`content${current + 1}`] || '',
-        title: this.nextAnswers[`title${current + 1}`] || '',
       });
-    } else if (emojiId === 0) {
-      message.warning('You choose an emoji');
     }
   };
 

@@ -4,7 +4,7 @@ import { Button, message } from 'antd';
 
 import TimerMachine from 'react-timer-machine';
 import moment from 'moment';
-import momentDurationFormatSetup from 'moment-duration-format';
+// import momentDurationFormatSetup from 'moment-duration-format';
 import PropTypes from 'prop-types';
 import { withFirebase } from '../Firebase';
 
@@ -26,7 +26,7 @@ class EmailSent extends Component {
       message.success('Check your email ');
       this.setState({ completed: false });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -56,8 +56,9 @@ class EmailSent extends Component {
                 started
                 countdown
                 timeStart={30 * 1000}
-                formatTimer={ms =>
-                  moment.duration(ms, 'milliseconds').format('h:mm:ss')}
+                formatTimer={ms => {
+                  moment.duration(ms, 'milliseconds').format('h:mm:ss');
+                }}
                 onComplete={() => {
                   this.setState({ completed: true });
                 }}
