@@ -18,10 +18,12 @@ class SignInTwitter extends Component {
 
     try {
       const socialAuthUser = await firebase.doSignInWithTwitter();
+      const userInfo = socialAuthUser.additionalUserInfo.profile;
+
       await firebase.user(socialAuthUser.user.uid).set(
         {
-          email: socialAuthUser.user.email,
-          name: socialAuthUser.user.displayName,
+          email: userInfo.email,
+          name: userInfo.name,
           userID: socialAuthUser.user.uid,
           goal: '',
           createdByTwitter: true,
@@ -43,11 +45,17 @@ class SignInTwitter extends Component {
     return localStorage.getItem('userId') ? (
       <Redirect to={ROUTES.HOME} />
     ) : (
-      <button type="submit" className="twitter-btn" onClick={this.handleClick}>
-        <TwitterImage className="twitter-btn__img" />
-        <span className="twitter-btn__text">Twitter</span>
+      <div>
+        <button
+          type="submit"
+          className="twitter-btn"
+          onClick={this.handleClick}
+        >
+          <TwitterImage className="twitter-btn__img" />
+          <span className="twitter-btn__text">Twitter</span>
+        </button>
         {error && <p>{error.message}</p>}
-      </button>
+      </div>
     );
   }
 }
