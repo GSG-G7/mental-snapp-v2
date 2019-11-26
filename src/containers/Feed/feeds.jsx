@@ -9,12 +9,13 @@ import JournalCard from '../../components/JournalCard';
 import LogoHeader from '../../components/LogoHeader';
 import './feeds.css';
 
+// Getting the option from the select component
 const { Option } = Select;
 
 const Feed = props => {
   const {
-    data,
-    monthCount,
+    data, // journals of selected month
+    monthCount, // all months with their count
     loading,
     handleChange,
     handleDelete,
@@ -43,6 +44,7 @@ const Feed = props => {
         </Select>
       </div>
       <div className="feed_journals container">
+        {/* we need to implement a readable function here */}
         {loading ? (
           <div style={{ textAlign: 'center', marginTop: '9vh' }}>
             <Spin size="large" />
@@ -50,15 +52,15 @@ const Feed = props => {
         ) : data.length > 0 ? (
           data.map(journal => (
             <JournalCard
-              key={journal.timestamp}
+              key={journal.timestamp} // we should use journal id
               time={moment(journal.timestamp).format('h:mm a')}
               date={moment(journal.timestamp).format('MMMM Do YYYY')}
               grateful={journal.grateful && journal.grateful.title}
               challenge={journal.challenge && journal.challenge.title}
               developing={journal.developing && journal.developing.title}
-              handleDelete={() => handleDelete(journal.timestamp)}
-              journalId={journal.timestamp}
-              handleJournalDetails={handleJournalDetails}
+              handleDelete={() => handleDelete(journal.timestamp)} // we should use journal id
+              journalId={journal.timestamp} // we should use journal id
+              handleJournalDetails={handleJournalDetails} // we should use journal id and pass it 🤨
             />
           ))
         ) : (
