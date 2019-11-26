@@ -9,7 +9,7 @@ import { ReactComponent as Shocked } from '../assets/images/shocked.svg';
 import { ReactComponent as Surprise } from '../assets/images/surprise.svg';
 import './questions.css';
 
-const Imojis = props => {
+const Emojis = props => {
   const { emojiId, emojiClick } = props;
 
   return (
@@ -53,9 +53,9 @@ const Imojis = props => {
   );
 };
 
-Imojis.propTypes = {
+Emojis.propTypes = {
   emojiId: PropTypes.string.isRequired,
   emojiClick: PropTypes.func.isRequired,
 };
 
-export default Imojis;
+export default Emojis;

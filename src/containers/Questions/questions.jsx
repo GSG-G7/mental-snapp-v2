@@ -6,7 +6,7 @@ import { Button, Input, Progress, Icon, Popconfirm } from 'antd';
 
 import BackButton from '../../components/BackButton';
 import entryData from './data';
-import Emojis from './imojis';
+import Emojis from './emojis';
 
 import './questions.css';
 
@@ -46,7 +46,7 @@ const Question = props => {
       </div>
       <div className="question__type">
         <p>
-          {current === 3 ? 'Imojis' : 'Question'}
+          {current === 3 ? 'Emojis' : 'Question'}
 
           <span className="question__count">
             {current + 1}

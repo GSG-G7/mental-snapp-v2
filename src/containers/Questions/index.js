@@ -25,7 +25,11 @@ class Questions extends React.Component {
   nextAnswers = {};
 
   getEmojiId = ({ target: { id } }) => {
-    this.setState({ emojiId: id });
+    const { emojiId } = this.state;
+
+    if (emojiId === id) {
+      this.setState({ emojiId: 0 });
+    } else this.setState({ emojiId: id });
   };
 
   handleConfirm = e => {
@@ -185,7 +189,3 @@ const AuthQuestion = compose(
 )(Questions);
 
 export default AuthQuestion;
-
-// import Imojies from './imojis';
-
-// export default Imojies;
