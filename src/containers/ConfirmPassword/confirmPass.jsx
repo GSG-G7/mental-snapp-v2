@@ -14,7 +14,7 @@ const ConfirmPass = props => {
     handleChange,
     handleSubmit,
     errorMessage,
-    loading
+    loading,
   } = props;
 
   return (
@@ -31,9 +31,9 @@ const ConfirmPass = props => {
               rules: [
                 {
                   required: true,
-                  message: 'Enter Your Password'
-                }
-              ]
+                  message: 'Enter Your Password',
+                },
+              ],
             })(
               <Input.Password
                 prefix={
@@ -71,9 +71,9 @@ ConfirmPass.propTypes = {
   errorMessage: PropTypes.string.isRequired,
   firebase: PropTypes.shape({
     doSignInWithEmailAndPassword: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
   }).isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
 };
 
 export default ConfirmPass;
