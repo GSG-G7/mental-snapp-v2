@@ -11,103 +11,131 @@ import { withFirebase } from '../Firebase/index';
 
 class FeedPage extends Component {
   state = {
-    data: [], // we need a descriptive name here
-    monthCount: months,
+    currentMonthJournal: [],
+    monthsWithCounts: months,
     loading: true,
     allJournals: [],
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { firebase } = this.props;
     const userId = localStorage.getItem('userId');
+    try {
+      // Getting all of the user journals
+      const querySnapshot = await firebase.db
+        .collection('journals')
+        .where('userId', '==', userId)
+        .get();
 
-    firebase.db // we need to use async-await in here
-      .collection('users')
-      .doc(userId)
-      .get()
-      .then(snapshot => {
-        if (snapshot.data().userJournals) {
-          const allUserJournal = snapshot.data().userJournals;
-          const monthArray = allUserJournal.map(journal =>
-            moment(journal.timestamp).format('MMMM')
-          );
+      const userJournals = [];
 
-          // getting each month a and how many journals in it
-          const filteredObject = monthArray.reduce((acc, curr) => {
-            if (typeof acc[curr] === 'undefined') {
-              acc[curr] = 1;
-            } else {
-              acc[curr] += 1;
-            }
-            return acc;
-          }, {});
+      querySnapshot.docs.forEach(doc => {
+        userJournals.push({ id: doc.id, ...doc.data() });
+      });
 
-          console.log(filteredObject);
+      if (querySnapshot) {
+        const monthArray = userJournals.map(journal =>
+          moment(journal.timestamp).format('MMMM')
+        );
 
-          const keys = Object.keys(filteredObject);
-          // adding a count to the months array which goes to the select
-          for (let i = 0; i < months.length; i++) {
-            for (let j = 0; j < keys.length; j++) {
-              if (months[i].month === keys[j]) {
-                months[i].count = filteredObject[keys[j]];
-              }
+        // Getting each month a and how many journals in it
+        const filteredObject = monthArray.reduce((acc, curr) => {
+          if (typeof acc[curr] === 'undefined') {
+            acc[curr] = 1;
+          } else {
+            acc[curr] += 1;
+          }
+          return acc;
+        }, {});
+
+        const keys = Object.keys(filteredObject);
+        // Adding a count to the months array which goes to the select
+        for (let i = 0; i < months.length; i++) {
+          for (let j = 0; j < keys.length; j++) {
+            if (months[i].month === keys[j]) {
+              months[i].count = filteredObject[keys[j]];
             }
           }
-          const currentMonthJournal = allUserJournal.filter(
-            // this can be done using firebase queries
-            journal =>
-              moment(journal.timestamp).format('MMMM') ===
-              moment(new Date()).format('MMMM')
-          );
-          this.setState({
-            monthCount: months, // should be named monthsWithCounts
-            data: currentMonthJournal, // don't use data as a variable name please 😒
-            loading: false,
-            allJournals: allUserJournal, // we don't need to get all the journals
-          });
         }
+
+        const currentMonthJournal = userJournals.filter(
+          journal =>
+            moment(journal.timestamp).format('MMMM') ===
+            moment(new Date()).format('MMMM')
+        );
+
         this.setState({
+          monthsWithCounts: months,
+          currentMonthJournal,
           loading: false,
+          allJournals: userJournals,
         });
+      }
+      this.setState({
+        loading: false,
       });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   handleChange = value => {
     const { allJournals } = this.state;
     const selectedJournal = allJournals.filter(
-      journal => moment(journal.timestamp).format('MMMM') === value // this value might go in the query
+      journal => moment(journal.timestamp).format('MMMM') === value
     );
-    this.setState({ data: selectedJournal });
+    this.setState({ currentMonthJournal: selectedJournal });
   };
 
-  handleDelete = id => {
+  handleDelete = async id => {
     const { firebase } = this.props;
-    const userId = firebase.auth.currentUser.uid; // we can get it from local storage
+    const userId = localStorage.getItem('userId');
 
-    const { data, monthCount, allJournals } = this.state;
+    const { currentMonthJournal, monthsWithCounts } = this.state;
     message.warning('This Journal is deleted');
 
     // we can update this in a different way
-    const deletedCardMonth = moment(data[0].timestamp).format('MMMM');
-    monthCount.map(month => {
+    const deletedCardMonth = moment(currentMonthJournal[0].timestamp).format(
+      'MMMM'
+    );
+
+    monthsWithCounts.map(month => {
       if (month.month === deletedCardMonth) {
         month.count--;
       }
       return month;
     });
+    try {
+      await firebase.db
+        .collection('journals')
+        .doc(id)
+        .delete();
 
-    firebase.db // we will use async-await here for sure but we might not even need this line
-      .collection('users')
-      .doc(userId)
-      .update({
-        userJournals: allJournals.filter(journal => journal.timestamp !== id),
+      // Getting all of the user journals
+      const querySnapshot = await firebase.db
+        .collection('journals')
+        .where('userId', '==', userId)
+        .get();
+
+      const userJournals = [];
+
+      querySnapshot.docs.forEach(doc => {
+        userJournals.push({ id: doc.id, ...doc.data() });
       });
 
-    this.setState({
-      // should get journals from there collection
-      data: data.filter(journal => journal.timestamp !== id),
-      allJournals: allJournals.filter(journal => journal.timestamp !== id),
-    });
+      const currentMonthJournals = userJournals.filter(
+        journal =>
+          moment(journal.timestamp).format('MMMM') ===
+          moment(new Date()).format('MMMM')
+      );
+
+      this.setState({
+        currentMonthJournal: currentMonthJournals,
+        allJournals: userJournals,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleJournalDetails = id => {
@@ -118,12 +146,12 @@ class FeedPage extends Component {
   };
 
   render() {
-    const { data, loading, monthCount } = this.state;
+    const { currentMonthJournal, loading, monthsWithCounts } = this.state;
     return (
       <Feed
-        data={data}
+        currentMonthJournal={currentMonthJournal}
         loading={loading}
-        monthCount={monthCount}
+        monthsWithCounts={monthsWithCounts}
         handleChange={this.handleChange}
         handleDelete={this.handleDelete}
         handleJournalDetails={this.handleJournalDetails}
