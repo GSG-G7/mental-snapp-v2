@@ -14,8 +14,8 @@ const { Option } = Select;
 
 const Feed = props => {
   const {
-    data, // journals of selected month
-    monthCount, // all months with their count
+    currentMonthJournal,
+    monthsWithCounts,
     loading,
     handleChange,
     handleDelete,
@@ -31,7 +31,7 @@ const Feed = props => {
           className="feeds__select"
           onChange={handleChange}
         >
-          {monthCount.map(element => (
+          {monthsWithCounts.map(element => (
             <Option
               className="feeds__option"
               key={element.id}
@@ -49,18 +49,18 @@ const Feed = props => {
           <div style={{ textAlign: 'center', marginTop: '9vh' }}>
             <Spin size="large" />
           </div>
-        ) : data.length > 0 ? (
-          data.map(journal => (
+        ) : currentMonthJournal.length > 0 ? (
+          currentMonthJournal.map(journal => (
             <JournalCard
-              key={journal.timestamp} // we should use journal id
+              key={journal.id}
               time={moment(journal.timestamp).format('h:mm a')}
               date={moment(journal.timestamp).format('MMMM Do YYYY')}
               grateful={journal.grateful && journal.grateful.title}
               challenge={journal.challenge && journal.challenge.title}
               developing={journal.developing && journal.developing.title}
-              handleDelete={() => handleDelete(journal.timestamp)} // we should use journal id
-              journalId={journal.timestamp} // we should use journal id
-              handleJournalDetails={handleJournalDetails} // we should use journal id and pass it 🤨
+              handleDelete={() => handleDelete(journal.id)}
+              journalId={journal.id}
+              handleJournalDetails={handleJournalDetails}
             />
           ))
         ) : (
@@ -75,8 +75,8 @@ const Feed = props => {
 };
 
 Feed.propTypes = {
-  data: PropTypes.arrayOf.isRequired,
-  monthCount: PropTypes.arrayOf.isRequired,
+  currentMonthJournal: PropTypes.arrayOf.isRequired,
+  monthsWithCounts: PropTypes.arrayOf.isRequired,
   loading: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
