@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Icon, Button, Form } from 'antd';
+import { Input, Icon, Button, Form, Spin } from 'antd';
 
 import { ReactComponent as ConfirmImg } from '../assets/images/confirmPass.svg';
 import Header from '../../components/Header';
@@ -9,11 +9,12 @@ import './confirmPass.css';
 
 const ConfirmPass = props => {
   const {
-    form: { getFieldDecorator },
+    getFieldDecorator,
     handelGoBack,
     handleChange,
     handleSubmit,
     errorMessage,
+    loading
   } = props;
 
   return (
@@ -25,14 +26,14 @@ const ConfirmPass = props => {
           This is to make sure it&apos;s you!
         </p>
         <Form className="confirm-pass__form" onSubmit={handleSubmit}>
-          <Form.Item>
+          <Form.Item hasFeedback>
             {getFieldDecorator('password', {
               rules: [
                 {
                   required: true,
-                  message: 'Enter Your Password',
-                },
-              ],
+                  message: 'Enter Your Password'
+                }
+              ]
             })(
               <Input.Password
                 prefix={
@@ -47,8 +48,13 @@ const ConfirmPass = props => {
 
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
-          <Button type="primary" size="large" htmlType="submit">
-            Proceed To Edit
+          <Button
+            type="primary"
+            size="large"
+            className="confirm-pass__form__loading"
+            onClick={handleSubmit}
+          >
+            {loading ? <Spin /> : 'Proceed To Edit'}
           </Button>
         </Form>
         <ConfirmImg className="confirm-pass__img" />
@@ -57,21 +63,17 @@ const ConfirmPass = props => {
   );
 };
 
-const confirmPasswordForm = Form.create({ name: 'confirm pass' })(ConfirmPass);
-
 ConfirmPass.propTypes = {
   handelGoBack: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  form: PropTypes.shape({
-    validateFields: PropTypes.func.isRequired,
-    getFieldDecorator: PropTypes.func.isRequired,
-  }).isRequired,
+  getFieldDecorator: PropTypes.func.isRequired,
   errorMessage: PropTypes.string.isRequired,
   firebase: PropTypes.shape({
     doSignInWithEmailAndPassword: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired
   }).isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
-export default confirmPasswordForm;
+export default ConfirmPass;

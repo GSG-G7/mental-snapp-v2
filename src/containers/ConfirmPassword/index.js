@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import { Form } from 'antd';
 import { withAuth } from '../Session/index';
+
 import { withFirebase } from '../Firebase';
 import { EDIT_ACCOUNT } from '../../constants/routes';
 
@@ -10,6 +12,7 @@ import ConfirmPassword from './confirmPass';
 class Index extends Component {
   state = {
     errorMessage: '',
+    loading: false,
   };
 
   handleSubmit = e => {
@@ -21,6 +24,7 @@ class Index extends Component {
     } = this.props;
     validateFields(async (err, values) => {
       if (!err) {
+        this.setState({ loading: true });
         try {
           const user = await firebase.auth.currentUser;
           await firebase.doSignInWithEmailAndPassword(
@@ -28,9 +32,10 @@ class Index extends Component {
             values.password
           );
           localStorage.setItem('confirm', true);
+          this.setState({ loading: false });
           push(EDIT_ACCOUNT);
         } catch (error) {
-          if (error.message) this.setState({ errorMessage: error.message });
+          if (error) this.setState({ errorMessage: error.message });
         }
       }
     });
@@ -47,14 +52,18 @@ class Index extends Component {
   render() {
     const {
       history: { goBack },
+      form: { getFieldDecorator },
     } = this.props;
-    const { errorMessage } = this.state;
+    const { errorMessage, loading } = this.state;
     return (
       <ConfirmPassword
         handelGoBack={goBack}
         handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
         handleErrorMessage={this.handleErrorMessage}
+        getFieldDecorator={getFieldDecorator}
         errorMessage={errorMessage}
+        loading={loading}
       />
     );
   }
@@ -67,6 +76,7 @@ Index.propTypes = {
   }).isRequired,
   form: PropTypes.shape({
     validateFields: PropTypes.func.isRequired,
+    getFieldDecorator: PropTypes.func.isRequired,
   }).isRequired,
   firebase: PropTypes.shape({
     doSignInWithEmailAndPassword: PropTypes.func.isRequired,
@@ -74,9 +84,11 @@ Index.propTypes = {
   }).isRequired,
 };
 
+const confirmPasswordForm = Form.create({ name: 'confirm pass' })(Index);
+
 const AuthConfirm = compose(
   withAuth,
   withFirebase
-)(Index);
+)(confirmPasswordForm);
 
 export default AuthConfirm;
