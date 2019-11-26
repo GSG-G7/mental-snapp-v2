@@ -16,7 +16,7 @@ export default [
   },
   {
     id: 4,
-    heading: 'Choose an emoji',
+    heading: 'Please, choose an emoji',
     percent: 100,
   },
 ];
