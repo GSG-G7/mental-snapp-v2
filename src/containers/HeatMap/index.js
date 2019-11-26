@@ -4,6 +4,8 @@ import { compose } from 'recompose';
 import { message } from 'antd';
 import { withAuth } from '../Session/index';
 
+// Refactor ...
+
 import HeatMap from './heatMap';
 import { withFirebase } from '../Firebase';
 import filter from './filter';
