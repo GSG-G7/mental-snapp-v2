@@ -15,25 +15,29 @@ class index extends Component {
     journalsOfTheDay: [],
   };
 
-  async componentDidMount() {
+  componentDidMount() {
+    const { data, journals } = this.state;
     const { firebase, history } = this.props;
     const userId = localStorage.getItem('userId');
-    try {
-      const snapshot = await firebase.db
-        .collection('journals')
-        .where('userId', '==', userId);
 
-      const data = snapshot.data().userJournals;
-
-      const heatMapData = filter(data);
-      this.setState({
-        data: heatMapData,
-        journals: data,
-      });
-      this.handleCurrentDay();
-    } catch (error) {
-      history.push('/server-error');
-    }
+    firebase.db
+      .collection('journals')
+      .get()
+      .then(docus =>
+        docus.forEach(doc => {
+          if (doc.data().userId === userId) {
+            const journalData = doc.data();
+            journals.push(journalData);
+            data.push(journalData);
+          }
+          const heatMap = filter(data);
+          this.setState({
+            journals,
+            data: heatMap,
+          });
+        })
+      )
+      .catch(error => history.push('/server-error'));
   }
 
   handleCurrentDay = () => {
