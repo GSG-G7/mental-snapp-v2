@@ -1,0 +1,86 @@
+.feeds {
+  padding-bottom: 5rem;
+  padding-top: 75px;
+}
+
+.feeds .ant-select {
+  margin: 5px 0;
+}
+
+.feeds .ant-select-selection--single {
+  padding: 0.3rem !important;
+  height: 40px !important;
+}
+
+.feeds__select {
+  width: 100% !important;
+}
+
+.feeds__logo {
+  margin-bottom: 15px;
+  height: 4vh;
+}
+
+.feeds__count {
+  font-weight: 700;
+}
+
+.feeds__count--none {
+  font-weight: 500;
+  color: #c0c0c0;
+}
+
+.feeds__message {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e9663a;
+  width: 98%;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.feeds__option {
+  display: flex !important;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-top: 18px;
+}
+
+.feeds__content .ant-select-selection-selected-value span:nth-child(2) {
+  visibility: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+  .feeds__content .ant-select-selection--single {
+    height: 60px;
+    border-color: black;
+    font-size: 30px;
+    padding-top: 10px;
+  }
+
+  .feeds__message {
+    font-size: 36px;
+  }
+
+  .feeds__option {
+    font-size: 18px;
+    margin-top: 18px;
+  }
+
+  .ant-select-dropdown-menu-item {
+    font-size: 30px !important;
+    margin-top: 18px;
+  }
+
+  .feed_journals {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left !important;
+  }
+
+  .feed_journals .journal-card {
+    width: 48%;
+    margin-top: 1rem;
+  }
+}
