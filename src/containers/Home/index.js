@@ -36,19 +36,29 @@ class Home extends Component {
             loading: false,
           });
         });
+
+      const userJournals = [];
+
       // Getting the user's recent journals
-      const userJournals = await firebase.db
+      const querySnapshot = await firebase.db
         .collection('journals')
-        .where('userID', '==', userId)
-        .orderBy('timestamp', 'des')
+        .where('userId', '==', userId)
+        .orderBy('timestamp', 'desc')
         .limit(3)
         .get();
+
+      querySnapshot.forEach(doc => {
+        userJournals.push({ id: doc.id, ...doc.data() });
+      });
+
+      console.log(querySnapshot);
 
       this.setState({
         recentJournals: userJournals,
       });
     } catch (error) {
-      push('/server-error');
+      console.log(error);
+      // push('/server-error');
     }
   }
 
@@ -73,7 +83,7 @@ class Home extends Component {
       .doc(id)
       .delete();
 
-    // Getting the user's recent journals
+    // Getting the user's recent journals after delete
     const userJournals = await firebase.db
       .collection('journals')
       .where('userID', '==', userId)
