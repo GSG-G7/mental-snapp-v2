@@ -14,6 +14,7 @@ import Questions from './Questions';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import UnderConstruction from './UnderConstruction';
+import EmailSent from './EmailSent';
 
 export {
   About,
@@ -32,4 +33,5 @@ export {
   SignIn,
   SignUp,
   UnderConstruction,
+  EmailSent,
 };
