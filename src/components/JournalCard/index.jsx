@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon, Popconfirm } from 'antd';
 import PropTypes from 'prop-types';
 import WOW from 'wow.js';
-import Feelings from './EmojiData';
+import Emoji from '../Emoji/emoji';
 
 import './style.css';
 
@@ -59,11 +59,7 @@ const JournalCard = ({
       >
         <div className="feeling-container">
           <span className="journal-card__body__title">My Mood</span>
-          <img
-            className="journal-card__icon--feeling"
-            src={Feelings[feeling - 1].photo}
-            alt={Feelings[feeling - 1].alt}
-          />
+          <Emoji feeling={feeling} />
         </div>
 
         {grateful && (

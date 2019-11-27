@@ -2,10 +2,11 @@ import React from 'react';
 import moment from 'moment';
 import { Icon, Popconfirm, Spin } from 'antd';
 import propTypes from 'prop-types';
-import './journal.css';
 
 import BackButton from '../../components/BackButton';
+import Emoji from '../../components/Emoji/emoji';
 import JournalComponent from '../../components/Journal';
+import './journal.css';
 
 const Journal = props => {
   const { journal, handleConfirm, handleGoBack, loading } = props;
@@ -40,6 +41,8 @@ const Journal = props => {
               <span>{moment(journal.timestamp).format('h:mm a')}</span>
             </div>
           </div>
+
+          <Emoji feeling={journal.emojiId} />
           {journal && journal.grateful && (
             <JournalComponent
               className="journal__first"
@@ -77,5 +80,6 @@ Journal.propTypes = {
   handleConfirm: propTypes.func.isRequired,
   handleGoBack: propTypes.func.isRequired,
   loading: propTypes.bool.isRequired,
+  emojiId: propTypes.number.isRequired,
 };
 export default Journal;
