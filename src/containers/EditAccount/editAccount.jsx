@@ -1,71 +1,34 @@
 import React from 'react';
-import { message, Form, Input, Icon, Button, Checkbox } from 'antd';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { Form, Input, Icon, Button, Checkbox } from 'antd';
 
-import { withFirebase } from '../Firebase';
-import Header from '../../components/Header';
 import './editAccount.css';
-import * as ROUTES from '../../constants/routes';
+import Header from '../../components/Header';
+import { CONFIRM_PASSWORD } from '../../constants/routes';
 
 const EditAccount = props => {
   const {
-    firebase,
     userInfo: { name, email },
     checked,
     handleChange,
-    handleErrorMessage,
+    handleSubmit,
     errorMessage,
     handleGoBack,
-    handlePush,
-    form: { getFieldDecorator, validateFieldsAndScroll },
+    getFieldDecorator,
   } = props;
-  const handleSubmit = e => {
-    e.preventDefault();
-    const user = firebase.auth.currentUser;
-    const userId =
-      firebase.auth.currentUser.uid || localStorage.getItem('userId');
-    validateFieldsAndScroll(async (err, values) => {
-      try {
-        if (!err) {
-          if (!values.password) {
-            await user.updateProfile({
-              displayName: values.name,
-            });
-            await user.updateEmail(values.email);
 
-            firebase
-              .user(userId)
-              .set({ name: values.name, email: values.email }, { merge: true });
-          } else {
-            await user.updateProfile({
-              displayName: values.name,
-            });
-            await user.updateEmail(values.email);
-            await user.updatePassword(values.password);
-
-            firebase
-              .user(userId)
-              .set({ name: values.name, email: values.email }, { merge: true });
-          }
-          localStorage.removeItem('confirm');
-          handlePush(ROUTES.ACCOUNT_SETTINGS);
-          message.success('account updated successfully');
-        }
-      } catch (error) {
-        if (error.message) handleErrorMessage(error.message);
-      }
-    });
-  };
+  // Redirect to confirm when not confirmed
   if (!localStorage.getItem('confirm'))
-    return <Redirect to={ROUTES.CONFIRM_PASSWORD} />;
+    return <Redirect to={CONFIRM_PASSWORD} />;
+
   return (
     <div className="edit-account">
       <Header
         text="Edit Account"
         handleBack={() => {
           localStorage.removeItem('confirm');
-          handleGoBack();
+          handleGoBack('/account-settings');
         }}
       />
 
@@ -91,7 +54,6 @@ const EditAccount = props => {
           <Form.Item hasFeedback>
             {getFieldDecorator('email', {
               initialValue: `${email}`,
-
               rules: [
                 {
                   type: 'email',
@@ -145,7 +107,7 @@ const EditAccount = props => {
                 type="default"
                 onClick={() => {
                   localStorage.removeItem('confirm');
-                  handleGoBack();
+                  handleGoBack('/account-settings');
                 }}
               >
                 Cancel
@@ -162,16 +124,13 @@ const EditAccount = props => {
   );
 };
 
-const editAccount = Form.create({ name: 'Edit Account' })(EditAccount);
 EditAccount.defaultProps = {
   errorMessage: '',
 };
+
 EditAccount.propTypes = {
-  form: PropTypes.shape({
-    validateFieldsAndScroll: PropTypes.func.isRequired,
-    getFieldValue: PropTypes.func.isRequired,
-    getFieldDecorator: PropTypes.func.isRequired,
-  }).isRequired,
+  getFieldDecorator: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   userInfo: PropTypes.shape({
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
@@ -179,13 +138,7 @@ EditAccount.propTypes = {
   checked: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleGoBack: PropTypes.func.isRequired,
-  firebase: PropTypes.shape({
-    auth: PropTypes.object.isRequired,
-    user: PropTypes.func.isRequired,
-  }).isRequired,
-  handlePush: PropTypes.func.isRequired,
-  handleErrorMessage: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
 };
 
-export default withFirebase(editAccount);
+export default EditAccount;
