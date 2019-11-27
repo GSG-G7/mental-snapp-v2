@@ -9,20 +9,7 @@ import NavigationBar from '../../components/navigationBar';
 
 import './accountSettings.css';
 
-const accountSettings = ({ info, handleLogOut, loading }) => {
-  const redirect = () => {
-    if (!info.createdByGoogle && !info.createdByTwitter) {
-      return '/confirm-password';
-    }
-    if (info.createdByGoogle) {
-      return 'https://myaccount.google.com/personal-info';
-    }
-    if (info.createdByTwitter) {
-      return 'https://twitter.com/settings/account';
-    }
-    return '/home';
-  };
-
+const accountSettings = ({ info, handleLogOut, loading, redirect }) => {
   return (
     <div className="settings">
       <div className="container">
@@ -93,6 +80,7 @@ accountSettings.propTypes = {
   }),
   loading: PropTypes.bool.isRequired,
   handleLogOut: PropTypes.func.isRequired,
+  redirect: PropTypes.func.isRequired,
 };
 
 export default accountSettings;

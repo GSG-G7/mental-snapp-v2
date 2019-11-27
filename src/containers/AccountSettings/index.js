@@ -4,7 +4,11 @@ import { compose } from 'recompose';
 import AccountSettings from './accountSettings';
 import { withFirebase } from '../Firebase/index';
 import { withAuth } from '../Session/index';
-import { LANDING, SERVER_ERROR } from '../../constants/routes';
+import {
+  LANDING,
+  SERVER_ERROR,
+  CONFIRM_PASSWORD,
+} from '../../constants/routes';
 
 class Account extends Component {
   state = {
@@ -51,6 +55,17 @@ class Account extends Component {
     return firebase.doSignOut;
   };
 
+  redirect = () => {
+    const { info } = this.state;
+    if (info.createdByGoogle) {
+      return 'https://myaccount.google.com/personal-info';
+    }
+    if (info.createdByTwitter) {
+      return 'https://twitter.com/settings/account';
+    }
+    return CONFIRM_PASSWORD;
+  };
+
   render() {
     const { info, loading } = this.state;
     return (
@@ -58,6 +73,7 @@ class Account extends Component {
         loading={loading}
         info={info}
         handleLogOut={this.handleLogOut}
+        redirect={this.redirect}
       />
     );
   }
