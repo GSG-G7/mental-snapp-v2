@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Icon, Popconfirm } from 'antd';
+import { Icon, Popconfirm, Spin } from 'antd';
 import propTypes from 'prop-types';
 import './journal.css';
 
@@ -24,36 +24,42 @@ const Journal = props => {
           </Popconfirm>
         </div>
       </div>
-      <div className="journal-details__top">
-        <div>
-          <Icon type="calendar" className="journal-card__icon" />
-          <span>{moment(journal.timestamp).format('MMMM Do')}</span>
-        </div>
-        <div>
-          <Icon type="clock-circle" className="journal-card__icon" />
-          <span>{moment(journal.timestamp).format('h:mm a')}</span>
-        </div>
-      </div>
-      {journal && journal.grateful && (
-        <JournalComponent
-          className="journal__first"
-          questionTitle="Grateful for:"
-          question={journal.grateful}
-        />
-      )}
+      {!journal ? (
+        <Spin />
+      ) : (
+        <section>
+          <div className="journal-details__top">
+            <div>
+              <Icon type="calendar" className="journal-card__icon" />
+              <span>{moment(journal.timestamp).format('MMMM Do')}</span>
+            </div>
+            <div>
+              <Icon type="clock-circle" className="journal-card__icon" />
+              <span>{moment(journal.timestamp).format('h:mm a')}</span>
+            </div>
+          </div>
+          {journal && journal.grateful && (
+            <JournalComponent
+              className="journal__first"
+              questionTitle="Grateful for:"
+              question={journal.grateful}
+            />
+          )}
 
-      {journal && journal.challenge && (
-        <JournalComponent
-          questionTitle="Challenges:"
-          question={journal.challenge}
-        />
-      )}
+          {journal && journal.challenge && (
+            <JournalComponent
+              questionTitle="Challenges:"
+              question={journal.challenge}
+            />
+          )}
 
-      {journal && journal.developing && (
-        <JournalComponent
-          questionTitle="Developing:"
-          question={journal.developing}
-        />
+          {journal && journal.developing && (
+            <JournalComponent
+              questionTitle="Developing:"
+              question={journal.developing}
+            />
+          )}
+        </section>
       )}
     </div>
   );

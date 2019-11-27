@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'antd';
+import { Icon, Spin } from 'antd';
 import ReactTooltip from 'react-tooltip';
 import CalenderHeatMap from 'react-calendar-heatmap';
 import moment from 'moment';
@@ -28,73 +28,79 @@ const heatMap = props => {
       <div className="container">
         <LogoHeader />
       </div>
-      <h3 className="heat-map__month container">
-        <Icon type="calendar" className="heat-map__icon" />
-        {moment().format('MMMM')}
-      </h3>
-      <div className="heat-map__container container">
-        {/* here we will display any journals and heatmap */}
-        <div className="heat-map__journals">
-          <div className="heat-map__body">
-            <CalenderHeatMap
-              startDate={firstDay}
-              endDate={lastDay}
-              values={data}
-              classForValue={value => {
-                if (!value || !value.count) {
-                  return 'color-empty';
-                }
-                return `color-scale-${Math.min(value.count, 4)}`;
-              }}
-              tooltipDataAttrs={toolTipData}
-              showWeekdayLabels={false}
-              showMonthLabels={false}
-              horizontal={false}
-              onClick={handleClick}
-            />
-            <ReactTooltip />
-            <span className="heat-map__description">
-              <div className="heat-map__legend">
-                <span className="heat-map__text">less activity</span>
-                <div className="heat-map__box heat-map__box--scale1" />
-                <div className="heat-map__box heat-map__box--scale2" />
-                <div className="heat-map__box heat-map__box--scale3" />
-                <div className="heat-map__box heat-map__box--scale4" />
-                <span className="heat-map__text">more activity</span>
+      {!journals ? (
+        <Spin />
+      ) : (
+        <section>
+          <h3 className="heat-map__month container">
+            <Icon type="calendar" className="heat-map__icon" />
+            {moment().format('MMMM')}
+          </h3>
+          <div className="heat-map__container container">
+            <div className="heat-map__journals">
+              <div className="heat-map__body">
+                <CalenderHeatMap
+                  startDate={firstDay}
+                  endDate={lastDay}
+                  values={data}
+                  classForValue={value => {
+                    if (!value || !value.count) {
+                      return 'color-empty';
+                    }
+                    return `color-scale-${Math.min(value.count, 4)}`;
+                  }}
+                  tooltipDataAttrs={toolTipData}
+                  showWeekdayLabels={false}
+                  showMonthLabels={false}
+                  horizontal={false}
+                  onClick={handleClick}
+                />
+                <ReactTooltip />
+                <span className="heat-map__description">
+                  <div className="heat-map__legend">
+                    <span className="heat-map__text">less activity</span>
+                    <div className="heat-map__box heat-map__box--scale1" />
+                    <div className="heat-map__box heat-map__box--scale2" />
+                    <div className="heat-map__box heat-map__box--scale3" />
+                    <div className="heat-map__box heat-map__box--scale4" />
+                    <span className="heat-map__text">more activity</span>
+                  </div>
+                  <p className="heat-map__text">
+                    Pick a day to check your activity in it
+                  </p>
+                </span>
               </div>
-              <p className="heat-map__text">
-                Pick a day to check your activity in it
-              </p>
-            </span>
-          </div>
 
-          {journals.length !== 0 ? (
-            journals.map((journal, index) => (
-              <JournalCard
-                key={journal.timestamp}
-                index={index}
-                journalId={journal.timestamp}
-                handleDelete={() => handleDelete(journal.timestamp)}
-                handleJournalDetails={handleJournalDetails}
-                time={moment(journal.timestamp).format('h:mm a')}
-                date={moment(journal.timestamp).format('MMMM Do YYYY')}
-                grateful={journal.grateful && journal.grateful.title}
-                challenge={journal.challenge && journal.challenge.title}
-                developing={journal.developing && journal.developing.title}
-              />
-            ))
-          ) : (
-            <div className="heat-map__empty wow slideInUp">
-              <p className="heat-map__journals__message">
-                no journals for this day
-              </p>
-              <div className="heat-map__journals__image">
-                <NoJournals />
-              </div>
+              {journals.length !== 0 ? (
+                journals.map((journal, index) => (
+                  <JournalCard
+                    key={journal.id}
+                    index={index}
+                    journalId={journal.id}
+                    handleDelete={() => handleDelete(journal.id)}
+                    handleJournalDetails={handleJournalDetails}
+                    time={moment(journal.timestamp).format('h:mm a')}
+                    date={moment(journal.timestamp).format('MMMM Do YYYY')}
+                    grateful={journal.grateful && journal.grateful.title}
+                    challenge={journal.challenge && journal.challenge.title}
+                    developing={journal.developing && journal.developing.title}
+                  />
+                ))
+              ) : (
+                <div className="heat-map__empty wow slideInUp">
+                  <p className="heat-map__journals__message">
+                    no journals for this day
+                  </p>
+                  <div className="heat-map__journals__image">
+                    <NoJournals />
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </div>
+          </div>
+        </section>
+      )}
+
       <NavigationBar />
     </div>
   );

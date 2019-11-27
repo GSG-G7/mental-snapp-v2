@@ -5,12 +5,11 @@ import { withAuth } from '../Session/index';
 import { withFirebase } from '../Firebase/index';
 
 import JournalPage from './journal';
-import { HOME } from '../../constants/routes';
+import { HEAT_MAP, HOME } from '../../constants/routes';
 
 class Journal extends Component {
   state = {
     journal: {},
-    allUserJournals: [],
   };
 
   componentDidMount() {
@@ -19,41 +18,32 @@ class Journal extends Component {
       match: { params },
     } = this.props;
     const { id } = params;
-    const userId = localStorage.getItem('userId');
     firebase.db
-      .collection('users')
-      .doc(userId)
+      .collection('journals')
       .get()
       .then(result => {
-        const allJournals = result.data().userJournals;
-        this.setState({ allUserJournals: allJournals });
-        const clickedJournal = allJournals.filter(card => {
-          return card.timestamp === id;
+        result.forEach(docus => {
+          if (docus.id === id) {
+            this.setState({ journal: docus.data() });
+          }
         });
-        return this.setState({ journal: clickedJournal[0] });
       });
   }
 
   handleConfirm = () => {
-    const { allUserJournals } = this.state;
     const {
       match: {
         params: { id },
       },
       firebase,
     } = this.props;
-    const userId = firebase.auth.currentUser.uid;
     this.setState({ journal: {} });
     firebase.db
-      .collection('users')
-      .doc(userId)
-      .update({
-        userJournals: allUserJournals.filter(
-          journal => journal.timestamp !== id
-        ),
-      });
+      .collection('journals')
+      .doc(id)
+      .delete();
     const { history } = this.props;
-    history.push(HOME);
+    history.push(HEAT_MAP);
   };
 
   handleGoBack = e => {

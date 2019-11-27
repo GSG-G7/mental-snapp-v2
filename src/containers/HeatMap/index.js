@@ -27,6 +27,7 @@ class index extends Component {
         docus.forEach(doc => {
           if (doc.data().userId === userId) {
             const journalData = doc.data();
+            journalData.id = doc.id;
             journals.push(journalData);
             data.push(journalData);
           }
@@ -37,6 +38,7 @@ class index extends Component {
           });
         })
       )
+      .then(this.handleCurrentDay)
       .catch(error => history.push('/server-error'));
   }
 
@@ -68,22 +70,16 @@ class index extends Component {
     }
   };
 
-  handleDelete = timestamp => {
+  handleDelete = id => {
     const { firebase } = this.props;
     const { journals } = this.state;
-    const userId = firebase.auth.currentUser.uid;
-
     // 1- also it will be deleted from state as follows :
-    const filteredData = journals.filter(
-      journal => journal.timestamp !== timestamp
-    );
+    const filteredData = journals.filter(journal => journal.id !== id);
 
     firebase.db
-      .collection('users')
-      .doc(userId)
-      .update({
-        userJournals: filteredData,
-      });
+      .collection('journals')
+      .doc(id)
+      .delete();
     message.warning('This Journal is deleted');
     const heatMapData = filter(filteredData);
 
