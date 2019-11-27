@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Icon, Popconfirm } from 'antd';
+import { Icon, Popconfirm, Spin } from 'antd';
 import propTypes from 'prop-types';
 import './journal.css';
 
@@ -8,7 +8,7 @@ import BackButton from '../../components/BackButton';
 import JournalComponent from '../../components/Journal';
 
 const Journal = props => {
-  const { journal, handleConfirm, handleGoBack } = props;
+  const { journal, handleConfirm, handleGoBack, loading } = props;
   return (
     <div className="journal-page">
       <div className="journal-page__header container">
@@ -24,36 +24,44 @@ const Journal = props => {
           </Popconfirm>
         </div>
       </div>
-      <div className="journal-details__top">
-        <div>
-          <Icon type="calendar" className="journal-card__icon" />
-          <span>{moment(journal.timestamp).format('MMMM Do')}</span>
+      {!loading ? (
+        <div className="journal-page__loading">
+          <Spin size="large" />
         </div>
-        <div>
-          <Icon type="clock-circle" className="journal-card__icon" />
-          <span>{moment(journal.timestamp).format('h:mm a')}</span>
-        </div>
-      </div>
-      {journal && journal.grateful && (
-        <JournalComponent
-          className="journal__first"
-          questionTitle="Grateful for:"
-          question={journal.grateful}
-        />
-      )}
+      ) : (
+        <section>
+          <div className="journal-details__top">
+            <div>
+              <Icon type="calendar" className="journal-card__icon" />
+              <span>{moment(journal.timestamp).format('MMMM Do')}</span>
+            </div>
+            <div>
+              <Icon type="clock-circle" className="journal-card__icon" />
+              <span>{moment(journal.timestamp).format('h:mm a')}</span>
+            </div>
+          </div>
+          {journal && journal.grateful && (
+            <JournalComponent
+              className="journal__first"
+              questionTitle="Grateful for:"
+              question={journal.grateful}
+            />
+          )}
 
-      {journal && journal.challenge && (
-        <JournalComponent
-          questionTitle="Challenges:"
-          question={journal.challenge}
-        />
-      )}
+          {journal && journal.challenge && (
+            <JournalComponent
+              questionTitle="Challenges:"
+              question={journal.challenge}
+            />
+          )}
 
-      {journal && journal.developing && (
-        <JournalComponent
-          questionTitle="Developing:"
-          question={journal.developing}
-        />
+          {journal && journal.developing && (
+            <JournalComponent
+              questionTitle="Developing:"
+              question={journal.developing}
+            />
+          )}
+        </section>
       )}
     </div>
   );
@@ -68,5 +76,6 @@ Journal.propTypes = {
   }).isRequired,
   handleConfirm: propTypes.func.isRequired,
   handleGoBack: propTypes.func.isRequired,
+  loading: propTypes.bool.isRequired,
 };
 export default Journal;
