@@ -64,7 +64,7 @@ const Feed = props => {
           onChange={handleSelectYearChange}
         >
           {userYears.map(year => (
-            <Option className="feeds__option" value={year}>
+            <Option className="feeds__option" key={year} value={year}>
               <span>{year}</span>
             </Option>
           ))}
