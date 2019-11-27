@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import AccountSettings from './accountSettings';
 import { withFirebase } from '../Firebase/index';
 import { withAuth } from '../Session/index';
-import { LANDING } from '../../constants/routes';
+import { LANDING, SERVER_ERROR } from '../../constants/routes';
 
 class Account extends Component {
   state = {
@@ -18,25 +18,30 @@ class Account extends Component {
   };
 
   componentDidMount = async () => {
-    const { firebase } = this.props;
-    const userId = localStorage.getItem('userId');
-    const snapshot = await firebase.db
-      .collection('users')
-      .doc(userId)
-      .get();
-    const userEmail = snapshot.data().email;
-    const userName = snapshot.data().name;
-    const { createdByGoogle } = snapshot.data();
-    const { createdByTwitter } = snapshot.data();
-    this.setState({
-      info: {
-        name: userName,
-        email: userEmail,
-        createdByGoogle,
-        createdByTwitter,
-      },
-      loading: false,
-    });
+    try {
+      const { firebase } = this.props;
+      const userId = localStorage.getItem('userId');
+      const snapshot = await firebase.db
+        .collection('users')
+        .doc(userId)
+        .get();
+      const userEmail = snapshot.data().email;
+      const userName = snapshot.data().name;
+      const { createdByGoogle } = snapshot.data();
+      const { createdByTwitter } = snapshot.data();
+      this.setState({
+        info: {
+          name: userName,
+          email: userEmail,
+          createdByGoogle,
+          createdByTwitter,
+        },
+        loading: false,
+      });
+    } catch (e) {
+      const { history } = this.props;
+      history.push(SERVER_ERROR);
+    }
   };
 
   handleLogOut = () => {
