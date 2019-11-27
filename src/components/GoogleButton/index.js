@@ -59,6 +59,7 @@ SignInGoogle.propTypes = {
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
     user: propTypes.func.isRequired,
+    journal: propTypes.func.isRequired,
     doSignInWithGoogle: propTypes.func.isRequired,
   }).isRequired,
 };
