@@ -13,7 +13,7 @@ const { Option } = Select;
 const Feed = props => {
   const {
     userYears,
-    currentMonthJournals,
+    currentJournals,
     monthsWithCounts,
     loading,
     handleSelectYearChange,
@@ -22,7 +22,7 @@ const Feed = props => {
     handleJournalDetails,
   } = props;
 
-  const showCurrentMonthJournals = () => {
+  const showCurrentJournals = () => {
     if (loading) {
       return (
         <div style={{ textAlign: 'center', marginTop: '9vh' }}>
@@ -30,8 +30,8 @@ const Feed = props => {
         </div>
       );
     }
-    if (currentMonthJournals.length > 0) {
-      return currentMonthJournals.map((journal, index) => (
+    if (currentJournals.length > 0) {
+      return currentJournals.map((journal, index) => (
         <JournalCard
           index={index}
           key={journal.id}
@@ -90,16 +90,14 @@ const Feed = props => {
           ))}
         </Select>
       </div>
-      <div className="feed_journals container">
-        {showCurrentMonthJournals()}
-      </div>
+      <div className="feed_journals container">{showCurrentJournals()}</div>
       <NavBar />
     </div>
   );
 };
 
 Feed.propTypes = {
-  currentMonthJournals: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  currentJournals: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   userYears: PropTypes.arrayOf(PropTypes.string).isRequired,
   monthsWithCounts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   loading: PropTypes.bool.isRequired,
