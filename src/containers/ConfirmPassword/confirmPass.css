@@ -1,3 +1,6 @@
+.confirm-pass__form__loading .ant-spin-dot-item{
+  background-color: white !important;
+}
 .confirm-pass__body {
   display: flex;
   flex-direction: column;

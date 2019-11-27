@@ -32,8 +32,10 @@ class Questions extends React.Component {
   };
 
   handleConfirm = e => {
+    const {
+      history: { push },
+    } = this.props;
     message.warning("You didn't make an entry today");
-    const { history: push } = this.props;
     push(HOME);
   };
 

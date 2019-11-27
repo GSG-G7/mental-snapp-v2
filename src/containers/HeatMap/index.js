@@ -13,27 +13,32 @@ class index extends Component {
     data: [],
     journals: [],
     journalsOfTheDay: [],
+    loading: false,
   };
 
   async componentDidMount() {
+    const { data, journals } = this.state;
     const { firebase, history } = this.props;
     const userId = localStorage.getItem('userId');
     try {
-      const snapshot = await firebase.db
-        .collection('users')
-        .doc(userId)
-        .get();
-
-      const data = snapshot.data().userJournals;
-
-      const heatMapData = filter(data);
-      this.setState({
-        data: heatMapData,
-        journals: data,
+      const docus = await firebase.db.collection('journals').get();
+      await docus.forEach(doc => {
+        if (doc.data().userId === userId) {
+          const journalData = doc.data();
+          journalData.id = doc.id;
+          journals.push(journalData);
+          data.push(journalData);
+        }
+        const heatMap = filter(data);
+        this.setState({
+          journals,
+          data: heatMap,
+          loading: true,
+        });
       });
-      this.handleCurrentDay();
+      await this.handleCurrentDay();
     } catch (error) {
-      history.push('/server-error');
+      history.push('server-error');
     }
   }
 
@@ -65,25 +70,18 @@ class index extends Component {
     }
   };
 
-  handleDelete = timestamp => {
+  handleDelete = id => {
     const { firebase } = this.props;
     const { journals } = this.state;
-    const userId = firebase.auth.currentUser.uid;
-
     // 1- also it will be deleted from state as follows :
-    const filteredData = journals.filter(
-      journal => journal.timestamp !== timestamp
-    );
+    const filteredData = journals.filter(journal => journal.id !== id);
 
     firebase.db
-      .collection('users')
-      .doc(userId)
-      .update({
-        userJournals: filteredData,
-      });
+      .collection('journals')
+      .doc(id)
+      .delete();
     message.warning('This Journal is deleted');
     const heatMapData = filter(filteredData);
-
     this.setState({
       journals: filteredData,
       data: heatMapData,
@@ -99,7 +97,7 @@ class index extends Component {
   };
 
   render() {
-    const { data, journalsOfTheDay } = this.state;
+    const { data, journalsOfTheDay, loading } = this.state;
     return (
       <HeatMap
         data={data}
@@ -107,6 +105,7 @@ class index extends Component {
         journals={journalsOfTheDay}
         handleDelete={this.handleDelete}
         handleJournalDetails={this.handleJournalDetails}
+        loading={loading}
       />
     );
   }

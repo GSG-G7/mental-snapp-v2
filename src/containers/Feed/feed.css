@@ -3,6 +3,10 @@
   padding-top: 75px;
 }
 
+.feeds .ant-select {
+  margin: 5px 0;
+}
+
 .feeds .ant-select-selection--single {
   padding: 0.3rem !important;
   height: 40px !important;
@@ -15,6 +19,15 @@
 .feeds__logo {
   margin-bottom: 15px;
   height: 4vh;
+}
+
+.feeds__count {
+  font-weight: 700;
+}
+
+.feeds__count--none {
+  font-weight: 500;
+  color: #c0c0c0;
 }
 
 .feeds__message {
