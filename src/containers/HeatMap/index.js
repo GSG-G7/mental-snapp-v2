@@ -4,8 +4,6 @@ import { compose } from 'recompose';
 import { message } from 'antd';
 import { withAuth } from '../Session/index';
 
-// Refactor ...
-
 import HeatMap from './heatMap';
 import { withFirebase } from '../Firebase';
 import filter from './filter';
@@ -22,9 +20,8 @@ class index extends Component {
     const userId = localStorage.getItem('userId');
     try {
       const snapshot = await firebase.db
-        .collection('users')
-        .doc(userId)
-        .get();
+        .collection('journals')
+        .where('userId', '==', userId);
 
       const data = snapshot.data().userJournals;
 
