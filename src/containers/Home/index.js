@@ -51,14 +51,11 @@ class Home extends Component {
         userJournals.push({ id: doc.id, ...doc.data() });
       });
 
-      console.log(querySnapshot);
-
       this.setState({
         recentJournals: userJournals,
       });
     } catch (error) {
-      console.log(error);
-      // push('/server-error');
+      push('/server-error');
     }
   }
 
@@ -74,26 +71,38 @@ class Home extends Component {
   };
 
   handleDelete = async id => {
-    const { firebase } = this.props;
+    const {
+      firebase,
+      history: { push },
+    } = this.props;
     const userId = localStorage.getItem('userId');
-    message.warning('This Journal is deleted');
+    try {
+      await firebase.db
+        .collection('journals')
+        .doc(id)
+        .delete();
 
-    await firebase.db
-      .collection('journals')
-      .doc(id)
-      .delete();
+      const userJournals = [];
 
-    // Getting the user's recent journals after delete
-    const userJournals = await firebase.db
-      .collection('journals')
-      .where('userID', '==', userId)
-      .orderBy('timestamp', 'des')
-      .limit(3)
-      .get();
+      // Getting the user's recent journals after delete
+      const querySnapshot = await firebase.db
+        .collection('journals')
+        .where('userId', '==', userId)
+        .orderBy('timestamp', 'desc')
+        .limit(3)
+        .get();
 
-    this.setState({
-      recentJournals: userJournals,
-    });
+      querySnapshot.forEach(doc => {
+        userJournals.push({ id: doc.id, ...doc.data() });
+      });
+
+      this.setState({
+        recentJournals: userJournals,
+      });
+      message.warning('This Journal is deleted');
+    } catch (error) {
+      push('/server-error');
+    }
   };
 
   handleBlur = ({ target }) => this.setState({ goal: target.textContent });
