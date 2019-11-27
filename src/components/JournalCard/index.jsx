@@ -7,6 +7,7 @@ import Feelings from './EmojiData';
 import './style.css';
 
 const JournalCard = ({
+  id,
   index,
   time,
   date,
@@ -61,8 +62,8 @@ const JournalCard = ({
           {/* image src is supposed to be Feeling[id].photo */}
           <img
             className="journal-card__icon--feeling"
-            src={Feelings[0].photo}
-            alt={Feelings[0].alt}
+            src={Feelings[id].photo}
+            alt={Feelings[id].alt}
           />
         </div>
 
@@ -96,6 +97,7 @@ JournalCard.defaultProps = {
 };
 
 JournalCard.propTypes = {
+  id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   time: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
