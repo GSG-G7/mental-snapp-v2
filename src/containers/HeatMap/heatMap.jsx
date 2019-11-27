@@ -86,6 +86,7 @@ const heatMap = props => {
                     date={moment(journal.timestamp).format('MMMM Do YYYY')}
                     grateful={journal.grateful && journal.grateful.title}
                     challenge={journal.challenge && journal.challenge.title}
+                    feeling={journal.emojiId}
                     developing={journal.developing && journal.developing.title}
                   />
                 ))
