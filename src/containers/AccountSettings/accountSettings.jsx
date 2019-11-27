@@ -22,11 +22,8 @@ const accountSettings = ({ info, handleLogOut, loading }) => {
 
           <a
             href={
-              // eslint-disable-next-line no-nested-ternary
-              !info.createdByTwitter && !info.createdByGoogle
+              !info.createdByGoogle
                 ? '/confirm-password'
-                : info.createdByTwitter
-                ? 'https://twitter.com/settings/profile'
                 : 'https://myaccount.google.com/personal-info'
             }
             className={info}
@@ -86,7 +83,6 @@ accountSettings.propTypes = {
     name: PropTypes.string,
     email: PropTypes.string,
     createdByGoogle: PropTypes.bool,
-    createdByTwitter: PropTypes.bool,
   }),
   loading: PropTypes.bool.isRequired,
   handleLogOut: PropTypes.func.isRequired,
