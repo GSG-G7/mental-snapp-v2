@@ -7,7 +7,6 @@
 }
 
 .journal__header {
-  position: relative;
   width: 100%;
   text-align: left;
   background: #e9663a;
@@ -28,13 +27,6 @@
 
 .journal__title {
   font-weight: bold;
-}
-
-.emoji-icon {
-  position: absolute;
-  margin: -23px 248px;
-  width: 25px;
-  height: 25px;
 }
 
 .journal__body {
