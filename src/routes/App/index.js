@@ -43,6 +43,11 @@ const App = () => {
           />
           <Route
             exact
+            path={ROUTES.EMAIL_SENT}
+            render={props => <Containers.EmailSent {...props} />}
+          />
+          <Route
+            exact
             path={ROUTES.FEED}
             render={porps => <Containers.Feed {...porps} />}
           />
