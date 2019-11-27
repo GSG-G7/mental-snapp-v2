@@ -35,6 +35,7 @@ const Feed = props => {
         <JournalCard
           index={index}
           key={journal.id}
+          feeling={journal.emojiId}
           time={moment(journal.timestamp).format('h:mm a')}
           date={moment(journal.timestamp).format('MMMM Do YYYY')}
           grateful={journal.grateful && journal.grateful.title}
