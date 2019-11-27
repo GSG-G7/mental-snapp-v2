@@ -47,6 +47,7 @@ const Home = props => {
           developing={journal.developing && journal.developing.title}
           handleDelete={() => handleDelete(journal.id)}
           journalId={journal.id}
+          feeling={journal.emojiId}
           handleJournalDetails={() => {
             return handleJournalDetails(journal.id);
           }}

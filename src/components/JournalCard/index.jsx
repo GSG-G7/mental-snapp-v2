@@ -7,7 +7,6 @@ import Feelings from './EmojiData';
 import './style.css';
 
 const JournalCard = ({
-  id,
   index,
   time,
   date,
@@ -17,6 +16,7 @@ const JournalCard = ({
   handleDelete,
   journalId,
   handleJournalDetails,
+  feeling,
 }) => {
   new WOW().init();
   return (
@@ -59,11 +59,10 @@ const JournalCard = ({
       >
         <div className="feeling-container">
           <span className="journal-card__body__title">My Mood</span>
-          {/* image src is supposed to be Feeling[id].photo */}
           <img
             className="journal-card__icon--feeling"
-            src={Feelings[id].photo}
-            alt={Feelings[id].alt}
+            src={Feelings[feeling - 1].photo}
+            alt={Feelings[feeling - 1].alt}
           />
         </div>
 
@@ -97,7 +96,6 @@ JournalCard.defaultProps = {
 };
 
 JournalCard.propTypes = {
-  id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   time: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
@@ -107,6 +105,7 @@ JournalCard.propTypes = {
   handleDelete: PropTypes.func.isRequired,
   journalId: PropTypes.string.isRequired,
   handleJournalDetails: PropTypes.func.isRequired,
+  feeling: PropTypes.number.isRequired,
 };
 
 export default JournalCard;

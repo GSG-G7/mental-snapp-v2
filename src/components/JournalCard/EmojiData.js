@@ -1,9 +1,9 @@
-import happy from '../../containers/assets/images/happy.svg';
-import angry from '../../containers/assets/images/smile.svg';
-import meh from '../../containers/assets/images/meh.svg';
-import sad from '../../containers/assets/images/sad.svg';
-import shocked from '../../containers/assets/images/shocked.svg';
-import surprise from '../../containers/assets/images/surprise.svg';
+import happy from './emoji icons/happy.svg';
+import angry from './emoji icons/angry.svg';
+import meh from './emoji icons/confused.svg';
+import sad from './emoji icons/unhappy.svg';
+import shocked from './emoji icons/shocked.svg';
+import surprise from './emoji icons/surprised.svg';
 
 const Feelings = [
   {
