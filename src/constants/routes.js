@@ -13,3 +13,4 @@ export const SERVER_ERROR = '/server-error';
 export const UNAUTHENTICATED = '/unauthenticated';
 export const JOURNAL = '/journal/:id';
 export const ABOUT = '/about';
+export const EMAIL_SENT = '/email-sent';
