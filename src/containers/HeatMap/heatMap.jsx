@@ -21,6 +21,7 @@ const heatMap = props => {
     handleClick,
     handleDelete,
     handleJournalDetails,
+    loading,
   } = props;
 
   return (
@@ -28,8 +29,10 @@ const heatMap = props => {
       <div className="container">
         <LogoHeader />
       </div>
-      {!journals ? (
-        <Spin />
+      {!loading ? (
+        <div className="heat-map__loading">
+          <Spin size="large" />
+        </div>
       ) : (
         <section>
           <h3 className="heat-map__month container">
@@ -133,6 +136,7 @@ heatMap.propTypes = {
   ).isRequired,
   handleDelete: PropTypes.func.isRequired,
   handleJournalDetails: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default heatMap;

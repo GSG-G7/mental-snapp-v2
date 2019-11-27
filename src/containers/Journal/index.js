@@ -10,24 +10,22 @@ import { HEAT_MAP, HOME } from '../../constants/routes';
 class Journal extends Component {
   state = {
     journal: {},
+    loading: false,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const {
       firebase,
       match: { params },
     } = this.props;
     const { id } = params;
-    firebase.db
-      .collection('journals')
-      .get()
-      .then(result => {
-        result.forEach(docus => {
-          if (docus.id === id) {
-            this.setState({ journal: docus.data() });
-          }
-        });
-      });
+    const result = await firebase.db.collection('journals').get();
+
+    await result.forEach(docus => {
+      if (docus.id === id) {
+        this.setState({ journal: docus.data(), loading: true });
+      }
+    });
   }
 
   handleConfirm = () => {
@@ -52,7 +50,7 @@ class Journal extends Component {
   };
 
   render() {
-    const { journal } = this.state;
+    const { journal, loading } = this.state;
     const {
       history: { goBack },
     } = this.props;
@@ -61,6 +59,7 @@ class Journal extends Component {
         journal={journal}
         handleGoBack={goBack}
         handleConfirm={this.handleConfirm}
+        loading={loading}
       />
     );
   }

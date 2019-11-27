@@ -13,33 +13,33 @@ class index extends Component {
     data: [],
     journals: [],
     journalsOfTheDay: [],
+    loading: false,
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { data, journals } = this.state;
     const { firebase, history } = this.props;
     const userId = localStorage.getItem('userId');
-
-    firebase.db
-      .collection('journals')
-      .get()
-      .then(docus =>
-        docus.forEach(doc => {
-          if (doc.data().userId === userId) {
-            const journalData = doc.data();
-            journalData.id = doc.id;
-            journals.push(journalData);
-            data.push(journalData);
-          }
-          const heatMap = filter(data);
-          this.setState({
-            journals,
-            data: heatMap,
-          });
-        })
-      )
-      .then(this.handleCurrentDay)
-      .catch(error => history.push('/server-error'));
+    try {
+      const docus = await firebase.db.collection('journals').get();
+      await docus.forEach(doc => {
+        if (doc.data().userId === userId) {
+          const journalData = doc.data();
+          journalData.id = doc.id;
+          journals.push(journalData);
+          data.push(journalData);
+        }
+        const heatMap = filter(data);
+        this.setState({
+          journals,
+          data: heatMap,
+          loading: true,
+        });
+      });
+      await this.handleCurrentDay();
+    } catch (error) {
+      history.push('server-error');
+    }
   }
 
   handleCurrentDay = () => {
@@ -97,7 +97,7 @@ class index extends Component {
   };
 
   render() {
-    const { data, journalsOfTheDay } = this.state;
+    const { data, journalsOfTheDay, loading } = this.state;
     return (
       <HeatMap
         data={data}
@@ -105,6 +105,7 @@ class index extends Component {
         journals={journalsOfTheDay}
         handleDelete={this.handleDelete}
         handleJournalDetails={this.handleJournalDetails}
+        loading={loading}
       />
     );
   }

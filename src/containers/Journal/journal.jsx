@@ -8,7 +8,7 @@ import BackButton from '../../components/BackButton';
 import JournalComponent from '../../components/Journal';
 
 const Journal = props => {
-  const { journal, handleConfirm, handleGoBack } = props;
+  const { journal, handleConfirm, handleGoBack, loading } = props;
   return (
     <div className="journal-page">
       <div className="journal-page__header container">
@@ -24,8 +24,10 @@ const Journal = props => {
           </Popconfirm>
         </div>
       </div>
-      {!journal ? (
-        <Spin />
+      {!loading ? (
+        <div className="journal-page__loading">
+          <Spin size="large" />
+        </div>
       ) : (
         <section>
           <div className="journal-details__top">
@@ -74,5 +76,6 @@ Journal.propTypes = {
   }).isRequired,
   handleConfirm: propTypes.func.isRequired,
   handleGoBack: propTypes.func.isRequired,
+  loading: propTypes.bool.isRequired,
 };
 export default Journal;
