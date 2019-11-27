@@ -42,8 +42,6 @@ class Firebase {
 
   users = () => this.db.collection('users');
 
-  journal = Jid => this.db.doc(`journals/${Jid}`);
-
   journals = () => this.db.collection('journals');
 }
 
