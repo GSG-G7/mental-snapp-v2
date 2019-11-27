@@ -107,7 +107,7 @@ const EditAccount = props => {
                 type="default"
                 onClick={() => {
                   localStorage.removeItem('confirm');
-                  handleGoBack();
+                  handleGoBack('/account-settings');
                 }}
               >
                 Cancel
