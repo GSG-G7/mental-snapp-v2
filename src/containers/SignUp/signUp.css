@@ -51,7 +51,7 @@
   flex-direction: column;
   justify-content: space-around;
 }
-.errorMesaage {
+.errorMessage {
   color: #f5222d;
   font-size: 14px;
   line-height: 1.5;
