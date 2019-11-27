@@ -35,7 +35,8 @@ class Index extends Component {
           this.setState({ loading: false });
           push(EDIT_ACCOUNT);
         } catch (error) {
-          if (error) this.setState({ errorMessage: error.message });
+          if (error)
+            this.setState({ errorMessage: error.message, loading: false });
         }
       }
     });
