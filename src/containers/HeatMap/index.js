@@ -82,7 +82,6 @@ class index extends Component {
       .delete();
     message.warning('This Journal is deleted');
     const heatMapData = filter(filteredData);
-
     this.setState({
       journals: filteredData,
       data: heatMapData,
