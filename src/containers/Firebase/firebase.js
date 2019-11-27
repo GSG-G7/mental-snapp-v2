@@ -44,7 +44,7 @@ class Firebase {
 
   // create collection for journals
   // and each journal will be a document
-  journal = Jid => this.db.doc(`journals/${Jid}`);
+  journal = journalId => this.db.doc(`journals/${journalId}`);
 
   journals = () => this.db.collection('journals');
 }
