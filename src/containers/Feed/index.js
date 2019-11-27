@@ -4,7 +4,7 @@ import moment from 'moment';
 import { message } from 'antd';
 import { compose } from 'recompose';
 
-import Feed from './feeds';
+import Feed from './feed';
 import months from './data';
 import { decrementMonthCount, selectMenuMonths } from './utils/index';
 import { withAuth } from '../Session/index';
@@ -12,11 +12,15 @@ import { withFirebase } from '../Firebase/index';
 
 class FeedPage extends Component {
   state = {
-    currentMonthJournals: [],
+    currentJournals: [],
+    userYears: [],
     monthsWithCounts: months,
     loading: true,
     allJournals: [],
   };
+
+  // Keep the journals of the selected year
+  currentYearJournals = [];
 
   async componentDidMount() {
     const {
@@ -27,7 +31,6 @@ class FeedPage extends Component {
     const userId = localStorage.getItem('userId');
 
     try {
-      // Getting all of the user journals
       const querySnapshot = await firebase.db
         .collection('journals')
         .where('userId', '==', userId)
@@ -40,33 +43,48 @@ class FeedPage extends Component {
       });
 
       if (querySnapshot) {
-        const currentMonthJournals = userJournals.filter(
+        const allYears = userJournals
+          .map(journal => moment(journal.timestamp).format('YYYY'))
+          .filter((item, index, array) => array.indexOf(item) === index)
+          .sort();
+
+        const currentJournals = userJournals.filter(
           journal =>
-            moment(journal.timestamp).format('MMMM') ===
-            moment(new Date()).format('MMMM')
+            moment(journal.timestamp).format('YYYY') ===
+              moment().format('YYYY') &&
+            moment(journal.timestamp).format('MMMM') === moment().format('MMMM')
         );
 
         this.setState({
-          monthsWithCounts: selectMenuMonths(userJournals),
-          currentMonthJournals,
+          monthsWithCounts: selectMenuMonths(currentJournals),
+          currentJournals,
           loading: false,
           allJournals: userJournals,
+          userYears: allYears,
         });
       }
-      this.setState({
-        loading: false,
-      });
     } catch (error) {
       push('/server-error');
     }
   }
 
-  handleChange = value => {
+  handleSelectYearChange = currentValue => {
     const { allJournals } = this.state;
     const selectedJournal = allJournals.filter(
-      journal => moment(journal.timestamp).format('MMMM') === value
+      journal => moment(journal.timestamp).format('YYYY') === currentValue
     );
-    this.setState({ currentMonthJournals: selectedJournal });
+    this.currentYearJournals = selectedJournal;
+    this.setState({
+      currentJournals: selectedJournal,
+      monthsWithCounts: selectMenuMonths(selectedJournal),
+    });
+  };
+
+  handleSelectMonthChange = currentValue => {
+    const selectedJournal = this.currentYearJournals.filter(
+      journal => moment(journal.timestamp).format('MMMM') === currentValue
+    );
+    this.setState({ currentJournals: selectedJournal });
   };
 
   handleDelete = async id => {
@@ -75,25 +93,25 @@ class FeedPage extends Component {
       history: { push },
     } = this.props;
 
-    const { currentMonthJournals, monthsWithCounts, allJournals } = this.state;
+    const { currentJournals, monthsWithCounts, allJournals } = this.state;
     message.warning('This Journal is deleted');
 
     const updatedJournals = allJournals.filter(journal => journal.id !== id);
 
     // Decrementing the count of that month
     const modifiedMonthsWithCounts = decrementMonthCount(
-      currentMonthJournals,
+      currentJournals,
       monthsWithCounts
     );
 
-    const updatedCurrentMonthJournals = updatedJournals.filter(
+    const updatedCurrentJournals = updatedJournals.filter(
       journal =>
-        moment(journal.timestamp).format('MMMM') ===
-        moment(new Date()).format('MMMM')
+        moment(journal.timestamp).format('YYYY') === moment().format('YYYY') &&
+        moment(journal.timestamp).format('MMMM') === moment().format('MMMM')
     );
 
     this.setState({
-      currentMonthJournals: updatedCurrentMonthJournals,
+      currentJournals: updatedCurrentJournals,
       allJournals: updatedJournals,
       monthsWithCounts: modifiedMonthsWithCounts,
     });
@@ -116,13 +134,20 @@ class FeedPage extends Component {
   };
 
   render() {
-    const { currentMonthJournals, loading, monthsWithCounts } = this.state;
+    const {
+      currentJournals,
+      loading,
+      monthsWithCounts,
+      userYears,
+    } = this.state;
     return (
       <Feed
-        currentMonthJournals={currentMonthJournals}
+        userYears={userYears}
+        currentJournals={currentJournals}
         loading={loading}
         monthsWithCounts={monthsWithCounts}
-        handleChange={this.handleChange}
+        handleSelectMonthChange={this.handleSelectMonthChange}
+        handleSelectYearChange={this.handleSelectYearChange}
         handleDelete={this.handleDelete}
         handleJournalDetails={this.handleJournalDetails}
       />
