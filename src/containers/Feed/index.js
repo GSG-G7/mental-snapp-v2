@@ -48,6 +48,11 @@ class FeedPage extends Component {
           .filter((item, index, array) => array.indexOf(item) === index)
           .sort();
 
+        this.currentYearJournals = userJournals.filter(
+          journal =>
+            moment(journal.timestamp).format('YYYY') === moment().format('YYYY')
+        );
+
         const currentJournals = userJournals.filter(
           journal =>
             moment(journal.timestamp).format('YYYY') ===
