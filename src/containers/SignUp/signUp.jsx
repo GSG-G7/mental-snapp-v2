@@ -5,6 +5,7 @@ import { Form, Input, Icon, Button, Spin } from 'antd';
 
 import Header from '../../components/Header';
 import GoogleButton from '../../components/GoogleButton';
+import TwitterButton from '../../components/TwitterButton';
 import { SIGN_IN, HOME } from '../../constants/routes';
 
 const SignUp = props => {
@@ -124,6 +125,7 @@ const SignUp = props => {
       <div className="signup__or">OR</div>
 
       <section className="signup__buttons">
+        <TwitterButton />
         <GoogleButton />
       </section>
     </div>
