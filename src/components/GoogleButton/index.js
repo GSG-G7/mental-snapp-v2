@@ -29,6 +29,7 @@ class SignInGoogle extends Component {
           },
           { merge: true }
         );
+
         localStorage.setItem('userId', socialAuthUser.user.uid);
         this.setState({ error: null });
         push(ROUTES.HOME);
@@ -59,6 +60,7 @@ SignInGoogle.propTypes = {
   firebase: propTypes.shape({
     auth: propTypes.object.isRequired,
     user: propTypes.func.isRequired,
+    journal: propTypes.func.isRequired,
     doSignInWithGoogle: propTypes.func.isRequired,
   }).isRequired,
 };
