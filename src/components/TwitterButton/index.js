@@ -65,10 +65,8 @@ SignInTwitter.propTypes = {
     push: propTypes.func.isRequired,
   }).isRequired,
   firebase: propTypes.shape({
-    auth: propTypes.object.isRequired,
     uid: propTypes.string.isRequired,
     user: propTypes.object.isRequired,
-    journal: propTypes.object.isRequired,
     doSignInWithTwitter: propTypes.func.isRequired,
   }).isRequired,
 };
