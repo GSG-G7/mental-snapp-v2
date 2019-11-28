@@ -5,7 +5,7 @@ import { withAuth } from '../Session/index';
 import { withFirebase } from '../Firebase/index';
 
 import JournalPage from './journal';
-import { HEAT_MAP, HOME } from '../../constants/routes';
+import { HOME } from '../../constants/routes';
 
 class Journal extends Component {
   state = {
@@ -19,13 +19,12 @@ class Journal extends Component {
       match: { params },
     } = this.props;
     const { id } = params;
-    const result = await firebase.db.collection('journals').get();
+    const result = await firebase.db
+      .collection('journals')
+      .doc(id)
+      .get();
 
-    await result.forEach(docus => {
-      if (docus.id === id) {
-        this.setState({ journal: docus.data(), loading: true });
-      }
-    });
+    this.setState({ journal: result.data(), loading: true });
   }
 
   handleConfirm = () => {
@@ -41,7 +40,7 @@ class Journal extends Component {
       .doc(id)
       .delete();
     const { history } = this.props;
-    history.push(HEAT_MAP);
+    history.push(HOME);
   };
 
   handleGoBack = e => {

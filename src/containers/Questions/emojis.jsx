@@ -54,7 +54,7 @@ const Emojis = props => {
 };
 
 Emojis.propTypes = {
-  emojiId: PropTypes.string.isRequired,
+  emojiId: PropTypes.number.isRequired,
   emojiClick: PropTypes.func.isRequired,
 };
 
