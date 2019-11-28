@@ -16,21 +16,33 @@ class EmailSent extends Component {
     time: 30,
   };
 
-  timer = setInterval(() => {
-    let { time } = this.state;
-    this.setState({ time: (time -= 1) });
-  }, 1000);
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState(({ time }) => {
+        if (time > 0) {
+          return { time: time - 1 };
+        }
+        clearInterval(this.timer);
+        return { completed: true, time: 30 };
+      });
+    }, 1000);
+  }
 
   stopTimer = () => {
+    this.setState({ completed: true, time: 30 });
     clearInterval(this.timer);
-    this.setState({ completed: true });
   };
 
   startTimer = () => {
-    const { time } = this.state;
-    {
-      time === 0 && this.stopTimer();
-    }
+    this.timer = setInterval(() => {
+      this.setState(({ time }) => {
+        if (time > 0) {
+          return { time: time - 1 };
+        }
+        clearInterval(this.timer);
+        return { completed: true, time: 30 };
+      });
+    }, 1000);
   };
 
   resend = async () => {
@@ -42,7 +54,8 @@ class EmailSent extends Component {
       const userEmail = await localStorage.getItem('userEmail');
       await firebase.forgotPassword(userEmail);
       message.success('Check your email ');
-      this.setState({ completed: false });
+      this.setState({ completed: false, time: 30 });
+      this.startTimer();
     } catch (err) {
       push('/server-error');
     }
@@ -69,10 +82,7 @@ class EmailSent extends Component {
             onSubmit={this.handleSubmit}
           >
             {!completed ? (
-              <span>
-                {this.startTimer()}
-                {time}
-              </span>
+              <span>{time}</span>
             ) : (
               <p className="btn__content">Resend</p>
             )}
