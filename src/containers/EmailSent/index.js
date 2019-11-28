@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 
 import { Button, message } from 'antd';
 
-import TimerMachine from 'react-timer-machine';
-import moment from 'moment';
-// import momentDurationFormatSetup from 'moment-duration-format';
 import PropTypes from 'prop-types';
-import { withFirebase } from '../Firebase';
 
+import { withFirebase } from '../Firebase';
 import Header from '../../components/Header';
 import { ReactComponent as Img } from '../assets/images/email-sent.svg';
 
@@ -16,17 +13,51 @@ import './style.css';
 class EmailSent extends Component {
   state = {
     completed: false,
+    time: 30,
+  };
+
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      this.setState(({ time }) => {
+        if (time > 0) {
+          return { time: time - 1 };
+        }
+        clearInterval(this.timer);
+        return { completed: true, time: 30 };
+      });
+    }, 1000);
+  }
+
+  stopTimer = () => {
+    this.setState({ completed: true, time: 30 });
+    clearInterval(this.timer);
+  };
+
+  startTimer = () => {
+    this.timer = setInterval(() => {
+      this.setState(({ time }) => {
+        if (time > 0) {
+          return { time: time - 1 };
+        }
+        clearInterval(this.timer);
+        return { completed: true, time: 30 };
+      });
+    }, 1000);
   };
 
   resend = async () => {
-    const { firebase } = this.props;
+    const {
+      firebase,
+      history: { push },
+    } = this.props;
     try {
       const userEmail = await localStorage.getItem('userEmail');
       await firebase.forgotPassword(userEmail);
       message.success('Check your email ');
-      this.setState({ completed: false });
+      this.setState({ completed: false, time: 30 });
+      this.startTimer();
     } catch (err) {
-      // console.log(err);
+      push('/server-error');
     }
   };
 
@@ -34,7 +65,7 @@ class EmailSent extends Component {
     const {
       history: { goBack },
     } = this.props;
-    const { completed } = this.state;
+    const { completed, time } = this.state;
     return (
       <section className="email-sent container">
         <Header text="Email Sent" handleBack={goBack} />
@@ -51,18 +82,7 @@ class EmailSent extends Component {
             onSubmit={this.handleSubmit}
           >
             {!completed ? (
-              <TimerMachine
-                className="btn__content"
-                started
-                countdown
-                timeStart={30 * 1000}
-                formatTimer={ms => {
-                  moment.duration(ms, 'milliseconds').format('h:mm:ss');
-                }}
-                onComplete={() => {
-                  this.setState({ completed: true });
-                }}
-              />
+              <span>{time}</span>
             ) : (
               <p className="btn__content">Resend</p>
             )}
@@ -75,7 +95,10 @@ class EmailSent extends Component {
 
 EmailSent.propTypes = {
   firebase: PropTypes.shape().isRequired,
-  history: PropTypes.shape({ goBack: PropTypes.func.isRequired }).isRequired,
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default withFirebase(EmailSent);
