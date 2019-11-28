@@ -43,7 +43,7 @@ class Home extends Component {
       const querySnapshot = await firebase.db
         .collection('journals')
         .where('userId', '==', userId)
-        .orderBy('timestamp', 'asc')
+        .orderBy('timestamp', 'desc')
         .limit(3)
         .get();
 
@@ -88,7 +88,7 @@ class Home extends Component {
       const querySnapshot = await firebase.db
         .collection('journals')
         .where('userId', '==', userId)
-        .orderBy('timestamp', 'asc')
+        .orderBy('timestamp', 'desc')
         .limit(3)
         .get();
 
