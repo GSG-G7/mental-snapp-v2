@@ -4,6 +4,15 @@
   padding-bottom: 80px;
 }
 
+.heat-map__loading {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(256, 256, 256, 0.2);
+}
+
 .heat-map__header {
   padding: 20px;
   text-align: left;
@@ -106,8 +115,7 @@
     width: 70%;
     margin: 0 auto;
   }
-  .heat-map__legend,
-  .heat-map__empty {
+  .heat-map__legend, .heat-map__empty {
     justify-content: center;
   }
   .heat-map__journals {
@@ -133,17 +141,14 @@
     margin: 1rem 0;
     text-emphasis: center;
   }
-
   .heat-map__body svg {
     width: 80%;
     display: block;
     margin: auto;
   }
-
   .heat-map__legend {
     padding: 0 1rem 0.5rem;
   }
-
   .heat-map__description {
     display: block;
     width: 100%;
@@ -154,7 +159,6 @@
     flex-direction: column;
     margin-top: 10px;
   }
-
   .heat-map__container {
     display: flex;
     justify-content: space-around;
@@ -166,11 +170,9 @@
     padding: 0;
     width: 100%;
   }
-
   .heat-map__journals .journal-card {
     width: 48%;
   }
-
   .heat-map__empty {
     flex-direction: column;
   }

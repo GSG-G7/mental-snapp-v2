@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { Button, message } from 'antd';
+
 import PropTypes from 'prop-types';
 
 import { withFirebase } from '../Firebase';

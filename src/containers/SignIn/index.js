@@ -5,7 +5,7 @@ import { Form, Input, Icon, Button, Spin } from 'antd';
 import PropTypes from 'prop-types';
 
 import Header from '../../components/Header';
-// import FacebookButton from '../../components/TwitterButton';
+import TwitterButton from '../../components/TwitterButton';
 import GoogleButton from '../../components/GoogleButton';
 
 import { withFirebase } from '../Firebase/index';
@@ -20,24 +20,28 @@ class SignInForm extends React.Component {
   };
 
   handleSubmit = e => {
-    const { firebase, history } = this.props;
+    const {
+      firebase: { doSignInWithEmailAndPassword },
+      history,
+    } = this.props;
     const {
       form: { validateFields },
     } = this.props;
     e.preventDefault();
-    validateFields((err, values) => {
+    validateFields(async (err, values) => {
       if (!err) {
         this.setState({ loading: true });
-        firebase
-          .doSignInWithEmailAndPassword(values.email, values.password)
-          .then(res => {
-            localStorage.setItem('userId', res.user.uid);
-            this.setState({ loading: false });
-            history.push(ROUTES.HOME);
-          })
-          .catch(error => {
-            this.setState({ error, loading: false });
-          });
+        try {
+          const result = await doSignInWithEmailAndPassword(
+            values.email,
+            values.password
+          );
+          localStorage.setItem('userId', result.user.uid);
+          this.setState({ loading: false });
+          history.push(ROUTES.HOME);
+        } catch (error) {
+          this.setState({ error, loading: false });
+        }
       }
     });
   };
@@ -114,7 +118,7 @@ class SignInForm extends React.Component {
         <section className="signin__or">OR</section>
 
         <section className="signin__buttons">
-          {/* <FacebookButton /> */}
+          <TwitterButton />
           <GoogleButton />
         </section>
       </div>
