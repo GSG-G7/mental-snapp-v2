@@ -4,7 +4,11 @@ import { compose } from 'recompose';
 import AccountSettings from './accountSettings';
 import { withFirebase } from '../Firebase/index';
 import { withAuth } from '../Session/index';
-import { LANDING } from '../../constants/routes';
+import {
+  LANDING,
+  SERVER_ERROR,
+  CONFIRM_PASSWORD,
+} from '../../constants/routes';
 
 class Account extends Component {
   state = {
@@ -12,33 +16,54 @@ class Account extends Component {
       name: '',
       email: '',
       createdByGoogle: false,
+      createdByTwitter: false,
     },
     loading: true,
   };
 
-  componentDidMount() {
-    const { firebase } = this.props;
-    const userId = localStorage.getItem('userId');
-    firebase.db
-      .collection('users')
-      .doc(userId)
-      .get()
-      .then(snapshot => {
-        const userEmail = snapshot.data().email;
-        const userName = snapshot.data().name;
-        const { createdByGoogle } = snapshot.data();
-        this.setState({
-          info: { name: userName, email: userEmail, createdByGoogle },
-          loading: false,
-        });
+  componentDidMount = async () => {
+    try {
+      const { firebase } = this.props;
+      const userId = localStorage.getItem('userId');
+      const snapshot = await firebase.db
+        .collection('users')
+        .doc(userId)
+        .get();
+      const userEmail = snapshot.data().email;
+      const userName = snapshot.data().name;
+      const { createdByGoogle } = snapshot.data();
+      const { createdByTwitter } = snapshot.data();
+      this.setState({
+        info: {
+          name: userName,
+          email: userEmail,
+          createdByGoogle,
+          createdByTwitter,
+        },
+        loading: false,
       });
-  }
+    } catch (e) {
+      const { history } = this.props;
+      history.push(SERVER_ERROR);
+    }
+  };
 
   handleLogOut = () => {
     const { firebase, history } = this.props;
     history.push(LANDING);
     localStorage.removeItem('userId');
     return firebase.doSignOut;
+  };
+
+  redirect = () => {
+    const { info } = this.state;
+    if (info.createdByGoogle) {
+      return 'https://myaccount.google.com/personal-info';
+    }
+    if (info.createdByTwitter) {
+      return 'https://twitter.com/settings/account';
+    }
+    return CONFIRM_PASSWORD;
   };
 
   render() {
@@ -48,6 +73,7 @@ class Account extends Component {
         loading={loading}
         info={info}
         handleLogOut={this.handleLogOut}
+        redirect={this.redirect}
       />
     );
   }
