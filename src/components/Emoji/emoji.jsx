@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Feelings from './EmojiData';
-import './emoji.css';
 
-const Emoji = ({ feeling }) => {
+const Emoji = ({ feeling, className }) => {
   return (
     <img
-      className="journal-card__icon--feeling"
+      className={className}
       src={Feelings[feeling - 1].photo}
       alt={Feelings[feeling - 1].alt}
     />
@@ -15,7 +14,8 @@ const Emoji = ({ feeling }) => {
 };
 
 Emoji.propTypes = {
-  feeling: PropTypes.number.isRequired,
+  feeling: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export default Emoji;

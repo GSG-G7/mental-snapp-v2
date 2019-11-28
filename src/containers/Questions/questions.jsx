@@ -126,7 +126,7 @@ Question.propTypes = {
     title: propTypes.string.isRequired,
     content: propTypes.string.isRequired,
     errors: propTypes.object.isRequired,
-    emojiId: propTypes.string.isRequired,
+    emojiId: propTypes.string,
   }).isRequired,
   emojiClick: propTypes.func.isRequired,
 };

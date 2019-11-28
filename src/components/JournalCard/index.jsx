@@ -59,7 +59,7 @@ const JournalCard = ({
       >
         <div className="feeling-container">
           <span className="journal-card__body__title">My Mood</span>
-          <Emoji feeling={feeling} />
+          <Emoji feeling={feeling} className="journal-card__icon--feeling" />
         </div>
 
         {grateful && (
@@ -98,10 +98,10 @@ JournalCard.propTypes = {
   grateful: PropTypes.string,
   challenge: PropTypes.string,
   developing: PropTypes.string,
+  feeling: PropTypes.number.isRequired,
   handleDelete: PropTypes.func.isRequired,
   journalId: PropTypes.string.isRequired,
   handleJournalDetails: PropTypes.func.isRequired,
-  feeling: PropTypes.number.isRequired,
 };
 
 export default JournalCard;

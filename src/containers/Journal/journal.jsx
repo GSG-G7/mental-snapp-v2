@@ -41,29 +41,33 @@ const Journal = props => {
               <span>{moment(journal.timestamp).format('h:mm a')}</span>
             </div>
           </div>
+          <div className="journals__container">
+            {journal && journal.grateful && (
+              <JournalComponent
+                className="journal__first"
+                questionTitle="Grateful for:"
+                question={journal.grateful}
+              />
+            )}
 
-          <Emoji feeling={journal.emojiId} />
-          {journal && journal.grateful && (
-            <JournalComponent
-              className="journal__first"
-              questionTitle="Grateful for:"
-              question={journal.grateful}
-            />
-          )}
+            {journal && journal.challenge && (
+              <JournalComponent
+                questionTitle="Challenges:"
+                question={journal.challenge}
+              />
+            )}
 
-          {journal && journal.challenge && (
-            <JournalComponent
-              questionTitle="Challenges:"
-              question={journal.challenge}
-            />
-          )}
-
-          {journal && journal.developing && (
-            <JournalComponent
-              questionTitle="Developing:"
-              question={journal.developing}
-            />
-          )}
+            {journal && journal.developing && (
+              <JournalComponent
+                questionTitle="Developing:"
+                question={journal.developing}
+                className="journal__last-card"
+              />
+            )}
+          </div>
+          <div className="journal__emoji--container">
+            <Emoji feeling={journal.emojiId} className="journal__emoji" />
+          </div>
         </section>
       )}
     </div>
@@ -76,10 +80,10 @@ Journal.propTypes = {
     challenge: propTypes.objectOf(propTypes.string),
     developing: propTypes.objectOf(propTypes.string),
     grateful: propTypes.objectOf(propTypes.string),
+    emojiId: propTypes.string,
   }).isRequired,
   handleConfirm: propTypes.func.isRequired,
   handleGoBack: propTypes.func.isRequired,
   loading: propTypes.bool.isRequired,
-  emojiId: propTypes.number.isRequired,
 };
 export default Journal;

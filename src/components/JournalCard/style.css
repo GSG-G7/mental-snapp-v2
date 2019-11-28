@@ -61,6 +61,10 @@
 .feeling-container {
   margin-bottom: 7px;
 }
+.journal-card__icon--feeling {
+  width: 25px;
+  height: 25px;
+}
 
 .journal-card__body__title {
   color: rgba(36, 36, 36, 0.6);
