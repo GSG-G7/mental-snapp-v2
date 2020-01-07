@@ -16,7 +16,7 @@ class FeedPage extends Component {
     userYears: [],
     monthsWithCounts: months,
     loading: true,
-    allJournals: [],
+    allJournals: []
   };
 
   // Keep the journals of the selected year
@@ -25,7 +25,7 @@ class FeedPage extends Component {
   async componentDidMount() {
     const {
       firebase,
-      history: { push },
+      history: { push }
     } = this.props;
 
     const userId = localStorage.getItem('userId');
@@ -65,7 +65,7 @@ class FeedPage extends Component {
           currentJournals,
           loading: false,
           allJournals: userJournals,
-          userYears: allYears,
+          userYears: allYears
         });
       }
     } catch (error) {
@@ -81,7 +81,7 @@ class FeedPage extends Component {
     this.currentYearJournals = selectedJournal;
     this.setState({
       currentJournals: selectedJournal,
-      monthsWithCounts: selectMenuMonths(selectedJournal),
+      monthsWithCounts: selectMenuMonths(selectedJournal)
     });
   };
 
@@ -95,7 +95,7 @@ class FeedPage extends Component {
   handleDelete = async id => {
     const {
       firebase,
-      history: { push },
+      history: { push }
     } = this.props;
 
     const { currentJournals, monthsWithCounts, allJournals } = this.state;
@@ -118,7 +118,7 @@ class FeedPage extends Component {
     this.setState({
       currentJournals: updatedCurrentJournals,
       allJournals: updatedJournals,
-      monthsWithCounts: modifiedMonthsWithCounts,
+      monthsWithCounts: modifiedMonthsWithCounts
     });
 
     try {
@@ -133,7 +133,7 @@ class FeedPage extends Component {
 
   handleJournalDetails = id => {
     const {
-      history: { push },
+      history: { push }
     } = this.props;
     push(`/journal/${id}`);
   };
@@ -143,7 +143,7 @@ class FeedPage extends Component {
       currentJournals,
       loading,
       monthsWithCounts,
-      userYears,
+      userYears
     } = this.state;
     return (
       <Feed
@@ -162,13 +162,13 @@ class FeedPage extends Component {
 
 FeedPage.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired
   }).isRequired,
   firebase: PropTypes.shape({
     auth: PropTypes.object.isRequired,
     user: PropTypes.func.isRequired,
-    db: PropTypes.object.isRequired,
-  }).isRequired,
+    db: PropTypes.object.isRequired
+  }).isRequired
 };
 
 const AuthFeed = compose(

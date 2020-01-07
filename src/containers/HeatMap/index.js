@@ -12,7 +12,7 @@ class index extends Component {
   state = {
     data: [],
     journals: [],
-    journalsOfTheDay: [],
+    journalsOfTheDay: []
   };
 
   async componentDidMount() {
@@ -20,16 +20,20 @@ class index extends Component {
     const userId = localStorage.getItem('userId');
     try {
       const snapshot = await firebase.db
-        .collection('users')
-        .doc(userId)
+        .collection('journals')
+        .where('userId', '==', userId)
         .get();
 
-      const data = snapshot.data().userJournals;
+      const data = [];
+
+      snapshot.forEach(doc => {
+        data.push({ id: doc.id, ...doc.data() });
+      });
 
       const heatMapData = filter(data);
       this.setState({
         data: heatMapData,
-        journals: data,
+        journals: data
       });
       this.handleCurrentDay();
     } catch (error) {
@@ -45,7 +49,7 @@ class index extends Component {
         journal => new Date(journal.timestamp).getDay() === currentDay
       );
       this.setState({
-        journalsOfTheDay: filteredJournals,
+        journalsOfTheDay: filteredJournals
       });
     }
   };
@@ -79,7 +83,7 @@ class index extends Component {
       .collection('users')
       .doc(userId)
       .update({
-        userJournals: filteredData,
+        userJournals: filteredData
       });
     message.warning('This Journal is deleted');
     const heatMapData = filter(filteredData);
@@ -87,13 +91,13 @@ class index extends Component {
     this.setState({
       journals: filteredData,
       data: heatMapData,
-      journalsOfTheDay: filteredData,
+      journalsOfTheDay: filteredData
     });
   };
 
   handleJournalDetails = id => {
     const {
-      history: { push },
+      history: { push }
     } = this.props;
     push(`/journal/${id}`);
   };
@@ -114,12 +118,12 @@ class index extends Component {
 
 index.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired
   }).isRequired,
   firebase: PropTypes.shape({
     auth: PropTypes.object.isRequired,
-    db: PropTypes.object.isRequired,
-  }).isRequired,
+    db: PropTypes.object.isRequired
+  }).isRequired
 };
 
 const AuthHeatMap = compose(
